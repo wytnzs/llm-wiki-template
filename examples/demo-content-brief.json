@@ -1,0 +1,32 @@
+﻿{
+  "meta": {
+    "type": "content_brief",
+    "version": "1.0",
+    "created": "YYYY-MM-DD",
+    "status": "draft"
+  },
+  "topic": {
+    "title": "为什么你收藏越多越不会输出",
+    "platform": "公众号",
+    "target_audience": "尝试过搭建知识库但坚持不下来的知识工作者"
+  },
+  "content_plan": {
+    "core_viewpoint": "知识库不是仓库，是工厂。收藏只是第一步，加工才是核心。",
+    "user_pain": "收藏了几百篇文章，打开率不到 5%",
+    "core_conflict": "你以为在积累，实际在制造认知负担",
+    "angle": "从个人经历切入，讲失败到成功"
+  },
+  "source_materials": {
+    "selected_cards": ["知识库不是仓库是工厂"],
+    "selected_cases": [],
+    "related_theme": "知识管理失败原因分析"
+  },
+  "constraints": {
+    "tone": "真诚分享，不说教",
+    "forbidden": ["不要承诺一定能解决", "不要贬低其他工具"],
+    "claim_level": "general"
+  },
+  "output_plan": {
+    "article_outline": "1. 一个扎心的现象 2. 为什么收藏越多越焦虑 3. 知识库的正确打开方式 4. 最小可执行方案"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "type": "content_brief",
+    "version": "1.0",
+    "created": "YYYY-MM-DD",
+    "status": "draft"
+  },
+  "topic": {
+    "title": "内容标题",
+    "platform": "公众号 / 小红书 / 短视频",
+    "target_audience": "目标人群描述"
+  },
+  "content_plan": {
+    "core_viewpoint": "核心观点",
+    "user_pain": "用户痛点",
+    "core_conflict": "核心冲突",
+    "angle": "表达角度"
+  },
+  "source_materials": {
+    "selected_cards": [],
+    "selected_cases": [],
+    "related_theme": ""
+  },
+  "constraints": {
+    "tone": "表达风格",
+    "forbidden": [],
+    "claim_level": "general / case_specific / educational"
+  },
+  "output_plan": {
+    "article_outline": "",
+    "video_script_points": [],
+    "xhs_notes": []
+  },
+  "review_standard": {
+    "must_have": [],
+    "must_avoid": []
+  }
+}

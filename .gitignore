@@ -1,0 +1,41 @@
+# LLM Wiki - 知识资产生产系统
+# 不上传私人数据
+
+# 实际内容不上传
+00-Inbox/
+01-Projects/
+02-Areas/
+03-Resources/
+04-Archive/
+05-Skills/
+06-选题库/
+
+# Claude Code 配置文件（含个人 skill）
+.claude/settings.local.json
+.claude/memory/
+
+# Obsidian
+.obsidian/
+
+# Codex
+.codex/
+
+# 草稿和交接单
+content-brief.json
+.claude/drafts/
+
+# 操作系统
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python/Node
+__pycache__/
+node_modules/
+.venv/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
