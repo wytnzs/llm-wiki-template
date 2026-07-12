@@ -74,6 +74,42 @@ THEMES = {
         "pre_bg": "#3D2E1E",
         "pre_text": "#FAFAF7",
     },
+    "graphite-gray": {
+        "body_bg": "#FFFFFF",
+        "h1_color": "#27272A",
+        "h2_color": "#27272A",
+        "h3_color": "#52525B",
+        "text_color": "#52525B",
+        "secondary_color": "#A1A1AA",
+        "border": "#E4E4E7",
+        "accent": "#F97316",
+        "accent_bg": "rgba(249,115,22,0.06)",
+        "quote_bg": "#FAFAFA",
+        "table_alt": "#FAFAFA",
+        "tag_bg": "#F4F4F5",
+        "code_bg": "#F4F4F5",
+        "code_color": "#27272A",
+        "pre_bg": "#F4F4F5",
+        "pre_text": "#52525B",
+    },
+    "ochre-red": {
+        "body_bg": "#FFFFFF",
+        "h1_color": "#1A1A2E",
+        "h2_color": "#1A1A2E",
+        "h3_color": "#333333",
+        "text_color": "#333333",
+        "secondary_color": "#9CA3AF",
+        "border": "#E5E7EB",
+        "accent": "#C53030",
+        "accent_bg": "rgba(197,48,48,0.06)",
+        "quote_bg": "#FFF5F5",
+        "table_alt": "#FFF5F5",
+        "tag_bg": "rgba(197,48,48,0.06)",
+        "code_bg": "#F9F9F9",
+        "code_color": "#C53030",
+        "pre_bg": "#1A1A2E",
+        "pre_text": "#F5F5F5",
+    },
     "minimal-fresh": {
         "body_bg": "#FFFFFF",
         "h1_color": "#1A1A1A",
@@ -696,10 +732,12 @@ def main():
   python md2wechat_formatter.py article.md --theme chinese
 
 新主题（对齐 gzh-pipeline 多主题系统）：
-  deepblue    — 深蓝商务（默认，理性专业）
-  warm-story  — 暖橙故事（温暖亲和）
-  tech-dark   — 科技暗色（现代冲击）
+  deepblue      — 深蓝商务（默认，理性专业）
+  warm-story    — 暖橙故事（温暖亲和）
+  tech-dark     — 科技暗色（现代冲击）
   minimal-fresh — 极简清爽（干净透气，细体+大留白）
+  graphite-gray — 石墨灰（克制理性，行业分析）
+  ochre-red     — 赭石红（庄重有力，政策解读）
 
 旧主题（兼容）：
   01fish, chinese, apple, 保险其实不难（→deepblue）
@@ -719,9 +757,12 @@ def main():
 
     if args.list_themes:
         print("可用主题：")
-        print("  deepblue    — 深蓝商务（默认，理性专业）")
-        print("  warm-story  — 暖橙故事（温暖亲和）")
-        print("  tech-dark   — 科技暗色（现代冲击）")
+        print("  deepblue      — 深蓝商务（默认，理性专业）")
+        print("  warm-story    — 暖橙故事（温暖亲和）")
+        print("  tech-dark     — 科技暗色（现代冲击）")
+        print("  minimal-fresh — 极简清爽（干净透气）")
+        print("  graphite-gray — 石墨灰（克制理性）")
+        print("  ochre-red     — 赭石红（庄重有力）")
         print("  --- 旧主题（兼容） ---")
         print("  01fish      — 01鱼商务风")
         print("  chinese     — 中国风（深红+金色+米白）")

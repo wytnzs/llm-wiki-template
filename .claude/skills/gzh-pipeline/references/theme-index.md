@@ -19,6 +19,8 @@ updated: 2026-07-12
 | **暖橙故事** | 温暖、亲和、耐读 | 故事文/亲和、个人经历、成长感悟、客户故事 | 米白 `#FAFAF7` + 茶色 `#8B7A6A` + 琥珀 `#C4814A` | Noto Serif SC（正文/标题）+ Noto Sans SC（说明） | `references/theme-warm-story.md` |
 | **科技暗色** | 现代、冲击、利落 | 观点文/冲击、工具文/利落、评测/方法论、认知输出 | 暗黑 `#0D0D0D→#1A1A2E` + 青/紫亮色强调 | Noto Sans SC（粗）+ Space Mono（数据/序号） | `references/theme-tech-dark.md` |
 | **极简清爽★** | 干净、透气、现代 | 方法论、工具文、观点文、教程、清单型内容 | 纯白 `#FFFFFF` + 鼠尾草绿 `#7A9E8E` 点缀 | Inter + Noto Sans SC Light（细体为主） | `references/theme-minimal-fresh.md` |
+| **石墨灰** | 克制、理性、专业 | 行业分析、专业观点、科技评论、高端品牌 | 纯白 `#FFFFFF` + 石墨灰 `#52525B` 细线 + 暖橙 `#F97316` 点睛 | Apple 系统字体 | `references/theme-graphite-gray.md` |
+| **赭石红** | 庄重、有力、可信赖 | 政策解读、法规分析、行业趋势、重要声明 | 米白 `#FFFFFF` + 赭石红 `#C53030` 强调 + 深靛 `#1A1A2E` 标题 | Noto Serif SC（衬线）+ Noto Sans SC（标签） | `references/theme-ochre-red.md` |
 
 ## 选择流程
 
@@ -34,7 +36,9 @@ updated: 2026-07-12
 | 观点文 × 冲击 | **科技暗色** |
 | 故事文 × 亲和 | **暖橙故事** |
 | 教程文 × 利落 | **极简清爽** 或 **深蓝商务** |
-| 解读文 × 冷静 | **深蓝商务** |
+| 解读文 × 冷静 | **深蓝商务** 或 **赭石红** |
+| 政策法规 × 正式 | **赭石红** |
+| 行业分析 × 专业 | **石墨灰** 或 **深蓝商务** |
 
 ### 手动选择
 
