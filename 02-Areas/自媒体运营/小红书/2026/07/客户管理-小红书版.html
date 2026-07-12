@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="kraft-paper">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>别再用表格管客户了 - 小红书轮播图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #e8e0d4; display: flex; flex-direction: column; align-items: center; padding: 32px 0; gap: 24px; }
+  .toolbar { position: sticky; top: 0; z-index: 100; background: #2a1e13; color: #fff; padding: 12px 24px; border-radius: 0 0 12px 12px; display: flex; gap: 12px; align-items: center; font-family: "Noto Sans SC", sans-serif; font-size: 14px; }
+  .toolbar button { background: #b85c2e; color: #fff; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; font-family: inherit; }
+  .toolbar button:hover { background: #d4733a; }
+  .poster { width: 1080px; height: 1440px; position: relative; overflow: hidden; flex-shrink: 0; }
+
+  /* Slide - kraft-paper theme */
+  .xhs { width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; }
+  .theme-warm { background: #eedfc7; color: #2a1e13; }
+  .theme-dark { background: #2a1e13; color: #eedfc7; }
+  .content { flex: 1; display: flex; flex-direction: column; padding: 100px 96px; }
+  .grow { flex: 1; }
+  .h1 { font-size: 68px; font-weight: 900; line-height: 1.2; letter-spacing: -0.02em; font-family: "Noto Sans SC", sans-serif; }
+  .h2 { font-size: 48px; font-weight: 800; line-height: 1.25; letter-spacing: -0.01em; font-family: "Noto Sans SC", sans-serif; }
+  .body-lg { font-size: 28px; line-height: 1.6; font-weight: 400; font-family: "Noto Sans SC", sans-serif; }
+  .body-sm { font-size: 22px; line-height: 1.6; font-weight: 400; font-family: "Noto Sans SC", sans-serif; }
+  .big-num { font-size: 160px; font-weight: 900; line-height: 1; font-family: "Noto Sans SC", sans-serif; }
+  .tag { display: inline-block; padding: 8px 24px; border-radius: 20px; font-size: 18px; font-weight: 500; background: rgba(184,92,46,0.12); color: #b85c2e; font-family: "Noto Sans SC", sans-serif; }
+  .tag-light { background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.8); }
+  .accent { color: #b85c2e; }
+  .accent-light { color: #d4733a; }
+  .bottom-strip { position: absolute; bottom: 0; left: 0; right: 0; height: 8px; background: #b85c2e; }
+  .divider { width: 80px; height: 4px; background: #b85c2e; margin: 24px 0; border-radius: 2px; }
+  .divider-light { background: rgba(255,255,255,0.3); }
+  .point-row { display: flex; align-items: flex-start; gap: 28px; margin-bottom: 28px; }
+  .point-num { font-size: 36px; font-weight: 800; color: #b85c2e; line-height: 1; flex-shrink: 0; font-family: "Noto Sans SC", sans-serif; }
+  .point-num-light { color: #d4733a; }
+  .point-text { font-size: 26px; line-height: 1.5; font-family: "Noto Sans SC", sans-serif; }
+  .card-box { background: rgba(255,255,255,0.5); border-radius: 10px; padding: 28px; border-left: 6px solid #b85c2e; }
+  .card-box-dark { background: rgba(255,255,255,0.06); border-left: 6px solid #d4733a; }
+  .callout { background: rgba(184,92,46,0.08); border-radius: 8px; padding: 20px 24px; font-size: 24px; line-height: 1.5; }
+  .callout-dark { background: rgba(255,255,255,0.06); }
+</style>
+</head>
+<body>
+
+<div class="toolbar" id="toolbar">
+  <span>📥 共 7 张 · 点击下载全部</span>
+  <button onclick="downloadAll()">⬇ 下载全部 PNG</button>
+</div>
+
+<!-- 第 1 张：封面 -->
+<div class="poster">
+  <div class="xhs theme-warm">
+    <div class="content" style="justify-content: center;">
+      <div class="tag" style="margin-bottom: 24px;">客户经营 · 方法论</div>
+      <div class="h1" style="margin-bottom: 20px;">别再用表格<br>管客户了</div>
+      <div class="body-lg" style="color: #5a4a38;">真正值钱的是下一步动作</div>
+    </div>
+    <div class="bottom-strip"></div>
+  </div>
+</div>
+
+<!-- 第 2 张：问题 -->
+<div class="poster">
+  <div class="xhs theme-warm">
+    <div class="content">
+      <div class="h2" style="margin-bottom: 32px;">你的表格缺什么？</div>
+      <div class="grow">
+        <div class="point-row">
+          <div class="point-num">01</div>
+          <div class="point-text">名字、电话、需求都记了</div>
+        </div>
+        <div class="point-row">
+          <div class="point-num">02</div>
+          <div class="point-text">但不知道这周该跟谁聊</div>
+        </div>
+        <div class="point-row">
+          <div class="point-num">03</div>
+          <div class="point-text">不知道谁值得推进</div>
+        </div>
+        <div class="point-row">
+          <div class="point-num">04</div>
+          <div class="point-text">不知道谁还缺关键信息</div>
+        </div>
+        <div style="margin-top: 40px;">
+          <div class="divider"></div>
+          <div class="body-lg" style="font-weight: 600;">问题不是你记没记。是你记录的是信息，不是经营。</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-strip"></div>
+  </div>
+</div>
+
+<!-- 第 3 张：关键概念 - 最小单位是事件（暗底） -->
+<div class="poster">
+  <div class="xhs theme-dark">
+    <div class="content">
+      <div class="big-num" style="margin-bottom: 16px;">01</div>
+      <div class="h2" style="margin-bottom: 28px; color: #eedfc7;">最小单位不是客户</div>
+      <div class="body-lg" style="color: rgba(238,223,199,0.7); margin-bottom: 20px;">是客户信息事件</div>
+      <div class="grow">
+        <div class="divider divider-light" style="margin-bottom: 28px;"></div>
+        <div class="body-sm" style="margin-bottom: 20px;"><span class="accent-light">事件</span> → 发生了什么</div>
+        <div class="body-sm" style="margin-bottom: 20px;"><span class="accent-light">洞察</span> → 这意味着什么</div>
+        <div class="body-sm" style="margin-bottom: 20px;"><span class="accent-light">跟进</span> → 下一步做什么</div>
+      </div>
+    </div>
+    <div class="bottom-strip"></div>
+  </div>
+</div>
+
+<!-- 第 4 张：信息缺口 -->
+<div class="poster">
+  <div class="xhs theme-warm">
+    <div class="content">
+      <div class="h2" style="margin-bottom: 24px;">信息缺口才是价值</div>
+      <div class="body-lg" style="margin-bottom: 32px; color: #5a4a38;">很多方案让客户反感，不是你不专业——是你太急着给答案。</div>
+      <div class="grow">
+        <div class="card-box" style="margin-bottom: 20px;">
+          <div class="body-sm" style="font-weight: 600; margin-bottom: 8px;">保险客户常见缺口</div>
+          <div class="body-sm" style="color: #5a4a38;">已有保单 · 家庭责任 · 预算边界</div>
+          <div class="body-sm" style="color: #5a4a38;">体检报告 · 真实顾虑 · 决策人</div>
+        </div>
+        <div class="body-lg" style="font-weight: 600;">专业不是马上给答案。</div>
+        <div class="body-lg" style="font-weight: 600; color: #b85c2e;">是知道什么时候不能急着给答案。</div>
+      </div>
+    </div>
+    <div class="bottom-strip"></div>
+  </div>
+</div>
+
+<!-- 第 5 张：经营看板（暗底） -->
+<div class="poster">
+  <div class="xhs theme-dark">
+    <div class="content">
+      <div class="big-num" style="margin-bottom: 16px;">02</div>
+      <div class="h2" style="margin-bottom: 28px; color: #eedfc7;">客户经营不是靠记忆</div>
+      <div class="grow">
+        <div class="divider divider-light" style="margin-bottom: 32px;"></div>
+        <div class="callout callout-dark" style="margin-bottom: 20px;">
+          <div class="body-sm">这周最值得跟进谁？</div>
+        </div>
+        <div class="callout callout-dark" style="margin-bottom: 20px;">
+          <div class="body-sm">哪些客户缺下一步动作？</div>
+        </div>
+        <div class="callout callout-dark" style="margin-bottom: 20px;">
+          <div class="body-sm">哪些客户信息不足但值得推进？</div>
+        </div>
+        <div style="margin-top: 24px;">
+          <div class="body-lg" style="color: rgba(238,223,199,0.8);">是帮你安排经营顺序，不是帮你回忆客户</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-strip"></div>
+  </div>
+</div>
+
+<!-- 第 6 张：四句话金句 -->
+<div class="poster">
+  <div class="xhs theme-warm">
+    <div class="content" style="justify-content: center;">
+      <div class="point-row" style="margin-bottom: 20px;">
+        <div class="point-num">01</div>
+        <div class="body-lg" style="font-weight: 600;">先接住信息，再判断价值</div>
+      </div>
+      <div class="point-row" style="margin-bottom: 20px;">
+        <div class="point-num">02</div>
+        <div class="body-lg" style="font-weight: 600;">先匹配身份，再沉淀档案</div>
+      </div>
+      <div class="point-row" style="margin-bottom: 20px;">
+        <div class="point-num">03</div>
+        <div class="body-lg" style="font-weight: 600;">先识别缺口，再生成方案</div>
+      </div>
+      <div class="point-row" style="margin-bottom: 20px;">
+        <div class="point-num">04</div>
+        <div class="body-lg" style="font-weight: 600;">先人工复核，再对外沟通</div>
+      </div>
+      <div style="margin-top: 24px;">
+        <div class="divider"></div>
+        <div class="body-lg" style="font-weight: 700; color: #b85c2e;">不是记不记的问题。是记了以后下一步做什么的问题。</div>
+      </div>
+    </div>
+    <div class="bottom-strip"></div>
+  </div>
+</div>
+
+<!-- 第 7 张：CTA -->
+<div class="poster">
+  <div class="xhs theme-warm">
+    <div class="content" style="justify-content: center; align-items: center; text-align: center;">
+      <div class="tag" style="margin-bottom: 24px;">思考题</div>
+      <div class="body-lg" style="font-weight: 600; margin-bottom: 20px;">你的客户管理在第几阶段？</div>
+      <div class="body-sm" style="color: #5a4a38; margin-bottom: 16px;">表格阶段 → 事件阶段 → 缺口阶段 → 经营阶段</div>
+      <div style="margin-top: 24px; padding: 20px 24px; background: rgba(184,92,46,0.08); border-radius: 8px;">
+        <div class="body-sm" style="font-weight: 600;">评论区说说你到哪一步了👇</div>
+      </div>
+    </div>
+    <div class="bottom-strip"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+function downloadCard(el, filename) {
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      canvas.toBlob(function(blob) {
+        saveAs(blob, filename + '.png');
+      });
+    });
+}
+
+function downloadAll() {
+  var posters = document.querySelectorAll('.poster');
+  var zip = new JSZip();
+  var count = posters.length;
+  var done = 0;
+  posters.forEach(function(el, i) {
+    html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+      .then(function(canvas) {
+        canvas.toBlob(function(blob) {
+          zip.file('page-' + (i+1) + '.png', blob);
+          done++;
+          if (done === count) {
+            zip.generateAsync({ type: 'blob' }).then(function(content) {
+              saveAs(content, '客户管理-轮播图.zip');
+            });
+          }
+        });
+      });
+  });
+}
+</script>
+</body>
+</html>
