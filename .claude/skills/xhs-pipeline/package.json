@@ -1,0 +1,11 @@
+{
+  "name": "xhs-pipeline",
+  "version": "2.0.0",
+  "description": "小红书内容生产管线 — guizang 视觉体系版",
+  "scripts": {
+    "validate": "node validate-social-deck.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.60.0"
+  }
+}

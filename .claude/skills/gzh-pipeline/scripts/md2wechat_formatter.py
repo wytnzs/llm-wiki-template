@@ -74,6 +74,24 @@ THEMES = {
         "pre_bg": "#3D2E1E",
         "pre_text": "#FAFAF7",
     },
+    "minimal-fresh": {
+        "body_bg": "#FFFFFF",
+        "h1_color": "#1A1A1A",
+        "h2_color": "#1A1A1A",
+        "h3_color": "#444444",
+        "text_color": "#333333",
+        "secondary_color": "#999999",
+        "border": "#EEEEEE",
+        "accent": "#7A9E8E",
+        "accent_bg": "rgba(122,158,142,0.08)",
+        "quote_bg": "#F8F9FA",
+        "table_alt": "#FBFCFC",
+        "tag_bg": "rgba(122,158,142,0.06)",
+        "code_bg": "#F8F9FA",
+        "code_color": "#7A9E8E",
+        "pre_bg": "#F5F7F6",
+        "pre_text": "#333333",
+    },
     "tech-dark": {
         "body_bg": "#0D0D0D",
         "h1_color": "#FFFFFF",
@@ -681,6 +699,7 @@ def main():
   deepblue    — 深蓝商务（默认，理性专业）
   warm-story  — 暖橙故事（温暖亲和）
   tech-dark   — 科技暗色（现代冲击）
+  minimal-fresh — 极简清爽（干净透气，细体+大留白）
 
 旧主题（兼容）：
   01fish, chinese, apple, 保险其实不难（→deepblue）

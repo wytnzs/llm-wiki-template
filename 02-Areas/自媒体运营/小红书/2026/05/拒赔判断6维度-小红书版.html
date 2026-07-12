@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 拒赔判断6维度</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  /* === 工具栏 === */
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  /* === 卡片基础 === */
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2C2C2C;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .info-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C2C2C;
+    margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .mini-card .m-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .mini-card .m-desc {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.35;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .data-table th {
+    background: #2C2C2C;
+    color: #FFFFFF;
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .data-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: #333;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #FAFAFA; }
+
+  .quote-box {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .divider {
+    width: 36px; height: 2px;
+    background: #2C2C2C; border-radius: 1px;
+    margin: 10px 0;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .cta-chip {
+    flex: 1;
+    background: #2C2C2C;
+    color: #FFF;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .dark-card {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .dark-card .dc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #CCC;
+    margin-bottom: 3px;
+  }
+  .dark-card .dc-body {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  /* === 封面 === */
+  .cover-slide {
+    background: #1A1A1A;
+  }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  /* === 深色页 === */
+  .dark-slide {
+    background: #1A1A1A;
+  }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+  .dark-slide .data-table { background: rgba(255,255,255,0.02); }
+  .dark-slide .data-table th { background: #555; }
+  .dark-slide .data-table td { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.04); }
+  .dark-slide .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+  /* === 特殊 === */
+  .highlight-number {
+    font-size: 36px;
+    font-weight: 900;
+    color: #2C2C2C;
+    line-height: 1;
+    margin-right: 6px;
+  }
+  .dark-slide .highlight-number {
+    color: #FFF;
+  }
+  .flex-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .badge {
+    display: inline-block;
+    background: #2C2C2C;
+    color: #FFF;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+  .dark-slide .badge {
+    background: #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">被拒赔了？</div>
+    <div class="cover-sub">3分钟判断有没有反转空间</div>
+    <div class="cover-tags">
+      <span class="tag">理赔干货</span>
+      <span class="tag">维权指南</span>
+      <span class="tag">收藏备用</span>
+    </div>
+    <div class="cover-quote">
+      <p>拒赔通知书只是保险公司单方面的意见，不代表法律最终裁决。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/9</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 核心认知 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">CORE INSIGHT</div>
+    <div class="main-title">拒赔不是终点</div>
+    <div class="sub-title">是维权的起点</div>
+    <div class="divider"></div>
+    <div class="intro">
+      理赔维权专家判断一个拒赔案件能不能反转，只需要3分钟。<br>
+      不是看哪条法规，是看6个关键维度。
+    </div>
+    <div class="info-card" style="margin-top:10px;">
+      <div class="card-title">核心认知</div>
+      <div class="card-body">
+        保险公司有专业的核赔团队和法务部门，但他们的结论不是法院判决。<br><br>
+        拒赔理由只要在法律层面有任何一个漏洞，你就可以打回去。
+        <small>关键不是有没有拒赔，是拒赔的理由站不站得住脚。</small>
+      </div>
+    </div>
+    <div class="page-num">2/9</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 维度1：如实告知 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">DIMENSION 01</div>
+    <div class="main-title">如实告知<br>有没有抗辩空间</div>
+    <div class="divider" style="background:#555;"></div>
+    <div class="intro">最常见的拒赔理由。保险公司说你投保前有病历未告知。</div>
+
+    <div class="dark-card">
+      <div class="dc-title">反转点</div>
+      <div class="dc-body">
+        - 询问是否具体？笼统的询问无效<br>
+        - 病史与本次出险有无因果关系？没关系不能拒赔<br>
+        - 是否已过两年不可抗辩期？
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">抗辩点</div>
+      <div class="dc-body">
+        只要不是主观恶意欺诈，很多"未告知"在法律层面都可以推翻。<br>
+        超过两年，不能以未如实告知拒赔。
+      </div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/9</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 维度2：免责条款 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">DIMENSION 02</div>
+    <div class="main-title">免责条款<br>有没有尽到说明义务</div>
+    <div class="divider"></div>
+    <div class="intro">保险公司拿"合同里写了不赔"来堵你的嘴。</div>
+
+    <div class="info-card">
+      <div class="card-title">反转点</div>
+      <div class="card-body">
+        重点看保险公司有没有对免责条款进行足以引起注意的提示：<br>
+        加粗、标红、弹窗引导。
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">抗辩点</div>
+      <div class="card-body">
+        没有证据证明保险公司尽到"明确说明义务"，<br>
+        该免责条款在法律上不产生效力。
+      </div>
+    </div>
+
+    <div class="page-num">4/9</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 维度3：医学定义 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">DIMENSION 03</div>
+    <div class="main-title">医学定义<br>是否落后于临床现实</div>
+    <div class="divider" style="background:#555;"></div>
+    <div class="intro">合同条款是几年前甚至十几年前定的，医疗技术在进步。</div>
+
+    <div class="dark-card">
+      <div class="dc-title">典型案例</div>
+      <div class="dc-body">
+        合同要求必须"开胸手术"，但你做的是微创。
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">反转点</div>
+      <div class="dc-body">
+        不是手术名称变了，是病没变。<br>
+        只要具备医疗必要性，且达到疾病实质状态，<br>
+        可以从"公平原则"出发申诉。
+      </div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">5/9</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 维度4：证据链 + 维度5：既往症 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">DIMENSION 04 &amp; 05</div>
+    <div class="main-title">证据链 + 既往症</div>
+    <div class="divider"></div>
+
+    <div class="info-card">
+      <div class="card-title">证据链是否合法</div>
+      <div class="card-body">
+        调查员是否存在诱导询问、违规调取隐私？<br>
+        证据不足、程序违法的拒赔，法庭上站不住脚。
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">既往症判定是否证据确凿</div>
+      <div class="card-body">
+        - 条款对"既往症"定义是否明确？<br>
+        - 投保前有症状（如头晕）不等于确诊<br>
+        - 旧疾和本次住院是否同一性质？
+        <small>保险公司不能仅凭猜测就说是既往症，必须拿出确凿病历记录。</small>
+      </div>
+    </div>
+
+    <div class="page-num">6/9</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · 维度6：非意外判定 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">DIMENSION 06</div>
+    <div class="main-title">非意外判定<br>意外险的头号杀手</div>
+    <div class="divider" style="background:#555;"></div>
+    <div class="intro">保险公司认定出险原因不符合"外来的、突发的、非本意的、非疾病的"四大要素。</div>
+
+    <div class="dark-card">
+      <div class="dc-title">典型案例</div>
+      <div class="dc-body">
+        猝死（判定为疾病）<br>
+        摔倒后诱发脑出血（判定为自身疾病导致，而非摔倒导致）
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">反转点：近因原则</div>
+      <div class="dc-body">
+        是先摔倒导致的出血，还是先出血导致的摔倒？<br>
+        专家介入可以调取法医鉴定或重新梳理医学逻辑来反转。
+      </div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/9</div>
+  </div>
+</div>
+
+<!-- 第 8 张 · 总结 -->
+<div class="slide bg-white">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-tag">SUMMARY</div>
+    <div class="main-title" style="font-size:30px;">拒赔能翻的<br>不只这6个维度</div>
+    <div class="divider"></div>
+    <div class="sub-title" style="margin-bottom:20px;">
+      还有医疗必要性争议、医院性质不符、<br>
+      等待期关联纠纷、职业风险等级变动……
+    </div>
+    <div class="quote-box">
+      <p>每个拒赔理由背后，都可能有一个法律漏洞。问题是——你有没有发现它。</p>
+    </div>
+    <div class="page-num">8/9</div>
+  </div>
+</div>
+
+<!-- 第 9 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;padding:36px;">
+    <div class="cover-title" style="font-size:36px;">把该赔的钱<br>拿回来</div>
+    <div class="divider" style="background:rgba(255,255,255,0.2);margin:14px 0;"></div>
+    <div class="cover-sub" style="margin-bottom:24px;">
+      我是刘立群。<br>
+      关注我，帮你把该赔的钱拿回来
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">9/9</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

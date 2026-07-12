@@ -1,0 +1,114 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - button "全部下载" [ref=e3] [cursor=pointer]
+    - button "下载当前" [ref=e4] [cursor=pointer]
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: "01"
+      - generic [ref=e8]:
+        - generic [ref=e9]: 客户经营系统
+        - generic [ref=e12]:
+          - heading "别再用 表格管客户" [level=1] [ref=e13]: 别再用表格管客户
+          - paragraph [ref=e14]: 真正值钱的不是记录，是下一步动作。
+          - img "客户管理库总流程" [ref=e16]
+        - generic [ref=e17]:
+          - generic [ref=e18]: 01 / 07
+          - generic [ref=e19]: CUSTOMER LIBRARY
+    - generic [ref=e20]:
+      - generic [ref=e21]: "02"
+      - generic [ref=e22]:
+        - generic [ref=e23]: 核心变化
+        - heading "从“能记录” 到“能经营”" [level=2] [ref=e27]: 从“能记录”到“能经营”
+        - paragraph [ref=e28]: 表格解决的是保存问题，客户管理库解决的是判断和行动问题。
+        - img "表格到经营资产" [ref=e31]
+        - generic [ref=e32]:
+          - generic [ref=e33]: 02 / 07
+          - generic [ref=e34]: STATIC → ASSET
+    - generic [ref=e35]:
+      - generic [ref=e36]: "03"
+      - generic [ref=e37]:
+        - generic [ref=e38]: 为什么表格不够
+        - heading "它少的不是字段， 是判断链路。" [level=2] [ref=e42]: 它少的不是字段，是判断链路。
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e45]: "01"
+            - heading "通讯录" [level=3] [ref=e46]
+            - paragraph [ref=e47]: 能找到人，但看不见过程。
+          - generic [ref=e48]:
+            - generic [ref=e49]: "02"
+            - heading "Excel" [level=3] [ref=e50]
+            - paragraph [ref=e51]: 能管字段，但长不出洞察。
+          - generic [ref=e52]:
+            - generic [ref=e53]: "03"
+            - heading "传统 CRM" [level=3] [ref=e54]
+            - paragraph [ref=e55]: 能管阶段，但不理解复杂关系。
+        - generic [ref=e56]:
+          - generic [ref=e57]: 03 / 07
+          - generic [ref=e58]: 不是工具不行，是目标不一样
+    - generic [ref=e59]:
+      - generic [ref=e60]: "04"
+      - generic [ref=e61]:
+        - generic [ref=e62]: 最小单位
+        - heading "不是客户， 是客户信息事件。" [level=2] [ref=e66]: 不是客户，是客户信息事件。
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - generic [ref=e69]: 事件
+            - heading "发生了什么" [level=3] [ref=e70]
+            - paragraph [ref=e71]: 聊天、资料、体检、顾虑、团队反馈。
+          - generic [ref=e72]:
+            - generic [ref=e73]: 洞察
+            - heading "这意味着什么" [level=3] [ref=e74]
+            - paragraph [ref=e75]: 需求、风险、机会、顾虑、信息缺口。
+          - generic [ref=e76]:
+            - generic [ref=e77]: 动作
+            - heading "下一步做什么" [level=3] [ref=e78]
+            - paragraph [ref=e79]: 补资料、复核、沟通、暂缓或推进。
+          - generic [ref=e80]:
+            - generic [ref=e81]: 资产
+            - heading "长期留下什么" [level=3] [ref=e82]
+            - paragraph [ref=e83]: 判断路径、服务记录、复盘经验。
+        - generic [ref=e84]:
+          - generic [ref=e85]: 04 / 07
+          - generic [ref=e86]: EVENT FIRST
+    - generic [ref=e87]:
+      - generic [ref=e88]: "05"
+      - generic [ref=e89]:
+        - generic [ref=e90]: 方案之前
+        - heading "先识别缺口， 再生成方案。" [level=2] [ref=e94]: 先识别缺口，再生成方案。
+        - paragraph [ref=e95]: 很多方案不是不专业，而是太早给了。
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - heading "保障规划" [level=3] [ref=e98]
+            - paragraph [ref=e99]: 先看已有保单、家庭责任、预算边界。
+          - generic [ref=e100]:
+            - heading "健康异常" [level=3] [ref=e101]
+            - paragraph [ref=e102]: 先补体检报告、病历、复查结果。
+          - generic [ref=e103]:
+            - heading "客户沟通" [level=3] [ref=e104]
+            - paragraph [ref=e105]: 先识别真实顾虑、决策人、时间节点。
+        - generic [ref=e106]:
+          - generic [ref=e107]: 05 / 07
+          - generic [ref=e108]: 专业不是马上给答案
+    - generic [ref=e109]:
+      - generic [ref=e110]: "06"
+      - generic [ref=e111]:
+        - generic [ref=e112]: 经营看板
+        - heading "这周该跟谁聊？" [level=2] [ref=e116]
+        - paragraph [ref=e117]: 不要靠记忆，靠看板。
+        - img "本周客户经营看板" [ref=e120]
+        - generic [ref=e121]:
+          - generic [ref=e122]: 06 / 07
+          - generic [ref=e123]: 优先跟进 · 补齐信息 · 方案复核 · 长期维护
+    - generic [ref=e124]:
+      - generic [ref=e125]: "07"
+      - generic [ref=e126]:
+        - generic [ref=e127]: 可收藏
+        - heading "客户经营 四句话" [level=2] [ref=e131]: 客户经营四句话
+        - generic [ref=e132]:
+          - heading "先接住信息，再判断价值。" [level=3] [ref=e134]
+          - heading "先匹配身份，再沉淀档案。" [level=3] [ref=e136]
+          - heading "先识别缺口，再生成方案。" [level=3] [ref=e138]
+          - heading "先人工复核，再对外沟通。" [level=3] [ref=e140]
+        - generic [ref=e141]:
+          - generic [ref=e142]: 07 / 07
+          - generic [ref=e143]: 评论区聊聊你的客户管理方式

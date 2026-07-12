@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 买保险正确顺序（王永涛）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  /* --- Cover Slide --- */
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 46px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-insight {
+    border-left: 2px solid rgba(255,255,255,0.2);
+    padding: 10px 14px;
+    margin-top: 6px;
+  }
+  .cover-slide .cover-insight p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.55;
+  }
+  .cover-slide .ip-line {
+    margin-top: 18px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1px;
+  }
+
+  /* --- Content Slides --- */
+  .content-slide { background: #FFFFFF; }
+  .content-slide .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+
+  .content-slide .main-point {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .content-slide .body-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .content-slide .body-text strong {
+    color: #1A1A1A;
+  }
+
+  .content-slide .insight-card {
+    background: #F5F6F8;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 12px;
+  }
+  .content-slide .insight-card p {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .content-slide .insight-card strong {
+    color: #1A1A1A;
+  }
+
+  /* --- Dark Content Slide --- */
+  .dark-content { background: #1A1A1A; }
+  .dark-content .section-label { color: rgba(255,255,255,0.3); }
+  .dark-content .main-point { color: #FFF; }
+  .dark-content .body-text { color: rgba(255,255,255,0.65); }
+  .dark-content .body-text strong { color: #FFF; }
+  .dark-content .insight-card {
+    background: rgba(255,255,255,0.04);
+  }
+  .dark-content .insight-card p { color: rgba(255,255,255,0.55); }
+  .dark-content .insight-card strong { color: rgba(255,255,255,0.85); }
+  .dark-content .page-num { color: rgba(255,255,255,0.12); }
+
+  /* --- Priority Card --- */
+  .priority-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .priority-num {
+    width: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .priority-num .num {
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .priority-num .label {
+    font-size: 9px;
+    color: #999;
+    letter-spacing: 1px;
+    margin-top: 1px;
+  }
+  .priority-body {
+    flex: 1;
+    background: #F5F6F8;
+    border-radius: 6px;
+    padding: 11px 14px;
+  }
+  .priority-body .p-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .priority-body .p-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.45;
+  }
+
+  .dark-content .priority-body {
+    background: rgba(255,255,255,0.04);
+  }
+  .dark-content .priority-body .p-title { color: #FFF; }
+  .dark-content .priority-body .p-desc { color: rgba(255,255,255,0.55); }
+  .dark-content .priority-num .num { color: #FFF; }
+  .dark-content .priority-num .label { color: rgba(255,255,255,0.3); }
+
+  /* --- Summary Table --- */
+  .summary-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  .summary-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 1px;
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .summary-table td {
+    font-size: 12px;
+    color: #444;
+    padding: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .summary-table td:first-child {
+    font-weight: 700;
+    color: #1A1A1A;
+    width: 30px;
+    text-align: center;
+  }
+  .dark-content .summary-table th { border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
+  .dark-content .summary-table td { border-color: rgba(255,255,255,0.04); color: rgba(255,255,255,0.55); }
+  .dark-content .summary-table td:first-child { color: #FFF; }
+
+  .summary-callout {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+    padding: 10px 12px;
+    background: #F5F6F8;
+    border-radius: 6px;
+  }
+  .dark-content .summary-callout {
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* --- CTA --- */
+  .cta-line {
+    margin-top: 18px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+  .cta-line strong {
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">买保险的<br>正确顺序</div>
+    <div class="cover-sub">大部分人第一步就搞反了</div>
+    <div class="cover-tags">
+      <span class="tag">保险科普</span>
+      <span class="tag">配置攻略</span>
+      <span class="tag">避坑</span>
+    </div>
+    <div class="cover-insight">
+      <p>顺序比产品重要。顺序对了，几千块能把全家保明白；顺序错了，花再多钱也是白搭。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/7</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 第一顺位 医保 -->
+<div class="slide content-slide">
+  <div class="content">
+    <div class="section-label">第一顺位</div>
+    <div class="main-point">医保</div>
+    <div class="body-text" style="margin-bottom:10px;">
+      不管你在农村还是城镇，有工作还是没工作——<strong>医保是所有保险的地基。</strong><br><br>
+      没有医保，后面的商业保险也会打折扣。没有的，现在去查去办，先把这个落听。
+    </div>
+    <div class="insight-card">
+      <p><strong>一个事实：</strong>有医保和没有医保的人，买百万医疗的保费不一样。没有医保的人，保费贵一倍。</p>
+    </div>
+    <div class="page-num">2/7</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 第二顺位 百万医疗+意外 -->
+<div class="slide dark-content">
+  <div class="content">
+    <div class="section-label">第二顺位</div>
+    <div class="main-point" style="margin-bottom:12px;">百万医疗 + 意外险</div>
+    <div class="body-text">
+      <strong>这两样保费低、杠杆高。</strong><br><br>
+      普通人最大的风险就是大额医疗费。百万医疗把住院费覆盖住，意外险把突发意外兜住。<br><br>
+      两样加起来一年几百块，把最大的窟窿先堵上。<br><br>
+      什么叫"全家"？只要这个人生病需要你掏钱，你就给他买上。
+    </div>
+    <div class="insight-card">
+      <p>一年几百块撬几百万保额。对普通家庭来说，这是性价比最高的两道防线。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/7</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 第三顺位 家庭支柱 -->
+<div class="slide content-slide">
+  <div class="content">
+    <div class="section-label">第三顺位</div>
+    <div class="main-point">定寿 → 重疾<br><span style="font-size:14px;font-weight:400;color:#777;">家庭支柱优先</span></div>
+
+    <div class="body-text" style="margin-top:10px;">
+      <strong>定寿排前面</strong>——便宜，杠杆高。家庭支柱倒了，房贷谁还、孩子谁养？定寿就是人不在、钱替你扛。<br><br>
+      <strong>重疾排后面</strong>——现在涨价了，但对家庭支柱仍然有用。重疾保的是收入损失，谁挣钱给谁买。
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <div style="flex:1;background:#F5F6F8;border-radius:6px;padding:10px 12px;">
+        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">定寿</div>
+        <div style="font-size:11px;color:#666;">一年几百块<br>撬上百万保额</div>
+      </div>
+      <div style="flex:1;background:#F5F6F8;border-radius:6px;padding:10px 12px;">
+        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">重疾</div>
+        <div style="font-size:11px;color:#666;">保收入损失<br>谁挣钱给谁买</div>
+      </div>
+    </div>
+
+    <div class="page-num">4/7</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 第四顺位 孩子重疾 + 储蓄险 -->
+<div class="slide content-slide">
+  <div class="content">
+    <div class="section-label">第四顺位</div>
+    <div class="main-point" style="font-size:22px;">孩子的重疾</div>
+    <div class="body-text" style="margin-bottom:16px;">
+      重疾保的是收入损失，孩子没有收入。<br>
+      孩子生病影响的是大人的收入——所以<strong>一定排在家庭支柱后面</strong>。
+    </div>
+
+    <div style="border-top:1px solid rgba(0,0,0,0.06);padding-top:14px;margin-bottom:10px;">
+      <div class="section-label">最后才是</div>
+      <div style="font-size:22px;font-weight:900;color:#1A1A1A;margin-bottom:6px;">储蓄险</div>
+      <div class="body-text">
+        <strong>先保障，后理财。</strong><br>
+        保障做全了，有闲钱、五年十年不动的，再放进储蓄险。
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <p>很多人的顺序是反的：先给孩子买了一堆，自己裸奔。或者一听人说"存钱"就买了储蓄险，结果医疗险还没配。</p>
+    </div>
+
+    <div class="page-num">5/7</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 顺序总览 -->
+<div class="slide dark-content">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-label">一张图记住</div>
+    <div class="main-point" style="margin-bottom:16px;">买保险的正确顺序</div>
+
+    <table class="summary-table">
+      <thead>
+        <tr><th>顺序</th><th>险种</th><th>给谁</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>医保</td><td>所有人</td></tr>
+        <tr><td>2</td><td>百万医疗 + 意外</td><td>全家（谁生病要你掏钱就买）</td></tr>
+        <tr><td>3</td><td>定寿 → 重疾</td><td>家庭支柱（最挣钱那个）</td></tr>
+        <tr><td>4</td><td>重疾</td><td>孩子（排大人后面）</td></tr>
+        <tr><td>5</td><td>储蓄险</td><td>有闲钱再考虑</td></tr>
+      </tbody>
+    </table>
+
+    <div class="summary-callout">
+      顺序错了，保障的覆盖面和力度都不一样。建议你对照这个顺序检查一下自己家的保单——从第一步开始，看看有没有跳级。
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">6/7</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">检查一下<br>你家的保险顺序</div>
+    <div class="cover-sub">从第一步开始，有没有跳级？</div>
+    <div style="margin-top:16px;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7;">
+        保险的价值不在卖出去那一瞬间，在兑现那一刻。<br>
+        把复杂的事讲简单、把该拿的钱拿到——这是我的事。
+      </div>
+    </div>
+    <div class="cta-line">
+      拿不准自己家的配置顺序对不对的，可以私信我帮你看看。
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">7/7</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '买保险正确顺序-王永涛.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

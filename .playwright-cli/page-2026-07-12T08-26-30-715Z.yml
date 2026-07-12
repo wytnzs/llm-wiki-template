@@ -1,0 +1,84 @@
+- main [ref=e2]:
+  - generic [ref=e3]:
+    - heading "公众号配图下载页" [level=1] [ref=e4]
+    - paragraph [ref=e5]: 用于《别再用表格管客户了，真正值钱的是下一步动作》。打开本页逐张下载 PNG，再上传到公众号图片库。
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: ILLUSTRATION 01
+      - generic [ref=e9]: 客户信息进入系统后，应该变成动作
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e12]: 信息
+          - generic [ref=e13]: 聊天 / 资料 / 反馈
+        - generic [ref=e14]: →
+        - generic [ref=e15]:
+          - generic [ref=e16]: 洞察
+          - generic [ref=e17]: 需求 / 风险 / 缺口
+        - generic [ref=e18]: →
+        - generic [ref=e19]:
+          - generic [ref=e20]: 动作
+          - generic [ref=e21]: 方案 / 跟进 / 复盘
+    - button "下载这张" [ref=e22] [cursor=pointer]
+  - generic [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e25]: ILLUSTRATION 02
+      - generic [ref=e26]: 四种客户管理方式，差别不在“能不能记录”
+      - table [ref=e27]:
+        - rowgroup [ref=e28]:
+          - row [ref=e29]:
+            - columnheader "工具" [ref=e30]
+            - columnheader "擅长" [ref=e31]
+            - columnheader "短板" [ref=e32]
+          - row [ref=e33]:
+            - cell "通讯录" [ref=e34]
+            - cell "找到人" [ref=e35]
+            - cell "没有过程" [ref=e36]
+          - row [ref=e37]:
+            - cell "表格" [ref=e38]
+            - cell "管字段" [ref=e39]
+            - cell "不长洞察" [ref=e40]
+          - row [ref=e41]:
+            - cell "CRM" [ref=e42]
+            - cell "管销售阶段" [ref=e43]
+            - cell "不懂复杂关系" [ref=e44]
+          - row [ref=e45]:
+            - cell "客户管理库" [ref=e46]
+            - cell "管理解路径" [ref=e47]
+            - cell "需要持续沉淀" [ref=e48]
+    - button "下载这张" [ref=e49] [cursor=pointer]
+  - generic [ref=e50]:
+    - generic [ref=e51]:
+      - generic [ref=e52]: ILLUSTRATION 03
+      - generic [ref=e53]: 方案前置之前，先问四个缺口
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - text: 客户是谁
+          - paragraph [ref=e56]: 身份、家庭责任、决策人是否清楚？
+        - generic [ref=e57]:
+          - text: 已有多少
+          - paragraph [ref=e58]: 保单、预算、已有服务是否清楚？
+        - generic [ref=e59]:
+          - text: 风险在哪
+          - paragraph [ref=e60]: 健康、理赔、法律边界是否清楚？
+        - generic [ref=e61]:
+          - text: 下一步是啥
+          - paragraph [ref=e62]: 补资料、复核、沟通还是暂缓？
+    - button "下载这张" [ref=e63] [cursor=pointer]
+  - generic [ref=e64]:
+    - generic [ref=e65]:
+      - generic [ref=e66]: ILLUSTRATION 04
+      - generic [ref=e67]: 本周客户经营看板
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - generic [ref=e70]: 优先跟进
+          - generic [ref=e71]: 高意愿 + 下一步清楚
+        - generic [ref=e72]:
+          - generic [ref=e73]: 补齐信息
+          - generic [ref=e74]: 有价值 + 缺关键资料
+        - generic [ref=e75]:
+          - generic [ref=e76]: 方案复核
+          - generic [ref=e77]: 可推进 + 需人工把关
+        - generic [ref=e78]:
+          - generic [ref=e79]: 长期维护
+          - generic [ref=e80]: 暂不成交 + 有关系价值
+    - button "下载这张" [ref=e81] [cursor=pointer]

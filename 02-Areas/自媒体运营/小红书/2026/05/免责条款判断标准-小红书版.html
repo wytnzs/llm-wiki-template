@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 免责条款≠不赔！法院认的3个判断标准</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #F0F0F0;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,245,245,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #1A1A1A; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: opacity 0.15s;
+  }
+  .toolbar .btn:hover { opacity: 0.85; }
+  .toolbar .btn.accent { background: #444; }
+  .toolbar .progress { color: rgba(0,0,0,0.25); font-size: 13px; }
+
+  /* ====== CARD BASE ====== */
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 8px; margin-bottom: 28px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+  }
+  .bg-light { background: #F7F7F7; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 32px 32px 28px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 720px;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 14px; right: 22px;
+    font-size: 10px; font-weight: 500;
+    color: rgba(0,0,0,0.15);
+    z-index: 3; letter-spacing: 1px;
+  }
+
+  /* ====== SECTION TAG ====== */
+  .section-tag {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 3px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ====== TITLES ====== */
+  .main-title {
+    font-size: 27px;
+    font-weight: 900;
+    color: #111;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+
+  /* ====== DIVIDER ====== */
+  .divider {
+    width: 32px; height: 3px;
+    background: #111; border-radius: 2px;
+    margin: 8px 0 14px;
+  }
+
+  /* ====== INTRO TEXT ====== */
+  .intro {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .intro b { color: #111; }
+
+  /* ====== BIG NUMBER ====== */
+  .big-num {
+    font-size: 56px; font-weight: 900;
+    color: #111;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .big-num-label {
+    font-size: 13px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  /* ====== INFO CARD (light) ====== */
+  .info-card {
+    background: #FAFAFA;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    border-left: 3px solid #111;
+  }
+  .info-card .card-title {
+    font-size: 13px; font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  /* ====== LIST ITEMS ====== */
+  .bullet-list {
+    list-style: none; padding: 0;
+  }
+  .bullet-list li {
+    font-size: 12px; color: #444; line-height: 1.6;
+    padding: 5px 0 5px 16px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .bullet-list li:last-child { border-bottom: none; }
+  .bullet-list li::before {
+    content: '';
+    position: absolute; left: 0; top: 12px;
+    width: 5px; height: 5px;
+    background: #111; border-radius: 50%;
+  }
+
+  /* ====== 3-COLUMN MINI CARDS ====== */
+  .card-row {
+    display: flex; gap: 10px; margin-bottom: 10px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FAFAFA;
+    border-radius: 8px;
+    padding: 18px 12px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .mini-card .m-num {
+    font-size: 28px; font-weight: 900;
+    color: #DDD;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .mini-card .m-title {
+    font-size: 13px; font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+  }
+  .mini-card .m-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.45;
+  }
+
+  /* ====== QUOTE BOX (dark inline) ====== */
+  .quote-box {
+    background: #1A1A1A;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 6px;
+    position: relative;
+  }
+  .quote-box::before {
+    content: '\201C';
+    position: absolute; top: 4px; left: 10px;
+    font-size: 36px; font-weight: 900;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.65;
+    padding-left: 6px;
+  }
+
+  /* ====== NAIL SENTENCE ====== */
+  .nail {
+    font-size: 15px; font-weight: 800;
+    color: #111;
+    line-height: 1.4;
+    padding: 10px 0 6px 14px;
+    border-left: 3px solid #111;
+    margin: 10px 0 6px;
+  }
+
+  /* ====== STEP NUMBER ====== */
+  .step-num {
+    font-size: 48px; font-weight: 900;
+    color: #E8E8E8;
+    line-height: 1;
+    min-width: 42px;
+    text-align: center;
+  }
+
+  /* ====== TABLE (A vs B) ====== */
+  .vs-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 11px;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .vs-table th {
+    background: #1A1A1A;
+    color: #FFF;
+    padding: 8px 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .vs-table th:first-child { background: #555; }
+  .vs-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: #333; line-height: 1.45;
+    text-align: center;
+  }
+  .vs-table tr:last-child td { border-bottom: none; }
+  .vs-table tr:nth-child(even) td { background: #FAFAFA; }
+
+  /* ====== DARK CARD ====== */
+  .dark-card {
+    background: #2A2A2A;
+    border-radius: 8px;
+    padding: 13px 16px;
+    margin-bottom: 8px;
+  }
+  .dark-card .dc-title {
+    font-size: 13px; font-weight: 700;
+    color: #AAA;
+    margin-bottom: 4px;
+  }
+  .dark-card .dc-body {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+
+  /* ====== CTA BUTTON ====== */
+  .cta-btn {
+    display: block;
+    background: #FFF;
+    color: #111;
+    text-align: center;
+    padding: 13px 20px;
+    border-radius: 8px;
+    font-size: 13px; font-weight: 700;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ====== COVER ====== */
+  .cover-slide { background: #121212; }
+  .cover-slide .content {
+    justify-content: center;
+    min-height: 720px;
+    padding: 40px 38px 32px;
+  }
+  .cover-slide .cover-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .cover-slide .cover-title {
+    font-size: 42px; font-weight: 900;
+    color: #FFF;
+    line-height: 1.12;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  .cover-slide .cover-line {
+    width: 48px; height: 2px;
+    background: rgba(255,255,255,0.15);
+    margin-bottom: 20px;
+  }
+  .cover-slide .cover-tags {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .cover-slide .tag {
+    font-size: 11px; font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 14px; border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid rgba(255,255,255,0.2);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.55;
+  }
+
+  /* ====== DARK SLIDE ====== */
+  .dark-slide { background: #121212; }
+  .dark-slide .section-tag { color: rgba(255,255,255,0.35); }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.5); }
+  .dark-slide .intro b { color: rgba(255,255,255,0.8); }
+  .dark-slide .divider { background: rgba(255,255,255,0.15); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.1); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.03);
+    border-left-color: rgba(255,255,255,0.25);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.6); }
+  .dark-slide .bullet-list li {
+    color: rgba(255,255,255,0.6);
+    border-bottom-color: rgba(255,255,255,0.04);
+  }
+  .dark-slide .bullet-list li::before { background: rgba(255,255,255,0.3); }
+  .dark-slide .mini-card { background: rgba(255,255,255,0.03); }
+  .dark-slide .mini-card .m-num { color: rgba(255,255,255,0.08); }
+  .dark-slide .mini-card .m-title { color: #CCC; }
+  .dark-slide .mini-card .m-desc { color: rgba(255,255,255,0.45); }
+  .dark-slide .nail { color: #FFF; border-left-color: rgba(255,255,255,0.3); }
+  .dark-slide .big-num { color: #FFF; }
+  .dark-slide .big-num-label { color: rgba(255,255,255,0.4); }
+  .dark-slide .vs-table th { background: #333; }
+  .dark-slide .vs-table th:first-child { background: #555; }
+  .dark-slide .vs-table td {
+    color: rgba(255,255,255,0.65);
+    border-bottom-color: rgba(255,255,255,0.04);
+  }
+  .dark-slide .vs-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .dark-slide .vs-table { border-color: rgba(255,255,255,0.06); }
+  .dark-slide .dark-card { background: rgba(255,255,255,0.04); }
+  .dark-slide .step-num { color: rgba(255,255,255,0.06); }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ====== 第1张 · 封面 ====== -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-badge">保险条款 × 法律</div>
+    <div class="cover-title">免责条款<br>≠ 不赔</div>
+    <div class="cover-sub">法院认的3个判断标准<br>搞懂了，再也不被保险公司唬住</div>
+    <div class="cover-line"></div>
+    <div class="cover-tags">
+      <span class="tag">保险理赔</span>
+      <span class="tag">免责条款</span>
+      <span class="tag">拒赔维权</span>
+    </div>
+    <div class="cover-quote">
+      <p>合同写了"不赔"，法院说：<br>等等，你先证明你跟客户说清楚了。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">1 / 8</div>
+  </div>
+</div>
+
+<!-- ====== 第2张 · 认知冲突 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">认知冲突</div>
+    <div class="main-title">写了免责就不赔？<br>没这么简单</div>
+    <div class="divider"></div>
+
+    <div class="intro">
+      很多人（包括不少代理人）有个误解：<br><br>
+      合同里白纸黑字写了"免责"，出了事保险公司就一定不赔。<br><br>
+      <b>实际情况是：法律给免责条款设了三道关卡。过不去，写了也白写。</b>
+    </div>
+
+    <div class="info-card" style="margin-top:10px;">
+      <div class="card-title">保险法第十七条的核心逻辑</div>
+      <div class="card-body">保险人必须做到两件事：<b>提示</b>（让你注意到这条存在）+<b>明确说明</b>（让你真正理解什么意思）。缺一个，免责条款就不生效。</div>
+    </div>
+
+    <div class="nail">不是"写了就算"，是"说清楚了才算"。</div>
+
+    <div class="page-num">2 / 8</div>
+  </div>
+</div>
+
+<!-- ====== 第3张 · 标准1 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">判断标准 01</div>
+    <div class="main-title">有没有"提示+说明"<br>——程序性审查</div>
+    <div class="divider"></div>
+
+    <div class="info-card">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">①</span> 提示义务
+      </div>
+      <div class="card-body">免责条款是不是加粗了？字号有没有比正文大？有没有单独签字确认？<br><b>形式上让投保人注意到——这是最低门槛。</b></div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">②</span> 明确说明义务
+      </div>
+      <div class="card-body">光加粗不够。保险人还得用通俗语言解释：这条到底什么意思？在什么情况下触发？后果是什么？<br><b>说人话，让投保人真正理解。</b></div>
+    </div>
+
+    <div class="quote-box" style="margin-top:8px;">
+      <p>翻译成实操：如果保险公司拒赔时拿不出证据证明"当时跟客户说清楚了"，那这条免责就是废纸。</p>
+    </div>
+
+    <div class="page-num">3 / 8</div>
+  </div>
+</div>
+
+<!-- ====== 第4张 · 标准2 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">判断标准 02</div>
+    <div class="main-title">不看名字看效果<br>——功能性认定</div>
+    <div class="divider"></div>
+
+    <div class="intro">
+      司法解释（二）第九条确立的原则：<br><br>
+      <b>不管条款叫什么名字、放在哪个章节，只要效果是"减轻或免除保险人赔偿责任"——就算免责条款。</b>
+    </div>
+
+    <div class="card-row" style="margin-top:10px;">
+      <div class="mini-card">
+        <div class="m-num">01</div>
+        <div class="m-title">免赔额</div>
+        <div class="m-desc">看着像技术参数，实质是减轻赔付</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-num">02</div>
+        <div class="m-title">免赔率</div>
+        <div class="m-desc">按比例少赔，效果=部分免责</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-num">03</div>
+        <div class="m-title">给付限制</div>
+        <div class="m-desc">设上限、设条件，都是减责手段</div>
+      </div>
+    </div>
+
+    <div class="nail">法院看的是实质效果，不是条款标题。</div>
+
+    <div class="page-num">4 / 8</div>
+  </div>
+</div>
+
+<!-- ====== 第5张 · 标准3 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">判断标准 03</div>
+    <div class="main-title">藏起来的免责<br>——条款"隐身术"</div>
+    <div class="divider"></div>
+
+    <div class="intro">
+      保险公司最常用的操作：把实质免责内容藏在其他章节里。<br>法院对此的态度很明确——<b>不能通过调整条款结构来规避告知义务</b>。
+    </div>
+
+    <div class="info-card" style="margin-top:6px;">
+      <div class="card-title">常见"隐身"位置</div>
+      <div class="card-body">
+        <ul class="bullet-list" style="margin-top:2px;">
+          <li>藏在"保险责任"章节的负面定义里（"本保险不包含……"）</li>
+          <li>散落在"名词释义"中（对关键术语做限缩解释）</li>
+          <li>埋在"赔偿处理方法"里（按责赔付、比例赔付公式）</li>
+          <li>放在"特别约定"附件中（字小、页多、签字潦草）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote-box" style="margin-top:8px;">
+      <p>如果允许保险公司通过调整条款结构来规避提示说明义务，投保人利益必然受损，违背保险法的立法初衷。</p>
+    </div>
+
+    <div class="page-num">5 / 8</div>
+  </div>
+</div>
+
+<!-- ====== 第6张 · 分类表 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">一张表搞懂</div>
+    <div class="main-title">免责条款的<br>三种分类维度</div>
+    <div class="divider"></div>
+
+    <table class="vs-table" style="margin-top:6px; text-align:left;">
+      <tr><th style="width:25%;">维度</th><th style="width:35%;">类型A</th><th style="width:40%;">类型B</th></tr>
+      <tr><td style="font-weight:700;">法律性质</td><td><b>法定免责</b><br>基于法律强制规定<br>只需提示</td><td><b>约定免责</b><br>保险人自行设计<br>必须提示+说明</td></tr>
+      <tr><td style="font-weight:700;">表现形式</td><td><b>显性免责</b><br>在"责任免除"专章<br>表述直接明确</td><td><b>隐性免责</b><br>散落在其他章节<br>容易被判未尽义务</td></tr>
+      <tr><td style="font-weight:700;">责任影响</td><td><b>豁免条款</b><br>完全免除赔付<br>如战争、恐怖袭击</td><td><b>减责条款</b><br>部分减轻赔付<br>如免赔额、按责赔付</td></tr>
+    </table>
+
+    <div class="nail" style="margin-top:14px;">分类直接决定举证责任轻重和法律效力强弱。</div>
+
+    <div class="page-num">6 / 8</div>
+  </div>
+</div>
+
+<!-- ====== 第7张 · 代理人实操 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">代理人实操</div>
+    <div class="main-title">客户问"这个赔不赔"<br>你怎么判断</div>
+    <div class="divider"></div>
+
+    <div class="info-card">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">1</span> 先看：条款有没有加粗/单独签字
+      </div>
+      <div class="card-body">如果保险公司连提示的形式都没做到，这条免责从一开始就站不住。</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">2</span> 再看：免责内容藏在哪
+      </div>
+      <div class="card-body">不在"责任免除"专章，而是散落在释义或赔偿方式里？隐性免责=保险公司举证压力更大。</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">3</span> 最后看：法定还是约定
+      </div>
+      <div class="card-body">醉驾、故意犯罪这类法定免责，保险公司只需证明"提示了"。但约定免责（商业设计），必须证明"说清楚了"。</div>
+    </div>
+
+    <div class="nail" style="margin-top:10px;">能帮客户把这三步理清楚，你就不是"卖保险的"，是"懂保险的"。</div>
+
+    <div class="page-num">7 / 8</div>
+  </div>
+</div>
+
+<!-- ====== 第8张 · CTA ====== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">写在最后</div>
+    <div class="main-title">免责条款是<br>保险合同的"定义工具"<br>也是"隔离工具"</div>
+    <div class="divider"></div>
+
+    <div class="dark-card">
+      <div class="dc-title">一句话总结</div>
+      <div class="dc-body">保险公司说"免责"，不代表法律认。能不能免责，看的不是条款怎么写，是保险公司有没有做到位。</div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">后面还会更新</div>
+      <div class="dc-body">免责条款在司法实践中的具体应用——哪些情况法院判了不免责、代理人怎么帮客户据理力争。</div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">关于我</div>
+      <div class="dc-body">王永涛。帮人把保险弄明白，把钱拿到手。<br>如果你也想系统搞懂理赔逻辑，关注我。</div>
+    </div>
+
+    <div class="cta-btn">关注 @保险其实不难 不迷路</div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.1); margin-top:auto; position:static; text-align:right; padding-top:14px;">8 / 8</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-免责条款判断标准.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

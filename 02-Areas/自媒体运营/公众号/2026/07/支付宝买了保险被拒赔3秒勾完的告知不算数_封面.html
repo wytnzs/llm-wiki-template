@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>封面</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f0f0f0; }
+.cover-wrapper { position: relative; width: 1283px; height: 383px; display: flex; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+.cover-left { width: 900px; height: 383px; background: linear-gradient(135deg, #0A1931 0%, #102542 50%, #162D5A 100%); padding: 48px 56px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.cover-left::before { content: ''; position: absolute; top: -50%; right: -30%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(247,127,0,0.08) 0%, transparent 70%); border-radius: 50%; }
+.cover-left::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); }
+.cover-tag { display: inline-flex; padding: 4px 12px; border-radius: 20px; background: rgba(247,127,0,0.2); border: 1px solid rgba(247,127,0,0.3); color: #F77F00; font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px; font-weight: 600; margin-bottom: 16px; align-self: flex-start; }
+.cover-title { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 44px; font-weight: 800; color: #FFFFFF; line-height: 1.3; letter-spacing: -0.5px; }
+.cover-subtitle { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 12px; letter-spacing: 0.5px; }
+.cover-right { width: 383px; height: 383px; background: linear-gradient(135deg, #102542 0%, #162D5A 50%, #1A3466 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; position: relative; overflow: hidden; }
+.cover-right::before { content: ''; position: absolute; top: -60%; right: -40%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(247,127,0,0.06) 0%, transparent 70%); border-radius: 50%; }
+.cover-right-title { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 22px; font-weight: 700; color: #FFFFFF; text-align: center; line-height: 1.4; position: relative; z-index: 1; }
+.cover-right-meta { font-family: -apple-system, "PingFang SC", sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 12px; position: relative; z-index: 1; }
+
+.download-btn { display: block; margin: 24px auto 0; padding: 12px 32px; background: #102542; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-family: -apple-system, "PingFang SC", sans-serif; }
+.download-btn:hover { background: #1A3466; }
+</style>
+</head>
+<body>
+<div>
+<div class="cover-wrapper" id="cover">
+  <div class="cover-left">
+    <div class="cover-tag">理赔案例</div>
+    <div class="cover-title">支付宝买了保险被拒赔？<br>法院：3秒勾完的告知<br>不算数</div>
+    <div class="cover-subtitle">互联网投保拒赔的三个关键判断</div>
+  </div>
+  <div class="cover-right">
+    <div class="cover-right-title">能跳过的告知<br>= 没告知</div>
+    <div class="cover-right-meta">#理赔案例</div>
+  </div>
+</div>
+<button class="download-btn" onclick="downloadCover()">下载封面 PNG</button>
+</div>
+<script>
+function downloadCover() {
+  html2canvas(document.getElementById('cover'), { scale: 2, useCORS: true }).then(canvas => {
+    var link = document.createElement('a'); link.download = '封面.png';
+    link.href = canvas.toDataURL('image/png'); link.click();
+  });
+}
+</script>
+</body>
+</html>

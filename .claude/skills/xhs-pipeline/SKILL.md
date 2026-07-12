@@ -34,7 +34,7 @@ description: >
 └── {主题}-小红书文案.md     # 发布文案
 ```
 
-输出目录格式：`01-Projects/自媒体运营/小红书/{年份}/{月份}/`
+输出目录格式：`02-Areas/自媒体运营/小红书/{年份}/{月份}/`
 
 ---
 
@@ -134,8 +134,11 @@ python3 "${SKILL_DIR}/scripts/fetch_wechat_article.py" "<URL>" --json
 | **Slide · PPT Style** | 大字标题 + 列表要点，清晰直给，PPT 演讲节奏 | **默认首选**。保险科普、产品对比、政策解读、清单总结 |
 | **Editorial Magazine × E-ink** | 杂志深度阅读，温暖纸质感 | 深度分析、个人故事、方法论、金句 |
 | **Swiss International** | 精确工程感，数据导向 | 数据报告、实操指南、对比测评、清单 |
+| **Minimal Fresh★** | 极简杂志风，大留白+细线分隔 | 方法论、认知输出、深度观点、个人IP内容 |
 
 选择建议参考 `references/theme-presets.md`。
+
+**Minimal Fresh★**：无需额外主题色。纯白背景 + 鼠尾草绿 `#7A9E8E` 点缀，字重 300~400（偏细）。详见 gzh-pipeline 的 `references/theme-minimal-fresh.md`。
 
 ### 第 2 步：选择主题色
 
@@ -249,15 +252,15 @@ Slide 关键规则：
 
 ### 视觉规则速查
 
-| 规则 | Slide | Editorial | Swiss |
-|------|-------|-----------|-------|
-| 字体 | 纯无衬线 (Noto Sans SC) | 衬线(serif)标题 + 无衬线(sans)正文 | 纯无衬线 (Inter + Noto Sans SC) |
-| 背景 | warm 暖底 / dark 暗底交替 | grain + 可用 WebGL 墨迹 | 纯色 + 可用装饰矩形 |
-| 卡片 | card-box (左侧 accent 色条) + point-row (编号列表) | 无 card 类（用排版表达层级） | card-fill / card-outlined（互斥） |
-| 数字 | big-num (140px+) / mid-num (88px) | data-num (96px) | num-mega (168px) |
-| 圆角 | 有（card-box 10px） | 有（图片 6px） | **禁止** |
-| emoji | **禁止** | **禁止**（用 Lucide） | **禁止**（用 Lucide） |
-| 节奏 | 第 3/7 张必须 dark 底打断 | mag-bg 用于封面+金句页 | 全篇纯色统一 |
+| 规则 | Slide | Editorial | Swiss | **Minimal Fresh★** |
+|------|-------|-----------|-------|-------------------|
+| 字体 | 纯无衬线 Noto Sans SC | 衬线标题+无衬线正文 | 纯无衬线 Inter+Noto Sans SC | Inter + Noto Sans SC Light（细体） |
+| 背景 | warm暖底/dark暗底交替 | grain + 可用 WebGL 墨迹 | 纯色 + 可用装饰矩形 | **纯白** + 极浅灰隔断 |
+| 卡片 | card-box + point-row | 无 card 类 | card-fill/card-outlined | **无卡片**——纯文字+细分割线 |
+| 数字 | big-num/mid-num | data-num (96px) | num-mega (168px) | mid-num (64px) 细体 |
+| 圆角 | 有（card-box 10px） | 有（图片 6px） | **禁止** | **禁止**（直角） |
+| emoji | **禁止** | **禁止**（用 Lucide） | **禁止**（用 Lucide） | **禁止** |
+| 节奏 | 第3/7张必须 dark 底打断 | mag-bg 用于封面+金句页 | 全篇纯色统一 | 全篇**白底+细线**，无暗底打断 |
 
 完整视觉规则见 `references/style-system.md`。
 

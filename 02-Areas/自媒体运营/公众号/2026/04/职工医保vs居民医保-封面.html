@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1283">
+<title>公众号封面 - 石家庄医保差距</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+.combo { display: flex; width: 1283px; height: 383px; }
+
+/* 左侧：长方形 900x383 */
+.left {
+  width: 900px; height: 383px;
+  background: linear-gradient(135deg, #0F4C5C 0%, #1A6B7C 50%, #0F4C5C 100%);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 40px;
+}
+.left::before {
+  content: ''; position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  border-radius: 50%;
+}
+.tag {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px; color: rgba(255,255,255,0.8);
+  margin-bottom: 16px;
+  font-family: -apple-system, 'PingFang SC', sans-serif;
+}
+.title {
+  font-size: 42px; font-weight: 900; color: #FFFFFF;
+  text-align: center; line-height: 1.3;
+  font-family: -apple-system, 'PingFang SC', sans-serif;
+  max-width: 780px;
+}
+.subtitle {
+  font-size: 18px; color: rgba(255,255,255,0.5);
+  margin-top: 12px;
+  font-family: -apple-system, 'PingFang SC', sans-serif;
+  letter-spacing: 2px;
+}
+
+/* 右侧：方形 383x383 */
+.right {
+  width: 383px; height: 383px;
+  background: linear-gradient(135deg, #0A1931 0%, #0F4C5C 100%);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 30px;
+}
+.right::before {
+  content: ''; position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%);
+  bottom: -80px; left: -80px;
+  border-radius: 50%;
+}
+.right-title {
+  font-size: 28px; font-weight: 800; color: #FFFFFF;
+  text-align: center; line-height: 1.4;
+  font-family: -apple-system, 'PingFang SC', sans-serif;
+  position: relative; z-index: 1;
+}
+.right-sub {
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  margin-top: 16px;
+  font-family: -apple-system, 'PingFang SC', sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="combo" id="cover">
+  <!-- 左侧长方形 -->
+  <div class="left">
+    <div class="tag">💊 医保深度解读</div>
+    <div class="title">职工花1万居民花5万</div>
+    <div class="subtitle">石家庄医保差距真相</div>
+  </div>
+  <!-- 右侧方形 -->
+  <div class="right">
+    <div class="right-title">职工花1万<br>居民花5万</div>
+    <div class="right-sub">医保差距真相</div>
+  </div>
+</div>
+
+<script>
+// 自动截图
+window.onload = function() {
+  setTimeout(function() {
+    var el = document.getElementById('cover');
+    html2canvas(el, { scale: 2, useCORS: true, backgroundColor: null }).then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = '职工医保vs居民医保-封面.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  }, 500);
+};
+</script>
+</body>
+</html>

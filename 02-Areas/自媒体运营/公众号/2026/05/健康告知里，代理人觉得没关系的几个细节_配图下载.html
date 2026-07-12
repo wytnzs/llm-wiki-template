@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配图下载 — 健康告知里，代理人觉得没关系的几个细节</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; flex-direction: column; align-items: center; background: #d5d8de; padding: 32px 16px; gap: 24px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .card-wrapper { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .btn-download { background: #102542; color: #FFF; border: none; padding: 10px 28px; font-size: 14px; border-radius: 6px; cursor: pointer; }
+  .btn-download:hover { background: #F77F00; }
+  .illu-card { position: relative; width: 677px; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+
+  /* Shared */
+  .card-dark { background: #102542; color: #FFF; padding: 28px 24px; }
+  .card-dark h3 { color: #F77F00; font-size: 16px; margin: 0 0 16px; font-weight: 700; }
+  .card-light { background: #F7F9FC; border: 1px solid #E5EAF2; padding: 24px; }
+  .card-heading { font-size: 15px; font-weight: 700; color: #F77F00; margin-bottom: 14px; letter-spacing: 1px; }
+
+  /* Card 1: Compare */
+  .compare-row { display: flex; gap: 16px; }
+  .compare-col { flex: 1; padding: 16px; border-radius: 8px; }
+  .compare-col.left { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
+  .compare-col.right { background: rgba(247,127,0,0.12); border: 1px solid rgba(247,127,0,0.25); }
+  .compare-label { font-size: 13px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .compare-label.dim { color: rgba(255,255,255,0.5); }
+  .compare-label.warm { color: #F77F00; }
+  .compare-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+
+  /* Card 2: Flow */
+  .flow-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .flow-step { background: rgba(247,127,0,0.10); border: 1px solid rgba(247,127,0,0.25); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: rgba(255,255,255,0.9); text-align: center; flex: 1; min-width: 80px; }
+  .flow-arrow { color: #F77F00; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+  .flow-warn { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.35); }
+
+  /* Card 3: Grid */
+  .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 8px; padding: 16px; }
+  .grid-item .num { color: #F77F00; font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+  .grid-item h4 { color: #FFF; font-size: 14px; margin: 0 0 6px; font-weight: 700; }
+  .grid-item p { color: rgba(255,255,255,0.7); font-size: 13px; margin: 0; line-height: 1.6; }
+
+  /* Card 4: Split */
+  .split-row { display: flex; gap: 0; border-radius: 8px; overflow: hidden; }
+  .split-col { flex: 1; padding: 20px 16px; text-align: center; }
+  .split-col.good { background: rgba(16,37,66,0.06); }
+  .split-col.bad { background: rgba(200,60,60,0.06); }
+  .split-icon { font-size: 22px; margin-bottom: 6px; }
+  .split-label { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .split-label.good { color: #102542; }
+  .split-label.bad { color: #C83C3C; }
+  .split-desc { font-size: 13px; color: #555; line-height: 1.5; }
+
+  .footer-note { font-size: 13px; color: #86909C; text-align: center; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- Card 1 -->
+<div class="card-wrapper">
+  <button class="btn-download" onclick="downloadCard('illu-1')">⬇ 下载配图 1 — 代理人以为 vs 核赔实际</button>
+  <div class="illu-card card-dark" id="illu-1">
+    <div class="card-heading">代理人以为 vs 核赔实际</div>
+    <div class="compare-row">
+      <div class="compare-col left">
+        <div class="compare-label dim">代理人以为</div>
+        <div class="compare-text">没开药<br>没住院<br>没确诊<br>→ 不算病，不用告知</div>
+      </div>
+      <div class="compare-col right">
+        <div class="compare-label warm">核赔实际</div>
+        <div class="compare-text">指标异常<br>医生建议复查<br>存在健康风险<br>→ 属于应告知事项</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="card-wrapper">
+  <button class="btn-download" onclick="downloadCard('illu-2')">⬇ 下载配图 2 — 随口说"不用告知"之后</button>
+  <div class="illu-card card-dark" id="illu-2">
+    <div class="card-heading">随口说"不用告知"之后</div>
+    <div class="flow-row">
+      <div class="flow-step">代理人说<br>"这个不用告知"</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">客户信了<br>全部勾"否"</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">顺利承保<br>代理人觉得省事</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step flow-warn">客户出险<br>保险公司拒赔</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step flow-warn">代理人<br>被追责</div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="card-wrapper">
+  <button class="btn-download" onclick="downloadCard('illu-3')">⬇ 下载配图 3 — 保险公司四大调查手段</button>
+  <div class="illu-card card-dark" id="illu-3">
+    <div class="card-heading">保险公司四大调查手段</div>
+    <div class="grid-2x2">
+      <div class="grid-item">
+        <div class="num">01</div>
+        <h4>医保卡记录</h4>
+        <p>购药、门诊科室、住院诊断全程可查。外借医保卡是高危行为。</p>
+      </div>
+      <div class="grid-item">
+        <div class="num">02</div>
+        <h4>体检机构数据</h4>
+        <p>美年、爱康等商业体检已联网，保险公司授权即可调取。</p>
+      </div>
+      <div class="grid-item">
+        <div class="num">03</div>
+        <h4>医院电子病历</h4>
+        <p>门诊病历保存15年，住院保存30年。电子化后查阅极快。</p>
+      </div>
+      <div class="grid-item">
+        <div class="num">04</div>
+        <h4>同业数据共享</h4>
+        <p>投保、理赔、拒保记录全行业可查。大额理赔必查。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="card-wrapper">
+  <button class="btn-download" onclick="downloadCard('illu-4')">⬇ 下载配图 4 — 告知到位 vs 糊弄过关</button>
+  <div class="illu-card card-light" id="illu-4">
+    <div class="card-heading" style="color:#102542;">告知到位 vs 糊弄过关</div>
+    <div class="split-row">
+      <div class="split-col good">
+        <div class="split-icon">&#9989;</div>
+        <div class="split-label good">告知到位</div>
+        <div class="split-desc">客户清楚自己的保障边界<br>出险时保险公司无理由拒赔<br>代理人的专业度被认可</div>
+      </div>
+      <div class="split-col bad">
+        <div class="split-icon">&#9888;</div>
+        <div class="split-label bad">糊弄过关</div>
+        <div class="split-desc">保单是一张废纸<br>客户保费全部白花<br>代理人失去信任和口碑</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  打开 preview.html 确认配图位置 → 在本页逐张下载 PNG → 上传到公众号图片库
+</div>
+
+<script>
+function downloadCard(id) {
+  var el = document.getElementById(id);
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = id + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>封面 - AI时代保险代理人最值钱的资产</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #d5d8de; gap: 20px; }
+  .combo { display: flex; }
+  .btn-download { background: #0F0F1A; color: #FFF; border: none; padding: 10px 28px; font-size: 15px; border-radius: 6px; cursor: pointer; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .btn-download:hover { background: #537FE7; }
+
+  .left {
+    width: 900px; height: 383px; position: relative; overflow: hidden;
+    background:
+      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
+      radial-gradient(ellipse 500px 400px at 80% 15%, rgba(83,127,231,0.12) 0%, transparent 100%),
+      radial-gradient(ellipse 400px 300px at 20% 85%, rgba(196,66,245,0.06) 0%, transparent 100%),
+      radial-gradient(ellipse 250px 200px at 60% 75%, rgba(0,212,255,0.05) 0%, transparent 100%),
+      linear-gradient(155deg, #0D0D0D 0%, #1A1A2E 45%, #16213E 100%);
+    background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 48px 64px 56px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .left::before {
+    content: ''; position: absolute;
+    width: 480px; height: 480px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(83,127,231,0.06) 0%, transparent 70%);
+    top: -200px; right: -180px;
+  }
+  .left::after {
+    content: ''; position: absolute;
+    width: 300px; height: 300px; border-radius: 50%;
+    border: 1.5px solid rgba(83,127,231,0.12);
+    top: 40px; right: 60px;
+  }
+  /* 几何斜线装饰 */
+  .geo-line {
+    position: absolute; bottom: 80px; right: 40px;
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(83,127,231,0.2));
+    transform: rotate(-22deg);
+  }
+  .geo-line-2 {
+    position: absolute; bottom: 110px; right: 40px;
+    width: 160px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.12));
+    transform: rotate(-22deg);
+  }
+  .dot-grid {
+    position: absolute; top: 32px; left: 32px;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(83,127,231,0.3);
+    box-shadow:
+      40px 0 0 rgba(83,127,231,0.2),
+      80px 0 0 rgba(83,127,231,0.15),
+      120px 0 0 rgba(83,127,231,0.1),
+      0 40px 0 rgba(83,127,231,0.15),
+      40px 40px 0 rgba(83,127,231,0.1),
+      80px 40px 0 rgba(83,127,231,0.08),
+      0 80px 0 rgba(83,127,231,0.1),
+      40px 80px 0 rgba(83,127,231,0.06);
+  }
+  .tag-row { display: flex; gap: 10px; margin-bottom: 20px; position: relative; z-index: 2; }
+  .tag {
+    padding: 5px 18px; border: 1px solid rgba(83,127,231,0.3);
+    border-radius: 20px; background: rgba(83,127,231,0.08);
+    color: rgba(255,255,255,0.7); font-size: 13px; letter-spacing: 2px;
+    font-family: "Space Mono", -apple-system, "PingFang SC", monospace;
+  }
+  .main-title {
+    font-size: 66px; font-weight: 900; color: #FFF;
+    line-height: 1.15;
+    position: relative; z-index: 2;
+    text-shadow: 0 0 80px rgba(83,127,231,0.1), 0 2px 4px rgba(0,0,0,0.3);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    letter-spacing: -1px;
+  }
+  .main-title .accent {
+    color: #537FE7;
+  }
+  .sub-row { display: flex; align-items: center; gap: 14px; margin-top: 14px; position: relative; z-index: 2; }
+  .sub-line { width: 40px; height: 3px; background: #537FE7; flex-shrink: 0; border-radius: 2px; }
+  .subtitle { font-size: 24px; color: rgba(255,255,255,0.5); letter-spacing: 0; font-weight: 400; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .info-line {
+    position: absolute; bottom: 36px; left: 64px;
+    font-size: 13px; color: rgba(255,255,255,0.25); letter-spacing: 2px; z-index: 2;
+    font-family: "Space Mono", monospace;
+  }
+
+  .right {
+    width: 383px; height: 383px; position: relative; overflow: hidden;
+    background:
+      radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px),
+      radial-gradient(ellipse 300px 300px at 50% 60%, rgba(83,127,231,0.08) 0%, transparent 100%),
+      radial-gradient(ellipse 200px 200px at 30% 30%, rgba(0,212,255,0.04) 0%, transparent 100%),
+      linear-gradient(155deg, #0D0D0D 0%, #1A1A2E 50%, #16213E 100%);
+    background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
+    display: flex; justify-content: center; align-items: center;
+    padding: 36px;
+  }
+  .right::before {
+    content: ''; position: absolute;
+    width: 340px; height: 340px; border-radius: 50%;
+    border: 1.5px solid rgba(83,127,231,0.08);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
+  .right::after {
+    content: ''; position: absolute;
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 1.5px solid rgba(0,212,255,0.1);
+    bottom: -60px; right: -60px;
+  }
+  .corner-bracket {
+    position: absolute; top: 28px; right: 28px;
+    width: 24px; height: 24px;
+    border-top: 2px solid rgba(83,127,231,0.3);
+    border-right: 2px solid rgba(83,127,231,0.3);
+  }
+  .right .title {
+    font-size: 54px; font-weight: 900; color: #FFF;
+    text-align: center; line-height: 1.3;
+    position: relative; z-index: 2;
+    text-shadow: 0 0 60px rgba(83,127,231,0.1), 0 2px 4px rgba(0,0,0,0.3);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    letter-spacing: -1px;
+  }
+  .right .title .accent {
+    color: #537FE7;
+  }
+  .right .bottom-line {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 2px; background: rgba(83,127,231,0.2);
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+<button class="btn-download" onclick="downloadCover()">⬇ 下载封面 PNG（2566×766）</button>
+<div class="combo">
+  <div class="left">
+    <div class="dot-grid"></div>
+    <div class="geo-line"></div>
+    <div class="geo-line-2"></div>
+    <div class="tag-row">
+      <span class="tag">01 客户数据</span>
+      <span class="tag">02 AI系统</span>
+    </div>
+    <div class="main-title">
+      AI时代保险代理人<br>
+      <span class="accent">最值钱的资产</span>
+    </div>
+    <div class="sub-row"><div class="sub-line"></div><span class="subtitle">不是AI，是你积累的东西</span></div>
+    <div class="info-line">WANG YONGTAO · 保险其实不难</div>
+  </div>
+  <div class="right">
+    <div class="corner-bracket"></div>
+    <div class="title">
+      最值钱<br>
+      的<span class="accent">资产</span>
+    </div>
+    <div class="bottom-line"></div>
+  </div>
+</div>
+<script>
+function downloadCover() {
+  var el = document.querySelector('.combo');
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = '封面_AI时代保险代理人最值钱的资产.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); });
+}
+</script>
+</body>
+</html>

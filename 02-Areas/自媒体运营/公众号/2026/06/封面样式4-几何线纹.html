@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>封面 - 几何线纹</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #d5d8de; gap: 20px; }
+  .combo { display: flex; }
+  .btn-download { background: #0a1f3d; color: #FFF; border: none; padding: 10px 28px; border-radius: 0; cursor: pointer; font-size: 14px; font-family: "IBM Plex Mono", monospace; }
+  .btn-download:hover { background: #315d93; }
+
+  .left {
+    width: 900px; height: 383px; position: relative; overflow: hidden;
+    background: #f2f4f5;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 48px 64px;
+    border-right: 1px solid #e5ebef;
+  }
+  /* 交叉网格 — 主装饰 */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(10,31,61,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10,31,61,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+  }
+  /* 斜线条纹 */
+  .stripe {
+    position: absolute;
+    top: -100px; left: 0; right: 0; height: 3px;
+    background: repeating-linear-gradient(
+      -45deg,
+      #315d93 0px, #315d93 20px,
+      transparent 20px, transparent 32px
+    );
+    opacity: 0.06;
+    transform: rotate(-12deg);
+    z-index: 1;
+  }
+  .stripe2 {
+    position: absolute;
+    bottom: 60px; left: 0; right: 0; height: 2px;
+    background: repeating-linear-gradient(
+      45deg,
+      #315d93 0px, #315d93 16px,
+      transparent 16px, transparent 28px
+    );
+    opacity: 0.04;
+    z-index: 1;
+  }
+  /* 左上角装饰方块 */
+  .corner-box {
+    position: absolute;
+    top: 24px; left: 24px;
+    width: 48px; height: 48px;
+    border: 2px solid #315d93;
+    opacity: 0.12;
+    z-index: 1;
+  }
+  .corner-box2 {
+    position: absolute;
+    top: 36px; left: 36px;
+    width: 24px; height: 24px;
+    background: #315d93;
+    opacity: 0.06;
+    z-index: 1;
+  }
+  .tag-row { display: flex; gap: 8px; margin-bottom: 20px; position: relative; z-index: 2; }
+  .tag {
+    padding: 4px 14px;
+    border: 1px solid #315d93;
+    color: #315d93;
+    font-size: 11px; letter-spacing: 1.5px;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .main-title {
+    font-size: 76px; font-weight: 500; color: #0a1f3d;
+    line-height: 1.08;
+    position: relative; z-index: 2;
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    letter-spacing: .03em;
+  }
+  .sub-row { margin-top: 12px; position: relative; z-index: 2; }
+  .subtitle {
+    font-size: 18px; color: #5f6d78;
+    letter-spacing: .12em;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+  }
+  .info-line {
+    position: absolute; bottom: 32px; left: 64px;
+    font-size: 12px; color: #5f6d78;
+    letter-spacing: .10em; z-index: 2;
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .right {
+    width: 383px; height: 383px; position: relative; overflow: hidden;
+    background: #f2f4f5;
+    display: flex; justify-content: center; align-items: center;
+    padding: 36px;
+  }
+  .right .grid-overlay-r {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(10,31,61,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10,31,61,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+  }
+  .right .cross {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 160px; height: 160px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  .right .cross::before {
+    content: ''; position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 1px; background: #315d93; opacity: 0.08;
+  }
+  .right .cross::after {
+    content: ''; position: absolute;
+    top: 50%; left: 0; right: 0;
+    height: 1px; background: #315d93; opacity: 0.08;
+  }
+  .right .title {
+    font-size: 48px; font-weight: 500; color: #0a1f3d;
+    text-align: center; line-height: 1.15;
+    position: relative; z-index: 2;
+    font-family: "Noto Serif SC", "Songti SC", serif;
+    letter-spacing: .03em;
+  }
+</style>
+</head>
+<body>
+  <button class="btn-download" onclick="downloadCover()">⬇ 下载</button>
+  <div class="combo">
+    <div class="left">
+      <div class="grid-overlay"></div>
+      <div class="stripe"></div>
+      <div class="stripe2"></div>
+      <div class="corner-box"></div>
+      <div class="corner-box2"></div>
+      <div class="tag-row">
+        <span class="tag">分红险</span>
+        <span class="tag">监管</span>
+      </div>
+      <div class="main-title">630倒计时<br>20天</div>
+      <div class="sub-row">
+        <span class="subtitle">演示利率全面下调至3.5%</span>
+      </div>
+      <div class="info-line">银保关注 · 2026.06</div>
+    </div>
+    <div class="right">
+      <div class="grid-overlay-r"></div>
+      <div class="cross"></div>
+      <div class="title">630<br>倒计时<br>20天</div>
+    </div>
+  </div>
+  <p style="margin-top:16px;font-size:12px;color:#5f6d78;font-family:'IBM Plex Mono',monospace;">
+    装饰：几何网格 / 斜线 / 交叉 / 方块 · 亮底 · 强调色 #315d93
+  </p>
+  <script>
+    function downloadCover() {
+      var el = document.querySelector('.combo');
+      html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+        .then(function(c) { var l = document.createElement('a'); l.download = '封面_几何线纹.png'; l.href = c.toDataURL('image/png'); l.click(); });
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</body>
+</html>

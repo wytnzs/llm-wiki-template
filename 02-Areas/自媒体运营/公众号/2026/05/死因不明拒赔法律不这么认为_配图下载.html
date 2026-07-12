@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>死因不明拒赔 — 配图下载</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #E5EAF2; display: flex; flex-direction: column; align-items: center; padding: 32px 16px; gap: 32px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .illu-card { position: relative; width: 677px; border-radius: 12px; overflow: hidden; }
+  .card-dark { background: #102542; color: #FFF; padding: 28px 24px; }
+  .card-heading { font-size: 15px; font-weight: 700; color: #F77F00; margin-bottom: 14px; letter-spacing: 1px; }
+
+  .compare-row { display: flex; gap: 16px; }
+  .compare-col { flex: 1; padding: 16px; border-radius: 8px; }
+  .compare-col.left { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
+  .compare-col.right { background: rgba(247,127,0,0.12); border: 1px solid rgba(247,127,0,0.25); }
+  .compare-label { font-size: 13px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .compare-label.dim { color: rgba(255,255,255,0.5); }
+  .compare-label.warm { color: #F77F00; }
+  .compare-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+
+  .bar-group { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; }
+  .bar-label { width: 70px; font-size: 13px; color: rgba(255,255,255,0.7); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 20px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #F77F00, rgba(247,127,0,0.5)); }
+  .bar-pct { width: 42px; font-size: 14px; font-weight: 900; color: #F77F00; text-align: left; flex-shrink: 0; }
+
+  .split-row { display: flex; gap: 0; border-radius: 8px; overflow: hidden; }
+  .split-col { flex: 1; padding: 20px 16px; text-align: center; }
+  .split-col.good { background: rgba(255,255,255,0.06); }
+  .split-icon { font-size: 22px; margin-bottom: 6px; }
+  .split-label { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .split-desc { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.75); }
+
+  .btn-download { display: inline-block; background: #F77F00; color: #FFF; border: none; padding: 8px 20px; font-size: 13px; border-radius: 6px; cursor: pointer; margin-top: 12px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .btn-download:hover { background: #E06D00; }
+
+  .card-wrapper { display: flex; flex-direction: column; align-items: center; gap: 0; background: #FFF; border-radius: 14px; padding: 20px 20px 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .card-label { font-size: 14px; font-weight: 700; color: #102542; margin-bottom: 12px; }
+  .card-note { font-size: 12px; color: #86909C; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<h2 style="color:#102542;margin-bottom:8px;">配图下载</h2>
+<p style="color:#86909C;margin-bottom:24px;">死因不明，保险公司就能拒赔？——法律可不这么认为 &nbsp;|&nbsp; 共 4 张</p>
+
+<!-- CARD 1 -->
+<div class="card-wrapper">
+  <div class="card-label">配图 1：保险公司说的 vs 法律说的</div>
+  <div class="illu-card card-dark" id="illu-1">
+    <div class="card-heading">死因不明拒赔：保险公司说的 vs 法律说的</div>
+    <div class="compare-row">
+      <div class="compare-col left">
+        <div class="compare-label dim">保险公司说</div>
+        <div class="compare-text">死因说不清楚<br>没法判断是否属于保险责任<br>&rarr; 不赔</div>
+      </div>
+      <div class="compare-col right">
+        <div class="compare-label warm">法律说</div>
+        <div class="compare-text">谁主张免责，谁举证<br>「不知道」不是拒赔理由<br>&rarr; 拿不出证据就得赔</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-1','配图1_保司说vs法律说')">下载 PNG</button>
+</div>
+
+<!-- CARD 2 -->
+<div class="card-wrapper">
+  <div class="card-label">配图 2：四个真实判例比例赔付</div>
+  <div class="illu-card card-dark" id="illu-2">
+    <div class="card-heading">四个真实判例：死因不明也能赔</div>
+    <div class="bar-group">
+      <div class="bar-row">
+        <div class="bar-label">临安案</div>
+        <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+        <div class="bar-pct">70%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">焦作案</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%"></div></div>
+        <div class="bar-pct">50%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">新野案</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%"></div></div>
+        <div class="bar-pct">50%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">江津案</div>
+        <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
+        <div class="bar-pct">40%</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-2','配图2_判例比例')">下载 PNG</button>
+</div>
+
+<!-- CARD 3 -->
+<div class="card-wrapper">
+  <div class="card-label">配图 3：两条维权路径</div>
+  <div class="illu-card card-dark" id="illu-3">
+    <div class="card-heading">死因不明拒赔：两条维权路径</div>
+    <div class="split-row" style="border-radius:8px;overflow:hidden;">
+      <div class="split-col good" style="background:rgba(255,255,255,0.06);">
+        <div class="split-icon" style="font-size:22px;margin-bottom:6px;color:#0A1931;">&#9878;</div>
+        <div class="split-label" style="color:#F77F00;font-size:14px;font-weight:700;margin-bottom:4px;">举证责任路线</div>
+        <div class="split-desc">家属完成初步举证<br>保险公司拿不出反驳证据<br>&rarr; 全额赔付</div>
+      </div>
+      <div class="split-col" style="background:rgba(247,127,0,0.10);">
+        <div class="split-icon" style="font-size:22px;margin-bottom:6px;color:#F77F00;">&#9878;</div>
+        <div class="split-label" style="color:#F77F00;font-size:14px;font-weight:700;margin-bottom:4px;">比例赔付路线</div>
+        <div class="split-desc">双方都说不清<br>依据第25条判决<br>&rarr; 40%~70% 比例赔付</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-3','配图3_两条路径')">下载 PNG</button>
+</div>
+
+<!-- CARD 4 -->
+<div class="card-wrapper">
+  <div class="card-label">配图 4：尸检决策指南</div>
+  <div class="illu-card card-dark" id="illu-4">
+    <div class="card-heading">尸检决策指南</div>
+    <div class="compare-row">
+      <div class="compare-col left">
+        <div class="compare-label dim">建议做尸检</div>
+        <div class="compare-text" style="font-size:13px;">&bull; 保司明确要求且承诺费用<br>&bull; 死因有重大争议需区分<br>&bull; 高保额，结果影响巨大</div>
+      </div>
+      <div class="compare-col right">
+        <div class="compare-label warm">可以不做的情形</div>
+        <div class="compare-text" style="font-size:13px;">&bull; 公安已出具意外死亡证明<br>&bull; 医院记录明确指向外伤<br>&bull; 保司仅口头推测无书面要求</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-4','配图4_尸检决策')">下载 PNG</button>
+</div>
+
+<div class="card-note" style="margin-top: 20px;">先在 _preview.html 确认位置，再回到本页下载 PNG</div>
+
+<script>
+function downloadCard(id, filename) {
+  var el = document.getElementById(id);
+  html2canvas(el, { scale: 2, backgroundColor: '#102542', useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = filename + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); });
+}
+</script>
+
+</body>
+</html>

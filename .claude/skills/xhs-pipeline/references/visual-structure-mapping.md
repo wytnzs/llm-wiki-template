@@ -181,10 +181,10 @@ updated: 2026-07-12
 
 | 视觉结构 | 推荐风格模式 | 原因 |
 |---------|-------------|------|
-| Cycle | Slide | 节奏感强，需要清晰的"步骤"视觉组件 |
-| Pipeline | Slide / Swiss | 步骤明确，Slide 的 point-row 或 Swiss 的网格都适合 |
-| Hub-and-Spoke | Slide | 需要并列展示多个分支，card-box 组件最合适 |
+| Cycle | Slide / Minimal Fresh | 节奏感强，需要清晰的步骤表达；Minimal Fresh 可做简约版 |
+| Pipeline | Slide / Swiss / Minimal Fresh | 步骤明确，Minimal Fresh 适合方法论类步骤 |
+| Hub-and-Spoke | Slide / Minimal Fresh | 需要并列展示多个分支，Minimal Fresh 用细线分隔 |
 | Before/After | Slide / Editorial | 对比需要视觉冲击（Slide 暗底）或叙事感（Editorial 金句） |
-| Layer Stack | Slide / Swiss | 层级感需要清晰的视觉分隔，Swiss 网格最精确 |
+| Layer Stack | Slide / Swiss / Minimal Fresh | 层级感需要清晰视觉分隔，Minimal Fresh 用纯白+细线 |
 | Data-First | Swiss / Slide | 数字需要精确展示，Swiss 的 num-mega + 网格最佳 |
-| Scientific | Editorial / Slide | 拆解机制需要深度阅读感，Editorial 最合适 |
+| Scientific | Editorial / Slide / Minimal Fresh | 拆解机制需要深度阅读感，Minimal Fresh 做简约版最合适 |

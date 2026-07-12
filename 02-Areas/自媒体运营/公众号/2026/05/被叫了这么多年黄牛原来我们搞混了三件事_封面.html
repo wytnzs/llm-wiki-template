@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>封面 - 被叫了这么多年黄牛原来我们搞混了三件事</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #d5d8de; gap: 20px; }
+  .combo { display: flex; }
+  .btn-download { background: #2B6CB0; color: #FFF; border: none; padding: 10px 28px; font-size: 15px; border-radius: 6px; cursor: pointer; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .btn-download:hover { background: #F77F00; }
+
+  /* 左侧面板：天空蓝 */
+  .left {
+    width: 900px; height: 383px; flex-shrink: 0; position: relative; overflow: hidden;
+    background:
+      radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+      radial-gradient(ellipse 550px 400px at 85% 20%, rgba(247,127,0,0.10) 0%, transparent 100%),
+      radial-gradient(ellipse 350px 280px at 15% 80%, rgba(43,108,176,0.15) 0%, transparent 100%),
+      radial-gradient(ellipse 200px 150px at 70% 85%, rgba(247,127,0,0.06) 0%, transparent 100%),
+      linear-gradient(155deg, #0F2B5C 0%, #1A4A8A 40%, #2B6CB0 70%);
+    background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 48px 64px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .left::before {
+    content: ''; position: absolute;
+    width: 420px; height: 420px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.10);
+    top: -200px; right: -140px;
+  }
+  .left::after {
+    content: ''; position: absolute;
+    width: 280px; height: 280px; border-radius: 50%;
+    border: 2px solid rgba(247,127,0,0.18);
+    top: 65px; right: 80px;
+  }
+  .dots {
+    position: absolute; top: 0; left: 0;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(247,127,0,0.7);
+    box-shadow:
+      278px 200px 0 rgba(255,255,255,0.35),
+      780px 130px 0 rgba(247,127,0,0.55),
+      740px 210px 0 rgba(255,255,255,0.25),
+      700px 170px 0 rgba(247,127,0,0.35),
+      560px 290px 0 rgba(255,255,255,0.18),
+      660px 80px  0 rgba(247,127,0,0.28),
+      830px 250px 0 rgba(255,255,255,0.14),
+      140px 300px 0 rgba(255,255,255,0.12),
+      320px 330px 0 rgba(247,127,0,0.20),
+      460px 320px 0 rgba(255,255,255,0.10),
+      810px 340px 0 rgba(247,127,0,0.16);
+  }
+  .line-diag {
+    position: absolute; width: 120px; height: 1px;
+    background: #F77F00;
+    top: 110px; right: 190px; opacity: 0.25;
+    transform: rotate(-28deg); transform-origin: left center;
+  }
+  .line-h {
+    position: absolute; bottom: 100px; left: 56px; right: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, #F77F00, rgba(247,127,0,0.08) 50%, transparent 80%);
+  }
+  .tag-row { display: flex; gap: 12px; margin-bottom: 22px; position: relative; z-index: 2; }
+  .tag {
+    padding: 6px 20px; border: 1px solid rgba(247,127,0,0.40);
+    border-radius: 20px; background: rgba(247,127,0,0.10);
+    color: rgba(255,255,255,0.90); font-size: 15px; letter-spacing: 1.5px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .main-title {
+    font-size: 68px; font-weight: 900; color: #FFF;
+    line-height: 1.10; letter-spacing: 2px;
+    position: relative; z-index: 2;
+    text-shadow: 0 0 80px rgba(247,127,0,0.15), 0 2px 4px rgba(0,0,0,0.3);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .sub-row { display: flex; align-items: center; gap: 14px; margin-top: 16px; position: relative; z-index: 2; }
+  .sub-dot { width: 10px; height: 10px; border-radius: 50%; background: #F77F00; flex-shrink: 0; box-shadow: 0 0 8px rgba(247,127,0,0.5); }
+  .subtitle { font-size: 28px; color: rgba(255,255,255,0.62); letter-spacing: 3px; font-weight: 400; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .info-line {
+    position: absolute; bottom: 40px; left: 64px;
+    font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 1px; z-index: 2;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  /* 右侧面板 */
+  .right {
+    width: 383px; height: 383px; flex-shrink: 0; position: relative; overflow: hidden;
+    background:
+      radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+      radial-gradient(ellipse 280px 280px at 60% 65%, rgba(247,127,0,0.09) 0%, transparent 100%),
+      radial-gradient(ellipse 200px 200px at 35% 25%, rgba(43,108,176,0.13) 0%, transparent 100%),
+      linear-gradient(155deg, #0F2B5C 0%, #1A4A8A 50%, #2B6CB0 100%);
+    background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
+    display: flex; justify-content: center; align-items: center;
+    padding: 36px;
+  }
+  .right::before {
+    content: ''; position: absolute;
+    width: 340px; height: 340px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.08);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
+  .right::after {
+    content: ''; position: absolute;
+    width: 220px; height: 220px; border-radius: 50%;
+    border: 2px solid rgba(247,127,0,0.16);
+    bottom: -80px; right: -70px;
+  }
+  .corner-accent {
+    position: absolute; top: 32px; right: 32px;
+    width: 28px; height: 28px;
+    border-top: 2px solid #F77F00;
+    border-right: 2px solid #F77F00;
+    opacity: 0.35;
+  }
+  .dots-r {
+    position: absolute; top: 0; left: 0;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(247,127,0,0.6);
+    box-shadow:
+      140px 105px 0 rgba(255,255,255,0.25),
+      300px 240px 0 rgba(247,127,0,0.40),
+      40px 320px 0 rgba(255,255,255,0.12),
+      260px 50px 0 rgba(255,255,255,0.10),
+      340px 150px 0 rgba(247,127,0,0.22),
+      80px 55px 0 rgba(255,255,255,0.08);
+  }
+  .right .title {
+    font-size: 42px; font-weight: 900; color: #FFF;
+    text-align: center; line-height: 1.30;
+    position: relative; z-index: 2; letter-spacing: 2px;
+    text-shadow: 0 0 60px rgba(247,127,0,0.12), 0 2px 4px rgba(0,0,0,0.3);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+</style>
+</head>
+<body>
+<button class="btn-download" onclick="downloadCover()">⬇ 下载封面 PNG（2566×766）</button>
+<div class="combo">
+  <div class="left">
+    <div class="dots"></div>
+    <div class="line-diag"></div>
+    <div class="line-h"></div>
+    <div class="tag-row">
+      <span class="tag">保险理赔</span>
+      <span class="tag">行业真相</span>
+      <span class="tag">黄牛鉴别</span>
+    </div>
+    <div class="main-title">被叫了这么多年"黄牛"</div>
+    <div class="sub-row"><div class="sub-dot"></div><span class="subtitle">原来我们搞混了三件事</span></div>
+    <div class="info-line">王永涛 · 保险其实不难 · 用专业让保险赔得明白</div>
+  </div>
+  <div class="right">
+    <div class="corner-accent"></div>
+    <div class="dots-r"></div>
+    <div class="title">被叫了这么多年<br>"黄牛"<br>原来我们搞混了<br>三件事</div>
+  </div>
+</div>
+<script>
+function downloadCover() {
+  var el = document.querySelector('.combo');
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = '封面_被叫了这么多年黄牛.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); });
+}
+</script>
+</body>
+</html>

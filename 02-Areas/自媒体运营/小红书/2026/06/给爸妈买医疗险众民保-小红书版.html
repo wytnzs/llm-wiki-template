@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>给爸妈买医疗险 · 众民保2026 · 小红书</title>
+  <meta name="viewport" content="width=1080">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 70px 20px 40px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .sheet { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+    .poster {
+      position: relative; overflow: hidden; isolation: isolate;
+      width: 1080px; height: 1440px; border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.24);
+    }
+    .poster .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 100px 96px;
+      display: flex; flex-direction: column;
+    }
+
+    .theme-warm { background: #fdf6ed; color: #2a1e13; }
+    .theme-warm .accent { color: #b85c2e; }
+    .theme-warm .tag { background: #f5e6d3; color: #8b5a3c; }
+    .theme-warm .card-box { background: #faf3ea; border-left: 4px solid #b85c2e; }
+    .theme-warm .card-box.dim { opacity: .60; background: #f7ede0; }
+    .theme-warm .divider { background: rgba(42,30,19,.15); }
+    .theme-warm .badge { background: #b85c2e; color: #fff; }
+
+    .theme-dark { background: #2a1e13; color: #fdf6ed; }
+    .theme-dark .accent { color: #e8a96b; }
+    .theme-dark .tag { background: rgba(255,255,255,.08); color: #c9a87c; }
+    .theme-dark .card-box { background: rgba(255,255,255,.06); border-left: 4px solid #e8a96b; }
+    .theme-dark .card-box.dim { opacity: .55; }
+    .theme-dark .divider { background: rgba(253,246,237,.15); }
+    .theme-dark .badge { background: #e8a96b; color: #2a1e13; }
+
+    .grain {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: .25; mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
+      background-size: 3px 3px;
+    }
+
+    h1 { font-weight: 900; font-size: 136px; line-height: 1.04; letter-spacing: -.01em; margin: 0; }
+    h2 { font-weight: 700; font-size: 76px; line-height: 1.14; letter-spacing: .01em; margin: 0; }
+    h3 { font-weight: 700; font-size: 48px; line-height: 1.22; margin: 0; }
+    .big-num { font-weight: 800; font-size: 140px; line-height: 1; letter-spacing: -.02em; }
+    .mid-num { font-weight: 700; font-size: 88px; line-height: 1; letter-spacing: -.01em; }
+    .body-lg { font-weight: 400; font-size: 34px; line-height: 1.55; margin: 0; }
+    .body-md { font-weight: 400; font-size: 28px; line-height: 1.6; margin: 0; }
+    .body-sm { font-weight: 400; font-size: 24px; line-height: 1.55; margin: 0; opacity: .72; }
+    .label { font-weight: 600; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+    .tag {
+      display: inline-block; padding: 10px 24px; border-radius: 6px;
+      font-weight: 600; font-size: 22px; letter-spacing: .04em;
+    }
+    .badge {
+      display: inline-block; padding: 6px 18px; border-radius: 4px;
+      font-weight: 700; font-size: 20px; letter-spacing: .06em;
+    }
+
+    .stack { display: flex; flex-direction: column; }
+    .row   { display: flex; flex-direction: row; }
+    .grow  { flex: 1; }
+    .center { text-align: center; align-items: center; }
+    .divider { height: 1px; border: 0; margin: 0; }
+    .gap-xs  { gap: 12px; }
+    .gap-sm  { gap: 20px; }
+    .gap-md  { gap: 36px; }
+    .gap-lg  { gap: 56px; }
+    .gap-xl  { gap: 80px; }
+
+    .card-box {
+      padding: 40px 48px; border-radius: 10px;
+    }
+    .card-box .row { align-items: flex-start; gap: 24px; }
+    .card-box .dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 12px;
+    }
+    .theme-warm .card-box .dot { background: #b85c2e; }
+    .theme-dark .card-box .dot { background: #e8a96b; }
+
+    .point-row {
+      display: flex; align-items: flex-start; gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(42,30,19,.10);
+    }
+    .theme-dark .point-row { border-bottom-color: rgba(253,246,237,.10); }
+    .point-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .point-row .point-num {
+      font-weight: 800; font-size: 56px; line-height: 1; flex-shrink: 0;
+      width: 72px; text-align: center;
+    }
+    .point-row .point-body { flex: 1; }
+    .point-row .point-body h3 { font-size: 38px; line-height: 1.3; }
+    .point-row .point-body p  { font-size: 26px; line-height: 1.5; margin: 8px 0 0; opacity: .72; }
+
+    .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+
+    .bottom-strip {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 20px; letter-spacing: .08em; opacity: .55;
+      padding-top: 24px; border-top: 1px solid;
+      margin-top: auto;
+    }
+    .theme-warm .bottom-strip { border-color: rgba(42,30,19,.12); }
+    .theme-dark .bottom-strip { border-color: rgba(253,246,237,.12); }
+
+    .toolbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(26,26,26,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 10px 20px; display: flex; align-items: center;
+      justify-content: center; gap: 10px; height: 54px;
+    }
+    .toolbar .btn {
+      background: #fff; color: #1a1a1a; border: none;
+      padding: 8px 20px; border-radius: 6px; font-size: 13px;
+      font-weight: 600; cursor: pointer; font-family: -apple-system, sans-serif;
+    }
+    .toolbar .btn.accent { background: #b85c2e; color: #fff; }
+    .toolbar .btn:hover { opacity: .85; }
+    .toolbar .progress { color: rgba(255,255,255,.35); font-size: 12px; font-weight: 500; min-width: 120px; text-align: center; font-family: -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar" id="toolbar">
+    <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+    <button class="btn" onclick="downloadOne()">下载当前</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <main class="sheet">
+
+    <!-- ===== 01 · 封面 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-01">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <span class="tag">众民保 · 2026 版</span>
+        <div class="grow" style="display:flex;align-items:center;">
+          <div class="stack gap-sm">
+            <h1>给爸妈<br>买医疗险</h1>
+            <h1 class="accent">首选这款</h1>
+            <p class="body-lg" style="margin-top:12px;">7 年保险人推荐<br>中老年闭眼入</p>
+          </div>
+        </div>
+        <div class="bottom-strip">
+          <span>Vol. 01 · 2026.06</span>
+          <span>众安保险</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 · 四大优势总览 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-02">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>爸妈买医疗险</h2>
+        <p class="body-lg">看重三点：<strong>投保宽、报销实、保费不贵</strong></p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box">
+            <div class="row">
+              <span class="mid-num accent" style="font-size:60px;line-height:1;width:70px;flex-shrink:0;">01</span>
+              <div>
+                <h3 style="font-size:38px;">高龄友好</h3>
+                <p class="body-md" style="margin-top:6px;">最高 <strong class="accent">70 岁</strong> 可投保</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="mid-num accent" style="font-size:60px;line-height:1;width:70px;flex-shrink:0;">02</span>
+              <div>
+                <h3 style="font-size:38px;">体检异常友好</h3>
+                <p class="body-md" style="margin-top:6px;">结节 / 三高也能保</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="mid-num accent" style="font-size:60px;line-height:1;width:70px;flex-shrink:0;">03</span>
+              <div>
+                <h3 style="font-size:38px;">术后康复保障</h3>
+                <p class="body-md" style="margin-top:6px;">骨折 / 中风康复可报销</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="mid-num accent" style="font-size:60px;line-height:1;width:70px;flex-shrink:0;">04</span>
+              <div>
+                <h3 style="font-size:38px;">看病服务省心</h3>
+                <p class="body-md" style="margin-top:6px;">垫付 / 陪诊 / 护工全包</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 · 关键数字 ===== -->
+    <section class="poster xhs theme-dark" id="xhs-03">
+      <div class="content center stack gap-lg" style="justify-content:center;">
+        <p class="label accent">给爸妈 · 四大优势</p>
+        <div class="stack gap-md">
+          <div>
+            <span class="big-num accent" style="font-size:170px;">70 岁</span>
+            <p class="body-lg" style="margin-top:8px;">最高投保年龄</p>
+          </div>
+          <div class="divider" style="width:80px;margin:20px auto;"></div>
+          <div class="row gap-xl" style="justify-content:center;">
+            <div class="stack gap-xs center">
+              <span class="mid-num accent">三高</span>
+              <span class="body-sm">带病可投</span>
+            </div>
+            <div class="stack gap-xs center">
+              <span class="mid-num accent">康复</span>
+              <span class="body-sm">术后费用<br>可报销</span>
+            </div>
+            <div class="stack gap-xs center">
+              <span class="mid-num accent">陪诊</span>
+              <span class="body-sm">看病不<br>用操心</span>
+            </div>
+          </div>
+        </div>
+        <p class="body-sm">爸妈的医疗险，这一款就够了</p>
+      </div>
+    </section>
+
+    <!-- ===== 04 · 高龄友好 + 体检异常友好 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-04">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>两个投保<br>门槛全放宽</h2>
+        <div class="grow stack gap-md" style="justify-content:center;">
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div style="flex:1;">
+                <h3 style="font-size:38px;">高龄友好</h3>
+                <p class="body-md" style="margin-top:8px;">市面多数医疗险 60 岁截止</p>
+                <p class="body-md" style="font-weight:700;">众民保放宽至 <strong class="accent">70 岁</strong></p>
+              </div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div style="flex:1;">
+                <h3 style="font-size:38px;">体检异常友好</h3>
+                <p class="body-md" style="margin-top:8px;">结节 · 高血压 · 高血脂 · 小毛病</p>
+                <p class="body-md" style="font-weight:700;">带病投保门槛宽松<br>臻选版可赔既往症住院</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 05 · 术后康复保障 + 看病服务 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-05">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>贴合老人<br>看病需求</h2>
+        <div class="grow stack gap-md" style="justify-content:center;">
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div style="flex:1;">
+                <h3 style="font-size:38px;">专属术后康复保障</h3>
+                <p class="body-md" style="margin-top:8px;">老人最怕骨折、中风后康复花钱<br>这笔大额开销医疗险直接报销</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div style="flex:1;">
+                <h3 style="font-size:38px;">看病服务省心</h3>
+                <p class="body-md" style="margin-top:8px;"><strong>住院垫付</strong> · 不用先垫钱<br><strong>就医陪诊</strong> · 老人不孤单<br><strong>住院护工</strong> · 子女不请假</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 · 投保建议时间轴 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-06">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>怎么选<br>最合适</h2>
+        <div class="grow stack gap-md" style="justify-content:center;">
+          <div class="card-box" style="border-left-color:#2a7d4c;">
+            <h3 style="font-size:38px;color:#2a7d4c;">55 岁以下</h3>
+            <p class="body-lg" style="margin-top:8px;">直接冲 <strong style="color:#2a7d4c;">臻选版</strong><br>保障更全，既往症也能覆盖</p>
+          </div>
+          <div class="card-box">
+            <h3 style="font-size:38px;">55 岁以上</h3>
+            <p class="body-lg" style="margin-top:8px;">预算有限选 <strong class="accent">经典版</strong><br>基础保障够用</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 07 · 金句深底 ===== -->
+    <section class="poster xhs theme-dark" id="xhs-07">
+      <div class="content center stack" style="justify-content:center;gap:48px;">
+        <span class="badge">给爸妈的爱</span>
+        <div class="stack gap-sm" style="align-items:center;">
+          <span class="big-num accent" style="font-size:150px;">给爸妈</span>
+          <p class="body-lg" style="opacity:.75;">买医疗险不用绕路</p>
+        </div>
+        <div class="divider" style="width:120px;margin:0 auto;"></div>
+        <p class="body-lg center" style="font-weight:500;">投保宽松 · 报销实用 · 保费不贵</p>
+      </div>
+    </section>
+
+    <!-- ===== 08 · CTA 收尾 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-08">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>你家爸妈<br>能买吗？</h2>
+        <p class="body-lg">众民保 26 版给爸妈的保障清单——</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>经典版 vs 臻选版责任对照</h3><p class="body-sm" style="margin-top:6px;">爸妈适合哪个一目了然</p></div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>既往症清单 & 赔付规则</h3><p class="body-sm" style="margin-top:6px;">三高/结节能不能赔</p></div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>爸妈年龄 · 保费速查表</h3><p class="body-sm" style="margin-top:6px;">60 岁 / 65 岁 / 70 岁各多少钱</p></div>
+            </div>
+          </div>
+        </div>
+        <hr class="divider" style="margin:0;">
+        <p class="body-lg center" style="font-weight:600;">资料已整理好<br>评论区回复「<strong class="accent">父母</strong>」，私信发你</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var W = 1080, H = 1440;
+      function renderPoster(el) {
+        var obr = el.style.borderRadius, obs = el.style.boxShadow;
+        el.style.borderRadius = '0'; el.style.boxShadow = 'none';
+        return html2canvas(el, { scale: 1, useCORS: true, backgroundColor: null, width: W, height: H, logging: false })
+          .then(function(c) { el.style.borderRadius = obr; el.style.boxShadow = obs; return c; });
+      }
+      function c2b(c) { return new Promise(function(r) { c.toBlob(r, 'image/png'); }); }
+      window.downloadAll = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var pg = document.getElementById('progress');
+        var zip = new JSZip(); var p = Promise.resolve();
+        ps.forEach(function(el, i) {
+          p = p.then(function() {
+            pg.textContent = '渲染 ' + (i+1) + '/' + ps.length + '...';
+            return renderPoster(el).then(function(c) { return c2b(c).then(function(b) { zip.file('小红书-' + String(i+1).padStart(2,'0') + '.png', b); }); });
+          });
+        });
+        p.then(function() { pg.textContent = '打包中...'; return zip.generateAsync({ type: 'blob' }); })
+         .then(function(b) { saveAs(b, '小红书-给爸妈医疗险.zip'); pg.textContent = ps.length + ' 张已完成'; });
+      };
+      window.downloadOne = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var vc = window.innerHeight / 2, idx = 0, min = Infinity;
+        ps.forEach(function(el, i) { var r = el.getBoundingClientRect(); var d = Math.abs(r.top + r.height/2 - vc); if (d < min) { min = d; idx = i; } });
+        renderPoster(ps[idx]).then(function(c) { return c2b(c); }).then(function(b) { saveAs(b, '小红书-' + String(idx+1).padStart(2,'0') + '.png'); });
+      };
+    })();
+  </script>
+</body>
+</html>

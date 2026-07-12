@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 不结婚养老规划</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #FAFAFA;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 70px 20px 80px;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* === 工具栏 === */
+.toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 12px 20px; display: flex; align-items: center;
+  justify-content: center; gap: 12px;
+}
+.toolbar .btn {
+  background: #2C2C2C; color: #FFF; border: none;
+  padding: 10px 24px; border-radius: 8px; font-size: 14px;
+  font-weight: 600; cursor: pointer;
+}
+.toolbar .btn.accent { background: #555; }
+.toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+/* === 卡片基础 === */
+.slide {
+  width: 540px; min-height: 720px;
+  position: relative; overflow: hidden;
+  border-radius: 6px; margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.bg-light { background: #FAFAFA; }
+.bg-white { background: #FFFFFF; }
+
+/* === 内容层 === */
+.content {
+  position: relative;
+  padding: 28px 26px 26px;
+  z-index: 2;
+}
+
+/* === 页码 === */
+.page-num {
+  position: absolute;
+  bottom: 12px; right: 20px;
+  font-size: 10px;
+  color: rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+/* === 标签 === */
+.section-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #2C2C2C;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* === 通用文字 === */
+.main-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: #1A1A1A;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.sub-title {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.intro {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+/* === 信息卡 === */
+.info-card {
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.info-card .card-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2C2C2C;
+  margin-bottom: 3px;
+}
+.info-card .card-body {
+  font-size: 12px;
+  color: #333;
+  line-height: 1.55;
+}
+.info-card .card-body small {
+  font-size: 10px;
+  color: #888;
+  display: block;
+  margin-top: 3px;
+}
+
+/* === 深色内容卡 === */
+.dark-card {
+  background: #2C2C2C;
+  border-radius: 6px;
+  padding: 11px 14px;
+  margin-bottom: 7px;
+}
+.dark-card .dc-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #CCC;
+  margin-bottom: 3px;
+}
+.dark-card .dc-body {
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+
+/* === 卡片网格 3列 === */
+.card-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.mini-card {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 12px 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  text-align: center;
+}
+.mini-card .m-icon { font-size: 22px; margin-bottom: 5px; }
+.mini-card .m-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 2px;
+}
+.mini-card .m-desc {
+  font-size: 10px;
+  color: #666;
+  line-height: 1.35;
+}
+
+/* === 表格 === */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  background: #FFFFFF;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.data-table th {
+  background: #2C2C2C;
+  color: #FFFFFF;
+  padding: 7px 8px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 10px;
+}
+.data-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: #333;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: #FAFAFA; }
+
+/* === 引用块 === */
+.quote-box {
+  background: #2C2C2C;
+  border-radius: 6px;
+  padding: 11px 16px;
+  margin-top: 10px;
+}
+.quote-box p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* === 分隔线 === */
+.divider {
+  width: 36px; height: 2px;
+  background: #2C2C2C; border-radius: 1px;
+  margin: 10px 0;
+}
+
+/* === CTA === */
+.cta-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.cta-chip {
+  flex: 1;
+  background: #2C2C2C;
+  color: #FFF;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* === 封面样式 === */
+.cover-slide {
+  background: #1A1A1A;
+}
+.cover-slide .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 720px;
+  padding: 36px 36px 28px;
+}
+.cover-slide .cover-title {
+  font-size: 48px;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.cover-slide .cover-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.cover-slide .cover-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.cover-slide .tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #FFF;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.cover-slide .cover-quote {
+  background: rgba(255,255,255,0.04);
+  border-left: 2px solid rgba(255,255,255,0.25);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  margin-top: 8px;
+}
+.cover-slide .cover-quote p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* === 深色页（技巧页） === */
+.dark-slide {
+  background: #1A1A1A;
+}
+.dark-slide .section-tag { color: #CCC; }
+.dark-slide .main-title { color: #FFF; }
+.dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+.dark-slide .intro { color: rgba(255,255,255,0.45); }
+.dark-slide .info-card {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+}
+.dark-slide .info-card .card-title { color: #CCC; }
+.dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+.dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+.dark-slide .data-table { background: rgba(255,255,255,0.02); }
+.dark-slide .data-table th { background: #555; }
+.dark-slide .data-table td { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.04); }
+.dark-slide .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+/* === 序号圆圈 === */
+.num-circle {
+  display: inline-flex;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #2C2C2C;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+.dark-slide .num-circle {
+  background: rgba(255,255,255,0.12);
+  color: #FFF;
+}
+.row-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.row-item .ri-text {
+  font-size: 12px;
+  color: #333;
+  line-height: 1.6;
+}
+.row-item .ri-text strong {
+  color: #1A1A1A;
+  font-weight: 700;
+}
+.dark-slide .row-item .ri-text {
+  color: rgba(255,255,255,0.7);
+}
+.dark-slide .row-item .ri-text strong {
+  color: #FFF;
+}
+</style>
+</head>
+<body>
+
+<!-- 工具栏 -->
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ================ 第 1 张 · 封面 ================ -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">不结婚<br>养老怎么安排？</div>
+    <div class="cover-sub">3个保险方案比老伴靠谱 · 养老规划攻略</div>
+    <div class="cover-tags">
+      <span class="tag">保险种草</span>
+      <span class="tag">养老规划</span>
+      <span class="tag">收藏备用</span>
+    </div>
+    <div class="cover-quote">
+      <p>不结婚不是养老的绊脚石，没规划才是。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/8</div>
+  </div>
+</div>
+
+<!-- ================ 第 2 张 · 痛点场景 ================ -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">01 · 先算账</div>
+    <div class="main-title">一个人老了<br>到底需要多少钱？</div>
+    <div class="sub-title">先接受一个事实：养儿防老早就不现实了。靠自己规划才是唯一的路。</div>
+    <div class="divider"></div>
+
+    <div class="info-card">
+      <div class="card-title">💰 养老最低预算</div>
+      <div class="card-body">
+        退休后每月生活费：<strong>3,000-5,000元</strong><br>
+        按60岁退休、活到85岁算<br>
+        至少需要准备：<strong>90万-150万</strong>
+        <small>不含医疗和护理费用</small>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">⚠️ 单身养老的三大风险</div>
+      <div class="card-body">
+        没人分担家庭开支 → 全靠自己扛<br>
+        没有子女兜底 → 不能出任何差错<br>
+        老了没人照应 → 需要提前锁定资源
+      </div>
+    </div>
+
+    <div class="intro" style="margin-top:10px;">
+      好消息是：这些问题都可以用保险工具提前解决。
+    </div>
+    <div class="page-num">2/8</div>
+  </div>
+</div>
+
+<!-- ================ 第 3 张 · 方案一：养老年金 ================ -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">02 · 方案一</div>
+    <div class="main-title">养老年金险<br>活多久领多久</div>
+    <div class="sub-title">最适合「管不住手」的人</div>
+
+    <div class="row-item">
+      <span class="num-circle">1</span>
+      <div class="ri-text">
+        <strong>强制储蓄</strong> —— 每年交一笔，交满约定年限，退休前不能随便取，专款专用
+      </div>
+    </div>
+
+    <div class="row-item">
+      <span class="num-circle">2</span>
+      <div class="ri-text">
+        <strong>终身领取</strong> —— 从约定年龄开始，每月/每年固定领钱，活到老领到老，永远不用担心人活着钱没了
+      </div>
+    </div>
+
+    <div class="row-item">
+      <span class="num-circle">3</span>
+      <div class="ri-text">
+        <strong>收益确定</strong> —— 领多少钱白纸黑字写在合同里，不受市场波动影响
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:6px;">
+      <div class="card-title">举个例子</div>
+      <div class="card-body">
+        30岁男性，年交2万，交20年<br>
+        60岁后每月领<strong>4,000+</strong>元<br>
+        领到85岁累计领取 <strong>120万+</strong>
+        <small>实际金额以具体产品为准</small>
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/8</div>
+  </div>
+</div>
+
+<!-- ================ 第 4 张 · 方案二：增额终身寿 ================ -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">03 · 方案二</div>
+    <div class="main-title">增额终身寿险<br>进可攻退可守</div>
+    <div class="sub-title">适合还在纠结未来规划、需要资金灵活性的人</div>
+    <div class="divider"></div>
+
+    <div class="row-item">
+      <span class="num-circle">1</span>
+      <div class="ri-text">
+        <strong>保额复利增长</strong> —— 保额和现金价值每年按约定利率复利增加，时间越长越可观
+      </div>
+    </div>
+
+    <div class="row-item">
+      <span class="num-circle">2</span>
+      <div class="ri-text">
+        <strong>灵活取用</strong> —— 需要用钱时可以减保取现，结婚、买房、创业都不耽误
+      </div>
+    </div>
+
+    <div class="row-item">
+      <span class="num-circle">3</span>
+      <div class="ri-text">
+        <strong>身故保障</strong> —— 如果不幸提前走了，保险公司赔一笔钱给受益人（父母），不是白交
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:6px;">
+      <div class="card-title">💡 适合谁</div>
+      <div class="card-body">
+        还在犹豫要不要结婚的人<br>
+        资金可能随时需要周转的人<br>
+        想要「保障+增值+灵活」一把抓的人
+      </div>
+    </div>
+    <div class="page-num">4/8</div>
+  </div>
+</div>
+
+<!-- ================ 第 5 张 · 方案三：养老社区 ================ -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">04 · 方案三</div>
+    <div class="main-title">养老社区保险<br>单身终极方案</div>
+    <div class="sub-title">老了也要有人气儿——比一个人在家孤独终老强太多</div>
+
+    <div class="info-card" style="margin-top:10px;">
+      <div class="card-title">🏠 什么是养老社区保险？</div>
+      <div class="card-body">
+        投保养老年金/寿险达到一定保费门槛<br>
+        即可获得高端养老社区的<strong>保证入住权</strong>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">✨ 单身老人的天堂配置</div>
+      <div class="card-body">
+        专人做饭、保洁打扫、24小时医护<br>
+        同龄人社交：棋牌、书法、健身、旅行团<br>
+        突发状况一键呼叫，比独居安全100倍
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">💰 门槛参考</div>
+      <div class="card-body">
+        总保费 100万-200万 左右（可分期）<br>
+        锁定夫妻两人/单人终身入住权
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">5/8</div>
+  </div>
+</div>
+
+<!-- ================ 第 6 张 · 对比表格 ================ -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">05 · 一表看懂</div>
+    <div class="main-title">三种方案怎么选？</div>
+    <div class="divider"></div>
+
+    <table class="data-table">
+      <tr>
+        <th style="width:22%">方案</th>
+        <th style="width:30%">核心优势</th>
+        <th style="width:24%">适合谁</th>
+        <th style="width:24%">灵活性</th>
+      </tr>
+      <tr>
+        <td><strong>养老年金</strong></td>
+        <td>活多久领多久</td>
+        <td>想强制储蓄的人</td>
+        <td>低</td>
+      </tr>
+      <tr>
+        <td><strong>增额寿</strong></td>
+        <td>复利增长+灵活取用</td>
+        <td>需要资金弹性的人</td>
+        <td>高</td>
+      </tr>
+      <tr>
+        <td><strong>养老社区</strong></td>
+        <td>锁定高端养老资源</td>
+        <td>追求品质养老的人</td>
+        <td>中</td>
+      </tr>
+    </table>
+
+    <div class="info-card" style="margin-top:12px;">
+      <div class="card-title">✅ 最佳策略：组合搭配</div>
+      <div class="card-body">
+        <strong>养老年金</strong> 打底（保证基本生活费）<br>
+        + <strong>增额寿</strong> 做备用金（灵活应对突发需求）<br>
+        + <strong>养老社区</strong> 布局未来（老了有人管）
+      </div>
+    </div>
+    <div class="page-num">6/8</div>
+  </div>
+</div>
+
+<!-- ================ 第 7 张 · 金句总结 ================ -->
+<div class="slide dark-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-tag">06 · 总结</div>
+    <div class="main-title" style="font-size:32px;margin-bottom:20px;">
+      提前规划<br>比临时抱佛脚强100倍
+    </div>
+
+    <div class="divider" style="background:#555;"></div>
+
+    <div class="intro" style="font-size:14px;line-height:1.8;">
+      <strong style="color:#FFF;">不结婚不可怕</strong><br>
+      <span style="color:rgba(255,255,255,0.5);">可怕的是老了才发现没准备</span>
+    </div>
+
+    <div class="intro" style="font-size:14px;line-height:1.8;margin-top:10px;">
+      <strong style="color:#FFF;">保险不是消费，是转移</strong><br>
+      <span style="color:rgba(255,255,255,0.5);">把年轻时的钱，挪到老了花</span>
+    </div>
+
+    <div class="intro" style="font-size:14px;line-height:1.8;margin-top:10px;">
+      <strong style="color:#FFF;">趁年轻把底打好了</strong><br>
+      <span style="color:rgba(255,255,255,0.5);">老了怎么过都舒服</span>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/8</div>
+  </div>
+</div>
+
+<!-- ================ 第 8 张 · CTA 行动 ================ -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title" style="font-size:38px;">想知道自己<br>该选哪个方案？</div>
+    <div class="cover-sub" style="color:rgba(255,255,255,0.35);">
+      每个人的情况不一样，方案也不一样<br>
+      评论区留下你的年龄+预算，我帮你看看
+    </div>
+    <div class="divider" style="background:rgba(255,255,255,0.15);margin:16px 0;"></div>
+    <div class="cover-quote">
+      <p>不管是年金还是增额寿，重要的是先开始。<br>哪怕每年只存5000，也比不存强。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">8/8</div>
+  </div>
+</div>
+
+<!-- CDN + 下载脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

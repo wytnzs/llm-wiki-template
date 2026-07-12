@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>飞书+AI搭建客户跟进系统</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#FFF;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:677px;margin:0 auto;padding:20px 16px;font-size:16px;line-height:1.8;color:#1A1A1A}h1{font-size:24px;font-weight:800;color:#102542;margin:24px 0 12px}h2{font-size:19px;font-weight:700;color:#102542;border-left:4px solid #F77F00;padding-left:12px;margin:20px 0 10px}h3{font-size:17px;font-weight:700;color:#0A1931;margin:16px 0 8px}p{margin:0 0 12px}strong{color:#0A1931}blockquote{border-left:3px solid #F77F00;background:#F7F9FC;padding:12px 16px;margin:16px 0;color:#4A4A4A;border-radius:0 4px 4px 0;font-size:15px}table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px}th{background:#102542;color:#FFF;padding:10px 12px;text-align:left;font-weight:600}td{padding:10px 12px;border-bottom:1px solid #E5EAF2}tr:nth-child(even) td{background:#F7F9FC}hr{border:none;border-top:1px solid #E5EAF2;margin:24px 0}.footer{margin-top:32px;padding-top:16px;border-top:1px solid #E5EAF2;font-size:14px;color:#86909C}.footer a{color:#F77F00;text-decoration:none}.illu-card{position:relative;width:100%;max-width:677px;margin:24px auto;border-radius:12px;overflow:hidden;box-sizing:border-box}</style></head><body>
+
+<p>之前写了两篇客户经营的文章。好几个代理人私我：你说的跟进表，具体怎么搭？</p>
+<p><strong>这篇就是答案。用飞书多维表格 + AI，零代码，一个下午搞定。</strong></p>
+<hr>
+<h2>为什么不用 CRM</h2>
+<p>市面上的保险 CRM 不少。我用过几个，后来放弃了。三个原因：</p>
+<p><strong>第一，太重。</strong>功能一堆，但你日常用的就那三四项。<br><strong>第二，不灵活。</strong>字段是预设的——但实际你记的东西往往是"他老婆最近查出了甲状腺结节"——这种信息，CRM 没地方放。<br><strong>第三，贵。</strong>稍微好用点的，一年几千。</p>
+<blockquote>大部分代理人不需要 CRM。需要一个自己能改、能查、能用 AI 帮忙分析的表。</blockquote>
+<hr>
+<h2>飞书多维表格：免费够用</h2>
+<p>飞书的多维表格本质就是一个在线数据库——像 Excel，但更聪明。免费（个人版够用）、手机电脑同步、能关联 AI、表格之间能互相引用。</p>
+<hr>
+<h2>搭一个客户跟进系统：四步</h2>
+<h3>第一步：建一张主表</h3>
+<p>新建一个多维表格，就叫"客户跟进"。字段就这些：</p>
+<table><tr><th>字段</th><th>类型</th><th>说明</th></tr>
+<tr><td>姓名</td><td>文本</td><td>客户的称呼</td></tr>
+<tr><td>层级</td><td>单选</td><td>A已成交 / B聊过没买 / C认识没聊过保险 / D忘了是谁</td></tr>
+<tr><td>上次互动日期</td><td>日期</td><td>最近一次聊天的日期</td></tr>
+<tr><td>上次聊了什么</td><td>多行文本</td><td>一句话记</td></tr>
+<tr><td>下次动作</td><td>多行文本</td><td>下一步做什么、什么时候做</td></tr>
+<tr><td>关键信息</td><td>多行文本</td><td>家庭成员、健康状况、职业、顾虑点</td></tr>
+<tr><td>来源</td><td>单选</td><td>转介绍 / 朋友圈 / 社群 / 线下 / 忘了</td></tr></table>
+<p>就七列。列多了你就不想填了。<strong>每列只记"不看会忘的东西"。</strong></p>
+
+<h3>第二步：建一个"待办"视图</h3>
+<p>按条件筛选后另存为一个视图，叫"本周该联系的人"：</p>
+<p>筛选条件：上次互动日期 早于 7 天前 AND 层级 不等于 D</p>
+<p>每周一打开这个视图，该找谁一目了然。</p>
+
+<h3>第三步：接入 AI 做自动分析</h3>
+<p>飞书多维表格有个功能叫"AI 字段"。我设了几个自动处理：</p>
+<p><strong>从"上次聊了什么"自动提取关键词</strong>——标出"重疾""医疗""理赔""养老"等标签。<br>
+<strong>自动计算"沉默天数"</strong>——超过 14 天标黄，超过 30 天标红。<br>
+<strong>自动生成"下次聊什么"建议</strong>——比如客户写了"女儿刚高考完"，AI 建议"聊教育金/学平险"。</p>
+<blockquote>不是 AI 替你聊。是 AI 帮你记住"该聊什么"，你只管聊。</blockquote>
+
+<h3>第四步：每周复盘</h3>
+<p>每周五花 15 分钟，扫一眼：这周跟几个人聊了？A 层有人到保单体检时间了吗？B 层有没有超过 30 天没联系？C 层有没有最近点赞你朋友圈的？</p>
+<p>用 AI 字段自动生成一段"本周客户经营简报"。</p>
+
+<!-- 配图 -->
+<div class="illu-card" id="illu-1" style="padding:32px 28px;background:#F7F9FC;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif"><h2 style="font-size:20px;font-weight:500;font-family:'Noto Serif SC','Songti SC',serif;color:#102542;margin:0 0 8px;border:none;padding:0">飞书 + AI 客户跟进系统</h2><p style="font-size:13px;color:#86909C;margin:0 0 20px;letter-spacing:.10em">四步搭建 · 零代码 · 一个下午</p><div style="display:flex;align-items:flex-start;gap:0"><div style="text-align:center;flex:1;min-width:0"><div style="width:40px;height:40px;background:#F77F00;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">1</div><div style="font-size:14px;font-weight:500;color:#102542;margin-bottom:4px">建主表</div><div style="font-size:11px;color:#86909C;line-height:1.5">7 个字段<br>够用就好</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:28px;padding-top:16px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-4px;border:5px solid transparent;border-left:8px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:40px;height:40px;background:#102542;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">2</div><div style="font-size:14px;font-weight:500;color:#102542;margin-bottom:4px">建视图</div><div style="font-size:11px;color:#86909C;line-height:1.5">筛选待办<br>该找谁一目了然</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:28px;padding-top:16px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-4px;border:5px solid transparent;border-left:8px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:40px;height:40px;background:#0A1931;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">3</div><div style="font-size:14px;font-weight:500;color:#102542;margin-bottom:4px">接 AI</div><div style="font-size:11px;color:#86909C;line-height:1.5">自动标签+分析<br>AI 帮你记住</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:28px;padding-top:16px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-4px;border:5px solid transparent;border-left:8px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:40px;height:40px;background:#86909C;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">4</div><div style="font-size:14px;font-weight:500;color:#102542;margin-bottom:4px">每周复盘</div><div style="font-size:11px;color:#86909C;line-height:1.5">15 分钟扫一眼<br>AI 自动出简报</div></div></div><p style="text-align:center;margin:14px 0 0;font-size:13px;color:#102542;font-weight:500">关键不是工具。是"每次互动完记一笔，定期回来翻"。</p></div>
+
+<hr>
+<h2>跟飞书没关系——关键是"记"</h2>
+<p>CRM、飞书、Excel、备忘录——工具不重要。重要的是两件事：</p>
+<p><strong>第一，每次互动完记一笔。</strong>很多人聊完客户，感觉不错，然后什么都不记。一周后忘了上次聊的啥。</p>
+<p><strong>第二，定期回来翻。</strong>记了不看等于没记。固定一个时间——每周一早上、每周五下班前——翻一遍。</p>
+<blockquote>一个好的跟进系统，不是功能多。是你真的在用。</blockquote>
+
+<h2>一个模板</h2>
+<p>我把自己用的飞书表格模板整理了一下。如果你不想从零搭——直接复制我的模板，把你的客户名单导进去就能用。想要的话私我，免费发你。</p>
+<hr>
+<p style="color:#86909C;font-size:15px">你现在用什么管客户？Excel？备忘录？还是脑子？私我聊聊，我帮你看看怎么升级。</p>
+<div class="footer"><p>📥 配图下载：打开 <a href="飞书加AI搭建客户跟进系统_配图下载.html">配图下载页</a> 下载 PNG</p></div>
+</body></html>

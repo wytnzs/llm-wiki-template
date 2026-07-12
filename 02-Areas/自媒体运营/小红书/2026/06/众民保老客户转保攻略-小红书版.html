@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>众民保 · 老客户转保全攻略 · 小红书</title>
+  <meta name="viewport" content="width=1080">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 70px 20px 40px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .sheet { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+    .poster {
+      position: relative; overflow: hidden; isolation: isolate;
+      width: 1080px; height: 1440px; border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.24);
+    }
+    .poster .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 100px 96px;
+      display: flex; flex-direction: column;
+    }
+
+    .theme-warm { background: #fdf6ed; color: #2a1e13; }
+    .theme-warm .accent { color: #b85c2e; }
+    .theme-warm .tag { background: #f5e6d3; color: #8b5a3c; }
+    .theme-warm .card-box { background: #faf3ea; border-left: 4px solid #b85c2e; }
+    .theme-warm .card-box.dim { opacity: .55; background: #f7ede0; }
+    .theme-warm .divider { background: rgba(42,30,19,.15); }
+    .theme-warm .badge { background: #b85c2e; color: #fff; }
+
+    .theme-dark { background: #2a1e13; color: #fdf6ed; }
+    .theme-dark .accent { color: #e8a96b; }
+    .theme-dark .tag { background: rgba(255,255,255,.08); color: #c9a87c; }
+    .theme-dark .card-box { background: rgba(255,255,255,.06); border-left: 4px solid #e8a96b; }
+    .theme-dark .divider { background: rgba(253,246,237,.15); }
+    .theme-dark .badge { background: #e8a96b; color: #2a1e13; }
+
+    .grain {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: .25; mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
+      background-size: 3px 3px;
+    }
+
+    h1 { font-weight: 900; font-size: 136px; line-height: 1.04; letter-spacing: -.01em; margin: 0; }
+    h2 { font-weight: 700; font-size: 76px; line-height: 1.14; letter-spacing: .01em; margin: 0; }
+    h3 { font-weight: 700; font-size: 42px; line-height: 1.22; margin: 0; }
+    .big-num { font-weight: 800; font-size: 140px; line-height: 1; letter-spacing: -.02em; }
+    .mid-num { font-weight: 700; font-size: 88px; line-height: 1; letter-spacing: -.01em; }
+    .body-lg { font-weight: 400; font-size: 34px; line-height: 1.55; margin: 0; }
+    .body-md { font-weight: 400; font-size: 28px; line-height: 1.6; margin: 0; }
+    .body-sm { font-weight: 400; font-size: 24px; line-height: 1.55; margin: 0; opacity: .72; }
+    .label { font-weight: 600; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+    .tag {
+      display: inline-block; padding: 10px 24px; border-radius: 6px;
+      font-weight: 600; font-size: 22px; letter-spacing: .04em;
+    }
+    .badge {
+      display: inline-block; padding: 6px 18px; border-radius: 4px;
+      font-weight: 700; font-size: 20px; letter-spacing: .06em;
+    }
+
+    .stack { display: flex; flex-direction: column; }
+    .row   { display: flex; flex-direction: row; }
+    .grow  { flex: 1; }
+    .center { text-align: center; align-items: center; }
+    .divider { height: 1px; border: 0; margin: 0; }
+    .gap-xs  { gap: 12px; }
+    .gap-sm  { gap: 20px; }
+    .gap-md  { gap: 36px; }
+    .gap-lg  { gap: 56px; }
+
+    .card-box { padding: 40px 48px; border-radius: 10px; }
+    .card-box .row { align-items: flex-start; gap: 24px; }
+    .card-box .dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 14px;
+    }
+    .theme-warm .card-box .dot { background: #b85c2e; }
+    .theme-dark .card-box .dot { background: #e8a96b; }
+
+    .point-row {
+      display: flex; align-items: flex-start; gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(42,30,19,.10);
+    }
+    .theme-dark .point-row { border-bottom-color: rgba(253,246,237,.10); }
+    .point-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .point-row .point-num {
+      font-weight: 800; font-size: 56px; line-height: 1; flex-shrink: 0;
+      width: 72px; text-align: center;
+    }
+    .point-row .point-body { flex: 1; }
+    .point-row .point-body h3 { font-size: 38px; line-height: 1.3; }
+    .point-row .point-body p  { font-size: 26px; line-height: 1.5; margin: 8px 0 0; opacity: .72; }
+
+    .stat-row {
+      display: flex; align-items: center; gap: 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(42,30,19,.10);
+    }
+    .theme-dark .stat-row { border-bottom-color: rgba(253,246,237,.10); }
+    .stat-row:last-child { border-bottom: 0; }
+    .stat-row .stat-num {
+      font-weight: 800; font-size: 72px; line-height: 1; flex-shrink: 0;
+    }
+    .stat-row .stat-body h3 { font-size: 32px; line-height: 1.3; }
+    .stat-row .stat-body p  { font-size: 24px; line-height: 1.5; margin: 6px 0 0; opacity: .72; }
+
+    .bottom-strip {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 20px; letter-spacing: .08em; opacity: .55;
+      padding-top: 24px; border-top: 1px solid;
+      margin-top: auto;
+    }
+    .theme-warm .bottom-strip { border-color: rgba(42,30,19,.12); }
+    .theme-dark .bottom-strip { border-color: rgba(253,246,237,.12); }
+
+    .toolbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(26,26,26,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 10px 20px; display: flex; align-items: center;
+      justify-content: center; gap: 10px; height: 54px;
+    }
+    .toolbar .btn {
+      background: #fff; color: #1a1a1a; border: none;
+      padding: 8px 20px; border-radius: 6px; font-size: 13px;
+      font-weight: 600; cursor: pointer; font-family: -apple-system, sans-serif;
+    }
+    .toolbar .btn.accent { background: #b85c2e; color: #fff; }
+    .toolbar .btn:hover { opacity: .85; }
+    .toolbar .progress { color: rgba(255,255,255,.35); font-size: 12px; font-weight: 500; min-width: 120px; text-align: center; font-family: -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar" id="toolbar">
+    <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+    <button class="btn" onclick="downloadOne()">下载当前</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <main class="sheet">
+
+    <!-- ===== 01 · 封面 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-01">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <span class="tag">众民保 · 老客户专享</span>
+        <div class="grow" style="display:flex;align-items:center;">
+          <div class="stack gap-sm">
+            <h1>转保<br>2026 版</h1>
+            <p class="body-lg" style="margin-top:8px;">全系列老产品都能转<br>四类人现在就该动</p>
+          </div>
+        </div>
+        <div class="bottom-strip">
+          <span>Vol. 03 · 2026.06</span>
+          <span>众安保险</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 · 哪些产品可转 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-02">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>全系列<br>都支持</h2>
+        <p class="body-lg">不管手里是哪款，都在转保范围内。</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>普惠百万医疗险</h3><p class="body-sm" style="margin-top:6px;">最早一批客户的首选</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>经典百万医疗险</h3><p class="body-sm" style="margin-top:6px;">存量最大的版本</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>2025 版百万医疗险</h3><p class="body-sm" style="margin-top:6px;">去年刚升级的客户</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>全系列中高端医疗险</h3><p class="body-sm" style="margin-top:6px;">中高端客户也能平滑过渡</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 · 转保条件（dark） ===== -->
+    <section class="poster xhs theme-dark" id="xhs-03">
+      <div class="content center stack" style="justify-content:center;gap:48px;">
+        <p class="label accent">转保门槛</p>
+        <div class="stack gap-xs">
+          <span class="big-num accent" style="font-size:180px;">3 年</span>
+          <p class="body-lg" style="opacity:.75;">不间断重新投保满 3 年<br>第 4 年转保 2026 版臻选版<br>解锁相伴专属权益</p>
+        </div>
+        <div class="divider" style="width:120px;margin:0 auto;"></div>
+        <p class="body-md" style="opacity:.60;">过往有无理赔记录<br>都不影响权益享受</p>
+      </div>
+    </section>
+
+    <!-- ===== 04 · 转保核心规则 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-04">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>转保规则<br>三条说清</h2>
+        <div class="grow stack" style="gap:0;justify-content:center;">
+          <div class="point-row">
+            <span class="point-num accent">01</span>
+            <div class="point-body">
+              <h3>严重既往症清单以 2026 版为准</h3>
+              <p>转保后用最新版清单，但认定时间仍按首次投保众民保的时间计算，不会重新认定</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">02</span>
+            <div class="point-body">
+              <h3>转保臻选版才能解锁相伴权益</h3>
+              <p>不间断投保满 3 年 + 第 4 年转臻选版 = 可选严重既往症可赔，或免赔额逐年下调</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">03</span>
+            <div class="point-body">
+              <h3>不会因理赔被拒续保</h3>
+              <p>自 2022 年上线至今，无一例因疾病出险被拒续保。只拒骗保瞒赔</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 05 · 四类人推荐 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-05">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>这四类人<br>现在就该转</h2>
+        <div class="grow stack" style="gap:0;">
+          <div class="point-row">
+            <span class="point-num accent">01</span>
+            <div class="point-body">
+              <h3>快满 4 年的老客户</h3>
+              <p>再坚持续保就能解锁相伴权益，现在转保已到最佳窗口</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">02</span>
+            <div class="point-body">
+              <h3>有既往症顾虑的客户</h3>
+              <p>转臻选版选相伴权益 1，可享严重既往症可赔保障</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">03</span>
+            <div class="point-body">
+              <h3>相对健康的客户</h3>
+              <p>不触及严重既往症，转保后选相伴权益 2，免赔额最低降至 1 万元</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">04</span>
+            <div class="point-body">
+              <h3>41-50 岁、61-70 岁</h3>
+              <p>这两个年龄段 2026 版直接降价，保障更多，保费更少</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 · 价格优势（dark） ===== -->
+    <section class="poster xhs theme-dark" id="xhs-06">
+      <div class="content center stack" style="justify-content:center;gap:48px;">
+        <span class="badge">价格利好</span>
+        <div class="stack gap-sm">
+          <div class="row center gap-lg">
+            <div class="stack center gap-xs">
+              <span class="mid-num accent">41-50</span>
+              <span class="body-sm" style="opacity:.60;">岁</span>
+            </div>
+            <div class="stack center gap-xs">
+              <span class="mid-num accent">61-70</span>
+              <span class="body-sm" style="opacity:.60;">岁</span>
+            </div>
+          </div>
+        </div>
+        <div class="divider" style="width:120px;margin:0 auto;"></div>
+        <p class="body-lg" style="opacity:.75;">两个年龄段<br><strong class="accent">保费直接降价</strong><br>保障还更多</p>
+      </div>
+    </section>
+
+    <!-- ===== 07 · 续保安全感 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-07">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>放心转</h2>
+        <p class="body-lg">数据背后是确定性。</p>
+        <div class="grow stack" style="gap:0;justify-content:center;">
+          <div class="stat-row">
+            <span class="stat-num accent">400万+</span>
+            <div class="stat-body"><h3>累计承保保单</h3><p>截至 2026 年 5 月底</p></div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-num accent">0</span>
+            <div class="stat-body"><h3>因疾病出险被拒续保</h3><p>自 2022 年 10 月上线以来</p></div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-num accent">241%</span>
+            <div class="stat-body"><h3>综合偿付能力充足率</h3><p>2026 年 Q1，远超监管要求</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 08 · 收尾 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-08">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>需要转保<br>方案？</h2>
+        <p class="body-lg">整理了一份转保资料——</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>转保条件逐条核对清单</h3><p class="body-sm" style="margin-top:6px;">看看你满不满足条件</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>2026 版 vs 老版本保障对比</h3><p class="body-sm" style="margin-top:6px;">转保后多了哪些保障一目了然</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>相伴权益选择指南</h3><p class="body-sm" style="margin-top:6px;">权益 1 还是权益 2？帮你对号入座</p></div></div></div>
+        </div>
+        <hr class="divider" style="margin:0;">
+        <p class="body-lg center" style="font-weight:600;">表格和图片已整理好<br>评论区回复「<strong class="accent">需要</strong>」，私信发你</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var W = 1080, H = 1440;
+      function renderPoster(el) {
+        var obr = el.style.borderRadius, obs = el.style.boxShadow;
+        el.style.borderRadius = '0'; el.style.boxShadow = 'none';
+        return html2canvas(el, { scale: 1, useCORS: true, backgroundColor: null, width: W, height: H, logging: false })
+          .then(function(c) { el.style.borderRadius = obr; el.style.boxShadow = obs; return c; });
+      }
+      function c2b(c) { return new Promise(function(r) { c.toBlob(r, 'image/png'); }); }
+      window.downloadAll = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var pg = document.getElementById('progress');
+        var zip = new JSZip(); var p = Promise.resolve();
+        ps.forEach(function(el, i) {
+          p = p.then(function() {
+            pg.textContent = '渲染 ' + (i+1) + '/' + ps.length + '...';
+            return renderPoster(el).then(function(c) { return c2b(c).then(function(b) { zip.file('小红书-' + String(i+1).padStart(2,'0') + '.png', b); }); });
+          });
+        });
+        p.then(function() { pg.textContent = '打包中...'; return zip.generateAsync({ type: 'blob' }); })
+         .then(function(b) { saveAs(b, '小红书-老客户转保攻略.zip'); pg.textContent = ps.length + ' 张已完成'; });
+      };
+      window.downloadOne = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var vc = window.innerHeight / 2, idx = 0, min = Infinity;
+        ps.forEach(function(el, i) { var r = el.getBoundingClientRect(); var d = Math.abs(r.top + r.height/2 - vc); if (d < min) { min = d; idx = i; } });
+        renderPoster(ps[idx]).then(function(c) { return c2b(c); }).then(function(b) { saveAs(b, '小红书-' + String(idx+1).padStart(2,'0') + '.png'); });
+      };
+    })();
+  </script>
+</body>
+</html>

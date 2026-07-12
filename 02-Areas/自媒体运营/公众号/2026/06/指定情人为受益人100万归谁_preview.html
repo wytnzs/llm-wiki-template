@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>指定情人为受益人，100万归谁？</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FFFFFF;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    max-width: 677px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #1A1A1A;
+  }
+  h1 { font-size: 24px; font-weight: 800; color: #102542; margin: 24px 0 4px; line-height: 1.4; }
+  .subtitle { font-size: 15px; color: #86909C; margin: 0 0 24px; line-height: 1.5; }
+  h2 { font-size: 19px; font-weight: 700; color: #102542; border-left: 4px solid #F77F00; padding-left: 12px; margin: 24px 0 12px; }
+  h3 { font-size: 17px; font-weight: 700; color: #0A1931; margin: 16px 0 8px; }
+  p { margin: 0 0 12px; color: #1A1A1A; }
+  strong { color: #0A1931; }
+  blockquote {
+    border-left: 3px solid #F77F00;
+    background: #F7F9FC;
+    padding: 12px 16px;
+    margin: 16px 0;
+    color: #4A4A4A;
+    border-radius: 0 4px 4px 0;
+    font-size: 15px;
+  }
+  .em-accent { color: #F77F00; font-weight: 700; }
+  hr { border: none; border-top: 1px solid #E5EAF2; margin: 24px 0; }
+  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #E5EAF2; font-size: 14px; color: #86909C; text-align: center; }
+
+  /* 卡片 - 预览版 */
+  .illu-card { position: relative; width: 100%; max-width: 677px; margin: 28px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+
+  /* 类型：对比卡 - 两个法律路径 */
+  .illu-contrast { background: linear-gradient(135deg, #0A1931 0%, #102542 100%); padding: 28px 24px; color: #FFFFFF; }
+  .illu-contrast-title { font-size: 16px; font-weight: 700; text-align: center; margin-bottom: 18px; color: #FFFFFF; }
+  .illu-contrast-grid { display: flex; gap: 12px; }
+  .illu-contrast-item { flex: 1; padding: 18px 14px; border-radius: 10px; }
+  .illu-contrast-item.wrong { background: rgba(139,26,26,0.15); border: 1px solid rgba(139,26,26,0.3); }
+  .illu-contrast-item.right { background: rgba(46,125,50,0.12); border: 1px solid rgba(46,125,50,0.25); }
+  .illu-contrast-label { font-size: 12px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .illu-contrast-item.wrong .illu-contrast-label { color: #EF5350; }
+  .illu-contrast-item.right .illu-contrast-label { color: #66BB6A; }
+  .illu-contrast-text { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.85); }
+  .illu-contrast-bad { text-align: left; margin-top: 12px; font-size: 12px; color: #EF5350; opacity: 0.7; }
+
+  /* 类型：流程卡 - 三颗钉子 */
+  .illu-nails { background: #F7F9FC; padding: 24px; border-radius: 12px; border: 1px solid #E5EAF2; }
+  .illu-nails-title { font-size: 15px; font-weight: 700; color: #102542; margin-bottom: 16px; text-align: center; }
+  .illu-nail-item { display: flex; gap: 12px; margin-bottom: 14px; }
+  .illu-nail-num { width: 28px; height: 28px; border-radius: 50%; background: #F77F00; color: #FFF; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .illu-nail-content { flex: 1; }
+  .illu-nail-head { font-size: 14px; font-weight: 700; color: #102542; margin-bottom: 4px; }
+  .illu-nail-desc { font-size: 13px; color: #4A4A4A; line-height: 1.6; }
+  .illu-nail-case { margin-top: 14px; padding: 12px; background: #FFF8F0; border-radius: 8px; border-left: 3px solid #F77F00; font-size: 13px; color: #4A4A4A; line-height: 1.6; }
+  .illu-nail-case strong { color: #0A1931; }
+
+  /* 类型：实操清单卡 */
+  .illu-tips { background: linear-gradient(135deg, #0A1931 0%, #162D5A 100%); padding: 28px 24px; color: #FFFFFF; }
+  .illu-tips-title { font-size: 16px; font-weight: 700; text-align: center; margin-bottom: 18px; color: #FFFFFF; }
+  .illu-tip-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+  .illu-tip-icon { color: #F77F00; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .illu-tip-text { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.85); }
+  .illu-tip-text strong { color: #F77F00; }
+  .illu-tip-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 14px 0; }
+</style>
+</head>
+<body>
+
+<h1>指定情人为受益人，100万归谁？</h1>
+<p class="subtitle">一个被系统性误读的法律条款——结论：该给H</p>
+
+<hr>
+
+<p>A投保了一份终身寿险。保额100万。</p>
+
+<p>受益人：H。身份关系：妻子。</p>
+
+<p>但H不是妻子。H是情人。</p>
+
+<p>两年后，A车祸身故。</p>
+
+<p>妻子B发现了这张保单。</p>
+
+<p>100万，归谁？</p>
+
+<p>很多人会告诉你：这有争议。</p>
+
+<p>一方说身份关系不实，指定无效。另一方说真实意思优先，指定有效。</p>
+
+<p>两个说法都引经据典。好像都有道理。</p>
+
+<p>但真相是——<strong>其中一方的法律依据，从一开始就用错了。</strong></p>
+
+<p>不是"有争议"。是结论明确。</p>
+
+<p><strong>100万，归H。</strong></p>
+
+<hr>
+
+<h2>为什么很多人会搞错？一个被误读的条款</h2>
+
+<p>争论的焦点，几乎都绕不开《保险法》司法解释三第九条第三款。</p>
+
+<p>这条规定：</p>
+
+<blockquote>约定的受益人同时包括姓名和身份关系，保险事故发生时身份关系发生变化的，认定为未指定受益人。</blockquote>
+
+<p>很多人看到这条，再看A的保单——受益人写了H的名字，又写了"妻子"——马上套用：</p>
+
+<p>"身份关系是假的，比'发生变化'还严重，所以指定无效。"</p>
+
+<p><strong>这就是误读的根源。</strong></p>
+
+<p>仔细看这条规定的措辞——"身份关系<strong>发生变化</strong>"。</p>
+
+<p>什么是"变化"？</p>
+
+<p>从A变成B，才是变化。从真变成假，才是变化。</p>
+
+<p>但本案是什么情况？</p>
+
+<p>H从一开始就不是妻子。</p>
+
+<p><strong>身份关系自始不实。自始至终没有"变化"过。</strong></p>
+
+<p>"变化"和"自始不实"，是两个完全不同的法律事实。</p>
+
+<p>第九条第三款调整的是前者——投保时关系是真的（比如指定"妻子李某"，当时确实是夫妻），后来离婚了，关系变了。</p>
+
+<p>这时候才适用"认定为未指定受益人"。</p>
+
+<p>因为它背后的逻辑是：被保险人当初指定受益人时，是基于"这个人是我妻子"这个真实前提。现在前提不存在了，所以推定被保险人可能想换人。</p>
+
+<p>但本案的前提从一开始就不存在吗？</p>
+
+<p>不是。A从一开始就知道H不是妻子。</p>
+
+<p>他是在明知H不是妻子的情况下，仍然指定H。</p>
+
+<p><strong>不存在"前提崩塌"的问题。</strong></p>
+
+<p>所以第九条第三款，从文义到逻辑，都不适用于这个场景。</p>
+
+<p><strong>这不是司法解释的漏洞。是适用者的逻辑错误。</strong></p>
+
+<!-- 配图1：错误适用 vs 正确适用 -->
+<div class="illu-card illu-contrast">
+  <div class="illu-contrast-title">同一个条款，两种完全不同的用法</div>
+  <div class="illu-contrast-grid">
+    <div class="illu-contrast-item wrong">
+      <div class="illu-contrast-label">❌ 错误适用</div>
+      <div class="illu-contrast-text">
+        A把H写为"妻子"<br>H不是妻子→身份不实<br><br>
+        <strong>结论：</strong>第九条第三款→<br>指定无效→遗产
+      </div>
+      <div class="illu-contrast-bad">▲ 把"自始不实"错当成"发生变化"</div>
+    </div>
+    <div class="illu-contrast-item right">
+      <div class="illu-contrast-label">✅ 正确适用</div>
+      <div class="illu-contrast-text">
+        A指定受益人写H的名字<br>明知H不是妻子仍然指定H<br><br>
+        <strong>结论：</strong>第九条第三款不适用→<br>真实意思表示→H有效
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>排除了错误条款，剩下的是什么？</h2>
+
+<p>剩下的，是整个保险法受益人制度的基石——<strong>被保险人的真实意思表示</strong>。</p>
+
+<p>《保险法》第三十九条：被保险人或者投保人可以指定受益人。</p>
+
+<p>《保险法》司法解释三的整体精神：受益人指定发生争议时，核心是探究被保险人的真实意思。</p>
+
+<p>A的真实意思是什么？</p>
+
+<p>他写的是H的名字。</p>
+
+<p>他要给谁？给H。</p>
+
+<p>就这么简单。</p>
+
+<p>为什么写"妻子"？因为保险公司内部要求受益人必须是近亲属。他为了通过审核，不得已填了"妻子"。</p>
+
+<p>这不是欺诈。这是在合规限制下的变通。</p>
+
+<p><strong>如果因为这种变通，就否定被保险人的真实意愿——</strong></p>
+
+<p><strong>那意味着：保险公司的内部核保规则，凌驾于被保险人的财产处分自由之上。</strong></p>
+
+<p>法律上没有这个道理。</p>
+
+<h2>公序良俗不能成为"口袋罪"</h2>
+
+<p>有人会说：即使司法解释不适用，还有公序良俗原则。</p>
+
+<p>《民法典》第一百五十三条：违背公序良俗的民事法律行为无效。</p>
+
+<p>"把保险金给情人，这还不违背公序良俗？"</p>
+
+<p>这个问题要拆开看。</p>
+
+<p><strong>公序良俗的审查，必须区分"行为内容"和"行为动机"。</strong></p>
+
+<p><strong>行为内容：</strong>A指定H为受益人。这是一个单方的财产处分行为。把财产给谁——这个行为本身是中立的。民法典保护财产处分自由。</p>
+
+<p><strong>行为动机：</strong>A为什么指定H？</p>
+
+<p>如果A指定H是为了维持不正当关系、用保险金作为对价换取同居——那这个指定行为确实因动机违法而无效。</p>
+
+<p>但如果A指定H，是出于对她长期陪伴的补偿、保障她日后的生活——这是合法的财产赠与。</p>
+
+<p><strong>区别在于动机，不在于身份。</strong></p>
+
+<p>本案中，没有证据证明A指定H是为了维持不正当关系。所以不能直接推定指定无效。</p>
+
+<p>德国联邦最高法院在一个类似案件中明确表态：已婚男子给情人做出赠与、供养承诺，或将情人指定为人寿保险受益人——这些行为通常是有效的。除非该女性明确以"持续的、产业性的方式从不道德关系中获取报酬"。</p>
+
+<p><strong>公序良俗保护的是社会基本秩序。不是用来惩罚出轨者的口袋条款。</strong></p>
+
+<p>如果把"婚外情"的标签贴上去，就一律否定所有相关民事行为的效力——那A给H买的所有东西，B都能要回去。这在法律上和实务上，都是行不通的。</p>
+
+<hr>
+
+<h2>还有一个被忽略的因素：两年不可抗辩</h2>
+
+<p>保单生效已经两年了。</p>
+
+<p>《保险法》第十六条：保险合同成立超过两年的，保险人不得解除合同。</p>
+
+<p>保险公司不能以投保时存在告知瑕疵为由，解除合同。</p>
+
+<p>这意味着什么？</p>
+
+<p>即使保险公司认为A填写身份关系不实属于"未如实告知"——<strong>也已经过了追诉期。</strong></p>
+
+<p>合同是有效的。保险公司必须赔付。</p>
+
+<p>那剩下唯一的问题是：赔给谁？回到真实意思表示。赔给H。</p>
+
+<!-- 配图2：三个核心结论 -->
+<div class="illu-card illu-nails">
+  <div class="illu-nails-title">三个核心结论</div>
+  <div class="illu-nail-item">
+    <div class="illu-nail-num">1</div>
+    <div class="illu-nail-content">
+      <div class="illu-nail-head">司法解释三第九条第三款不适用</div>
+      <div class="illu-nail-desc">"身份关系发生变化"≠"身份关系自始不实"。用错了条款，结论自然错误。</div>
+    </div>
+  </div>
+  <div class="illu-nail-item">
+    <div class="illu-nail-num">2</div>
+    <div class="illu-nail-content">
+      <div class="illu-nail-head">真实意思表示是最高原则</div>
+      <div class="illu-nail-desc">A写了H的名字。保险公司的内部核保规则，不能凌驾于被保险人的财产处分自由之上。</div>
+    </div>
+  </div>
+  <div class="illu-nail-item">
+    <div class="illu-nail-num">3</div>
+    <div class="illu-nail-content">
+      <div class="illu-nail-head">公序良俗不能机械适用</div>
+      <div class="illu-nail-desc">区分"行为内容"和"行为动机"。无证据证明以不正当关系为对价，就不能推定无效。</div>
+    </div>
+  </div>
+  <div class="illu-nail-case">
+    <strong>支持性判例：2024年"陆甲案"</strong><br>
+    投保人将女友填写为"配偶"，法院认定身份关系错误属于"认知偏差"而非"关系变化"，保单明确填写了姓名和身份证号，指定有效，保险金归女友。
+  </div>
+</div>
+
+<h2>支持性判例：2024年"陆甲案"</h2>
+
+<p>这个逻辑不是空谈。司法实践中有直接支持的判例。</p>
+
+<p>2024年"陆甲案"：投保人将女友填写为"配偶"。身份关系明显不实。</p>
+
+<p>法院审理后认定：<strong>身份关系的错误属于"认知偏差"，而非"关系变化"。</strong>保单明确填写了女友的姓名和身份证号，且投保人当时无其他配偶。</p>
+
+<p>判决：<strong>指定有效。保险金归女友。</strong></p>
+
+<p>注意法院用的词——"认知偏差"。</p>
+
+<p>意思是：投保人写"配偶"，不是因为他认为女友真的是法律意义上的配偶。而是他不知道该用什么身份来填，所以选了一个最接近的。</p>
+
+<p>这个逻辑，完全适用于本案。</p>
+
+<p>A写H为"妻子"——不是因为他认为H真的是法律上的妻子。而是保险公司只有"配偶""子女""父母"这几个选项，他只能选一个。</p>
+
+<p><strong>这不是欺诈。这是在有限选项下的真实意思表达。</strong></p>
+
+<hr>
+
+<h2>这个案子的启示</h2>
+
+<p>受益人指定这件事，很多人的认知停留在"填个表而已"。</p>
+
+<p>但一个格子填错了，可能引发几百万的纠纷。</p>
+
+<p>对保险代理人和从业者来说，真正该学的不是"这个案子怎么判"——</p>
+
+<p>而是怎么帮客户把受益人的指定写干净：</p>
+
+<!-- 配图3：实操建议 -->
+<div class="illu-card illu-tips">
+  <div class="illu-tips-title">✍️ 受益人指定实操法则</div>
+  <div class="illu-tip-item">
+    <span class="illu-tip-icon">▶</span>
+    <span class="illu-tip-text"><strong>只写姓名和身份证号</strong>——不写身份关系。身份关系不仅没有法律帮助，反而可能成为争议根源。</span>
+  </div>
+  <hr class="illu-tip-divider">
+  <div class="illu-tip-item">
+    <span class="illu-tip-icon">▶</span>
+    <span class="illu-tip-text"><strong>变更受益人必须书面通知保险公司</strong>——口头说、写遗嘱、离婚协议约定都不算数。</span>
+  </div>
+  <hr class="illu-tip-divider">
+  <div class="illu-tip-item">
+    <span class="illu-tip-icon">▶</span>
+    <span class="illu-tip-text"><strong>定期检视保单受益人</strong>——婚姻变了、关系变了，及时去保险公司改。</span>
+  </div>
+</div>
+
+<p style="margin-top:28px;">一句话：<strong>受益人指定，一个名字就够了。</strong></p>
+
+<hr>
+
+<p>这个案子，你觉得应该怎么判？</p>
+
+<p>评论区说说。</p>
+
+<p style="margin-top: 20px; font-weight: 700; color: #102542; font-size: 15px;">我是刘立群。关注我，帮你把该赔的钱拿回来。</p>
+
+<div class="footer">
+  <p>配图已嵌入正文位置 · 下载配图请打开同目录下"配图下载"页面</p>
+</div>
+
+</body>
+</html>

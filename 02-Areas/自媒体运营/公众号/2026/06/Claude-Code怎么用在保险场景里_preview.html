@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Claude Code怎么用在保险场景里</title><style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#FFF;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:677px;margin:0 auto;padding:20px 16px;font-size:16px;line-height:1.8;color:#1A1A1A}
+h1{font-size:24px;font-weight:800;color:#102542;margin:24px 0 12px}h2{font-size:19px;font-weight:700;color:#102542;border-left:4px solid #F77F00;padding-left:12px;margin:20px 0 10px}h3{font-size:17px;font-weight:700;color:#0A1931;margin:16px 0 8px}
+p{margin:0 0 12px}strong{color:#0A1931}blockquote{border-left:3px solid #F77F00;background:#F7F9FC;padding:12px 16px;margin:16px 0;color:#4A4A4A;border-radius:0 4px 4px 0;font-size:15px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px}th{background:#102542;color:#FFF;padding:10px 12px;text-align:left;font-weight:600}td{padding:10px 12px;border-bottom:1px solid #E5EAF2}tr:nth-child(even) td{background:#F7F9FC}
+hr{border:none;border-top:1px solid #E5EAF2;margin:24px 0}.footer{margin-top:32px;padding-top:16px;border-top:1px solid #E5EAF2;font-size:14px;color:#86909C}.footer a{color:#F77F00;text-decoration:none}
+.illu-card{position:relative;width:100%;max-width:677px;margin:24px auto;border-radius:12px;overflow:hidden;box-sizing:border-box}
+</style></head><body>
+
+<p>去年我开始用 Claude Code 的时候，身边没一个同行在用。</p>
+<p>他们的反应分两种。一种问"那是什么"。一种问"你不就是卖保险的吗，写代码干嘛"。</p>
+<p>一年下来，Claude Code 已经是我日常干活用得最多的工具——不是写代码，是处理保险业务里那些"重复、费脑、容易出错"的事。</p>
+<p><strong>这篇文章不讲技术。讲场景。</strong></p>
+
+<hr>
+
+<h2>Claude Code 能干嘛——保险版</h2>
+<p>Claude Code 和 ChatGPT、豆包最大的区别：它不是聊天窗口。它是一个能直接读文件、写文件、执行命令、联网搜索的 AI Agent。</p>
+<p>你给它一个任务，它自己拆解、自己执行、自己检查。</p>
+<table>
+<tr><th>场景</th><th>以前怎么做</th><th>Claude Code 怎么做</th></tr>
+<tr><td>批量整理理赔材料</td><td>一份一份手动翻</td><td>把 PDF 全丢进文件夹，一句话让它提取关键字段</td></tr>
+<tr><td>比对保单条款差异</td><td>两个文档对着看，眼睛花</td><td>丢给它，输出差异表</td></tr>
+<tr><td>写公众号文章</td><td>打开空白文档发呆</td><td>给素材+大纲，生成初稿</td></tr>
+<tr><td>做数据分析</td><td>Excel 拉半天</td><td>说一句话，它写脚本跑</td></tr>
+<tr><td>查法规和判例</td><td>百度一个个翻</td><td>联网搜索+自动汇总</td></tr>
+</table>
+<blockquote>聊天窗口是"问一句答一句"。Agent 是"你说目标，它自己干完"。</blockquote>
+
+<hr>
+
+<h2>五个真实场景</h2>
+
+<h3>场景一：批量提取理赔材料关键信息</h3>
+<p>一个工伤案子，客户发来 8 份 PDF——病历、诊断证明、事故认定书、保险合同……加起来上百页。</p>
+<p>以前我得一份份打开，手动摘。现在我把所有 PDF 放到一个文件夹，对 Claude Code 说一句话：</p>
+<p>"读这个文件夹里的所有文件，提取：就诊日期、诊断结论、事故发生时间、涉及的保险条款编号、保险公司拒赔理由。输出一张表。"</p>
+<p>几分钟，表出来了。我再花十几分钟核实一遍——完事。</p>
+<blockquote>它不是在帮我打字。是在帮我做"信息提取"这个工序。</blockquote>
+
+<h3>场景二：产品条款差异对比</h3>
+<p>客户有两份百万医疗险，要我帮忙看看哪个更好。以前我是两个 PDF 左右分屏，逐条对着看。</p>
+<p>现在："对比这两个产品条款，重点看：免赔额设置、等待期、免责条款、续保条件、特殊门诊覆盖范围。输出差异表，标出谁优谁劣。"</p>
+<p>输出来一张表，差异项用颜色标好。我再过一遍关键判断。</p>
+<blockquote>它不是在帮我读。是在帮我做"结构化对比"——这正是人脑最不擅长的事。</blockquote>
+
+<h3>场景三：写公众号初稿</h3>
+<p>我的流程不是"让 AI 直接写"。是：先给它素材+大纲+风格约束 → 它出初稿 → 我审——改观点、调语气、删废话、补案例 → 回去让它排版生成 HTML。</p>
+<p>每篇文章 AI 参与了约 60% 的工作量。但那 40%——观点、语气、案例选择——决定了这篇文章是我的还是机器的。</p>
+<blockquote>AI 写不出一篇像你的文章。但它能帮你省掉 60% 你不用动脑的活。</blockquote>
+
+<h3>场景四：数据分析</h3>
+<p>我想知道最近半年处理的理赔案子里，哪种拒赔理由出现频率最高。以前只能凭印象说"好像既往症拒赔比较多"。</p>
+<p>现在把脱敏后的案件记录丢给 Claude Code："分析这些案件，统计拒赔理由分布、保险公司响应时间、成功翻盘的比例。画个图。"</p>
+<p>五分钟，数据+图表全出来。</p>
+<blockquote>一个代理人如果能用数据说话——你跟客户聊的时候，底气完全不一样。</blockquote>
+
+<h3>场景五：法规判例搜索</h3>
+<p>保险法、司法解释、各地法院判例——这些东西散落在十几个网站里。Claude Code 可以联网搜索，然后自动汇总、分类、生成简报。</p>
+<p>比如："搜索 2025-2026 年关于'既往症''如实告知义务'的保险合同纠纷判例，提取案号、争议焦点、法院认定、判决结果。输出表格。"</p>
+<p>以前干这个活得一下午。现在十分钟。</p>
+
+<!-- 配图：5场景速览 -->
+<div class="illu-card" id="illu-1" style="padding:32px 28px;background:#F7F9FC;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif">
+<h2 style="font-size:20px;font-weight:500;font-family:'Noto Serif SC','Songti SC',serif;color:#102542;margin:0 0 8px;border:none;padding:0">Claude Code × 保险：5 个场景</h2>
+<p style="font-size:13px;color:#86909C;margin:0 0 20px;letter-spacing:.10em">从聊天到干活——AI Agent 的保险实战</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="background:#FFF;border-radius:8px;padding:14px;border-left:4px solid #F77F00"><div style="font-size:15px;font-weight:500;color:#102542;margin-bottom:4px">📄 批量提取</div><div style="font-size:12px;color:#86909C">上百页 PDF → 一张结构化表格</div></div>
+<div style="background:#FFF;border-radius:8px;padding:14px;border-left:4px solid #102542"><div style="font-size:15px;font-weight:500;color:#102542;margin-bottom:4px">⚖️ 条款对比</div><div style="font-size:12px;color:#86909C">两份保单 → 差异表 + 优劣标注</div></div>
+<div style="background:#FFF;border-radius:8px;padding:14px;border-left:4px solid #0A1931"><div style="font-size:15px;font-weight:500;color:#102542;margin-bottom:4px">✍️ 写文章</div><div style="font-size:12px;color:#86909C">素材+大纲 → 初稿 → 人工审校</div></div>
+<div style="background:#FFF;border-radius:8px;padding:14px;border-left:4px solid #86909C"><div style="font-size:15px;font-weight:500;color:#102542;margin-bottom:4px">📊 数据分析</div><div style="font-size:12px;color:#86909C">脱敏案件 → 统计+图表</div></div>
+</div>
+<div style="background:#FFF;border-radius:8px;padding:14px;border-left:4px solid #F77F00;margin-top:10px"><div style="font-size:15px;font-weight:500;color:#102542;margin-bottom:4px">🔍 判例搜索</div><div style="font-size:12px;color:#86909C">联网搜索 → 自动汇总 → 结构化简报</div></div>
+<p style="text-align:center;margin:14px 0 0;font-size:13px;color:#102542;font-weight:500">从"问一句答一句"到"你说目标，它自己干完"</p>
+</div>
+
+<hr>
+
+<h2>怎么开始</h2>
+<p>不需要会写代码。Claude Code 你用自然语言就能操作。</p>
+<p>第一步：装好 Claude Code（网上有教程，十分钟）。</p>
+<p>第二步：从一件事开始。不要上来就想"全面改造工作流"。就挑一个场景——比如"帮我对比两份保单"——试一次。</p>
+<p>第三步：试完你会发现——原来不是你用不上 AI。是你之前用的 AI 工具，形态不对。</p>
+<blockquote>聊天窗口让你觉得 AI 只能聊天。Agent 让你意识到，AI 能干活的。</blockquote>
+
+<h2>一个提醒</h2>
+<p>Claude Code 能读文件、能写文件、能执行命令——这既是它的强项，也是你要注意的地方。</p>
+<p>回到那三条红线：<strong>数据先脱敏、决策你来下、AI 输出的东西先审核。</strong></p>
+<blockquote>Agent 帮你省的是"做"的时间。不是"判断"的责任。</blockquote>
+
+<hr>
+<p style="color:#86909C;font-size:15px">你在用什么工具辅助业务？有没有试过 AI Agent？私我聊聊，我可以帮你看看哪些活适合交给它干。</p>
+<div class="footer"><p>📥 配图下载：打开 <a href="Claude-Code怎么用在保险场景里_配图下载.html">配图下载页</a> 下载 PNG</p></div>
+</body></html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配图下载</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #F5F6F8; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; padding: 40px 20px; max-width: 700px; margin: 0 auto; }
+h1 { font-size: 20px; color: #102542; margin-bottom: 24px; text-align: center; }
+.card-wrap { margin: 0 auto 40px; }
+.card { width: 100%; max-width: 640px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.download-btn { display: block; width: 100%; max-width: 640px; padding: 10px; margin-top: 8px; background: #102542; color: #fff; border: none; border-radius: 6px; font-size: 14px; font-family: inherit; cursor: pointer; }
+.download-btn:hover { background: #1A3466; }
+/* Card content styles */
+.card-dark { background: linear-gradient(135deg, #0A1931 0%, #162D5A 100%); padding: 48px 40px; color: #fff; }
+.card-dark .num { font-size: 72px; font-weight: 800; color: #F77F00; line-height: 1; margin-bottom: 8px; }
+.card-dark .label { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.card-dark .desc { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.card-dark .sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 12px; }
+.card-compare { background: #fff; padding: 32px; }
+.card-compare h3 { font-size: 18px; font-weight: 700; color: #102542; margin-bottom: 16px; text-align: center; }
+.compare-row { display: flex; gap: 16px; }
+.compare-col { flex: 1; padding: 16px; border-radius: 8px; }
+.compare-col.l { background: #FFF3E8; }
+.compare-col.r { background: #E8F4F0; }
+.compare-col .cl { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.compare-col.l .cl { color: #B85C2E; }
+.compare-col.r .cl { color: #1A7A5C; }
+.compare-col p { font-size: 14px; color: #333; line-height: 1.6; }
+.card-warm { background: #F7F9FC; padding: 32px; border-left: 4px solid #F77F00; }
+.card-warm .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; background: rgba(247,127,0,0.1); color: #F77F00; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+.card-warm h3 { font-size: 18px; font-weight: 700; color: #102542; margin-bottom: 16px; }
+.card-warm .item { display: flex; align-items: flex-start; margin-bottom: 12px; }
+.card-warm .item:last-child { margin-bottom: 0; }
+.card-warm .item-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #102542; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; margin-right: 12px; }
+.card-warm .item-text { font-size: 15px; color: #1A1A1A; line-height: 1.6; padding-top: 3px; }
+.card-orange { background: #F7F9FC; padding: 32px; border-left: 4px solid #102542; }
+.card-orange .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; background: rgba(247,127,0,0.1); color: #F77F00; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+.card-orange h3 { font-size: 18px; font-weight: 700; color: #102542; margin-bottom: 16px; }
+.card-orange .item { display: flex; align-items: flex-start; margin-bottom: 12px; }
+.card-orange .item:last-child { margin-bottom: 0; }
+.card-orange .item-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #F77F00; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; margin-right: 12px; }
+.card-orange .item-text { font-size: 15px; color: #1A1A1A; line-height: 1.6; padding-top: 3px; }
+.card-quote { background: #102542; padding: 48px 40px; text-align: center; }
+.card-quote .qt { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.5; }
+.card-quote .qsub { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>配图卡片（共5张）</h1>
+
+<p style="text-align:center;color:#86909C;font-size:13px;margin-bottom:32px;">点击下载按钮导出 PNG</p>
+
+<!-- Card 1 -->
+<div class="card-wrap">
+<div class="card" id="illu-1-content">
+<div class="card-dark">
+<div class="num">3秒</div>
+<div class="label">完成健康告知</div>
+<div class="desc">人看一条健康告知平均需要 15-20 秒。<br>3秒完成只有一个解释：没看，直接点的确认。</div>
+<div class="sub">互联网投保告知流程的有效性争议</div>
+</div>
+</div>
+<button class="download-btn" onclick="downloadCard('illu-1-content', '配图-1-3秒告知')">下载 PNG</button>
+</div>
+
+<!-- Card 2 -->
+<div class="card-wrap">
+<div class="card" id="illu-2-content">
+<div class="card-compare">
+<h3>投保告知：线下 vs 互联网</h3>
+<div class="compare-row">
+<div class="compare-col l">
+<div class="cl">线下投保</div>
+<p>核保员当面询问<br>一问一答<br>全凭回忆，无记录</p>
+</div>
+<div class="compare-col r">
+<div class="cl">互联网投保</div>
+<p>弹窗勾选框<br>可跳过、无强制停留<br>每一步都有后台记录</p>
+</div>
+</div>
+</div>
+</div>
+<button class="download-btn" onclick="downloadCard('illu-2-content', '配图-2-线下vs互联网')">下载 PNG</button>
+</div>
+
+<!-- Card 3 -->
+<div class="card-wrap">
+<div class="card" id="illu-3-content">
+<div class="card-warm">
+<div class="tag">判断框架</div>
+<h3>互联网投保拒赔三个关键判断</h3>
+<div class="item">
+<div class="item-num">1</div>
+<div class="item-text"><strong>告知页面能跳过吗？</strong><br>能跳过 = 等于没告知</div>
+</div>
+<div class="item">
+<div class="item-num">2</div>
+<div class="item-text"><strong>告知问题具体还是概括？</strong><br>"其他"等概括性询问不产生告知义务</div>
+</div>
+<div class="item">
+<div class="item-num">3</div>
+<div class="item-text"><strong>客户到底知不知道？</strong><br>不知道需要告知 ≠ 故意隐瞒</div>
+</div>
+</div>
+</div>
+<button class="download-btn" onclick="downloadCard('illu-3-content', '配图-3-三个判断')">下载 PNG</button>
+</div>
+
+<!-- Card 4 -->
+<div class="card-wrap">
+<div class="card" id="illu-4-content">
+<div class="card-orange">
+<div class="tag">行动清单</div>
+<h3>遇到同类拒赔，做这三件事</h3>
+<div class="item">
+<div class="item-num">1</div>
+<div class="item-text"><strong>要投保流程截图</strong><br>看告知页面能不能跳过、有没有强制停留时间</div>
+</div>
+<div class="item">
+<div class="item-num">2</div>
+<div class="item-text"><strong>看拒赔通知书的措辞</strong><br>查同类案件法院怎么判</div>
+</div>
+<div class="item">
+<div class="item-num">3</div>
+<div class="item-text"><strong>先发函，别急着起诉</strong><br>附上截图和判例，有时不必走到诉讼</div>
+</div>
+</div>
+</div>
+<button class="download-btn" onclick="downloadCard('illu-4-content', '配图-4-三件事')">下载 PNG</button>
+</div>
+
+<!-- Card 5 -->
+<div class="card-wrap">
+<div class="card" id="illu-5-content">
+<div class="card-quote">
+<div class="qt">"能跳过的告知，<br>等于没告知"</div>
+<div class="qsub">——互联网投保拒赔的核心判断</div>
+</div>
+</div>
+<button class="download-btn" onclick="downloadCard('illu-5-content', '配图-5-金句')">下载 PNG</button>
+</div>
+
+<script>
+function downloadCard(id, name) {
+  var el = document.getElementById(id);
+  html2canvas(el, { scale: 2, useCORS: true, backgroundColor: null }).then(function(canvas) {
+    var link = document.createElement('a');
+    link.download = name + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+</script>
+</body>
+</html>

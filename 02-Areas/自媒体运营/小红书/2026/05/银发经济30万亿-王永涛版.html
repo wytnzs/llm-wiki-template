@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 银发经济30万亿（王永涛）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  /* Cover */
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 44px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-data {
+    border-left: 2px solid rgba(255,255,255,0.2);
+    padding: 10px 14px;
+    margin-top: 2px;
+  }
+  .cover-slide .cover-data p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.55;
+  }
+  .cover-slide .cover-data strong {
+    color: rgba(255,255,255,0.75);
+  }
+  .cover-slide .ip-line {
+    margin-top: 18px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1px;
+  }
+
+  /* Light content */
+  .content-light { background: #FFFFFF; }
+  .content-light .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+  .content-light .main-point {
+    font-size: 24px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .content-light .body-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+  }
+  .content-light .body-text strong {
+    color: #1A1A1A;
+  }
+  .content-light .insight-card {
+    background: #F5F6F8;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+  .content-light .insight-card p {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .content-light .insight-card strong { color: #1A1A1A; }
+
+  /* Dark content */
+  .content-dark { background: #1A1A1A; }
+  .content-dark .section-label { color: rgba(255,255,255,0.3); }
+  .content-dark .main-point { color: #FFF; }
+  .content-dark .body-text { color: rgba(255,255,255,0.65); }
+  .content-dark .body-text strong { color: #FFF; }
+  .content-dark .insight-card { background: rgba(255,255,255,0.04); }
+  .content-dark .insight-card p { color: rgba(255,255,255,0.55); }
+  .content-dark .insight-card strong { color: rgba(255,255,255,0.85); }
+  .content-dark .page-num { color: rgba(255,255,255,0.12); }
+
+  /* Point card */
+  .point-card {
+    background: #F5F6F8;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .point-card .pc-num {
+    font-size: 10px;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .point-card .pc-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .point-card .pc-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.45;
+  }
+  .content-dark .point-card { background: rgba(255,255,255,0.04); }
+  .content-dark .point-card .pc-title { color: #FFF; }
+  .content-dark .point-card .pc-desc { color: rgba(255,255,255,0.55); }
+
+  .cta-line {
+    margin-top: 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+  .cta-line strong { color: rgba(255,255,255,0.7); }
+
+  .big-number {
+    font-size: 48px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .big-number-label {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  .content-dark .big-number { color: #FFF; }
+  .content-dark .big-number-label { color: rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">银发经济30万亿<br>普通人的机会在哪</div>
+    <div class="cover-sub">不是开养老院，也不是卖保健品</div>
+    <div class="cover-tags">
+      <span class="tag">银发经济</span>
+      <span class="tag">保险</span>
+      <span class="tag">机会</span>
+    </div>
+    <div class="cover-data">
+      <p>60岁以上人口 <strong>3.23亿</strong>，占总人口 <strong>23%</strong>。每4个人里就有1个超过60岁。<br>2035年银发经济规模预计达 <strong>30万亿</strong>。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/7</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 数据 -->
+<div class="slide content-dark">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-label">先看清现实</div>
+    <div class="big-number" style="font-size:52px;">3.23亿</div>
+    <div class="big-number-label">60岁以上人口</div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;">
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:6px;padding:10px;text-align:center;">
+        <div style="font-size:20px;font-weight:900;color:#FFF;">23%</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.35);">占总人口</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border-radius:6px;padding:10px;text-align:center;">
+        <div style="font-size:20px;font-weight:900;color:#FFF;">30万亿</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.35);">2035年市场预测</div>
+      </div>
+    </div>
+    <div class="body-text">
+      银发经济确实是风口。但风口来了，普通人第一反应往往是去开养老院、卖保健品、做老年旅游——那些是资本的游戏。<br><br>
+      换个角度想：<strong>3.23亿老人，每个背后都是一个家庭。这些家庭最怕什么？</strong>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">2/7</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 真实需求 -->
+<div class="slide content-light">
+  <div class="content">
+    <div class="section-label">最痛的刚需</div>
+    <div class="main-point" style="font-size:22px;">怕生病拖垮全家</div>
+    <div class="body-text">
+      我做了5年内勤，见过太多这样的家庭：老人一生病，全家积蓄见底。<br><br>
+      2025年全国次均住院费用8,509元。对普通家庭来说，一次住院可能就是几个月的结余。如果是大病，几十万的开销足以拖垮一个家庭。<br><br>
+      不是因为没有保险——<strong>是因为保险没买对。</strong><br><br>
+      买的时候没人告诉他们什么赔什么不赔。结果真出事了才发现赔不了。这才是银发经济里最痛的需求，也是最缺专业服务的地方。
+    </div>
+    <div class="insight-card">
+      <p><strong>关键判断：</strong>这些家庭需要的不是又一个产品，是有人能帮他们把保险理清楚——买什么、怎么买、出了事怎么赔。</p>
+    </div>
+    <div class="page-num">3/7</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 三样东西 -->
+<div class="slide content-dark">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-label">普通人做这件事需要什么</div>
+    <div class="main-point" style="font-size:22px;margin-bottom:14px;">不用投钱，不用开公司<br>需要的是三样东西</div>
+
+    <div class="point-card">
+      <div class="pc-num">第一</div>
+      <div class="pc-title">懂保险规则</div>
+      <div class="pc-desc">不是卖产品的逻辑，是理赔的逻辑。知道什么能赔、什么不能赔、为什么。</div>
+    </div>
+    <div class="point-card">
+      <div class="pc-num">第二</div>
+      <div class="pc-title">能帮人排坑</div>
+      <div class="pc-desc">同样的医疗险，健康告知怎么写、医院怎么选、免责怎么看——这些细节决定一年后能不能赔到钱。</div>
+    </div>
+    <div class="point-card">
+      <div class="pc-num">第三</div>
+      <div class="pc-title">靠谱</div>
+      <div class="pc-desc">不以成交为目的，以帮人解决问题为目的。你做对的事，钱是自然来的结果。</div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">4/7</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 为什么我看到这个机会 -->
+<div class="slide content-light">
+  <div class="content">
+    <div class="section-label">我为什么说这个</div>
+    <div class="main-point" style="font-size:20px;">保险行业不缺卖产品的人<br>缺帮人把钱拿到手的人</div>
+    <div class="body-text" style="margin-top:10px;">
+      我学的保险，干的内勤，现在做理赔和AI工具。<br><br>
+      这些年最大的感受是：大部分人买保险的时候没人告诉他真话。业务员只管卖出去，理赔的时候出了问题，消费者自己扛。<br><br>
+      这中间的缺口，就是普通人的机会。<br><br>
+      <strong>不需要你跟大公司竞争，不需要你投钱建渠道。</strong>你只需要比大多数人更懂规则，然后帮一个家庭把保险整明白、帮一个老人把该赔的钱拿到。
+    </div>
+    <div class="insight-card">
+      <p>银发经济30万亿里，普通人的位置不是去造风口，是去填那些大公司够不着的小角落。</p>
+    </div>
+    <div class="page-num">5/7</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 总结 -->
+<div class="slide content-dark">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-label">总结</div>
+    <div class="main-point" style="font-size:22px;margin-bottom:14px;">银发经济最大的风口<br>不是产品，是信任</div>
+    <div class="body-text">
+      3.23亿老人。<br>
+      每个老人背后都是一个家庭。<br>
+      每个家庭都需要有人帮他们搞定保险这件事。<br><br>
+      <strong>这就是我能看到的，最实在的机会。</strong>
+    </div>
+    <div class="insight-card" style="margin-top:14px;">
+      <p>你不需要成为专家再开始——从帮一个人看明白一份保单开始，就够了。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">6/7</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title" style="font-size:38px;">帮一个人把保险弄明白<br>比卖给十个人更有价值</div>
+    <div class="cover-sub">保险真正的价值不在卖出去那一瞬间，在兑现那一刻。</div>
+    <div style="margin-top:22px;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7;">
+        如果你也在想怎么在这个方向入局，<br>可以私信聊聊，我把我看到的路数分享给你。
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">7/7</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '银发经济30万亿-王永涛.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保险人实战课程体系 长海报</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FFF8F0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    padding: 0;
+  }
+  #controls {
+    position: fixed;
+    top: 16px;
+    right: 24px;
+    z-index: 999;
+  }
+  #controls button {
+    background: #C85A35;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 2px 12px rgba(200,90,53,0.35);
+    transition: opacity 0.2s;
+  }
+  #controls button:hover { opacity: 0.9; }
+  #poster {
+    width: 750px;
+    background: #FFF8F0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    background: linear-gradient(135deg, #E07B53, #C85A35);
+    padding: 48px 44px 40px;
+    color: #fff;
+    text-align: center;
+  }
+  .hero-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 18px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .hero-sub {
+    font-size: 16px;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.14);
+    border-radius: 12px;
+    padding: 10px 20px;
+    min-width: 120px;
+  }
+  .hero-stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .hero-stat-label {
+    font-size: 12px;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+
+  /* ========== OVERVIEW BAR ========== */
+  .overview-bar {
+    background: #FFF5EB;
+    padding: 18px 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    font-size: 15px;
+    color: #3D1F12;
+  }
+  .overview-bar .num {
+    color: #C85A35;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  /* ========== SECTION TITLE ========== */
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #3D1F12;
+    padding: 0 44px;
+    margin-top: 36px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #3D1F12;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 2px 10px;
+    min-width: 28px;
+  }
+  .section-title .pill {
+    display: inline-block;
+    background: rgba(224,123,83,0.12);
+    color: #C85A35;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 2px 10px;
+    margin-left: auto;
+  }
+
+  /* ========== MODULE CARD ========== */
+  .module-card {
+    margin: 0 44px 20px;
+    background: #fff;
+    border-radius: 10px;
+    border-left: 4px solid #E07B53;
+    padding: 18px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+  .module-card .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .module-card .card-header .m-number {
+    background: #3D1F12;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 2px 10px;
+    min-width: 28px;
+    text-align: center;
+  }
+  .module-card .card-header h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #3D1F12;
+  }
+  .module-card .card-header .pill {
+    background: rgba(224,123,83,0.1);
+    color: #C85A35;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 2px 10px;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ========== SUB-MODULE ========== */
+  .sub-module {
+    margin-bottom: 10px;
+  }
+  .sub-module:last-child { margin-bottom: 0; }
+  .sub-module .sm-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3D1F12;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sub-module .sm-title .sm-num {
+    color: #C85A35;
+    font-weight: 700;
+    font-size: 12px;
+    min-width: 20px;
+  }
+  .sub-module .q-list {
+    padding-left: 26px;
+    list-style: none;
+  }
+  .sub-module .q-list li {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2px;
+    position: relative;
+    padding-left: 12px;
+  }
+  .sub-module .q-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: #C85A35;
+    font-weight: 700;
+  }
+
+  /* ========== 2-COL GRID ========== */
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .grid-2col .sub-card {
+    background: #FFF8F0;
+    border-radius: 8px;
+    padding: 12px;
+    border-left: 3px solid #E07B53;
+  }
+  .grid-2col .sub-card .sc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #3D1F12;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .grid-2col .sub-card .sc-desc {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* ========== DENSE ========== */
+  .sub-card-dense { padding: 10px 12px; }
+  .sub-card-dense .sc-title { font-size: 12px; margin-bottom: 3px; }
+  .sub-card-dense .sc-desc { font-size: 11px; }
+
+  /* ========== TAG FLOW ========== */
+  .tag-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag-flow .tag-item {
+    background: rgba(224,123,83,0.08);
+    color: #C85A35;
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ========== BOTTOM LINK ========== */
+  .module-more {
+    margin-top: 10px;
+    text-align: right;
+    font-size: 13px;
+    color: #C85A35;
+    font-weight: 600;
+    cursor: default;
+  }
+
+  /* ========== FOOTER ========== */
+  .poster-footer {
+    background: #3D1F12;
+    padding: 36px 44px 40px;
+    margin-top: 36px;
+    text-align: center;
+    color: #fff;
+  }
+  .poster-footer .footer-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .poster-footer .footer-sub {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .poster-footer .footer-cta {
+    display: inline-block;
+    background: #E07B53;
+    color: #fff;
+    border-radius: 24px;
+    padding: 12px 36px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .poster-footer .footer-qr-note {
+    margin-top: 16px;
+    font-size: 12px;
+    opacity: 0.6;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 760px) {
+    #poster { width: 100%; }
+    .hero { padding: 36px 20px 32px; }
+    .hero h1 { font-size: 26px; }
+    .overview-bar { padding: 14px 20px; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+    .section-title { padding: 0 20px; }
+    .module-card { margin: 0 16px 16px; padding: 14px; }
+    .poster-footer { padding: 28px 20px; }
+    #controls { right: 12px; top: 12px; }
+    #controls button { padding: 8px 16px; font-size: 13px; }
+  }
+  @media (max-width: 480px) {
+    .grid-2col { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: column; align-items: center; gap: 10px; }
+    .hero-stat { min-width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="controls">
+  <button onclick="downloadPoster()">下载海报 PNG</button>
+</div>
+
+<div id="poster">
+
+  <!-- ========== HERO ========== -->
+  <div class="hero">
+    <div class="hero-label">保险代理人·专属进阶课</div>
+    <h1>理赔维权 & 核保实务<br>全流程实战指南</h1>
+    <div class="hero-sub">
+      从理赔维权到核保实务，覆盖 130+ 真实拒赔场景<br>
+      27 个专题模块 × 150+ 实务问答，系统提升专业能力
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">7</div>
+        <div class="hero-stat-label">大系列课程</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">27</div>
+        <div class="hero-stat-label">专题模块</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">150+</div>
+        <div class="hero-stat-label">实务问答</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== OVERVIEW BAR ========== -->
+  <div class="overview-bar">
+    <span><span class="num">7</span> 大系列课程</span>
+    <span><span class="num">27</span> 专题模块</span>
+    <span><span class="num">150+</span> 实务问答</span>
+  </div>
+
+  <!-- ========== MODULE 1 ========== -->
+  <div class="section-title">
+    <span class="num-badge">1</span>
+    理赔维权系列
+    <span class="pill">26讲</span>
+  </div>
+  <div class="module-card">
+    <div class="card-header">
+      <span class="m-number">1</span>
+      <h3>理赔维权系列</h3>
+      <span class="pill">26讲</span>
+    </div>
+
+    <div class="grid-2col">
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">一、电动车事故拒赔维权</div>
+        <div class="sc-desc">骑未挂牌电动车上路摔伤能理赔吗？电动三轮车被认定为摩托车责任谁承担？法院为何一个判赔一个不判？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二、第三方侵权拒赔维权</div>
+        <div class="sc-desc">保险公司是否有权要求第三方先行赔付？第三方已赔付如何处理？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">三、医保卡外借拒赔维权</div>
+        <div class="sc-desc">医保卡被他人使用如何自证清白？外借购药后本人出险法院如何裁判？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">四、保单复效拒赔维权</div>
+        <div class="sc-desc">复效时填写健康问卷是否合理？脱保期间出险仍获赔的情形解析</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">五、肿瘤拒赔维权</div>
+        <div class="sc-desc">如何判断肿瘤良恶性？新旧重疾险恶性肿瘤定义核心差异。CIN被拒赔如何维权？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">六、先天性疾病与遗传性疾病拒赔维权</div>
+        <div class="sc-desc">哪些疾病属于保险意义上的先天性疾病？因先天性疾病被拒赔如何维权？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">七、重疾标准拒赔维权</div>
+        <div class="sc-desc">I型糖尿病未满足特定赔付条件——3个成功维权案例</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">八、不可抗辩条款拒赔维权</div>
+        <div class="sc-desc">短期医疗险能否适用两年不可抗辩条款？两年内出险两年后申请能获赔吗？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">九、受益人拒赔维权</div>
+        <div class="sc-desc">保单被强制执行时受益人可替代投保人吗？被保险人与受益人同时身故保险金如何分配？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十、离婚案件中保单归属认定与财产分割</div>
+        <div class="sc-desc">保险金属于个人财产还是夫妻共同财产？生存型保险会被纳入共同财产分割吗？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十一、多重责任竞合维权</div>
+        <div class="sc-desc">交通事故与工伤竞合如何计算赔偿？三险竞合赔付顺序如何确定？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十二、等待期内拒赔维权</div>
+        <div class="sc-desc">等待期内查出异常即遭拒赔如何反驳？检查异常≠确诊</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十三、承保决定前出险拒赔维权</div>
+        <div class="sc-desc">保险公司未出单客户已出事是否属于保险责任？符合承保条件但未出单能否获赔？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十四、治疗方式不符合条款约定拒赔维权</div>
+        <div class="sc-desc">微创手术被拒开胸才赔是否合理？格式条款直接认定无效的依据是什么？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十五、保险公司解除合同及拒赔时效限制维权</div>
+        <div class="sc-desc">查出未如实告知超30天才拒赔是否仍有权解除合同？未解除合同直接拒赔法院支持吗？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十六、复效等待期出险拒赔维权</div>
+        <div class="sc-desc">复效后等待期重新计算客户是否知情？两年不可抗辩从投保时还是复效时起算？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十七、诉讼时效相关拒赔维权</div>
+        <div class="sc-desc">出险两年后才申请理赔真的已超过诉讼时效吗？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十八、无效条款相关拒赔维权</div>
+        <div class="sc-desc">条款要求开颅才赔微创不算是否有效？紧急送医未就诊定点医院保险公司能拒赔吗？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">十九、如实告知相关拒赔维权</div>
+        <div class="sc-desc">乳腺增生未告知与乳腺癌有关联就一定拒赔吗？概括性问题未作答是否构成违反告知义务？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二十、身故原因不明的举证责任</div>
+        <div class="sc-desc">死因不明被拒意外险举证责任由谁承担？家属拒绝尸检保险公司可免赔吗？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二十一、保险人询问是告知义务的前提</div>
+        <div class="sc-desc">业务员代客户填写问卷出险后以未告知拒赔责任谁承担？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二十二、如何判断拒赔是否合理</div>
+        <div class="sc-desc">浅表性胃炎未告知与萎缩性胃炎是否为同一病症？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二十三、猝死被拒赔维权</div>
+        <div class="sc-desc">诊断书写'猝死'是否等同于疾病死亡？猝死属意外还是疾病——举证方法详解</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二十四、中暑被拒赔维权</div>
+        <div class="sc-desc">中暑被定义为疾病是否排除在意外险之外？条款未列明免责能以疾病为由拒赔吗？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二十五、高原反应被拒赔维权</div>
+        <div class="sc-desc">高原反应属'疾病'还是'意外'？可预见高原反应≠可预见死亡——如何区分？</div>
+      </div>
+      <div class="sub-card sub-card-dense">
+        <div class="sc-title">二十六、既往症拒赔维权</div>
+        <div class="sc-desc">既往症是医疗险专属概念吗重疾险中是否也存在？投保前有症状投保后确诊是否属既往症？</div>
+      </div>
+    </div>
+
+    <div class="module-more">+ 26个专题问题 ›</div>
+  </div>
+
+  <!-- ========== MODULE 2 ========== -->
+  <div class="section-title">
+    <span class="num-badge">2</span>
+    如实告知系列
+    <span class="pill">12讲</span>
+  </div>
+  <div class="module-card">
+    <div class="card-header">
+      <span class="m-number">2</span>
+      <h3>如实告知系列</h3>
+      <span class="pill">12讲</span>
+    </div>
+    <div class="tag-flow">
+      <span class="tag-item">提示与明确说明义务</span>
+      <span class="tag-item">无效条款识别与维权</span>
+      <span class="tag-item">询问方式的法律要求</span>
+      <span class="tag-item">概括性条款的认定与使用</span>
+      <span class="tag-item">告知义务的免除情形</span>
+      <span class="tag-item">告知的有效对象</span>
+      <span class="tag-item">职业告知</span>
+      <span class="tag-item">体检与告知义务的关系</span>
+      <span class="tag-item">病历主诉的证据效力</span>
+      <span class="tag-item">症状未告知的认定与应对</span>
+      <span class="tag-item">多家投保的告知要求</span>
+      <span class="tag-item">疾病未告知的处理</span>
+    </div>
+    <div class="module-more">+ 12个专题问题 ›</div>
+  </div>
+
+  <!-- ========== MODULE 3 ========== -->
+  <div class="section-title">
+    <span class="num-badge">3</span>
+    告知的艺术与理赔的技巧
+    <span class="pill">6讲</span>
+  </div>
+  <div class="module-card">
+    <div class="card-header">
+      <span class="m-number">3</span>
+      <h3>告知的艺术与理赔的技巧</h3>
+      <span class="pill">6讲</span>
+    </div>
+    <div class="grid-2col">
+      <div class="sub-card">
+        <div class="sc-title">1. 告知基础知识体系</div>
+        <div class="sc-desc">常见不知如何告知的场景梳理。告知的内容与范围、何时履行、法律后果、补救余地。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">2. 分险种逐条解读健康告知</div>
+        <div class="sc-desc">寿险/医疗险/重疾险健康告知逐条解读。智能核保机制。不同险种告知差异。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">3. 异常体检状况的告知处理</div>
+        <div class="sc-desc">体检提示"建议进一步检查/诊治/复查"如何应对？医保卡外借、流产等私密性经历如何告知？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">4. 理赔中对未如实告知的处理</div>
+        <div class="sc-desc">《保险法》第16条运用。赔付/拒赔/解约赔付/解约退费等不同处理结果。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">5. 未如实告知被拒赔的应对策略</div>
+        <div class="sc-desc">健康问询本身存在问题、未告知内容不足以影响承保结果、援引两年不可抗辩条款、保险公司未依法解除合同。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">6. 未如实告知拒赔常见问题处理</div>
+        <div class="sc-desc">两年不可抗辩条款的运用与不适用情形。概括性问询。医保卡外借被拒赔应对。</div>
+      </div>
+    </div>
+    <div class="module-more">+ 6个专题问题 ›</div>
+  </div>
+
+  <!-- ========== MODULE 4 ========== -->
+  <div class="section-title">
+    <span class="num-badge">4</span>
+    常见疾病的核保处理
+    <span class="pill">19讲</span>
+  </div>
+  <div class="module-card">
+    <div class="card-header">
+      <span class="m-number">4</span>
+      <h3>常见疾病的核保处理</h3>
+      <span class="pill">19讲</span>
+    </div>
+    <div class="grid-2col">
+      <div class="sub-card">
+        <div class="sc-title">1. 残疾人的核保处理</div>
+        <div class="sc-desc">残疾人群体保险可保性分析及核保实务操作要点。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">2. 肝胆脾胰肾B超异常</div>
+        <div class="sc-desc">脾大背后血液疾病风险。常见B超异常哪些可标准体？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">3. 高尿酸血症</div>
+        <div class="sc-desc">尿酸轻度偏高为何保费大幅上涨？肾脏风险逻辑。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">4. 高血压</div>
+        <div class="sc-desc">"见医生紧张"导致血压偏高如何应对？哪些高血压无需告知？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">5. 癫痫</div>
+        <div class="sc-desc">仅发作一次如何补救？智能核保秒拒如何通过人工复核？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">6. 甲状腺结节</div>
+        <div class="sc-desc">为何有人承保有人被终身除外？读懂B超"微小钙化"。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">7. 类风湿性关节炎</div>
+        <div class="sc-desc">为何寿险相对容易、重疾和医疗险困难？血沉和C反应蛋白判断窗口期。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">8. 卵圆孔未闭</div>
+        <div class="sc-desc">心脏"小洞"为何关联中风风险？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">9. 女性常见疾病</div>
+        <div class="sc-desc">宫颈糜烂、HPV阳性如何争取标准体？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">10. 妊娠期糖尿病/高血压</div>
+        <div class="sc-desc">产后12周最佳投保窗口期。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">11. 肾结石与肾囊肿</div>
+        <div class="sc-desc">一个标准体一个拒保的差异关键。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">12. 糖尿病</div>
+        <div class="sc-desc">未服药、自我感觉健康为何被拒保？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">13. 胃炎</div>
+        <div class="sc-desc">同为胃炎为何有人标体有人拒保？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">14. 新生儿败血症/血小板减少性紫癜</div>
+        <div class="sc-desc">血小板计数降至多少是核保"死线"？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">15. 乙肝</div>
+        <div class="sc-desc">小三阳满足哪两个隐性条件可争取标准体？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">16. 抑郁症</div>
+        <div class="sc-desc">"感觉良好"就能投保吗？复发风险与自杀风险防御。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">17. 早产儿及孕妇</div>
+        <div class="sc-desc">满月即可投保吗？忽视3项关键指标将徒劳无功。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">18. 乳腺结节与纤维腺瘤</div>
+        <div class="sc-desc">BI-RADS 2级竟是标准体？BI-RADS 3级如何争取标体？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">19. 其他常见异常</div>
+        <div class="sc-desc">痔疮、心率超100、触诊正常为何仍需加做超声？</div>
+      </div>
+    </div>
+    <div class="module-more">+ 19个专题问题 ›</div>
+  </div>
+
+  <!-- ========== MODULE 5 ========== -->
+  <div class="section-title">
+    <span class="num-badge">5</span>
+    体检异常与核保
+    <span class="pill">5讲</span>
+  </div>
+  <div class="module-card">
+    <div class="card-header">
+      <span class="m-number">5</span>
+      <h3>体检异常与核保</h3>
+      <span class="pill">5讲</span>
+    </div>
+    <div class="grid-2col">
+      <div class="sub-card">
+        <div class="sc-title">1. 尿常规异常与核保</div>
+        <div class="sc-desc">尿潜血不同人群差异逻辑。尿蛋白阳性的多种可能性。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">2. 女性专项体检异常与核保</div>
+        <div class="sc-desc">TCT报告"ASC-US"代表什么？CIN术后能否购买重疾险？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">3. 综合体检异常与核保</div>
+        <div class="sc-desc">痔疮——重疾能过医疗险为何除外？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">4. 心电图异常与核保</div>
+        <div class="sc-desc">右束支传导阻滞——有人承保有人延期。发病期能否投保？</div>
+      </div>
+      <div class="sub-card" style="grid-column: span 2;">
+        <div class="sc-title">5. 血常规异常与核保</div>
+        <div class="sc-desc">缺铁性贫血降至多少触发延期线？血小板异常的风险信号。</div>
+      </div>
+    </div>
+    <div class="module-more">+ 5个专题问题 ›</div>
+  </div>
+
+  <!-- ========== MODULE 6 ========== -->
+  <div class="section-title">
+    <span class="num-badge">6</span>
+    交通事故系列
+    <span class="pill">8讲</span>
+  </div>
+  <div class="module-card">
+    <div class="card-header">
+      <span class="m-number">6</span>
+      <h3>交通事故系列</h3>
+      <span class="pill">8讲</span>
+    </div>
+    <div class="grid-2col">
+      <div class="sub-card">
+        <div class="sc-title">1. 交通事故与赔偿责任</div>
+        <div class="sc-desc">责任划分的五种结果及赔偿比例。区分责任划分与赔偿比例。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">2. 交警部门办事</div>
+        <div class="sc-desc">可索要哪些"三证一单"？扣车条件与时限。申请法院查封的时机。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">3. 住院治疗</div>
+        <div class="sc-desc">病历本和发票的重要性。出院需复印哪些资料？</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">4. 伤残鉴定</div>
+        <div class="sc-desc">三种鉴定标准及适用场景。鉴定时机的选择。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">5. 赔偿项目</div>
+        <div class="sc-desc">法定赔偿项目清单。残疾赔偿金分龄计算方式。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">6. 如何和解与如何打官司</div>
+        <div class="sc-desc">和解的五种途径。诉讼的审理时间和常见错误。诉讼时效与管辖法院选择。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">7. 诉讼时效与管辖法院选择</div>
+        <div class="sc-desc">诉讼时效的计算方式及中断情形。管辖法院的选择策略。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">8. 如何选择律师</div>
+        <div class="sc-desc">选择律师的常见错误。何时委托最有利？</div>
+      </div>
+    </div>
+    <div class="module-more">+ 8个专题问题 ›</div>
+  </div>
+
+  <!-- ========== MODULE 7 ========== -->
+  <div class="section-title">
+    <span class="num-badge">7</span>
+    其他专项课程
+    <span class="pill">5讲</span>
+  </div>
+  <div class="module-card">
+    <div class="card-header">
+      <span class="m-number">7</span>
+      <h3>其他专项课程</h3>
+      <span class="pill">5讲</span>
+    </div>
+    <div class="grid-2col">
+      <div class="sub-card">
+        <div class="sc-title">1. 销售误导与维权</div>
+        <div class="sc-desc">什么是保险销售误导？涵盖的具体情形。法院认定标准。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">2. 视频号定位与爆款选题</div>
+        <div class="sc-desc">定位黄金三角。变现框架设计（19.9元到百万级产品矩阵）。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">3. 工伤认定及赔偿</div>
+        <div class="sc-desc">14个实务问题覆盖工伤认定、医疗费用报销、待遇计算、48小时死亡等。</div>
+      </div>
+      <div class="sub-card">
+        <div class="sc-title">4. 交通事故处理与住院注意事项</div>
+        <div class="sc-desc">病历书写如何直接影响赔偿？出院前必须完成的几件事。</div>
+      </div>
+      <div class="sub-card" style="grid-column: span 2;">
+        <div class="sc-title">5. 雇主责任险拒赔维权</div>
+        <div class="sc-desc">员工未列入名单是否合理？24小时意外险非工作时间能否赔付？</div>
+      </div>
+    </div>
+    <div class="module-more">+ 5个专题问题 ›</div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <div class="poster-footer">
+    <div class="footer-title">保险人实战课程体系</div>
+    <div class="footer-sub">
+      系统掌握理赔维权与核保实务全流程<br>
+      从拒赔应对到承保决策，构建专业护城河
+    </div>
+    <div class="footer-cta">扫码咨询 · 立即报名</div>
+    <div class="footer-qr-note">长按识别二维码 · 获取完整课程大纲与试听链接</div>
+  </div>
+
+</div>
+
+<script>
+function downloadPoster() {
+  const poster = document.getElementById('poster');
+  const btn = document.querySelector('#controls button');
+  btn.disabled = true;
+  btn.textContent = '生成中…';
+  html2canvas(poster, {
+    scale: 2,
+    width: 750,
+    windowWidth: 750,
+    useCORS: true,
+    backgroundColor: '#FFF8F0',
+    logging: false
+  }).then(function(canvas) {
+    const link = document.createElement('a');
+    link.download = '保险人实战课程体系_长海报.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    link.remove();
+  }).catch(function(err) {
+    console.error(err);
+    alert('生成失败，请重试');
+  }).finally(function() {
+    btn.disabled = false;
+    btn.textContent = '下载海报 PNG';
+  });
+}
+</script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</body>
+</html>

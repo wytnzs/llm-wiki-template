@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; }
+  .combo {
+    display: flex;
+    width: 1283px;
+    height: 383px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .left {
+    width: 900px;
+    height: 383px;
+    background: linear-gradient(135deg, #0F4C5C 0%, #1A6B7C 50%, #0F4C5C 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .left::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+  }
+  .left::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    bottom: -150px;
+    left: -50px;
+  }
+  .left-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 40px;
+  }
+  .main-title {
+    font-size: 56px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .sub-title {
+    font-size: 22px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 16px;
+    font-weight: 400;
+  }
+  .tags {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 28px;
+  }
+  .tag {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+  }
+  .right {
+    width: 383px;
+    height: 383px;
+    background: linear-gradient(160deg, #1A237E 0%, #3949AB 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+  }
+  .right-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+<div class="combo">
+  <div class="left">
+    <div class="left-content">
+      <div class="main-title">保险自媒体，越来越像了</div>
+      <div class="sub-title">9月30日之后，逻辑要变回来了</div>
+      <div class="tags">
+        <span class="tag">内容合规</span>
+        <span class="tag">2026年9月30日施行</span>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="right-title">保险自媒体<br>新规解读</div>
+  </div>
+</div>
+</body>
+</html>

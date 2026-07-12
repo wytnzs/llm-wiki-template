@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配图下载 - 知识库不应该是你的第二大脑，而是你的工厂</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #e5ebef; font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 32px 16px 60px; }
+.header { max-width: 677px; margin: 0 auto 28px; text-align: center; }
+.header h1 { font-size: 20px; font-weight: 500; font-family:'Noto Serif SC','Songti SC',serif; color: #0a1f3d; margin-bottom: 6px; letter-spacing:.02em; }
+.header p { font-size: 14px; color: #5f6d78; }
+.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+.illu-download-btn { position: absolute; top: 10px; right: 10px; z-index: 10; background: rgba(255,255,255,0.9); border: 1px solid #CBD5E0; border-radius: 6px; padding: 5px 14px; font-size: 13px; cursor: pointer; color: #4A5568; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.4; font-weight: 600; }
+.illu-download-btn:hover { background: #FFFFFF; border-color: #F77F00; color: #F77F00; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📥 配图下载</h1>
+  <p>知识库不应该是你的第二大脑，而是你的工厂 · 共 3 张 · 点击每张右上角按钮下载 PNG</p>
+</div>
+
+<!-- 配图1：三种认知对比 -->
+<div class="illu-card" id="illu-1" style="padding: 32px 28px; background: #0a1f3d; color:#FFFFFF; font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-1', '三种认知三种结果')">⬇</button>
+  <h2 style="font-size:20px; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif; color:#FFFFFF; margin:0 0 8px 0; border:none; padding:0; letter-spacing:.02em;">三种认知，三种结果</h2>
+  <p style="font-size:13px; color:rgba(255,255,255,0.5); margin:0 0 20px 0; font-family:'IBM Plex Mono',monospace; letter-spacing:.10em; text-transform:uppercase;">KNOWLEDGE BASE PARADIGM</p>
+  <div style="display:flex; gap:12px;">
+    <div style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:16px 12px; text-align:center;">
+      <div style="font-size:28px; margin-bottom:6px;">📦</div>
+      <div style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.6); margin-bottom:8px;">仓库</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.5;">收集→分类→保存<br>越存越累</div>
+    </div>
+    <div style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:16px 12px; text-align:center;">
+      <div style="font-size:28px; margin-bottom:6px;">🧠</div>
+      <div style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.6); margin-bottom:8px;">第二大脑</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.5;">只记不加工<br>越记越乱</div>
+    </div>
+    <div style="flex:1; background:rgba(49,93,147,0.15); border:1px solid rgba(49,93,147,0.3); border-radius:8px; padding:16px 12px; text-align:center;">
+      <div style="font-size:28px; margin-bottom:6px;">🏭</div>
+      <div style="font-size:15px; font-weight:600; color:#d7e1ec; margin-bottom:8px;">工厂</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.85); line-height:1.5;">输入→加工→产出<br>越产越多</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#d7e1ec; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif;">定位决定结果——你的知识库是仓库、大脑、还是工厂？</p>
+</div>
+
+<!-- 配图2：五层生产线 -->
+<div class="illu-card" id="illu-2" style="padding: 32px 28px; background: #f2f4f5; font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-2', '五层知识生产线')">⬇</button>
+  <h2 style="font-size:20px; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif; color:#0a1f3d; margin:0 0 8px 0; border:none; padding:0; letter-spacing:.02em;">五层知识生产线</h2>
+  <p style="font-size:13px; color:#5f6d78; margin:0 0 24px 0; font-family:'IBM Plex Mono',monospace; letter-spacing:.10em; text-transform:uppercase;">FROM INPUT TO OUTPUT</p>
+  <div style="display:flex; align-items:flex-start; gap:0;">
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#315d93; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; font-family:'IBM Plex Mono',monospace;">01</div>
+      <div style="font-size:14px; font-weight:500; color:#0a1f3d; margin-bottom:4px; line-height:1.4; font-family:'Noto Serif SC','Songti SC',serif;">输入层</div>
+      <div style="font-size:11px; color:#5f6d78; line-height:1.5;">Inbox<br>收集碎片</div>
+    </div>
+    <div style="display:flex; align-items:center; flex-shrink:0; width:36px; padding-top:20px;">
+      <div style="flex:1; height:1.5px; background:#e5ebef; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #315d93;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#315d93; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; font-family:'IBM Plex Mono',monospace;">02</div>
+      <div style="font-size:14px; font-weight:500; color:#0a1f3d; margin-bottom:4px; line-height:1.4; font-family:'Noto Serif SC','Songti SC',serif;">资产层</div>
+      <div style="font-size:11px; color:#5f6d78; line-height:1.5;">卡片·案例<br>主题地图</div>
+    </div>
+    <div style="display:flex; align-items:center; flex-shrink:0; width:36px; padding-top:20px;">
+      <div style="flex:1; height:1.5px; background:#e5ebef; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #315d93;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#315d93; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; font-family:'IBM Plex Mono',monospace;">03</div>
+      <div style="font-size:14px; font-weight:500; color:#0a1f3d; margin-bottom:4px; line-height:1.4; font-family:'Noto Serif SC','Songti SC',serif;">项目层</div>
+      <div style="font-size:11px; color:#5f6d78; line-height:1.5;">当前任务<br>内容生产</div>
+    </div>
+    <div style="display:flex; align-items:center; flex-shrink:0; width:36px; padding-top:20px;">
+      <div style="flex:1; height:1.5px; background:#e5ebef; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#F77F00; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; font-family:'IBM Plex Mono',monospace;">04</div>
+      <div style="font-size:14px; font-weight:500; color:#0a1f3d; margin-bottom:4px; line-height:1.4; font-family:'Noto Serif SC','Songti SC',serif;">输出层</div>
+      <div style="font-size:11px; color:#5f6d78; line-height:1.5;">文章·视频<br>课程·方案</div>
+    </div>
+    <div style="display:flex; align-items:center; flex-shrink:0; width:36px; padding-top:20px;">
+      <div style="flex:1; height:1.5px; background:#e5ebef; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#0a1f3d; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; font-family:'IBM Plex Mono',monospace;">05</div>
+      <div style="font-size:14px; font-weight:500; color:#0a1f3d; margin-bottom:4px; line-height:1.4; font-family:'Noto Serif SC','Songti SC',serif;">反馈层</div>
+      <div style="font-size:11px; color:#5f6d78; line-height:1.5;">复盘反哺<br>迭代升级</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:14px; color:#0a1f3d; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif;">没有输出和复盘，前面三层就是仓库</p>
+</div>
+
+<!-- 配图3：三步闭环 -->
+<div class="illu-card" id="illu-3" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #e5ebef; font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-3', '三步最小闭环')">⬇</button>
+  <h2 style="font-size:20px; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif; color:#0a1f3d; margin:0 0 8px 0; border:none; padding:0; letter-spacing:.02em;">从今天开始的三步闭环</h2>
+  <p style="font-size:13px; color:#5f6d78; margin:0 0 20px 0; font-family:'IBM Plex Mono',monospace; letter-spacing:.10em; text-transform:uppercase;">MINIMUM VIABLE WORKFLOW</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div style="background:#f2f4f5; border-radius:8px; padding:18px 16px; border-left:4px solid #315d93;">
+      <div style="font-size:24px; font-weight:500; color:#315d93; margin-bottom:2px; line-height:1.2; font-family:'Noto Serif SC','Songti SC',serif;">01</div>
+      <div style="font-size:15px; font-weight:500; color:#0a1f3d; margin-bottom:4px; font-family:'Noto Serif SC','Songti SC',serif;">记一下</div>
+      <div style="font-size:12px; color:#5f6d78; line-height:1.6;">想法、案例、问题，随手记到 Inbox。不分轻重，先收再说。</div>
+    </div>
+    <div style="background:#f2f4f5; border-radius:8px; padding:18px 16px; border-left:4px solid #315d93;">
+      <div style="font-size:24px; font-weight:500; color:#315d93; margin-bottom:2px; line-height:1.2; font-family:'Noto Serif SC','Songti SC',serif;">02</div>
+      <div style="font-size:15px; font-weight:500; color:#0a1f3d; margin-bottom:4px; font-family:'Noto Serif SC','Songti SC',serif;">每周提炼</div>
+      <div style="font-size:12px; color:#5f6d78; line-height:1.6;">从 Inbox 挑最有价值的，写成知识卡片。一张卡片只讲一个概念。</div>
+    </div>
+    <div style="background:#f2f4f5; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:500; color:#F77F00; margin-bottom:2px; line-height:1.2; font-family:'Noto Serif SC','Songti SC',serif;">03</div>
+      <div style="font-size:15px; font-weight:500; color:#0a1f3d; margin-bottom:4px; font-family:'Noto Serif SC','Songti SC',serif;">每月输出</div>
+      <div style="font-size:12px; color:#5f6d78; line-height:1.6;">从卡片组合成文章、视频或朋友圈。有了产出，系统才会自动生长。</div>
+    </div>
+    <div style="background:#f2f4f5; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:500; color:#F77F00; margin-bottom:2px; line-height:1.2; font-family:'Noto Serif SC','Songti SC',serif;">↻</div>
+      <div style="font-size:15px; font-weight:500; color:#0a1f3d; margin-bottom:4px; font-family:'Noto Serif SC','Songti SC',serif;">循环</div>
+      <div style="font-size:12px; color:#5f6d78; line-height:1.6;">输出中发现缺口，回头补充卡片。卡片多了，自然有更多选题。</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#0a1f3d; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif;">跑通了再加主题地图、案例库、Skill</p>
+</div>
+
+<p style="text-align:center; max-width:677px; margin:32px auto 0; font-size:13px; color:#5f6d78;">
+  打开预览 HTML 确认位置，在本页下载 PNG → 上传到公众号图片库 → 回到预览页全选复制正文粘贴
+</p>
+
+<script>
+function downloadCard(elementId, filename) {
+  var el = document.getElementById(elementId);
+  if (!el) return;
+  var btn = el.querySelector('.illu-download-btn');
+  if (btn) btn.style.display = 'none';
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = (filename || '配图') + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      if (btn) btn.style.display = '';
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); if (btn) btn.style.display = ''; });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>做一个保险AI工具的实际成本</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#FFF;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:677px;margin:0 auto;padding:20px 16px;font-size:16px;line-height:1.8;color:#1A1A1A}h1{font-size:24px;font-weight:800;color:#102542;margin:24px 0 12px}h2{font-size:19px;font-weight:700;color:#102542;border-left:4px solid #F77F00;padding-left:12px;margin:20px 0 10px}h3{font-size:17px;font-weight:700;color:#0A1931;margin:16px 0 8px}p{margin:0 0 12px}strong{color:#0A1931}blockquote{border-left:3px solid #F77F00;background:#F7F9FC;padding:12px 16px;margin:16px 0;color:#4A4A4A;border-radius:0 4px 4px 0;font-size:15px}table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px}th{background:#102542;color:#FFF;padding:10px 12px;text-align:left;font-weight:600}td{padding:10px 12px;border-bottom:1px solid #E5EAF2}tr:nth-child(even) td{background:#F7F9FC}hr{border:none;border-top:1px solid #E5EAF2;margin:24px 0}.footer{margin-top:32px;padding-top:16px;border-top:1px solid #E5EAF2;font-size:14px;color:#86909C}.footer a{color:#F77F00;text-decoration:none}.illu-card{position:relative;width:100%;max-width:677px;margin:24px auto;border-radius:12px;overflow:hidden;box-sizing:border-box}</style></head><body>
+
+<p>经常有人问我：你做的那些工具，花了多少钱？</p>
+<p>拒赔维权分析、伤残鉴定预估、家庭财务分析——听起来像是要一个团队干半年。实际上，三个工具加在一起，花了几千块。时间加起来不到三个月。一个人。</p>
+<p><strong>这篇文章把成本全拆开。如果你想自己做工具，可以当预算参考。</strong></p>
+<hr>
+<h2>三个工具，花了多少</h2>
+<table><tr><th>工具</th><th>开发时间</th><th>现金成本</th><th>核心能力</th></tr>
+<tr><td>拒赔维权分析</td><td>~4 周</td><td>约 800 元</td><td>输入拒赔通知书+保单 → 输出抗辩要点</td></tr>
+<tr><td>交通事故伤残鉴定</td><td>~3 周</td><td>约 600 元</td><td>输入伤情+事故描述 → 输出等级预估+赔偿区间</td></tr>
+<tr><td>家庭财务分析</td><td>~2 周</td><td>约 300 元</td><td>输入收支资产 → 输出保障缺口</td></tr></table>
+<p><strong>总计：约 9 周，1700 元。</strong></p>
+<hr>
+<h2>钱花在哪了</h2>
+<p><strong>大模型 API 调用费（最大头）</strong>：DeepSeek API 开发阶段反复测试约 1000 块。上线后一个请求 0.3-0.8 元，用户量没起来之前一个月几十块。</p>
+<blockquote>大模型 API 是最大的开支。但选对模型，成本可控。DeepSeek 的性价比目前没有对手。</blockquote>
+<p><strong>服务器和域名</strong>：Cloudflare Worker 免费额度够用。域名一年几十块。基本可以忽略。</p>
+<p><strong>数据采购</strong>：伤残鉴定工具买《人体损伤致残程度分级》完整数据和各地赔偿标准表，花了 500 块。其他两个工具用的公开数据——免费。</p>
+<p><strong>设计和其他</strong>：没花钱。工具界面就是表单+结果展示，不需要设计。</p>
+<hr>
+<h2>时间花在哪了</h2>
+<div class="illu-card" id="illu-1" style="padding:32px 28px;background:#F7F9FC;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif"><h2 style="font-size:20px;font-weight:500;font-family:'Noto Serif SC','Songti SC',serif;color:#102542;margin:0 0 8px;border:none;padding:0">时间分配：钱不是最大成本，时间才是</h2><p style="font-size:13px;color:#86909C;margin:0 0 20px;letter-spacing:.10em">9 周开发时间，花在哪了</p><div style="display:flex;align-items:flex-end;gap:16px;justify-content:center;height:160px;padding-bottom:8px"><div style="flex:1;max-width:100px;text-align:center"><div style="font-size:18px;font-weight:900;color:#F77F00;margin-bottom:4px">30%</div><div style="height:72px;background:linear-gradient(180deg,#F77F00 0%,rgba(247,127,0,0.15) 100%);border-radius:6px 6px 0 0;width:100%"></div><div style="font-size:12px;font-weight:600;color:#102542;margin-top:8px">搭原型</div></div><div style="flex:1;max-width:100px;text-align:center"><div style="font-size:18px;font-weight:900;color:#102542;margin-bottom:4px">40%</div><div style="height:96px;background:linear-gradient(180deg,#102542 0%,rgba(16,37,66,0.15) 100%);border-radius:6px 6px 0 0;width:100%"></div><div style="font-size:12px;font-weight:600;color:#102542;margin-top:8px">调效果</div></div><div style="flex:1;max-width:100px;text-align:center"><div style="font-size:18px;font-weight:900;color:#0A1931;margin-bottom:4px">20%</div><div style="height:48px;background:linear-gradient(180deg,#0A1931 0%,rgba(10,25,49,0.15) 100%);border-radius:6px 6px 0 0;width:100%"></div><div style="font-size:12px;font-weight:600;color:#102542;margin-top:8px">找人试</div></div><div style="flex:1;max-width:100px;text-align:center"><div style="font-size:18px;font-weight:900;color:#86909C;margin-bottom:4px">10%</div><div style="height:24px;background:linear-gradient(180deg,#86909C 0%,rgba(134,144,156,0.15) 100%);border-radius:6px 6px 0 0;width:100%"></div><div style="font-size:12px;font-weight:600;color:#102542;margin-top:8px">文档</div></div></div><p style="text-align:center;margin:14px 0 0;font-size:13px;color:#102542;font-weight:500">做工具最难的不是"做出来"。是"做到能用"。</p></div>
+
+<p><strong>第一阶段：搭原型（30%）</strong>——Claude Code 2-3 天搭出能跑的原型。不会写代码也能做。<br>
+<strong>第二阶段：调效果（40%）</strong>——最花时间。反复改提示词框架、补数据、跑测试用例。没有捷径。<br>
+<strong>第三阶段：找人试（20%）</strong>——他们的吐槽比点赞值钱一百倍。<br>
+<strong>第四阶段：文档（10%）</strong>——再好的工具，没人知道怎么用，等于没做。</p>
+<hr>
+<h2>你的第一个工具，怎么开始</h2>
+<p><strong>第一步</strong>：选一个你每周至少遇到三次的问题。别想做"万能工具"。<br><strong>第二步</strong>：先用现有 AI 试。看看能不能答。能答但不够好——说明缺的是场景框架和数据。这就是你的切入点。<br><strong>第三步</strong>：搭一个最简原型。让 Claude Code 帮你写。<br><strong>第四步</strong>：找 5 个人试。别找夸你的人。</p>
+<blockquote>第一个工具的目标不是"好用"。是"能跑"。能跑之后，迭代才是真正的开发。</blockquote>
+<hr>
+<h2>值不值</h2>
+<p>一个工具帮 100 个人，一个人省 30 分钟——就是 3000 分钟。我花 9 周换 3000 分钟，值。而且工具是资产。你做完了，它就是你的。明年还在用，后面还在用。</p>
+<blockquote>理赔帮一个人。工具帮一群人。这就是我为什么一直在做。</blockquote>
+<hr>
+<p style="color:#86909C;font-size:15px">你有没有想做的工具？或者有什么重复性的活想看看能不能用 AI 替？私我，帮你看看怎么入手。</p>
+<div class="footer"><p>📥 配图下载：打开 <a href="做一个保险AI工具的实际成本_配图下载.html">配图下载页</a> 下载 PNG</p></div>
+</body></html>

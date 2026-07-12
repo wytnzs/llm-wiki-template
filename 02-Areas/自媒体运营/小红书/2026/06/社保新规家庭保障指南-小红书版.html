@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="kraft-paper">
+<head>
+  <meta charset="utf-8">
+  <title>社保新规 · 30+家庭医疗保障补充指南 · 小红书 Social Card</title>
+  <meta name="viewport" content="width=1080">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    /* =========================================================
+       Editorial Magazine × E-ink — 小红书 3:4 Card
+       Theme: kraft-paper — warm, personal, handwritten feel
+       ========================================================= */
+
+    /* ---------- 1. Theme tokens ---------- */
+    :root,
+    [data-theme="kraft-paper"] {
+      --paper:     #eedfc7;
+      --paper-2:   #dfc9a8;
+      --ink:       #2a1e13;
+      --muted:     #755f49;
+      --line:      rgba(42,30,19,.24);
+      --accent:    #9b5a2e;
+      --accent-soft: #d5b58f;
+      --ink-rgb: 42,30,19;
+      --paper-rgb: 238,223,199;
+      --accent-rgb: 155,90,46;
+    }
+
+    /* ---------- 2. Typography stack ---------- */
+    :root {
+      --serif-zh: "Noto Serif SC", "Songti SC", "STSong", serif;
+      --serif-en: "Playfair Display", "Noto Serif SC", serif;
+      --sans-zh: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei UI", sans-serif;
+      --sans-en: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+    }
+
+    /* ---------- 3. Reset & sheet ---------- */
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      font-family: var(--sans-zh);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding: 70px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sheet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    /* ---------- 4. Poster board ---------- */
+    .poster {
+      position: relative;
+      background: var(--paper);
+      color: var(--ink);
+      overflow: hidden;
+      isolation: isolate;
+      width: 1080px;
+      height: 1440px;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.24);
+    }
+    .poster figure { margin: 0; }
+    .poster .content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      padding: 96px 88px;
+    }
+
+    /* ---------- 5. Background layers ---------- */
+    .mag-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .grain {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .35;
+      mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(0,0,0,.045) 1px, transparent 1px);
+      background-size: 3px 3px;
+    }
+    .paper-wash {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(var(--ink-rgb),.02), rgba(var(--ink-rgb),.05) 60%, rgba(var(--ink-rgb),.08));
+    }
+
+    /* ---------- 6. Typography roles ---------- */
+    .kicker {
+      font-family: var(--mono);
+      font-size: 21px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(var(--ink-rgb), .55);
+      margin: 0 0 18px;
+    }
+    .h-display {
+      font-family: var(--serif-zh);
+      font-weight: 500;
+      font-size: 124px;
+      line-height: 1.06;
+      letter-spacing: .04em;
+      margin: 0 0 24px;
+      color: var(--ink);
+    }
+    .h-xl {
+      font-family: var(--serif-zh);
+      font-weight: 500;
+      font-size: 88px;
+      line-height: 1.10;
+      letter-spacing: .03em;
+      margin: 0 0 24px;
+      color: var(--ink);
+    }
+    .h-md {
+      font-family: var(--serif-zh);
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 1.18;
+      letter-spacing: .02em;
+      margin: 0 0 18px;
+      color: var(--ink);
+    }
+    .h-sub {
+      font-family: var(--serif-en);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 36px;
+      color: var(--muted);
+      margin: 0 0 24px;
+    }
+    .lead {
+      font-family: var(--serif-zh);
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.55;
+      color: rgba(var(--ink-rgb), .82);
+      margin: 0 0 24px;
+    }
+    .body {
+      font-family: var(--serif-zh);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.65;
+      color: rgba(var(--ink-rgb), .80);
+      margin: 0 0 18px;
+    }
+    .meta {
+      font-family: var(--mono);
+      font-size: 18px;
+      letter-spacing: .20em;
+      text-transform: uppercase;
+      color: rgba(var(--ink-rgb), .55);
+    }
+    .pullquote {
+      font-family: var(--serif-zh);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 1.28;
+      color: var(--ink);
+      margin: 0;
+    }
+    .num-big {
+      font-family: var(--serif-en);
+      font-weight: 500;
+      font-size: 160px;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -.02em;
+    }
+
+    /* ---------- 7. Issue label + metadata ---------- */
+    .issue-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 20px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .issue-row .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .issue-strip {
+      position: absolute;
+      left: 88px;
+      right: 88px;
+      bottom: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 18px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+    .issue-strip span { white-space: nowrap; }
+
+    /* ---------- 8. Layout primitives ---------- */
+    .stack    { display: flex; flex-direction: column; }
+    .gap-1    { gap: 12px; }
+    .gap-2    { gap: 24px; }
+    .gap-3    { gap: 36px; }
+    .gap-4    { gap: 48px; }
+    .gap-5    { gap: 64px; }
+    .row      { display: flex; flex-direction: row; }
+    .col-2    { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .col-3    { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+    .center   { text-align: center; }
+    .grow     { flex: 1; }
+    .rule     { height: 1px; background: var(--line); border: 0; margin: 24px 0; }
+    .rule-accent { height: 2px; background: var(--accent); border: 0; margin: 24px 0; width: 96px; }
+
+    /* ---------- 9. Editorial components ---------- */
+    .callout {
+      border-left: 3px solid var(--accent);
+      padding: 18px 28px;
+      font-family: var(--serif-zh);
+      font-style: italic;
+      font-size: 36px;
+      line-height: 1.35;
+      color: var(--ink);
+      background: var(--paper-2);
+    }
+    .callout .callout-src {
+      display: block;
+      margin-top: 18px;
+      font-style: normal;
+      font-family: var(--mono);
+      font-size: 20px;
+      letter-spacing: .12em;
+      color: var(--muted);
+    }
+    .ledger { display: flex; flex-direction: column; }
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .ledger-row .ledger-nb {
+      font-family: var(--mono);
+      font-size: 28px;
+      color: var(--accent);
+      letter-spacing: .08em;
+    }
+    .ledger-row .ledger-title {
+      font-family: var(--serif-zh);
+      font-weight: 500;
+      font-size: 42px;
+      letter-spacing: .02em;
+      color: var(--ink);
+    }
+    .ledger-row .ledger-note {
+      font-family: var(--serif-zh);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.55;
+      color: rgba(var(--ink-rgb), .72);
+    }
+    .marginalia {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 48px;
+    }
+    .marginalia .mg-col {
+      border-left: 1px solid var(--line);
+      padding-left: 24px;
+    }
+    .marginalia .mg-col p {
+      font-family: var(--mono);
+      font-size: 20px;
+      letter-spacing: .04em;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .pipeline-v { display: flex; flex-direction: column; gap: 28px; }
+    .pipeline-v .step {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 28px;
+      align-items: baseline;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .pipeline-v .step:last-child { border-bottom: 0; }
+    .pipeline-v .step-nb {
+      font-family: var(--mono);
+      font-size: 32px;
+      color: var(--accent);
+    }
+    .pipeline-v .step-title {
+      font-family: var(--serif-zh);
+      font-weight: 500;
+      font-size: 40px;
+      letter-spacing: .02em;
+      margin: 0 0 8px;
+    }
+    .pipeline-v .step-desc {
+      font-family: var(--serif-zh);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.6;
+      color: rgba(var(--ink-rgb), .72);
+      margin: 0;
+    }
+    .beforeafter {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 32px;
+      height: 100%;
+    }
+    .beforeafter .ba-block {
+      padding: 32px;
+      background: var(--paper-2);
+      border-left: 3px solid var(--accent);
+    }
+    .beforeafter .ba-block.before { opacity: .68; }
+    .ba-label {
+      font-family: var(--mono);
+      font-size: 20px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    /* ---------- 10. Frame image ---------- */
+    .frame-img {
+      position: relative;
+      overflow: hidden;
+      background: var(--paper-2);
+      display: block;
+      margin: 0;
+      border-radius: 6px;
+      box-shadow: 0 18px 36px -18px rgba(42,30,19,.22), 0 2px 6px rgba(42,30,19,.06);
+    }
+    .frame-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%;
+      display: block;
+    }
+    .frame-img.r-16x10 { aspect-ratio: 16 / 10; }
+    .frame-img.r-4x3   { aspect-ratio: 4 / 3; }
+
+    /* ---------- 11. Download toolbar ---------- */
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(26,26,26,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 54px;
+    }
+    .toolbar .btn {
+      background: #fff;
+      color: #1a1a1a;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      letter-spacing: .3px;
+      font-family: -apple-system, 'PingFang SC', sans-serif;
+    }
+    .toolbar .btn:hover {
+      opacity: .85;
+      transform: translateY(-1px);
+    }
+    .toolbar .btn.accent {
+      background: #9b5a2e;
+      color: #fff;
+    }
+    .toolbar .progress {
+      color: rgba(255,255,255,.35);
+      font-size: 12px;
+      font-weight: 500;
+      min-width: 120px;
+      text-align: center;
+      font-family: -apple-system, 'PingFang SC', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== TOOLBAR ========== -->
+  <div class="toolbar" id="toolbar">
+    <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+    <button class="btn" onclick="downloadOne()">下载当前</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <!-- ========== POSTER SHEET ========== -->
+  <main class="sheet">
+
+    <!-- ===== 01 · M01 封面 ===== -->
+    <section class="poster xhs" id="xhs-01">
+      <canvas class="mag-bg" data-bg="ink-flow"></canvas>
+      <div class="grain"></div>
+      <div class="paper-wash"></div>
+      <div class="content stack gap-4">
+        <div class="issue-row">
+          <span>社保专题</span><span class="dot"></span><span>2026.06</span>
+        </div>
+        <div class="stack gap-2 grow" style="justify-content:center;">
+          <h1 class="h-display">婆婆住院花8万<br>社保只报了4万</h1>
+          <p class="h-sub">30+家庭，你的保障缺口补上了吗？</p>
+        </div>
+        <p class="lead">前保司内勤 × AI三维法。<br>社保是底线，商保补缺口。看完不再为全家保障焦虑。</p>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>1 / 8</span>
+      </div>
+    </section>
+
+    <!-- ===== 02 · M10 col-2 社保新规改了什么 ===== -->
+    <section class="poster xhs" id="xhs-02">
+      <div class="grain"></div>
+      <div class="content stack gap-5">
+        <div class="stack gap-2">
+          <p class="kicker">社保新规</p>
+          <h2 class="h-xl">到底改了什么？</h2>
+        </div>
+        <div class="col-2">
+          <div class="stack gap-3" style="padding:32px;background:var(--paper-2);">
+            <p class="body" style="font-size:28px;font-weight:500;color:var(--ink);">好消息</p>
+            <p class="lead">门诊报销范围扩大</p>
+            <p class="lead">异地就医结算更方便</p>
+            <p class="body">头疼脑热小毛病，社保覆盖更好了。</p>
+          </div>
+          <div class="stack gap-3" style="padding:32px;background:var(--paper-2);">
+            <p class="body" style="font-size:28px;font-weight:500;color:var(--ink);">但别忽略</p>
+            <p class="lead">大病统筹起付线提高了</p>
+            <p class="lead">报销比例仍有地域差</p>
+            <p class="body">越贵的治疗项目，社保覆盖缺口反而越大。</p>
+          </div>
+        </div>
+        <div class="callout">
+          社保就像医院的基础门诊——能解决头疼脑热，但遇上靶向药、ICU，天花板就露出来了。
+        </div>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>2 / 8</span>
+      </div>
+    </section>
+
+    <!-- ===== 03 · M08 Field Ledger 社保五大缺口 ===== -->
+    <section class="poster xhs" id="xhs-03">
+      <div class="grain"></div>
+      <div class="content stack gap-4">
+        <div class="stack gap-2">
+          <p class="kicker">看清缺口</p>
+          <h2 class="h-xl">社保够不到<br>的五个地方</h2>
+        </div>
+        <div class="ledger grow">
+          <div class="ledger-row">
+            <span class="ledger-nb">01</span>
+            <span class="ledger-title">自费项目</span>
+            <span class="ledger-note">靶向药、进口器械不在目录</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-nb">02</span>
+            <span class="ledger-title">统筹限额</span>
+            <span class="ledger-note">超过年度上限的部分全部自费</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-nb">03</span>
+            <span class="ledger-title">地域差</span>
+            <span class="ledger-note">异地就医报销比例缩水</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-nb">04</span>
+            <span class="ledger-title">起付线</span>
+            <span class="ledger-note">大病统筹起付门槛在提高</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-nb">05</span>
+            <span class="ledger-title">封顶线</span>
+            <span class="ledger-note">越贵的治疗，缺口越大</span>
+          </div>
+        </div>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>3 / 8</span>
+      </div>
+    </section>
+
+    <!-- ===== 04 · M14 Pipeline AI三维法 ===== -->
+    <section class="poster xhs" id="xhs-04">
+      <div class="grain"></div>
+      <div class="content stack gap-5">
+        <div class="stack gap-2">
+          <p class="kicker">解决方案</p>
+          <h2 class="h-xl">AI三维<br>医疗险规划法</h2>
+        </div>
+        <div class="pipeline-v grow">
+          <div class="step">
+            <span class="step-nb">01</span>
+            <div>
+              <p class="step-title">AI初筛匹配产品</p>
+              <p class="step-desc">输入家庭年龄、病史、预算，10分钟筛出符合社保新规补充需求的医疗险——覆盖社保外自费药的百万医疗，或是针对老人的防癌医疗险。</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-nb">02</span>
+            <div>
+              <p class="step-title">规则校验排理赔坑</p>
+              <p class="step-desc">凭借多年保司内勤核赔经验，帮你避开"既往症除外""医院等级限制"这些容易踩的理赔雷区。</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-nb">03</span>
+            <div>
+              <p class="step-title">家庭适配调方案细节</p>
+              <p class="step-desc">孩子刚满2岁、婆婆有高血压——不同成员匹配不同产品，用最少的预算把全家的保障缺口补上。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>4 / 8</span>
+      </div>
+    </section>
+
+    <!-- ===== 05 · M11 Marginalia 真实案例 ===== -->
+    <section class="poster xhs" id="xhs-05">
+      <div class="grain"></div>
+      <div class="content stack gap-5">
+        <div class="stack gap-2">
+          <p class="kicker">真实案例</p>
+          <h2 class="h-xl">一家三代<br>怎么配？</h2>
+        </div>
+        <div class="marginalia grow">
+          <div class="stack gap-3">
+            <p class="lead" style="font-size:32px;color:var(--ink);">30岁运营客户，孩子2岁，婆婆高血压。</p>
+            <hr class="rule">
+            <p class="lead">孩子：医疗险附加门诊责任——2岁娃门诊频率高，小病小痛全覆盖。</p>
+            <p class="lead">婆婆：核赔宽松的防癌医疗险——有高血压也能过，把最大风险兜住。</p>
+            <p class="body">总预算控制在合理范围。每一分钱花在真正的缺口上。</p>
+          </div>
+          <div class="mg-col">
+            <p>30岁 运营</p>
+            <p>孩子 2岁</p>
+            <p>婆婆 高血压</p>
+            <p>孩子→门诊责任</p>
+            <p>婆婆→防癌医疗</p>
+            <p>全家人→百万医疗</p>
+            <p>最少预算</p>
+            <p>最大覆盖</p>
+          </div>
+        </div>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>5 / 8</span>
+      </div>
+    </section>
+
+    <!-- ===== 06 · M05 Before/After 对比 ===== -->
+    <section class="poster xhs" id="xhs-06">
+      <div class="grain"></div>
+      <div class="content stack gap-4">
+        <div class="stack gap-2">
+          <p class="kicker">差距有多大</p>
+          <h2 class="h-md">只有社保<br>vs 社保+商保</h2>
+        </div>
+        <div class="beforeafter grow">
+          <div class="ba-block before">
+            <p class="ba-label" style="color:var(--muted);">只有社保</p>
+            <p class="lead">自费药械自己扛。统筹超额自己扛。异地就医报销打折。一场大病，存款花光，房贷断供。</p>
+          </div>
+          <div class="ba-block">
+            <p class="ba-label" style="color:var(--accent);">社保 + 商保</p>
+            <p class="lead">社保外自费药 → 商保全额报。超额部分 → 商保兜底。异地就医 → 商保不限地域。全家风险，各司其职。</p>
+          </div>
+        </div>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>6 / 8</span>
+      </div>
+    </section>
+
+    <!-- ===== 07 · M04 Pull Quote 金句 ===== -->
+    <section class="poster xhs" id="xhs-07">
+      <canvas class="mag-bg" data-bg="ink-flow"></canvas>
+      <div class="grain"></div>
+      <div class="paper-wash"></div>
+      <div class="content stack" style="justify-content:center;">
+        <div class="stack gap-4 center">
+          <p class="pullquote">买医疗险不是买<br>"治病的钱"，<br>是买"不用借钱的底气"。</p>
+          <hr class="rule-accent" style="margin:0 auto;">
+          <p class="meta">两个孩子的宝爸 · 河北大学保险科班 · 前保司内勤</p>
+        </div>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>7 / 8</span>
+      </div>
+    </section>
+
+    <!-- ===== 08 · M07 CTA 尾页 ===== -->
+    <section class="poster xhs" id="xhs-08">
+      <div class="grain"></div>
+      <div class="content stack gap-4">
+        <div class="stack gap-2">
+          <p class="kicker">CTA</p>
+          <h2 class="h-xl">还在为全家<br>保障焦虑？</h2>
+        </div>
+        <div class="ledger grow">
+          <div class="ledger-row">
+            <span class="ledger-nb">01</span>
+            <span class="ledger-title">社保够不够</span>
+            <span class="ledger-note">帮你算清家里的保障缺口</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-nb">02</span>
+            <span class="ledger-title">产品怎么选</span>
+            <span class="ledger-note">用AI三维法10分钟筛出最适合的方案</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-nb">03</span>
+            <span class="ledger-title">理赔怎么避坑</span>
+            <span class="ledger-note">前保司内勤帮你绕开拒赔雷区</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-nb">04</span>
+            <span class="ledger-title">家庭怎么配置</span>
+            <span class="ledger-note">老人孩子各配各的，预算花在刀刃上</span>
+          </div>
+        </div>
+        <div class="callout" style="text-align:center;font-style:normal;">
+          靠谱的保障，是专业透明、不用焦虑。
+          <span class="callout-src">拿不准家里的保单？私信我帮你做免费年检。</span>
+        </div>
+      </div>
+      <div class="issue-strip">
+        <span>小红书 · 家庭保障</span>
+        <span>—</span>
+        <span>8 / 8</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    (function() {
+      'use strict';
+      if (window.MagazineBg) return;
+      var MB = {};
+      function cssVarRgb(name, fallback) {
+        var raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        if (!raw) return fallback;
+        var parts = raw.split(',').map(function(x) { return parseInt(x.trim(), 10); });
+        return parts.length === 3 && parts.every(function(n) { return !isNaN(n); }) ? parts : fallback;
+      }
+      MB.mount = function(canvas, opts) {
+        opts = opts || {};
+        var ctx = canvas.getContext('2d');
+        var w = canvas.parentElement ? canvas.parentElement.offsetWidth : 1080;
+        var h = canvas.parentElement ? canvas.parentElement.offsetHeight : 1440;
+        canvas.width = w;
+        canvas.height = h;
+        var ink = opts.ink || [10,10,11];
+        var paper = opts.paper || [243,240,232];
+        var strength = opts.strength || 0.32;
+        var grd = ctx.createLinearGradient(0, 0, w*0.6, h*0.8);
+        grd.addColorStop(0, 'rgba(' + ink.join(',') + ',' + (strength * 0.15) + ')');
+        grd.addColorStop(0.5, 'rgba(' + ink.join(',') + ',' + (strength * 0.08) + ')');
+        grd.addColorStop(1, 'rgba(' + paper.join(',') + ',0)');
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalAlpha = strength * 0.06;
+        ctx.strokeStyle = 'rgb(' + ink.join(',') + ')';
+        ctx.lineWidth = 1.5;
+        for (var i = 0; i < 8; i++) {
+          var x = w * 0.1 + (w * 0.8 * i / 7);
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.quadraticCurveTo(x + w*0.05, h*0.4, x - w*0.03, h);
+          ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+      };
+      window.MagazineBg = MB;
+      function mountAll() {
+        var ink = cssVarRgb('--ink-rgb', [42,30,19]);
+        var paper = cssVarRgb('--paper-rgb', [238,223,199]);
+        document.querySelectorAll('canvas.mag-bg').forEach(function(c) {
+          MB.mount(c, { ink: ink, paper: paper, strength: 0.32 });
+        });
+      }
+      if (document.readyState === 'complete') mountAll();
+      else window.addEventListener('load', mountAll);
+    })();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var W = 1080, H = 1440;
+
+      function renderPoster(el) {
+        var origBr = el.style.borderRadius;
+        var origBs = el.style.boxShadow;
+        el.style.borderRadius = '0';
+        el.style.boxShadow = 'none';
+        return html2canvas(el, {
+          scale: 1,
+          useCORS: true,
+          backgroundColor: null,
+          width: W,
+          height: H,
+          logging: false
+        }).then(function(canvas) {
+          el.style.borderRadius = origBr;
+          el.style.boxShadow = origBs;
+          return canvas;
+        });
+      }
+
+      function canvasToBlob(canvas) {
+        return new Promise(function(resolve) {
+          canvas.toBlob(resolve, 'image/png');
+        });
+      }
+
+      window.downloadAll = function() {
+        var posters = document.querySelectorAll('.poster.xhs');
+        var progress = document.getElementById('progress');
+        var zip = new JSZip();
+        var p = Promise.resolve();
+        posters.forEach(function(el, i) {
+          p = p.then(function() {
+            progress.textContent = '渲染 ' + (i+1) + '/' + posters.length + '...';
+            return renderPoster(el).then(function(canvas) {
+              return canvasToBlob(canvas).then(function(blob) {
+                zip.file('小红书-' + String(i+1).padStart(2,'0') + '.png', blob);
+              });
+            });
+          });
+        });
+        p.then(function() {
+          progress.textContent = '打包中...';
+          return zip.generateAsync({ type: 'blob' });
+        }).then(function(blob) {
+          saveAs(blob, '小红书-全部.zip');
+          progress.textContent = posters.length + ' 张已完成';
+        });
+      };
+
+      window.downloadOne = function() {
+        var posters = document.querySelectorAll('.poster.xhs');
+        var vc = window.innerHeight / 2;
+        var idx = 0, min = Infinity;
+        posters.forEach(function(el, i) {
+          var rect = el.getBoundingClientRect();
+          var d = Math.abs(rect.top + rect.height/2 - vc);
+          if (d < min) { min = d; idx = i; }
+        });
+        renderPoster(posters[idx]).then(function(canvas) {
+          return canvasToBlob(canvas);
+        }).then(function(blob) {
+          saveAs(blob, '小红书-' + String(idx+1).padStart(2,'0') + '.png');
+        });
+      };
+    })();
+  </script>
+</body>
+</html>

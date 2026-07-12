@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 买保险正确顺序</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2C2C2C;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .info-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C2C2C;
+    margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 14px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .mini-card .m-icon { font-size: 22px; margin-bottom: 5px; }
+  .mini-card .m-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .mini-card .m-desc {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.35;
+  }
+
+  .quote-box {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .cta-chip {
+    flex: 1;
+    background: #2C2C2C;
+    color: #FFF;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .dark-card {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .dark-card .dc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #CCC;
+    margin-bottom: 3px;
+  }
+  .dark-card .dc-body {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .dark-slide { background: #1A1A1A; }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+  .priority-card {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+    margin-bottom: 10px;
+  }
+  .priority-num {
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .priority-num .num {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .priority-num .label {
+    font-size: 9px;
+    color: #888;
+    letter-spacing: 1px;
+  }
+  .priority-body {
+    flex: 1;
+    background: #FAFAFA;
+    border-radius: 6px;
+    padding: 12px 14px;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .priority-body .p-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1A1A1A;
+    margin-bottom: 3px;
+  }
+  .priority-body .p-desc {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .dark-slide .priority-body {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .priority-body .p-title { color: #FFF; }
+  .dark-slide .priority-body .p-desc { color: rgba(255,255,255,0.6); }
+
+  .highlight-quote {
+    font-size: 18px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.4;
+    padding: 14px 0;
+    margin-bottom: 10px;
+  }
+
+  .voice-line {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.7;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .voice-line:last-child { border-bottom: none; }
+  .voice-em {
+    color: #1A1A1A;
+    font-weight: 700;
+  }
+  .dark-slide .voice-line { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.06); }
+  .dark-slide .voice-em { color: #FFF; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">买保险的<br>正确顺序</div>
+    <div class="cover-sub">嗓子已经哑了，今年第31遍，但我还要说</div>
+    <div class="cover-tags">
+      <span class="tag">保险科普</span>
+      <span class="tag">避坑指南</span>
+      <span class="tag">听话照做</span>
+    </div>
+    <div class="cover-quote">
+      <p>哪怕有一个人看，帮到一个人是一个人</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/8</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 第一顺位 医保 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">priority 1</div>
+    <div class="priority-card" style="margin-bottom:6px;">
+      <div class="priority-num">
+        <div class="num" style="color:#1A1A1A;">1</div>
+        <div class="label">顺位</div>
+      </div>
+      <div class="priority-body" style="background:#1A1A1A;border-color:transparent;">
+        <div class="p-title" style="color:#FFF;font-size:18px;">医保</div>
+        <div class="p-desc" style="color:rgba(255,255,255,0.7);">居民医保 / 职工医保</div>
+      </div>
+    </div>
+
+    <div style="background:#FAFAFA;border-radius:6px;padding:12px 14px;margin-bottom:10px;">
+      <div style="font-size:12px;color:#555;line-height:1.7;">
+        <strong style="color:#1A1A1A;">不管你在农村还是城镇</strong><br>
+        <strong style="color:#1A1A1A;">不管你有工作还是没工作</strong><br>
+        <strong style="color:#1A1A1A;">不管你是刚出生还是60岁</strong><br><br>
+        只要你是中国人，就可以上医保。<br>
+        没有的，现在、赶快、买上。
+      </div>
+    </div>
+
+    <div class="info-card" style="background:#FFF8E1;border-color:rgba(255,152,0,0.2);">
+      <div class="card-title">⏰ 行动指令</div>
+      <div class="card-body">不知道自己有没有？去查，去网上问，然后去查。一定买上。</div>
+    </div>
+    <div class="page-num">2/8</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 关于"全家"的真心话 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">priority 2</div>
+    <div class="priority-card" style="margin-bottom:10px;">
+      <div class="priority-num">
+        <div class="num" style="color:#FFF;">2</div>
+        <div class="label" style="color:rgba(255,255,255,0.3);">顺位</div>
+      </div>
+      <div class="priority-body">
+        <div class="p-title" style="font-size:18px;">百万医疗 + 意外险</div>
+        <div class="p-desc">全家的，小保费撬动大杠杆</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">什么叫"全家"？我说句实在话</div>
+      <div class="card-body">
+        全家代表什么？代表只要这个人生病需要你掏钱——你就给我买上。<br><br>
+        如果不需要，你可以不买。<br><br>
+        你婆婆生病不用你掏一分钱，你可以不花这个保费。<br><br>
+        <strong>但如果婆婆生病需要你家掏钱——傻姑娘，给她买上，偷偷地买。</strong>
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">普通老百姓最大的风险</div>
+      <div class="dc-body">就是大额医疗费。百万医疗加意外，把这风险堵住了，普通人就不用怕了。</div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/8</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 第三顺位 家庭支柱 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">priority 3</div>
+    <div class="priority-card">
+      <div class="priority-num">
+        <div class="num" style="color:#1A1A1A;">3</div>
+        <div class="label">顺位</div>
+      </div>
+      <div class="priority-body">
+        <div class="p-title">家庭支柱的定寿 + 重疾</div>
+        <div class="p-desc">你们家最挣钱那个人</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:10px;">
+      <div class="mini-card" style="text-align:left;flex:1;">
+        <div class="m-title">定寿</div>
+        <div class="m-desc">便宜，杠杆高<br><strong style="color:#1A1A1A;">排前面</strong></div>
+      </div>
+      <div class="mini-card" style="text-align:left;flex:1;">
+        <div class="m-title">重疾</div>
+        <div class="m-desc">涨价了，有点贵<br>但对家庭支柱仍然有用</div>
+      </div>
+    </div>
+
+    <div class="info-card" style="background:#FAFAFA;">
+      <div class="card-title">为什么定寿优先</div>
+      <div class="card-body">
+        家庭支柱倒下了，房贷谁还？孩子谁养？定寿就是——人不在了，钱替你在。一年几百块撬上百万保额，普通家庭最需要的安全感。
+      </div>
+    </div>
+
+    <div class="page-num">4/8</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 第四顺位 孩子重疾 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">priority 4</div>
+    <div class="priority-card">
+      <div class="priority-num">
+        <div class="num" style="color:#1A1A1A;">4</div>
+        <div class="label">顺位</div>
+      </div>
+      <div class="priority-body">
+        <div class="p-title">孩子的重疾</div>
+        <div class="p-desc">往后稍，排在这</div>
+      </div>
+    </div>
+
+    <div style="background:#FAFAFA;border-radius:6px;padding:12px 14px;margin-bottom:8px;">
+      <div style="font-size:13px;color:#1A1A1A;font-weight:700;margin-bottom:4px;">为什么排这么靠后？</div>
+      <div style="font-size:11px;color:#555;line-height:1.6;">
+        重疾险保的是收入损失。<br>
+        孩子没有收入。<br><br>
+        孩子生病，影响的是某个大人的收入——因为要陪他。<br>
+        所以一定要排在家庭支柱的重疾后面。
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;">
+      <div class="mini-card" style="flex:1;background:#FAFAFA;">
+        <div class="m-title">先保</div>
+        <div class="m-desc">挣钱的人<br>倒了就没人挣钱了</div>
+      </div>
+      <div class="mini-card" style="flex:1;background:#FAFAFA;">
+        <div class="m-title">再保</div>
+        <div class="m-desc">不挣钱的人<br>花钱的人往后排</div>
+      </div>
+    </div>
+
+    <div class="page-num">5/8</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 储蓄险 最后 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">priority 5</div>
+    <div class="priority-card">
+      <div class="priority-num">
+        <div class="num" style="color:#1A1A1A;">5</div>
+        <div class="label">顺位</div>
+      </div>
+      <div class="priority-body">
+        <div class="p-title">储蓄险</div>
+        <div class="p-desc">存钱，先保障后理财</div>
+      </div>
+    </div>
+
+    <div class="quote-box" style="margin-bottom:10px;">
+      <p>保障完了之后，你才考虑储蓄险。有闲钱了，这笔钱五年十年都不动，再放保险里。</p>
+    </div>
+
+    <table class="data-table" style="margin-top:0;">
+      <tr>
+        <th>顺序</th>
+        <th>买什么</th>
+        <th>给谁</th>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">①</td>
+        <td>医保</td>
+        <td>所有人</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">②</td>
+        <td>百万医疗 + 意外</td>
+        <td>全家（谁生病要你掏钱就给谁买）</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">③</td>
+        <td>定寿 → 重疾</td>
+        <td>家庭支柱（最挣钱那个）</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">④</td>
+        <td>重疾</td>
+        <td>孩子（排在大人的后面）</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">⑤</td>
+        <td>储蓄险</td>
+        <td>有闲钱再说</td>
+      </tr>
+    </table>
+
+    <div class="intro" style="margin-bottom:0;margin-top:6px;">
+      先保障后理财，顺序错了，方向就错了。
+    </div>
+
+    <div class="page-num">6/8</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · 完整顺序一览（深色总结页） -->
+<div class="slide dark-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-tag">the whole picture</div>
+    <div class="main-title" style="margin-bottom:16px;">一张图记住<br>买保险的顺序</div>
+
+    <div style="margin-bottom:4px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:6px 10px;background:rgba(255,255,255,0.04);border-radius:4px;">
+        <div style="font-size:20px;font-weight:900;color:#555;">1</div>
+        <div style="font-size:14px;font-weight:700;color:#FFF;">医保</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-left:auto;">全民必买</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:6px 10px;background:rgba(255,255,255,0.04);border-radius:4px;">
+        <div style="font-size:20px;font-weight:900;color:#555;">2</div>
+        <div style="font-size:14px;font-weight:700;color:#FFF;">百万医疗 + 意外</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-left:auto;">全家配置</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:6px 10px;background:rgba(255,255,255,0.04);border-radius:4px;">
+        <div style="font-size:20px;font-weight:900;color:#555;">3</div>
+        <div style="font-size:14px;font-weight:700;color:#FFF;">定寿 → 重疾</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-left:auto;">家庭支柱</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding:6px 10px;background:rgba(255,255,255,0.04);border-radius:4px;">
+        <div style="font-size:20px;font-weight:900;color:#555;">4</div>
+        <div style="font-size:14px;font-weight:700;color:#FFF;">孩子重疾</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-left:auto;">排在大人后</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 10px;background:rgba(255,255,255,0.04);border-radius:4px;">
+        <div style="font-size:20px;font-weight:900;color:#555;">5</div>
+        <div style="font-size:14px;font-weight:700;color:#FFF;">储蓄险</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-left:auto;">有闲钱再考虑</div>
+      </div>
+    </div>
+
+    <div class="divider" style="background:#555;"></div>
+
+    <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.6;">
+      普通老百姓最大的风险就是大额医疗费。<br>
+      把这风险堵住了，普通人不用怕了。
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/8</div>
+  </div>
+</div>
+
+<!-- 第 8 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">第31遍了<br>帮到一个是一个</div>
+    <div class="cover-sub">嗓子哑了我也要说</div>
+    <div class="cover-quote">
+      <p>天天说天天说也没人看。那也得说——哪怕有一个人看，帮到一个人是一个人。</p>
+    </div>
+    <div style="margin-top:20px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:10px;">检查一下你家保险顺序对不对</div>
+      <div class="cta-row">
+        <div class="cta-chip" style="background:#555;">收藏 ⭐ 照着买</div>
+        <div class="cta-chip" style="background:#555;">转发 ↗️ 帮到更多人</div>
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">8/8</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '买保险正确顺序-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书 - 退休金差距</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px; color: rgba(0,0,0,0.2); z-index: 3;
+  }
+
+  .section-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; color: #2C2C2C; margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-size: 26px; font-weight: 900; color: #1A1A1A;
+    line-height: 1.25; margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 12px;
+  }
+
+  .info-card {
+    background: #FFFFFF; border-radius: 6px; padding: 12px 14px;
+    margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px; font-weight: 700; color: #2C2C2C; margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px; color: #333; line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px; color: #888; display: block; margin-top: 3px;
+  }
+
+  .card-row {
+    display: flex; gap: 8px; margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1; background: #FFFFFF; border-radius: 6px;
+    padding: 12px 10px; border: 1px solid rgba(0,0,0,0.06); text-align: center;
+  }
+  .mini-card .m-title { font-size: 12px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+  .mini-card .m-desc { font-size: 10px; color: #666; line-height: 1.35; }
+
+  .quote-box {
+    background: #2C2C2C; border-radius: 6px; padding: 11px 16px; margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.6; font-style: italic;
+  }
+
+  .divider {
+    width: 36px; height: 2px; background: #2C2C2C; border-radius: 1px; margin: 10px 0;
+  }
+
+  .dark-card {
+    background: #2C2C2C; border-radius: 6px; padding: 11px 14px; margin-bottom: 7px;
+  }
+  .dark-card .dc-title { font-size: 12px; font-weight: 700; color: #CCC; margin-bottom: 3px; }
+  .dark-card .dc-body { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+  /* 封面 */
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content {
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 720px; padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 48px; font-weight: 900; color: #FFFFFF;
+    line-height: 1.15; margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px; color: rgba(255,255,255,0.4); line-height: 1.5; margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px; font-weight: 600; color: #FFF;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.55; font-style: italic;
+  }
+
+  /* 深色页 */
+  .dark-slide { background: #1A1A1A; }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+  /* 对比块 */
+  .compare-row {
+    display: flex; gap: 8px; margin-bottom: 10px;
+  }
+  .compare-card {
+    flex: 1; border-radius: 6px; padding: 14px 12px;
+  }
+  .compare-card.good { background: #F0F7F0; }
+  .compare-card.bad { background: #F7F0F0; }
+  .compare-card .c-label {
+    font-size: 11px; font-weight: 700; margin-bottom: 6px;
+  }
+  .compare-card.good .c-label { color: #2E7D32; }
+  .compare-card.bad .c-label { color: #C62828; }
+  .compare-card .c-item {
+    font-size: 11px; color: #555; line-height: 1.6;
+    padding-left: 12px; position: relative;
+  }
+  .compare-card .c-item::before {
+    content: ""; position: absolute; left: 2px; top: 6px;
+    width: 4px; height: 4px; border-radius: 50%;
+  }
+  .compare-card.good .c-item::before { background: #4CAF50; }
+  .compare-card.bad .c-item::before { background: #EF5350; }
+
+  .dark-slide .compare-card.good { background: rgba(76,175,80,0.08); }
+  .dark-slide .compare-card.bad { background: rgba(239,83,80,0.08); }
+  .dark-slide .compare-card.good .c-label { color: #81C784; }
+  .dark-slide .compare-card.bad .c-label { color: #E57373; }
+  .dark-slide .compare-card .c-item { color: rgba(255,255,255,0.6); }
+
+  /* 大数字 */
+  .big-num {
+    font-size: 42px; font-weight: 900; color: #2C2C2C; line-height: 1;
+    margin-bottom: 4px;
+  }
+  .dark-slide .big-num { color: #FFF; }
+
+  /* 编号列表 */
+  .num-list { list-style: none; padding: 0; }
+  .num-list li {
+    display: flex; gap: 10px; margin-bottom: 10px;
+    font-size: 12px; color: #333; line-height: 1.5;
+  }
+  .num-list li .badge {
+    width: 20px; height: 20px; border-radius: 50%; background: #2C2C2C;
+    color: #FFF; font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .dark-slide .num-list li { color: rgba(255,255,255,0.75); }
+  .dark-slide .num-list li .badge { background: rgba(255,255,255,0.12); }
+
+  /* 场景对话块 */
+  .dialog-block {
+    background: rgba(0,0,0,0.02);
+    border-radius: 6px; padding: 12px 14px; margin-bottom: 8px;
+  }
+  .dialog-block .speaker {
+    font-size: 11px; font-weight: 700; color: #2C2C2C; margin-bottom: 2px;
+  }
+  .dialog-block .speech {
+    font-size: 12px; color: #444; line-height: 1.55;
+  }
+  .dark-slide .dialog-block { background: rgba(255,255,255,0.03); }
+  .dark-slide .dialog-block .speaker { color: #CCC; }
+  .dark-slide .dialog-block .speech { color: rgba(255,255,255,0.65); }
+
+  /* 金句大字 */
+  .big-quote {
+    font-size: 20px; font-weight: 700; color: #1A1A1A;
+    line-height: 1.4; text-align: center; padding: 20px 0;
+  }
+  .dark-slide .big-quote { color: #FFF; }
+
+  /* 身份标签 */
+  .author-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 4px 14px;
+    font-size: 11px; color: rgba(255,255,255,0.5);
+    margin-top: 10px;
+  }
+
+  /* 最后一张 */
+  .cta-title {
+    font-size: 28px; font-weight: 900; color: #FFF; text-align: center; margin-bottom: 8px;
+  }
+  .cta-sub {
+    font-size: 12px; color: rgba(255,255,255,0.45); text-align: center; line-height: 1.6; margin-bottom: 16px;
+  }
+  .cta-row-custom {
+    display: flex; gap: 10px; justify-content: center; margin-top: 16px;
+  }
+  .cta-chip {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #FFF; text-align: center; padding: 12px 24px;
+    border-radius: 6px; font-size: 13px; font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ==================== 第 1 张 · 封面 ==================== -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">有退休金<br>和没有的差距</div>
+    <div class="cover-sub">病房里两位阿姨的对话，说透了晚年真相</div>
+    <div class="cover-tags">
+      <span class="tag">养老规划</span>
+      <span class="tag">真实故事</span>
+      <span class="tag">收藏备用</span>
+    </div>
+    <div class="cover-quote">
+      <p>有稳定退休金的家庭，抗风险能力相当于给晚年买了份"基础兜底险"。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 2 张 · 故事场景 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">病房里的两个世界</div>
+    <div class="main-title" style="font-size:22px;">同一间病房，两种晚年</div>
+
+    <div class="dialog-block" style="border-left:3px solid #4CAF50;">
+      <div class="speaker" style="color:#2E7D32;">阿姨 A · 有退休金</div>
+      <div class="speech">"住多久都不怕，自己的钱够造"<br>儿子只负责偶尔来送饭，她笑着说</div>
+    </div>
+
+    <div class="dialog-block" style="border-left:3px solid #EF5350;">
+      <div class="speaker" style="color:#C62828;">阿姨 B · 没退休金</div>
+      <div class="speech">"能出院就别住了，给孩子省点"<br>儿子每天愁眉苦脸算医药费，她偷偷跟护士说</div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="intro" style="font-size:12px;color:#888;margin-bottom:0;">
+      同样生病住院，心态完全不同。<br>差距的根本不是子女孝不孝顺，而是——<strong style="color:#1A1A1A;">有没有退休金兜底。</strong>
+    </div>
+    <div class="page-num">2/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 3 张 · 核心洞察 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">核心洞察</div>
+    <div class="main-title" style="font-size:22px;">退休金 ≠ 钱，是"抗风险能力"</div>
+    <div class="intro">
+      前保司内勤 + AI理赔规划师，见过太多这样的差距——
+    </div>
+    <div class="compare-row">
+      <div class="compare-card good">
+        <div class="c-label">✅ 有退休金</div>
+        <div class="c-item">住院不怕花钱，选好的治疗方案</div>
+        <div class="c-item">子女只负责陪伴，不背经济债</div>
+        <div class="c-item">老了有底气，不用看任何人脸色</div>
+      </div>
+      <div class="compare-card bad">
+        <div class="c-label">❌ 没有退休金</div>
+        <div class="c-item">小病拖、大病扛，怕花钱</div>
+        <div class="c-item">压力全压在孩子身上</div>
+        <div class="c-item">晚年生活质量断崖式下降</div>
+      </div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">养老金就是晚年的"基础兜底险"</div>
+      <div class="dc-body">它不是让你变富，是让你在老了、病了的时候，<br>不用把压力全压在孩子身上，不用委屈自己。</div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 4 张 · 30+的焦虑 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">现实困境</div>
+    <div class="main-title" style="font-size:22px;">30岁后的焦虑，藏在这些话里</div>
+    <div class="sub-title">不是不想规划，是两头都顾不上</div>
+
+    <div class="info-card" style="background:#F7F7F7;border:none;">
+      <div class="card-body" style="text-align:center;font-size:13px;color:#555;line-height:1.7;">
+        "我爸妈没退休金，自己也没攒够养老钱，<br><strong style="color:#1A1A1A;">就怕以后生病拖垮全家</strong>"<br>
+        <small style="margin-top:6px;display:block;">——很多 30+ 朋友的真实心声</small>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">两头压力</div>
+      <div class="card-body">
+        <strong>上面：</strong>父母的养老/医疗没着落<br>
+        <strong>下面：</strong>自己的养老/保险还没配齐<br>
+        <small>中间还要养孩子、还房贷</small>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">破局思路</div>
+      <div class="card-body">不要一次性解决所有问题。先搭好基础保障网，再慢慢补。比什么都不做强百倍。</div>
+    </div>
+
+    <div class="page-num">4/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 5 张 · 建议 1 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">行动方案 ❶</div>
+    <div class="main-title" style="font-size:22px;">先把医保交上</div>
+    <div class="sub-title">国家给的基础福利，不能丢</div>
+
+    <div class="dark-card">
+      <div class="dc-title">职工医保 / 居民医保</div>
+      <div class="dc-body">这是最基础的一层保障。相当于"退休后的基础退休金"，国家兜底，一定要保住。<br>断缴了尽快补上，别给晚年留窟窿。</div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">给父母的建议</div>
+      <div class="dc-body">如果父母没有职工医保，帮他们交居民医保。一年几百块，住院能报销一大半。<br>这是性价比最高的"孝顺投资"。</div>
+    </div>
+
+    <div class="divider" style="background:rgba(255,255,255,0.2);"></div>
+    <div class="big-quote" style="font-size:14px;font-weight:400;padding:8px 0 0;">
+      医保是地基，没有它，再好的商保也盖不稳。
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">5/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 6 张 · 建议 2 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">行动方案 ❷</div>
+    <div class="main-title" style="font-size:22px;">用AI三维法选对商保</div>
+    <div class="sub-title">花小钱买"不用借钱的底气"</div>
+
+    <div class="info-card">
+      <div class="card-title">第一维：AI初筛匹配</div>
+      <div class="card-body">根据年龄、健康状况、预算，AI筛选高性价比医疗险，不用自己一家家比。<small>避坑：别只看价格，要看保障范围和续保条件</small></div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">第二维：用核赔规则排坑</div>
+      <div class="card-body">保险公司怎么赔、什么情况不赔，AI模拟理赔路径，提前排除理赔雷区。<small>避坑：健康告知一定要如实填，否则买了也白买</small></div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">第三维：调细节匹配家庭</div>
+      <div class="card-body">根据家庭实际情况调整：保额、免赔额、附加险。不买贵的，只买对的。</div>
+    </div>
+
+    <div class="page-num">6/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 7 张 · 建议 3 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">行动方案 ❸</div>
+    <div class="main-title" style="font-size:22px;">每年存一笔养老备用金</div>
+    <div class="sub-title">不用多，关键是"存得住"</div>
+
+    <div class="dark-card">
+      <div class="dc-title">每月存多少？</div>
+      <div class="dc-body">不用多，每月 300-500 元就行。关键是雷打不动、专款专用。<br>一年 6,000，十年 6 万——比急用钱时求人强。</div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">怎么存？</div>
+      <div class="dc-body">单独开一个账户，发工资第一天自动转入。看不见、花不着，时间会给你答案。</div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">为什么要存？</div>
+      <div class="dc-body">医保+商保解决"治病的钱"，备用金解决"活着的生活质量"。<br>两个缺一不可。</div>
+    </div>
+
+    <div class="divider" style="background:rgba(255,255,255,0.2);margin-top:14px;"></div>
+    <div class="big-quote" style="font-size:14px;font-weight:400;padding:8px 0 0;">
+      积少成多，总比临时抱佛脚强。
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 8 张 · 金句升华 ==================== -->
+<div class="slide bg-white">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;text-align:center;">
+    <div class="section-tag" style="text-align:center;display:block;">送给你一句话</div>
+    <div class="divider" style="margin:10px auto;"></div>
+    <div class="big-quote" style="font-size:22px;padding:24px 0;">
+      买医疗险不是买"治病的钱"<br>
+      是买<strong>"不用借钱的底气"</strong>
+    </div>
+    <div class="divider" style="margin:10px auto;"></div>
+    <div class="intro" style="text-align:center;font-size:12px;color:#888;margin-top:10px;">
+      靠谱比什么都好<br>提前规划总比临时抱佛脚强
+    </div>
+    <div class="page-num">8/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 9 张 · CTA ==================== -->
+<div class="slide cover-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;text-align:center;">
+    <div class="cover-title" style="font-size:36px;">给家人的保障网<br>今天就开始搭</div>
+    <div class="cover-sub" style="margin-bottom:20px;">
+      医保 + 商保 + 备用金<br>三根柱子，撑起晚年的体面
+    </div>
+    <div class="cta-row-custom">
+      <div class="cta-chip">👍 收藏备用</div>
+      <div class="cta-chip">↗️ 转给爸妈看</div>
+      <div class="cta-chip">💬 你家怎么规划的？</div>
+    </div>
+    <div class="cover-quote" style="margin-top:20px;">
+      <p>评论区聊聊，你的养老保障搭到哪一步了👇</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">9/9</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-退休金差距-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-退休金差距-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-退休金差距-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配图下载 - 体检报告上的随访观察复查</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #E5EAF2; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; display: flex; flex-direction: column; align-items: center; padding: 30px 16px 60px; gap: 40px; }
+.page-title { font-size: 22px; font-weight: 800; color: #102542; text-align: center; margin-bottom: 10px; }
+.page-sub { font-size: 14px; color: #86909C; text-align: center; margin-bottom: 20px; }
+.illu-wrapper { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.illu-card { width: 677px; border-radius: 12px; overflow: hidden; }
+.btn-download { background: #102542; color: #FFF; border: none; padding: 8px 24px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.btn-download:hover { background: #F77F00; }
+.card-num { font-size: 14px; color: #86909C; font-weight: 600; }
+
+/* Card Type 2: Grid 3-col */
+.card-grid3 { background: #F7F9FC; padding: 28px 24px 20px; width:677px; }
+.card-grid3 .card-label { font-size: 12px; color: #F77F00; letter-spacing: 2px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-grid3 .card-title { font-size: 18px; font-weight: 800; color: #102542; margin-bottom: 20px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-grid3 .grid-row { display: flex; gap: 16px; }
+.card-grid3 .grid-item { flex: 1; background: #FFFFFF; border-radius: 8px; padding: 18px 14px; border-top: 3px solid #F77F00; }
+.card-grid3 .grid-item .level { font-size: 13px; color: #F77F00; font-weight: 700; margin-bottom: 4px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-grid3 .grid-item .term { font-size: 22px; font-weight: 900; color: #102542; margin-bottom: 6px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-grid3 .grid-item .desc { font-size: 13px; color: #4A4A4A; line-height: 1.6; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-grid3 .card-note { margin-top: 14px; padding: 10px 14px; background: #FFF; border-radius: 6px; font-size: 13px; color: #0A1931; font-weight: 600; border-left: 3px solid #F77F00; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+/* Card Type 2 alt: 2x2 */
+.card-2x2 { background: #F7F9FC; padding: 28px 24px 20px; width:677px; }
+.card-2x2 .card-label { font-size: 12px; color: #F77F00; letter-spacing: 2px; font-weight: 600; margin-bottom: 6px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-2x2 .card-title { font-size: 18px; font-weight: 800; color: #102542; margin-bottom: 18px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-2x2 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.card-2x2 .g-item { background: #FFFFFF; border-radius: 8px; padding: 16px; border-left: 3px solid #F77F00; }
+.card-2x2 .g-item .g-num { font-size: 12px; color: #F77F00; font-weight: 700; margin-bottom: 2px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-2x2 .g-item .g-name { font-size: 16px; font-weight: 800; color: #102542; margin-bottom: 4px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-2x2 .g-item .g-rule { font-size: 12px; color: #86909C; margin-bottom: 6px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-2x2 .g-item .g-desc { font-size: 13px; color: #1A1A1A; line-height: 1.6; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+/* Card Type 1: Flow */
+.card-flow { background: #102542; padding: 28px 24px 20px; width:677px; color: #FFF; }
+.card-flow .card-label { font-size: 12px; color: #F77F00; letter-spacing: 2px; font-weight: 600; margin-bottom: 6px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-flow .card-title { font-size: 18px; font-weight: 800; color: #FFF; margin-bottom: 22px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-flow .flow-steps { display: flex; align-items: center; justify-content: center; gap: 0; }
+.card-flow .flow-step { flex: 1; text-align: center; padding: 14px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; position: relative; }
+.card-flow .flow-step .step-num { font-size: 11px; color: #F77F00; font-weight: 700; margin-bottom: 4px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-flow .flow-step .step-title { font-size: 15px; font-weight: 700; color: #FFF; margin-bottom: 4px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-flow .flow-step .step-desc { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-flow .flow-arrow { flex: 0 0 auto; padding: 0 6px; color: #F77F00; font-size: 20px; font-weight: 700; }
+
+/* Card Type 4: Vertical progression */
+.card-prog { background: #F7F9FC; padding: 28px 24px 20px; width:677px; }
+.card-prog .card-label { font-size: 12px; color: #F77F00; letter-spacing: 2px; font-weight: 600; margin-bottom: 6px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-prog .card-title { font-size: 18px; font-weight: 800; color: #102542; margin-bottom: 18px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-prog .prog-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; margin-bottom: 10px; background: #FFF; border-radius: 8px; }
+.card-prog .prog-badge { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: #FFF; }
+.card-prog .prog-badge.l1 { background: #86909C; }
+.card-prog .prog-badge.l2 { background: #6B7B8D; }
+.card-prog .prog-badge.l3 { background: #C85A35; }
+.card-prog .prog-badge.l4 { background: #F77F00; }
+.card-prog .prog-content .prog-name { font-size: 15px; font-weight: 700; color: #102542; margin-bottom: 2px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-prog .prog-content .prog-desc { font-size: 13px; color: #4A4A4A; line-height: 1.5; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-prog .prog-content .prog-note { font-size: 12px; color: #F77F00; margin-top: 4px; font-weight: 600; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+/* Card Type 5: Split */
+.card-split { display: flex; border-radius: 12px; overflow: hidden; width:677px; }
+.card-split .split-half { flex: 1; padding: 48px 20px 24px; position: relative; }
+.card-split .split-half.left-split { background: #102542; color: #FFF; }
+.card-split .split-half.right-split { background: #F7F9FC; color: #1A1A1A; }
+.card-split .split-label { font-size: 12px; letter-spacing: 2px; font-weight: 600; margin-bottom: 4px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-split .left-split .split-label { color: #F77F00; }
+.card-split .right-split .split-label { color: #C85A35; }
+.card-split .split-title { font-size: 17px; font-weight: 800; margin-bottom: 12px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-split .split-item { font-size: 13px; line-height: 1.7; margin-bottom: 6px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+.card-split .right-split .split-item { border-bottom-color: #E5EAF2; color: #4A4A4A; }
+.card-split .card-label-top { position: absolute; top: 16px; left: 24px; font-size: 12px; color: #F77F00; letter-spacing: 2px; font-weight: 600; z-index: 2; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+.footer-note { font-size: 13px; color: #86909C; text-align: center; margin-top: 40px; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<div class="page-title">配图下载</div>
+<div class="page-sub">体检报告上的"随访""观察""复查"，到底哪些要告知？ · 共 5 张</div>
+
+<!-- Card 1 -->
+<div class="illu-wrapper">
+  <div class="card-num">配图 1/5 · 认知刷新</div>
+  <div class="illu-card card-grid3" id="illu-1">
+    <div class="card-label">认知刷新</div>
+    <div class="card-title">"观察""随访""复查"是三级台阶</div>
+    <div class="grid-row">
+      <div class="grid-item">
+        <div class="level">第一级·最轻微</div>
+        <div class="term">观察</div>
+        <div class="desc">医生认为基本正常<br>日常留意即可<br>不构成诊断</div>
+      </div>
+      <div class="grid-item">
+        <div class="level">第二级·需关注</div>
+        <div class="term">随访</div>
+        <div class="desc">定期关注变化<br>暂无需治疗<br>不等于确诊</div>
+      </div>
+      <div class="grid-item">
+        <div class="level">第三级·需确认</div>
+        <div class="term">复查</div>
+        <div class="desc">指定时间内再查<br>排除或确认问题<br>仍未确诊</div>
+      </div>
+    </div>
+    <div class="card-note">核心判断：医生写"随访/观察/复查"≠ 写"确诊XX病"</div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-1')">下载 PNG</button>
+</div>
+
+<!-- Card 2 -->
+<div class="illu-wrapper">
+  <div class="card-num">配图 2/5 · 核心工具</div>
+  <div class="illu-card card-2x2" id="illu-2">
+    <div class="card-label">核心工具</div>
+    <div class="card-title">四种健康问询问法速查</div>
+    <div class="grid-2">
+      <div class="g-item">
+        <div class="g-num">问法一</div>
+        <div class="g-name">限定项目型</div>
+        <div class="g-rule">触发条件：括号内项目+异常</div>
+        <div class="g-desc">仅列出的检查项目异常才需告知。血压、血脂不在列？不告知。</div>
+      </div>
+      <div class="g-item">
+        <div class="g-num">问法二</div>
+        <div class="g-name">异常+进一步检查</div>
+        <div class="g-rule">触发条件：两年内+异常+被要求进一步检查</div>
+        <div class="g-desc">三个条件缺一不可。"必要时就诊"一般不算，"建议复查"算。</div>
+      </div>
+      <div class="g-item">
+        <div class="g-num">问法三</div>
+        <div class="g-name">一年+进一步处理</div>
+        <div class="g-rule">触发条件：一年内+异常+被要求治疗/检查/随访</div>
+        <div class="g-desc">时间窗口缩短为一年，但"复查随访"明确在范围内。</div>
+      </div>
+      <div class="g-item">
+        <div class="g-num">问法四</div>
+        <div class="g-name">两年住院/建议</div>
+        <div class="g-rule">触发条件：两年内被建议住院/手术/进一步检查</div>
+        <div class="g-desc">超过一年但曾被建议？仍可能触发。这是最容易漏掉的一条。</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-2')">下载 PNG</button>
+</div>
+
+<!-- Card 3 -->
+<div class="illu-wrapper">
+  <div class="card-num">配图 3/5 · 行动指南</div>
+  <div class="illu-card card-flow" id="illu-3">
+    <div class="card-label">行动指南</div>
+    <div class="card-title">拿到体检报告，三步判断要不要告知</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-num">Step 1</div>
+        <div class="step-title">读建议措辞</div>
+        <div class="step-desc">"观察/随访/复查"<br>"必要时/建议/必须"<br>措辞越肯定越需重视</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-num">Step 2</div>
+        <div class="step-title">对照问询条款</div>
+        <div class="step-desc">逐字看保单问法<br>是限定项目型？<br>还是异常+建议型？</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-num">Step 3</div>
+        <div class="step-title">判断是否触发</div>
+        <div class="step-desc">同一异常不同问法<br>结论可能完全不同<br>逐字对照，别猜</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-3')" style="background:#F77F00">下载 PNG</button>
+</div>
+
+<!-- Card 4 -->
+<div class="illu-wrapper">
+  <div class="card-num">配图 4/5 · 判断工具</div>
+  <div class="illu-card card-prog" id="illu-4">
+    <div class="card-label">判断工具</div>
+    <div class="card-title">医师建议四类：越往下越需要重视</div>
+    <div class="prog-item">
+      <div class="prog-badge l1">1</div>
+      <div class="prog-content">
+        <div class="prog-name">仅说明 + 生活建议</div>
+        <div class="prog-desc">"避免负重""穿弹力袜"——不需就医，一般不需告知。</div>
+        <div class="prog-note">告知风险：极低</div>
+      </div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-badge l2">2</div>
+      <div class="prog-content">
+        <div class="prog-name">"必要时"就诊</div>
+        <div class="prog-desc">"必要时肛肠科就诊"——有症状再处理。"必要时"不是"必须"。</div>
+        <div class="prog-note">告知风险：低</div>
+      </div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-badge l3">3</div>
+      <div class="prog-content">
+        <div class="prog-name">建议复查确诊</div>
+        <div class="prog-desc">"复查血压确诊是否高血压"——需再查才能诊断。是否告知看问询措辞。</div>
+        <div class="prog-note">告知风险：中等 · 需对照问询</div>
+      </div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-badge l4">4</div>
+      <div class="prog-content">
+        <div class="prog-name">明确建议专科复查</div>
+        <div class="prog-desc">"颈动脉粥样硬化""右肺高密度影"——风险较高，大部分问询触发告知。</div>
+        <div class="prog-note">告知风险：高 · 建议如实告知</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-4')">下载 PNG</button>
+</div>
+
+<!-- Card 5 -->
+<div class="illu-wrapper">
+  <div class="card-num">配图 5/5 · 裁决标准</div>
+  <div class="illu-card card-split" id="illu-5">
+    <span class="card-label-top">裁决标准</span>
+    <div class="split-half left-split">
+      <div class="split-label">效力更高</div>
+      <div class="split-title">三甲医院</div>
+      <div class="split-item">影像设备精度高</div>
+      <div class="split-item">诊断医师经验丰富</div>
+      <div class="split-item">可作为核保依据</div>
+      <div class="split-item">时间近的 &gt; 时间远的</div>
+    </div>
+    <div class="split-half right-split">
+      <div class="split-label">效力较低</div>
+      <div class="split-title">体检中心</div>
+      <div class="split-item">筛查性质，非确诊性质</div>
+      <div class="split-item">结论不能推翻三甲诊断</div>
+      <div class="split-item">可用三甲复查结果覆盖</div>
+      <div class="split-item">单位体检 &gt; 个人体检</div>
+    </div>
+  </div>
+  <button class="btn-download" onclick="downloadCard('illu-5')">下载 PNG</button>
+</div>
+
+<div class="footer-note">
+  打开预览 HTML 确认配图位置 → 在本页逐张下载 PNG（1354px 宽）<br>
+  上传到公众号图片库 → 回到预览页全选复制正文 → 粘贴后插入配图
+</div>
+
+<script>
+function downloadCard(id) {
+  var el = document.getElementById(id);
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = id + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); });
+}
+</script>
+
+</body>
+</html>

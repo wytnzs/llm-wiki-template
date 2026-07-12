@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=540">
+<title>小红书 - 三甲医生为什么不买保险</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(16px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+body {
+background: #EDEDE8;
+display: flex; flex-direction: column; align-items: center;
+padding: 70px 20px 80px;
+font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+}
+
+.slide {
+animation: fadeUp 0.5s ease-out both;
+width: 540px; min-height: 720px;
+position: relative; overflow: hidden;
+border-radius: 8px; margin-bottom: 24px;
+box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.slide:nth-child(2) { animation-delay: 0.1s; }
+.slide:nth-child(3) { animation-delay: 0.2s; }
+.slide:nth-child(4) { animation-delay: 0.3s; }
+.slide:nth-child(5) { animation-delay: 0.4s; }
+
+.toolbar {
+position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+border-bottom: 1px solid rgba(0,0,0,0.04);
+padding: 10px 20px; display: flex; align-items: center;
+justify-content: center; gap: 10px; height: 50px;
+}
+.toolbar .btn {
+background: #1A1A1A; color: #FFF; border: none;
+padding: 8px 20px; border-radius: 6px; font-size: 13px;
+font-weight: 600; cursor: pointer; transition: all 0.2s;
+letter-spacing: 0.5px;
+}
+.toolbar .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.toolbar .btn.accent { background: #C79A5E; }
+.toolbar .progress {
+color: rgba(0,0,0,0.25); font-size: 12px;
+font-weight: 500; min-width: 100px; text-align: center;
+}
+
+.bg-warm { background: #F5F5F0; }
+.bg-white { background: #FFFFFF; }
+
+.content {
+position: relative;
+padding: 36px 32px 30px;
+z-index: 2;
+min-height: 720px;
+display: flex;
+flex-direction: column;
+}
+
+.page-num {
+position: absolute;
+bottom: 14px; right: 24px;
+font-size: 11px; font-weight: 500;
+letter-spacing: 1px; color: rgba(0,0,0,0.15);
+z-index: 3;
+}
+.page-num.dark { color: rgba(255,255,255,0.12); }
+
+.section-tag {
+display: inline-flex; align-items: center; gap: 6px;
+font-size: 10px; font-weight: 700; letter-spacing: 2px;
+color: #999; text-transform: uppercase; margin-bottom: 10px;
+}
+.section-tag::before {
+content: ''; display: inline-block;
+width: 16px; height: 1.5px; background: #C79A5E; border-radius: 1px;
+}
+
+.main-title { font-size: 24px; font-weight: 800; color: #1A1A1A; line-height: 1.35; margin-bottom: 8px; }
+.sub-title { font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 14px; }
+.body-text { font-size: 13px; color: #444; line-height: 1.75; margin-bottom: 10px; }
+
+.small-title { font-size: 14px; font-weight: 700; color: #1A1A1A; line-height: 1.4; margin-bottom: 6px; }
+
+.serif-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 22px; color: #1A1A1A; line-height: 1.35; margin-bottom: 10px; }
+.serif-sub { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 14px; color: #666; line-height: 1.6; }
+
+.gold-num { color: #C79A5E; font-weight: 800; font-size: 32px; line-height: 1; margin-bottom: 4px; font-family: 'Noto Serif SC', serif; }
+.gold-num-lg { color: #C79A5E; font-weight: 900; font-size: 52px; line-height: 1; font-family: 'Noto Serif SC', serif; }
+
+.divider { width: 32px; height: 2px; background: #C79A5E; border-radius: 1px; margin: 10px 0; }
+.divider.subtle { width: 100%; height: 1px; background: rgba(0,0,0,0.04); margin: 14px 0; }
+
+/* 信息卡 */
+.info-card {
+background: #FFFFFF; border-radius: 8px; padding: 14px 16px; margin-bottom: 8px;
+box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+}
+.info-card .card-title { font-size: 12px; font-weight: 700; color: #1A1A1A; margin-bottom: 6px; letter-spacing: 0.3px; }
+.info-card .card-body { font-size: 12px; color: #444; line-height: 1.6; }
+.info-card .card-body small { font-size: 10px; color: #999; display: block; margin-top: 4px; }
+
+/* 正确买法卡片 */
+.buy-card {
+background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%);
+border-radius: 8px; padding: 14px 16px; margin-top: 4px; position: relative; overflow: hidden;
+}
+.buy-card::after {
+content: ''; position: absolute; top: 0; right: 0;
+width: 80px; height: 80px;
+background: radial-gradient(circle, rgba(199,154,94,0.06) 0%, transparent 70%);
+}
+.buy-card .bc-label {
+font-size: 10px; font-weight: 700; color: #C79A5E; letter-spacing: 2px; margin-bottom: 6px;
+}
+.buy-card .bc-item {
+font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.5; margin-bottom: 3px;
+padding-left: 12px; position: relative;
+}
+.buy-card .bc-item::before {
+content: '✓'; position: absolute; left: 0;
+color: #C79A5E; font-weight: 700;
+}
+
+/* 对比框 */
+.compare-box { display: flex; gap: 10px; margin-bottom: 8px; }
+.compare-col { flex: 1; border-radius: 8px; padding: 14px 12px; }
+.compare-col.danger { background: #1A1A1A; }
+.compare-col.safe { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.06); }
+.compare-col .c-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+.compare-col.danger .c-label { color: #C79A5E; }
+.compare-col.safe .c-label { color: #999; }
+.compare-col .c-point { font-size: 11px; line-height: 1.5; margin-bottom: 4px; padding-left: 8px; position: relative; }
+.compare-col.danger .c-point { color: rgba(255,255,255,0.7); }
+.compare-col.safe .c-point { color: #444; }
+.compare-col .c-point::before { content: '·'; position: absolute; left: 0; }
+
+/* 高亮框 */
+.highlight-box {
+background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%);
+border-radius: 8px; padding: 14px 16px; margin-bottom: 8px; position: relative; overflow: hidden;
+}
+.highlight-box::after {
+content: ''; position: absolute; top: 0; right: 0;
+width: 80px; height: 80px;
+background: radial-gradient(circle, rgba(199,154,94,0.06) 0%, transparent 70%);
+}
+.highlight-box .hb-label { font-size: 9px; font-weight: 700; color: #C79A5E; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.highlight-box .hb-body { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.65; position: relative; z-index: 1; }
+.highlight-box .hb-body strong { color: #C79A5E; font-weight: 700; }
+
+/* 标签组 */
+.tag-group { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.tag-sm { font-size: 9px; font-weight: 600; color: #C79A5E; background: rgba(199,154,94,0.08); border: 1px solid rgba(199,154,94,0.15); padding: 3px 10px; border-radius: 20px; letter-spacing: 0.3px; }
+
+/* 双栏信息卡布局 */
+.grid-2col { display: flex; gap: 10px; margin-bottom: 8px; flex: 1; }
+.grid-2col .col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.col-card {
+background: #FFFFFF; border-radius: 8px; padding: 14px 14px;
+box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); flex: 1;
+}
+.col-card .cc-icon { font-size: 20px; margin-bottom: 4px; line-height: 1; }
+.col-card .cc-title { font-size: 11px; font-weight: 700; color: #1A1A1A; margin-bottom: 3px; }
+.col-card .cc-desc { font-size: 10px; color: #888; line-height: 1.5; }
+.col-card .cc-bad { color: #C79A5E; font-weight: 600; font-size: 10px; margin-bottom: 2px; }
+.col-card .cc-good { color: #1A1A1A; font-weight: 600; font-size: 10px; margin-bottom: 2px; }
+
+/* CTA 栏 */
+.cta-row { display: flex; gap: 10px; margin-top: auto; padding-top: 14px; }
+.cta-chip { flex: 1; background: #1A1A1A; color: #FFF; text-align: center; padding: 12px 8px; border-radius: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+.cta-chip.gold { background: #C79A5E; }
+
+/* 金句引用 */
+.quote-box {
+background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%);
+border-radius: 8px; padding: 18px 20px; position: relative; overflow: hidden;
+}
+.quote-box::before {
+content: '"'; position: absolute; top: 2px; left: 12px;
+font-size: 48px; color: rgba(199,154,94,0.15);
+font-family: 'Noto Serif SC', serif; line-height: 1;
+}
+.quote-box p {
+font-size: 15px; color: rgba(255,255,255,0.88); line-height: 1.7; padding-left: 8px;
+position: relative; z-index: 1; font-family: 'Noto Serif SC', serif; font-weight: 600;
+}
+.quote-box .quote-author {
+display: block; margin-top: 8px; font-size: 11px; color: rgba(199,154,94,0.5);
+font-style: normal; letter-spacing: 0.5px; font-family: -apple-system, 'PingFang SC', sans-serif; font-weight: 400;
+}
+
+/* 深色页 */
+.dark-slide { background: #1A1A1A; }
+.dark-slide .section-tag { color: rgba(255,255,255,0.3); }
+.dark-slide .section-tag::before { background: #C79A5E; }
+.dark-slide .main-title { color: #FFF; }
+.dark-slide .serif-title { color: #FFF; }
+.dark-slide .sub-title { color: rgba(255,255,255,0.4); }
+.dark-slide .body-text { color: rgba(255,255,255,0.65); }
+
+/* 封面 */
+.cover-slide { background: #1A1A1A; }
+.cover-slide .content { display: flex; flex-direction: column; justify-content: center; min-height: 720px; padding: 40px 36px 32px; }
+.cover-slide .grid-texture { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; }
+.cover-slide .geo-ring { position: absolute; border-radius: 50%; border: 1.5px solid; z-index: 0; }
+.cover-slide .geo-ring.r1 { top: -80px; right: -80px; width: 260px; height: 260px; border-color: rgba(199,154,94,0.06); }
+.cover-slide .geo-ring.r2 { top: -40px; right: -40px; width: 180px; height: 180px; border-color: rgba(199,154,94,0.04); }
+.cover-slide .geo-ring.r3 { bottom: -60px; left: -60px; width: 200px; height: 200px; border-color: rgba(255,255,255,0.03); }
+.cover-slide .geo-ring.r4 { bottom: -20px; left: -20px; width: 120px; height: 120px; border-color: rgba(255,255,255,0.02); }
+.cover-slide .gold-corner { position: absolute; top: 32px; right: 32px; width: 24px; height: 24px; border-top: 2px solid rgba(199,154,94,0.3); border-right: 2px solid rgba(199,154,94,0.3); z-index: 1; }
+.cover-slide .gold-ambient { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(0deg, rgba(199,154,94,0.04) 0%, transparent 100%); z-index: 1; }
+.cover-slide .cover-title { font-size: 40px; font-weight: 900; color: #FFF; line-height: 1.15; margin-bottom: 14px; position: relative; z-index: 1; }
+.cover-slide .cover-sub { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.5; margin-bottom: 14px; position: relative; z-index: 1; }
+.cover-slide .cover-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; position: relative; z-index: 1; }
+.cover-slide .tag { font-size: 10px; font-weight: 600; color: #C79A5E; background: rgba(199,154,94,0.08); border: 1px solid rgba(199,154,94,0.15); padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+.cover-slide .cover-quote { background: rgba(255,255,255,0.03); border-left: 2px solid #C79A5E; border-radius: 0 6px 6px 0; padding: 10px 14px; position: relative; z-index: 1; }
+.cover-slide .cover-quote p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.55; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+<button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+<button class="btn" onclick="downloadOne()">下载当前</button>
+<span class="progress" id="progress"></span>
+</div>
+
+<!-- ======== 第 1 张 · 封面 ======== -->
+<div class="slide cover-slide">
+<div class="grid-texture"></div>
+<div class="geo-ring r1"></div>
+<div class="geo-ring r2"></div>
+<div class="geo-ring r3"></div>
+<div class="geo-ring r4"></div>
+<div class="gold-corner"></div>
+<div class="gold-ambient"></div>
+<div class="content">
+<div class="cover-title">三甲医生<br>为什么不买保险？</div>
+<div class="cover-sub">4 个内行人才知道的保险真相</div>
+<div class="cover-tags">
+<span class="tag">重疾险</span>
+<span class="tag">百万医疗</span>
+<span class="tag">保险避坑</span>
+</div>
+<div class="cover-quote">
+<p>普通人看着保障齐全的保险，在医生眼里可能是理赔难、赔付少的鸡肋产品</p>
+</div>
+<div class="page-num dark">1/5</div>
+</div>
+</div>
+
+<!-- ======== 第 2 张 · 重疾险真相① ======== -->
+<div class="slide bg-warm">
+<div class="content">
+<div class="section-tag">重疾险 · 01</div>
+<div class="main-title">高发疾病不保<br>大病赔不了</div>
+<div class="body-text">大部分重疾早期就能筛查发现及时治愈。但不少重疾险对原位癌、冠脉介入术等高发疾病，要么不保，要么理赔条件严苛。治病花了钱，只因没达到合同重疾标准，最终无法理赔。</div>
+
+<div class="divider"></div>
+
+<div class="small-title">✅ 正确买法</div>
+<div class="buy-card">
+<div class="bc-label">三项必查</div>
+<div class="bc-item">必须包含原位癌、冠脉介入术等高发轻症，缺一不可</div>
+<div class="bc-item">轻症赔30%保额，中症至少赔60%</div>
+<div class="bc-item">保额至少50万，一线城市建议80万+</div>
+</div>
+
+<div class="page-num">2/5</div>
+</div>
+</div>
+
+<!-- ======== 第 3 张 · 重疾险真相② ======== -->
+<div class="slide bg-white">
+<div class="content">
+<div class="section-tag">重疾险 · 02</div>
+<div class="main-title">癌症二次赔很有用<br>但猫腻多</div>
+<div class="body-text">癌症复发、转移是大病家庭返贫的主因。癌症二次赔是重疾险性价比很高的附加保障——但很多产品暗藏套路，理赔门槛极高。</div>
+
+<div class="divider"></div>
+
+<div class="compare-box">
+<div class="compare-col danger">
+<div class="c-label">套路产品</div>
+<div class="c-point">只保复发转移</div>
+<div class="c-point">不保新发、持续治疗</div>
+<div class="c-point">长间隔期</div>
+</div>
+<div class="compare-col safe">
+<div class="c-label">正确产品</div>
+<div class="c-point">覆盖新发、复发、<br>转移、持续四种情况</div>
+<div class="c-point">3年间隔期</div>
+</div>
+</div>
+
+<div class="highlight-box">
+<div class="hb-label">KEY TAKEAWAY</div>
+<div class="hb-body">选癌症二次赔，记住两个标准：<strong>3年间隔期</strong> + <strong>覆盖四种情况</strong></div>
+</div>
+
+<div class="page-num">3/5</div>
+</div>
+</div>
+
+<!-- ======== 第 4 张 · 百万医疗险 ======== -->
+<div class="slide bg-warm">
+<div class="content">
+<div class="section-tag">百万医疗险</div>
+<div class="main-title">两个隐藏坑<br>理赔时才知道</div>
+
+<div class="grid-2col">
+<div class="col">
+<div class="col-card">
+<div class="cc-icon">💊</div>
+<div class="cc-title">坑①：救命药不给报</div>
+<div class="cc-desc">几十万的进口靶向药、免疫药需院外购买，部分产品不报销</div>
+<div class="divider subtle" style="margin:8px 0"></div>
+<div class="cc-good">✅ 自带院外购药责任，100%报销</div>
+</div>
+</div>
+<div class="col">
+<div class="col-card">
+<div class="cc-icon">📅</div>
+<div class="cc-title">坑②：续保无保障</div>
+<div class="cc-desc">一年期产品，有病了、理赔过、产品不卖了——第二年就被拒保</div>
+<div class="divider subtle" style="margin:8px 0"></div>
+<div class="cc-good">✅ 选保证续保20年的产品</div>
+</div>
+</div>
+</div>
+
+<div class="highlight-box">
+<div class="hb-label">总结</div>
+<div class="hb-body">百万医疗险必须看两点：<strong>院外购药责任</strong> + <strong>保证续保条款</strong>。缺一个，几十万的保障就悬了。</div>
+</div>
+
+<div class="page-num">4/5</div>
+</div>
+</div>
+
+<!-- ======== 第 5 张 · 金句 + 互动 ======== -->
+<div class="slide dark-slide">
+<div class="content" style="justify-content:center;">
+<div class="section-tag" style="color:rgba(255,255,255,0.3);">INSIGHT</div>
+
+<div class="quote-box">
+<p>保险真正的价值不在卖出去那一瞬间，<br>而在兑现那一刻。</p>
+<span class="quote-author">—— 王永涛</span>
+</div>
+
+<div style="margin-top:24px; text-align:center;">
+<p style="font-size:13px; color:rgba(255,255,255,0.35); line-height:1.6;">如果你也在研究保险，不确定自己买的到底靠不靠谱——随时来问我，知无不言。</p>
+</div>
+
+<div class="cta-row">
+<div class="cta-chip gold">💬 不清楚的地方，来问我</div>
+</div>
+
+<div class="page-num dark">5/5</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2; const SLIDE_W = 540, SLIDE_H = 720;
+async function renderSlide(s) { s.style.animation = 'none'; return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: SLIDE_W, height: SLIDE_H, logging: false }); }
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+async function downloadAll() {
+const slides = document.querySelectorAll('.slide'); const progress = document.getElementById('progress'); const zip = new JSZip();
+for (let i = 0; i < slides.length; i++) { progress.textContent = `渲染 ${i+1}/${slides.length}...`; const canvas = await renderSlide(slides[i]); zip.file(`三甲医生为什么不买保险-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas)); }
+progress.textContent = '打包中...'; saveAs(await zip.generateAsync({type:'blob'}), '三甲医生为什么不买保险-全部.zip'); progress.textContent = `${slides.length} 张已完成`;
+}
+async function downloadOne() {
+const slides = document.querySelectorAll('.slide'); const vc = window.innerHeight / 2; let idx = 0, min = Infinity;
+slides.forEach((s,i) => { const d = Math.abs(s.getBoundingClientRect().top + 360 - vc); if (d < min) { min = d; idx = i; } });
+const canvas = await renderSlide(slides[idx]); saveAs(await canvasToBlob(canvas), `三甲医生为什么不买保险-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

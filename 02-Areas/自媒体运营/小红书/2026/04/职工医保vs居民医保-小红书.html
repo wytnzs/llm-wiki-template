@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 石家庄医保差距</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #FAFAFA;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 70px 20px 80px;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* === 工具栏 === */
+.toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 12px 20px; display: flex; align-items: center;
+  justify-content: center; gap: 12px;
+}
+.toolbar .btn {
+  background: #2C2C2C; color: #FFF; border: none;
+  padding: 10px 24px; border-radius: 8px; font-size: 14px;
+  font-weight: 600; cursor: pointer;
+}
+.toolbar .btn.accent { background: #555; }
+.toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+/* === 卡片基础 === */
+.slide {
+  width: 540px; min-height: 720px;
+  position: relative; overflow: hidden;
+  border-radius: 6px; margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.bg-light { background: #FAFAFA; }
+.bg-white { background: #FFFFFF; }
+
+/* === 内容层 === */
+.content {
+  position: relative;
+  padding: 28px 26px 26px;
+  z-index: 2;
+}
+
+/* === 页码 === */
+.page-num {
+  position: absolute;
+  bottom: 12px; right: 20px;
+  font-size: 10px;
+  color: rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+/* === 标签 === */
+.section-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #2C2C2C;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* === 通用文字 === */
+.main-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: #1A1A1A;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.sub-title {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.intro {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+/* === 信息卡 === */
+.info-card {
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.info-card .card-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2C2C2C;
+  margin-bottom: 3px;
+}
+.info-card .card-body {
+  font-size: 12px;
+  color: #333;
+  line-height: 1.55;
+}
+.info-card .card-body small {
+  font-size: 10px;
+  color: #888;
+  display: block;
+  margin-top: 3px;
+}
+
+/* === 卡片网格 2列 === */
+.card-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.big-card {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 16px 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+  text-align: center;
+}
+.big-card .bc-num {
+  font-size: 32px;
+  font-weight: 900;
+  color: #2C2C2C;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.big-card .bc-label {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.3;
+}
+.big-card .bc-sub {
+  font-size: 10px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* === 表格 === */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  background: #FFFFFF;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.data-table th {
+  background: #2C2C2C;
+  color: #FFFFFF;
+  padding: 7px 8px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 10px;
+}
+.data-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: #333;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: #FAFAFA; }
+
+/* === 引用块 === */
+.quote-box {
+  background: #2C2C2C;
+  border-radius: 6px;
+  padding: 11px 16px;
+  margin-top: 10px;
+}
+.quote-box p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* === 分隔线 === */
+.divider {
+  width: 36px; height: 2px;
+  background: #2C2C2C; border-radius: 1px;
+  margin: 10px 0;
+}
+
+/* === CTA === */
+.cta-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.cta-chip {
+  flex: 1;
+  background: #2C2C2C;
+  color: #FFF;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* === 深色卡 === */
+.dark-card {
+  background: #2C2C2C;
+  border-radius: 6px;
+  padding: 11px 14px;
+  margin-bottom: 7px;
+}
+.dark-card .dc-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #CCC;
+  margin-bottom: 3px;
+}
+.dark-card .dc-body {
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+
+/* === 封面样式 === */
+.cover-slide {
+  background: #1A1A1A;
+}
+.cover-slide .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 720px;
+  padding: 36px 36px 28px;
+}
+.cover-slide .cover-title {
+  font-size: 48px;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.cover-slide .cover-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.cover-slide .cover-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.cover-slide .tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #FFF;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.cover-slide .cover-quote {
+  background: rgba(255,255,255,0.04);
+  border-left: 2px solid rgba(255,255,255,0.25);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  margin-top: 8px;
+}
+.cover-slide .cover-quote p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* === 深色页 === */
+.dark-slide {
+  background: #1A1A1A;
+}
+.dark-slide .section-tag { color: #CCC; }
+.dark-slide .main-title { color: #FFF; }
+.dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+.dark-slide .intro { color: rgba(255,255,255,0.45); }
+.dark-slide .info-card {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+}
+.dark-slide .info-card .card-title { color: #CCC; }
+.dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+.dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+.dark-slide .data-table { background: rgba(255,255,255,0.02); }
+.dark-slide .data-table th { background: #555; }
+.dark-slide .data-table td { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.04); }
+.dark-slide .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.dark-slide .page-num { color: rgba(255,255,255,0.12); }
+.dark-slide .big-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); }
+.dark-slide .big-card .bc-num { color: #FFF; }
+.dark-slide .big-card .bc-label { color: rgba(255,255,255,0.45); }
+.dark-slide .big-card .bc-sub { color: rgba(255,255,255,0.25); }
+
+/* 高亮数字 */
+.highlight-num {
+  font-size: 48px; font-weight: 900; color: #2C2C2C; line-height: 1;
+}
+.highlight-unit {
+  font-size: 16px; font-weight: 600; color: #666; margin-left: 2px;
+}
+.text-center { text-align: center; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<!-- 工具栏 -->
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">职工花1万<br>居民花5万</div>
+    <div class="cover-sub">石家庄医保差距真相 · 2026最新数据</div>
+    <div class="cover-tags">
+      <span class="tag">💰 省钱必看</span>
+      <span class="tag">📋 实用科普</span>
+      <span class="tag">🔖 收藏备用</span>
+    </div>
+    <div class="cover-quote">
+      <p>同一个城市，同一台手术，就因为标签不一样，自己掏的钱差几万。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/10</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 核心对比表 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">01 · 核心对比</div>
+    <div class="main-title">一张表看清差距</div>
+    <div class="sub-title">职工医保 vs 居民医保 · 石家庄2026</div>
+    <table class="data-table">
+      <tr><th>维度</th><th>职工医保</th><th>居民医保</th></tr>
+      <tr><td>个人缴费</td><td>6.5%（约3870-7160元/年）</td><td>400元/年</td></tr>
+      <tr><td>财政补贴</td><td>单位承担大头</td><td>≥670元/人/年</td></tr>
+      <tr><td>个人账户</td><td>✅ 有，可共济</td><td>❌ 无</td></tr>
+      <tr><td>门诊限额</td><td>最高6000元</td><td>400元</td></tr>
+      <tr><td>住院封顶</td><td>75万元</td><td>约30万元</td></tr>
+      <tr><td>退休待遇</td><td>终身免费</td><td>逐年缴费</td></tr>
+    </table>
+    <div class="divider"></div>
+    <div class="intro">缴费差11倍，保障差15倍——但这不是"哪个更好"，是本来就不是同一个东西。</div>
+    <div class="page-num">2/10</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 底层逻辑 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">02 · 底层逻辑</div>
+    <div class="main-title">为什么差距是天然的</div>
+    <div class="card-row">
+      <div class="big-card">
+        <div class="bc-num">职工</div>
+        <div class="bc-label">劳动福利</div>
+        <div class="bc-sub">有工作→单位交大头<br>强制参保，高缴费高保障</div>
+      </div>
+      <div class="big-card">
+        <div class="bc-num">居民</div>
+        <div class="bc-label">社会救助</div>
+        <div class="bc-sub">全民兜底→财政补贴<br>低门槛，保基本不保品质</div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">名字早就说清楚了</div>
+      <div class="card-body">"城镇职工"=你有工作，给你福利。"城乡居民"=你没固定工作，给你兜底。定位不一样，差距就是天生的。</div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/10</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 门诊差距 -->
+<div class="slide bg-light">
+  <div class="content">
+    <div class="section-tag">03 · 门诊</div>
+    <div class="main-title">15倍的差距</div>
+    <div class="card-row">
+      <div class="big-card">
+        <div class="bc-num">6000元</div>
+        <div class="bc-label">职工医保门诊限额</div>
+        <div class="bc-sub">起付线100元，退休人员可达5000-6000</div>
+      </div>
+      <div class="big-card">
+        <div class="bc-num">400元</div>
+        <div class="bc-label">居民医保门诊限额</div>
+        <div class="bc-sub">2026年3月前仅200元，刚翻倍</div>
+      </div>
+    </div>
+    <div class="intro" style="margin-top:12px;">
+      职工感冒了→去药店刷个人账户。<br>
+      居民感冒了→去医院排队用门诊统筹。<br><br>
+      两种医保的用户体验，完全不一样。
+    </div>
+    <div class="info-card">
+      <div class="card-title">2026年新政改善</div>
+      <div class="card-body">居民门诊取消起付线，报销比例提至最高95%，但400元的年度天花板仍是硬约束。<small>数据：石家庄市医保局2026年3月更新</small></div>
+    </div>
+    <div class="page-num">4/10</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 住院差距 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">04 · 住院</div>
+    <div class="main-title">最怕的不是生病，是大病</div>
+    <div class="card-row">
+      <div class="big-card">
+        <div class="bc-num">75万</div>
+        <div class="bc-label">职工封顶线</div>
+        <div class="bc-sub">2026年大幅提升</div>
+      </div>
+      <div class="big-card">
+        <div class="bc-num">30万</div>
+        <div class="bc-label">居民封顶线（含大病）</div>
+        <div class="bc-sub">约石家庄居民7年收入</div>
+      </div>
+    </div>
+    <div class="intro mt-8">
+      2.5倍的差距。极端风险面前，30万可能几个月就烧完——癌症靶向、器官移植、重大手术。
+    </div>
+    <div class="info-card">
+      <div class="card-title">DRG改革还在加码</div>
+      <div class="card-body">按病种付费后，医院倾向缩短住院、控制用药。好药、贵药越来越难在院内获取，医保身份的"天花板效应"正在显现。</div>
+    </div>
+    <div class="page-num">5/10</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 退休 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">05 · 退休</div>
+    <div class="main-title">一道分水岭</div>
+    <div class="card-row">
+      <div class="big-card">
+        <div class="bc-num">终身</div>
+        <div class="bc-label">职工医保退休后</div>
+        <div class="bc-sub">缴满年限→不再缴费→终身享受</div>
+      </div>
+      <div class="big-card">
+        <div class="bc-num">逐年</div>
+        <div class="bc-label">居民医保退休后</div>
+        <div class="bc-sub">今年交今年有，明年不交明年没</div>
+      </div>
+    </div>
+    <div class="info-card mt-12">
+      <div class="card-title">关键差异</div>
+      <div class="card-body">职工缴满30年（男）/25年（女）≈ 退休后0成本。居民不存在"退休"概念，活到老交到老。</div>
+    </div>
+    <div class="quote-box mt-12">
+      <p>一个60岁的职工和一个60岁的居民，医疗上的安全感完全不同。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">6/10</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · 灵活就业 -->
+<div class="slide bg-light">
+  <div class="content">
+    <div class="section-tag">06 · 灵活就业</div>
+    <div class="main-title">最纠结的一群人</div>
+    <div class="card-row">
+      <div class="big-card">
+        <div class="bc-num">4645元</div>
+        <div class="bc-label">职工·年缴费</div>
+        <div class="bc-sub">基数71463×6.5%</div>
+      </div>
+      <div class="big-card">
+        <div class="bc-num">400元</div>
+        <div class="bc-label">居民·年缴费</div>
+        <div class="bc-sub">2025年标准</div>
+      </div>
+    </div>
+    <div class="intro mt-8">
+      差价11倍。一年差4000多块，每月多交300多。
+    </div>
+    <div class="info-card">
+      <div class="card-title">多交4000换什么？</div>
+      <div class="card-body">✅ 个人账户（药店买药）<br>✅ 门诊6000额度<br>✅ 住院75万封顶<br>✅ 退休终身免费</div>
+    </div>
+    <div class="intro mt-8">
+      对长期自由职业者来说——这不只是"保障"，这是给退休后的自己买了一张长期饭票。
+    </div>
+    <div class="page-num">7/10</div>
+  </div>
+</div>
+
+<!-- 第 8 张 · 怎么选 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">07 · 决策指南</div>
+    <div class="main-title">所以到底怎么选？</div>
+    <div class="info-card">
+      <div class="card-title">💼 有工作的</div>
+      <div class="card-body">职工医保强制的，没得选。但也别抱怨——它是你性价比最高的保障，没有之一。</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">🆓 自由职业/灵活就业</div>
+      <div class="card-body">优先职工医保！石家庄缴费比例已降到6.5%，每月多交几百换终身保障，值。</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">🏠 全职主妇/主夫/学生</div>
+      <div class="card-body">居民医保是唯一选项。它的价值是维持"医保身份"，再配商业医疗险补齐短板。</div>
+    </div>
+    <div class="divider"></div>
+    <div class="intro" style="font-weight:600;color:#1A1A1A;">
+      最糟糕的选择不是选了居民医保——<br>而是以为有保障，就什么都不用再准备了。
+    </div>
+    <div class="page-num">8/10</div>
+  </div>
+</div>
+
+<!-- 第 9 张 · 金句 -->
+<div class="slide dark-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-tag">核心观点</div>
+    <div class="main-title" style="font-size:32px;">居民医保是安全网<br>职工医保是护城河</div>
+    <div class="divider" style="background:#555;margin:12px 0;"></div>
+    <div class="intro" style="font-size:14px;">
+      安全网 → 保你不掉下去<br>
+      护城河 → 让你过得更好
+    </div>
+    <div class="quote-box mt-16">
+      <p>认识差距，但不否定差距。然后在自己的位置上，做最优的补充配置。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">9/10</div>
+  </div>
+</div>
+
+<!-- 第 10 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="cover-title">收藏这篇<br>帮家人看看</div>
+    <div class="cover-sub">医保是大多数家庭最大的保障底牌<br>搞清楚差距，才能做对选择</div>
+    <div class="cover-tags">
+      <span class="tag">❤️ 实用科普</span>
+      <span class="tag">📌 建议收藏</span>
+    </div>
+    <div class="cover-quote">
+      <p>你或者你家人交的是职工还是居民？看完这篇心里有数了吗？评论区聊聊👇</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">10/10</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`石家庄医保差距-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '石家庄医保差距-小红书.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `石家庄医保差距-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

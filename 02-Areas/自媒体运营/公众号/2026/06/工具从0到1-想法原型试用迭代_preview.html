@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>工具从0到1-想法原型试用迭代</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#FFF;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:677px;margin:0 auto;padding:20px 16px;font-size:16px;line-height:1.8;color:#1A1A1A}h1{font-size:24px;font-weight:800;color:#102542;margin:24px 0 12px}h2{font-size:19px;font-weight:700;color:#102542;border-left:4px solid #F77F00;padding-left:12px;margin:20px 0 10px}h3{font-size:17px;font-weight:700;color:#0A1931;margin:16px 0 8px}p{margin:0 0 12px}strong{color:#0A1931}blockquote{border-left:3px solid #F77F00;background:#F7F9FC;padding:12px 16px;margin:16px 0;color:#4A4A4A;border-radius:0 4px 4px 0;font-size:15px}hr{border:none;border-top:1px solid #E5EAF2;margin:24px 0}.footer{margin-top:32px;padding-top:16px;border-top:1px solid #E5EAF2;font-size:14px;color:#86909C}.footer a{color:#F77F00;text-decoration:none}.illu-card{position:relative;width:100%;max-width:677px;margin:24px auto;border-radius:12px;overflow:hidden;box-sizing:border-box}</style></head><body>
+
+<p>上篇写了做三个工具的成本。这篇写过程。</p>
+<p>用拒赔维权分析工具当例子，从头到尾，每一步真实发生了什么。</p>
+<hr>
+<h2>起点：一个问题反复出现</h2>
+<p>今年 2 月，一周之内，三个代理人找我帮忙分析拒赔案子。三个案子拒赔理由不一样，但我干的事是一样的：翻拒赔通知书，找引用条款，查保险法，翻类似判例，列抗辩要点。</p>
+<p>第三次干完，我想：<strong>这个活能不能让 AI 来？</strong>不是让 AI 做判断。是让 AI 把"找条款、翻判例、列依据"这些机械动作干了。</p>
+<hr>
+<h2>第一步：定义"最小能跑的版本"</h2>
+<p>我给自己定了一个硬约束：<strong>第一个版本只解决一个问题——输入拒赔通知书和保单，输出保险公司拒赔引用了哪些条款 + 这些条款在保险法下是否有效。</strong></p>
+<p>不做抗辩建议。不做类似判例。不做任何超出范围的功能。因为如果连"条款是否有效"都做不准，后面的功能都是空中楼阁。</p>
+<blockquote>最小版本的目标不是"好用"。是"能跑，且跑得对"。</blockquote>
+<hr>
+<h2>第二步：搭原型（2 天）</h2>
+<p>把想法丢给 Claude Code。它生成了第一版代码——HTML + JavaScript，部署在 Cloudflare Worker 上。能跑。但输出质量不稳定。同样一份拒赔通知书，多试几次，输出的结构有时整齐有时散架。</p>
+<blockquote>能跑和能用之间，隔着"稳定"两个字。</blockquote>
+<hr>
+<h2>第三步：调输出稳定性（花了最长时间）</h2>
+<p>DeepSeek 很聪明，但自由发挥能力太强了。我的办法很笨：<strong>反复改提示词框架。</strong></p>
+<p>不是改"措辞"。是改"输出约束"——规定它必须用 JSON 格式返回、规定每个字段的内容范围、规定不确定的时候必须标注"不确定"而不是瞎编。</p>
+<p>大概改了二十版提示词。每次改完跑 10 个测试案例，对比输出。用了两周零碎时间。提示词从一段话变成了一个详细的操作手册。</p>
+<blockquote>提示词不是"说说就行"。是要写到"换个没看过的人，照着做也能出一样的结果"。</blockquote>
+<hr>
+<h2>第四步：加数据层</h2>
+<p>提示词稳定之后还有一个问题：AI 不知道最新的判例。这不是提示词能解决的。得喂数据。</p>
+<p>我做了两件事：整理近两年公开的保险合同纠纷裁判文书，提取关键字段；做成检索库，AI 分析时自动匹配相关判例。这部分花了大概一周。</p>
+<blockquote>AI 的能力 = 模型能力 + 数据质量。模型谁都能用。数据才是你的壁垒。</blockquote>
+<hr>
+<h2>第五步：找人试用</h2>
+<p>找了 5 个做理赔的同行来试。第一轮反馈："分析结果挺全的，但我不知道从哪开始看。""法律术语看不太懂。""能不能加一个'下一步建议'？"</p>
+<p>三条反馈指向同一个问题：<strong>我做的工具是给"懂法律的人"用的。但实际用户是代理人——他们需要的不只是法律分析，是"告诉我怎么做"。</strong></p>
+<p>回去改了输出结构：最上面加"一句话结论"，每个法律术语加大白话解释，最后加"建议下一步动作"。第二轮试用，反馈明显好了。</p>
+<blockquote>不是东西做错了。是做对了一半——只做了"分析"，没做"翻译"。</blockquote>
+<hr>
+<h2>第六步：持续迭代</h2>
+<p>工具上线之后，不是结束。我现在每周打开看一次——有没有报错、有没有反馈。每次发现新判例、新法规，手动补充到数据层。迭代不要求快。求稳。每次改一点，每次比上次好用一点。</p>
+<blockquote>工具不是做完就完了。工具是活的——你不管它，它就死了。</blockquote>
+
+<!-- 配图 -->
+<div class="illu-card" id="illu-1" style="padding:32px 28px;background:#F7F9FC;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif"><h2 style="font-size:20px;font-weight:500;font-family:'Noto Serif SC','Songti SC',serif;color:#102542;margin:0 0 8px;border:none;padding:0">一个工具从 0 到 1</h2><p style="font-size:13px;color:#86909C;margin:0 0 20px;letter-spacing:.10em">以拒赔维权分析工具为例</p><div style="display:flex;align-items:flex-start;gap:0"><div style="text-align:center;flex:1;min-width:0"><div style="width:36px;height:36px;background:#F77F00;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff">1</div><div style="font-size:12px;font-weight:500;color:#102542">定义最小版本</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:22px;padding-top:14px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-3px;border:4px solid transparent;border-left:6px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:36px;height:36px;background:#102542;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff">2</div><div style="font-size:12px;font-weight:500;color:#102542">搭原型</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:22px;padding-top:14px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-3px;border:4px solid transparent;border-left:6px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:36px;height:36px;background:#0A1931;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff">3</div><div style="font-size:12px;font-weight:500;color:#102542">调稳定性</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:22px;padding-top:14px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-3px;border:4px solid transparent;border-left:6px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:36px;height:36px;background:#86909C;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff">4</div><div style="font-size:12px;font-weight:500;color:#102542">加数据层</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:22px;padding-top:14px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-3px;border:4px solid transparent;border-left:6px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:36px;height:36px;background:#F77F00;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff">5</div><div style="font-size:12px;font-weight:500;color:#102542">找人试用</div></div><div style="display:flex;align-items:center;flex-shrink:0;width:22px;padding-top:14px"><div style="flex:1;height:1.5px;background:#E5EAF2;position:relative"><div style="position:absolute;right:-2px;top:-3px;border:4px solid transparent;border-left:6px solid #F77F00"></div></div></div><div style="text-align:center;flex:1;min-width:0"><div style="width:36px;height:36px;background:#0A1931;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff">6</div><div style="font-size:12px;font-weight:500;color:#102542">持续迭代</div></div></div><p style="text-align:center;margin:14px 0 0;font-size:13px;color:#102542;font-weight:500">第一个工具走弯路。第二个就顺了。第三个两周搞定。</p></div>
+
+<hr>
+<h2>总结</h2>
+<p>一个反复出现的问题 → 定义最小版本 → 搭原型（2-3 天）→ 调稳定性（最花时间）→ 加数据层（你的壁垒）→ 找人试用（吐槽比点赞值钱）→ 迭代（每周比上周好用一点）。</p>
+<p>这个流程，做第一个工具的时候走了不少弯路。做第二个的时候就顺了。做第三个的时候，从想法到能用的版本，只用了两周。</p>
+<blockquote>不是你会做工具了。是你学会"怎么学做工具"了。</blockquote>
+<hr>
+<p style="color:#86909C;font-size:15px">你有没有一个想法——某个重复的活，你觉得应该可以用 AI 做的？私我聊聊，帮你看看第一步怎么走。</p>
+<div class="footer"><p>📥 配图下载：打开 <a href="工具从0到1-想法原型试用迭代_配图下载.html">配图下载页</a> 下载 PNG</p></div>
+</body></html>

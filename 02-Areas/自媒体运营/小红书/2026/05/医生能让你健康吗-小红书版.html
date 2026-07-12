@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 医生能让你健康吗</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2C2C2C;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .info-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C2C2C;
+    margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 16px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .mini-card .m-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+  }
+  .mini-card .m-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .quote-box {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .divider {
+    width: 36px; height: 2px;
+    background: #2C2C2C; border-radius: 1px;
+    margin: 10px 0;
+  }
+
+  .dark-card {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .dark-card .dc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #CCC;
+    margin-bottom: 3px;
+  }
+  .dark-card .dc-body {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .cover-slide {
+    background: #1A1A1A;
+  }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .dark-slide {
+    background: #1A1A1A;
+  }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+  .cta-chip {
+    flex: 1;
+    background: #2C2C2C;
+    color: #FFF;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">医生能让<br>你健康吗？</div>
+    <div class="cover-sub" style="font-size:32px;color:rgba(255,255,255,0.7);font-weight:700;">不能。</div>
+    <div class="cover-tags">
+      <span class="tag">健康认知</span>
+      <span class="tag">醍醐灌顶</span>
+      <span class="tag">收藏备用</span>
+    </div>
+    <div class="cover-quote">
+      <p>维持健康的最后一道防线才是医生，不是你想象中的第一道。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/9</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 先泼冷水 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">FACT</div>
+    <div class="main-title">医生救不了<br>你的健康</div>
+    <div class="divider"></div>
+    <div class="intro">
+      很多医生自己看上去就像大病初愈。<br>
+      医生群体平均寿命比正常人群还早。
+    </div>
+    <div class="info-card">
+      <div class="card-title">慢性病，医学能治好吗？</div>
+      <div class="card-body">
+        高血压、糖尿病、高血脂——都不能。<br>
+        现代医学对它们做的是对抗治疗，不是治愈。
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">什么是对抗治疗？</div>
+      <div class="card-body">
+        血压高了吃药降压<br>
+        血糖高了用药降糖<br>
+        疼就止痛，感染就上消炎药<br>
+        器官长瘤子就割掉它
+      </div>
+    </div>
+    <div class="page-num">2/9</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 医学的局限 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">REALITY</div>
+    <div class="main-title">总是去帮助<br>常常去安慰</div>
+    <div class="sub-title">有时去治愈</div>
+    <div class="divider" style="background:#555;"></div>
+    <div class="intro">
+      医学的格言已经说得很清楚了——<br>
+      "治愈"只是偶尔发生的事。
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">这句话意味着</div>
+      <div class="dc-body">
+        大部分时候，医学能做的是控制症状、延缓进程，<br>
+        而不是真正"治好"你。
+      </div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">一个扎心的事实</div>
+      <div class="dc-body">
+        如果把健康寄托在医生和药物上，<br>
+        你从一开始就站错了位置。
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/9</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 健康在谁手里 -->
+<div class="slide bg-white">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-tag">TRUTH</div>
+    <div class="main-title" style="font-size:30px;">能让你健康的<br>只有你自己</div>
+    <div class="divider"></div>
+    <div class="sub-title" style="font-size:14px;margin-bottom:16px;">
+      不是医生，不是保健品，不是体检套餐。
+    </div>
+    <div class="info-card">
+      <div class="card-title">健康的三个决定因素</div>
+      <div class="card-body">
+        <strong>你的健康理念</strong> —— 你相信什么，你就怎么做<br>
+        <strong>你的生活方式</strong> —— 你每天在做什么<br>
+        <strong>你的坚持</strong> —— 一天两天没用，十年八年有用
+      </div>
+    </div>
+    <div class="quote-box" style="margin-top:14px;">
+      <p>不管哪一种疾病，永远绕不开四个字：生活方式。</p>
+    </div>
+    <div class="page-num">4/9</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 四大基石 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">FOUNDATION</div>
+    <div class="main-title">健康的<br>四大基石</div>
+    <div class="divider" style="background:#555;"></div>
+    <div class="intro">听起来像套话，但这才是维持健康的根本。</div>
+
+    <div class="card-row">
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-title" style="color:#CCC;">吃得健康</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.6);">均衡饮食<br>不暴饮暴食</div>
+      </div>
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-title" style="color:#CCC;">睡得香</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.6);">规律作息<br>尽量不要熬夜</div>
+      </div>
+    </div>
+    <div class="card-row">
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-title" style="color:#CCC;">规律运动</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.6);">坚持动起来<br>不需要多专业</div>
+      </div>
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-title" style="color:#CCC;">开心点</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.6);">心态好<br>比吃啥补品都管用</div>
+      </div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">5/9</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 防线逻辑 -->
+<div class="slide bg-white">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div class="section-tag">PERSPECTIVE</div>
+    <div class="main-title" style="font-size:30px;">医生的角色<br>被搞反了</div>
+    <div class="divider"></div>
+    <div class="intro">
+      大多数人的顺序：<br>
+      生病 → 看医生 → 吃药/手术 → 指望治好
+    </div>
+    <div class="info-card">
+      <div class="card-title">正确的顺序应该是</div>
+      <div class="card-body">
+        <strong>调整生活方式 → 指标仍异常 → 再找医生兜底</strong>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">医生是最后一道防线</div>
+      <div class="card-body">
+        不是你想象中的第一道。<br>
+        药物和手术是兜底的，不是用来给你挥霍健康做后盾的。
+      </div>
+    </div>
+    <div class="page-num">6/9</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · 两个认知陷阱 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">TRAPS</div>
+    <div class="main-title">两个最常见的<br>健康认知坑</div>
+    <div class="divider" style="background:#555;"></div>
+
+    <div class="dark-card">
+      <div class="dc-title">陷阱一：身边即世界</div>
+      <div class="dc-body">
+        "我爷爷一天喝半斤酒，活到99，所以喝酒没事。"<br>
+        个例不是规律。你看到的只是幸存者。
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">陷阱二：过度恐慌</div>
+      <div class="dc-body">
+        看到新闻有人感冒进了ICU，自己流个鼻涕慌得要住院。<br>
+        健康是宏大概念，不要听风就是雨。
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">正确姿势</div>
+      <div class="dc-body">
+        多听正规科普，保持理性。<br>
+        不焦虑，不盲目。
+      </div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/9</div>
+  </div>
+</div>
+
+<!-- 第 8 张 · 行动指南 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">ACTION</div>
+    <div class="main-title">从今天开始<br>做这三件事</div>
+    <div class="divider"></div>
+
+    <div class="info-card">
+      <div class="card-title">规律作息</div>
+      <div class="card-body">
+        不熬夜不是口号，是健康的基本盘。<br>
+        三点不睡六点起，阎王夸你好身体。
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">均衡饮食 + 坚持运动</div>
+      <div class="card-body">
+        不用多专业，先动起来。<br>
+        把伤害身体的坏习惯一点一点改掉。
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">摆正认知</div>
+      <div class="card-body">
+        健康是一个整体系统，不是单项指标。<br>
+        不要等指标爆了才想起改。
+      </div>
+    </div>
+
+    <div class="page-num">8/9</div>
+  </div>
+</div>
+
+<!-- 第 9 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;padding:36px;">
+    <div class="cover-title" style="font-size:36px;">健康不是<br>等生病了找医生</div>
+    <div class="divider" style="background:rgba(255,255,255,0.2);margin:14px 0;"></div>
+    <div class="cover-sub" style="margin-bottom:24px;color:rgba(255,255,255,0.5);">
+      是每一天的每一个选择。<br><br>
+      关注我，一起把健康拿在自己手里。
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">9/9</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

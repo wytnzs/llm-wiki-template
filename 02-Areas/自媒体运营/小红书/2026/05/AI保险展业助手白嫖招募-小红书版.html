@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - AI保险展业助手白嫖招募</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  /* === 工具栏 === */
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  /* === 卡片基础 === */
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  /* === 内容层 === */
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  /* === 页码 === */
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  /* === 标签 === */
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2C2C2C;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* === 通用文字 === */
+  .main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  /* === 信息卡 === */
+  .info-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C2C2C;
+    margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* === 卡片网格 3列 === */
+  .card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .mini-card .m-icon { font-size: 22px; margin-bottom: 5px; }
+  .mini-card .m-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .mini-card .m-desc {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.35;
+  }
+
+  /* === 表格 === */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .data-table th {
+    background: #2C2C2C;
+    color: #FFFFFF;
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .data-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: #333;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #FAFAFA; }
+
+  /* === 引用块 === */
+  .quote-box {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* === 分隔线 === */
+  .divider {
+    width: 36px; height: 2px;
+    background: #2C2C2C; border-radius: 1px;
+    margin: 10px 0;
+  }
+
+  /* === 大号数字 === */
+  .big-num {
+    font-size: 48px; font-weight: 900;
+    color: #2C2C2C;
+    line-height: 1;
+    display: inline-block;
+  }
+
+  /* === 功能四列 === */
+  .func-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .func-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 14px 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .func-card .f-num {
+    font-size: 28px; font-weight: 900; color: #2C2C2C;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .func-card .f-title {
+    font-size: 13px; font-weight: 700; color: #1A1A1A;
+    margin-bottom: 4px;
+  }
+  .func-card .f-desc {
+    font-size: 10px; color: #666; line-height: 1.5;
+  }
+
+  /* === CTA === */
+  .cta-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .cta-chip {
+    flex: 1;
+    background: #2C2C2C;
+    color: #FFF;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* === 深色卡 === */
+  .dark-card {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .dark-card .dc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #CCC;
+    margin-bottom: 3px;
+  }
+  .dark-card .dc-body {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  /* === 封面样式 === */
+  .cover-slide {
+    background: #1A1A1A;
+  }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 46px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  /* === 深色页 === */
+  .dark-slide {
+    background: #1A1A1A;
+  }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+  .dark-slide .data-table { background: rgba(255,255,255,0.02); }
+  .dark-slide .data-table th { background: #555; }
+  .dark-slide .data-table td { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.04); }
+  .dark-slide .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+  .dark-slide .dark-card { background: rgba(255,255,255,0.04); }
+  .dark-slide .dark-card .dc-title { color: #CCC; }
+  .dark-slide .dark-card .dc-body { color: rgba(255,255,255,0.7); line-height: 1.5; }
+  .dark-slide .divider { background: rgba(255,255,255,0.2); }
+  .dark-slide .big-num { color: #FFF; }
+
+  /* === 对比双栏 === */
+  .compare-row {
+    display: flex; gap: 10px; margin-bottom: 10px;
+  }
+  .compare-col {
+    flex: 1;
+    border-radius: 6px;
+    padding: 14px 12px;
+  }
+  .compare-col.left-col {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .compare-col.right-col {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .compare-col .col-label {
+    font-size: 11px; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .compare-col.left-col .col-label { color: #888; }
+  .compare-col.right-col .col-label { color: #CCC; }
+  .compare-col .col-item {
+    font-size: 10px; line-height: 1.7;
+  }
+  .compare-col.left-col .col-item { color: rgba(255,255,255,0.5); }
+  .compare-col.right-col .col-item { color: rgba(255,255,255,0.8); }
+</style>
+</head>
+<body>
+
+<!-- 工具栏 -->
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ===== 第 1 张 · 封面 ===== -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">我写了一个<br>AI保险展业<br>助手</div>
+    <div class="cover-sub">现在请你来白嫖<br>第一批测试用户，免费</div>
+    <div class="cover-tags">
+      <span class="tag">飞书Agent</span>
+      <span class="tag">保险展业</span>
+      <span class="tag">限20人</span>
+    </div>
+    <div class="cover-quote">
+      <p>不是卖课，不是割韭菜。是一个懂保险展业工作场景的 AI Agent。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 2 张 · 痛点 ===== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">PAIN POINTS</div>
+    <div class="main-title">做保险这行，<br>你是不是也这样？</div>
+    <div class="sub-title">这些问题，本质上是同一个问题——你缺一个能帮你记、帮你算、帮你盯的助理。</div>
+
+    <div class="info-card">
+      <div class="card-title">🔍 客户多了记不住</div>
+      <div class="card-body">Excel翻来翻去，上次跟进的备注写得太潦草，自己都认不出来。</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">📅 跟进全靠脑子记</div>
+      <div class="card-body">周末回家一想——糟了，好像有个客户两周没联系了。</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">💬 异议处理临时想话术</div>
+      <div class="card-body">客户说"太贵了""有社保就够了"，每次现场硬想，聊完觉得自己没发挥好。</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">📊 上百款产品挑花眼</div>
+      <div class="card-body">翻产品手册翻到怀疑人生，最后推荐的还是自己最熟的那三五款。</div>
+    </div>
+
+    <div class="page-num">2/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 3 张 · 核心概念（深色） ===== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">WHAT IS IT</div>
+    <div class="main-title">一个跑在飞书里<br>的 AI 保险展业助手</div>
+    <div class="sub-title">你在飞书里跟它说话，它帮你干四件事</div>
+
+    <div class="func-grid">
+      <div class="func-card" style="background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);">
+        <div class="f-num" style="color:#FFF;">1</div>
+        <div class="f-title" style="color:#CCC;">记客户</div>
+        <div class="f-desc" style="color:rgba(255,255,255,0.5);">说句话就建档，自动提取姓名/年龄/险种/预算</div>
+      </div>
+      <div class="func-card" style="background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);">
+        <div class="f-num" style="color:#FFF;">2</div>
+        <div class="f-title" style="color:#CCC;">做分析</div>
+        <div class="f-desc" style="color:rgba(255,255,255,0.5);">5维评分引擎，203款产品6维打分Top5推荐</div>
+      </div>
+      <div class="func-card" style="background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);">
+        <div class="f-num" style="color:#FFF;">3</div>
+        <div class="f-title" style="color:#CCC;">盯跟进</div>
+        <div class="f-desc" style="color:rgba(255,255,255,0.5);">超14天预警、超30天沉睡，早9点日报推送</div>
+      </div>
+      <div class="func-card" style="background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);">
+        <div class="f-num" style="color:#FFF;">4</div>
+        <div class="f-title" style="color:#CCC;">出话术</div>
+        <div class="f-desc" style="color:rgba(255,255,255,0.5);">6类异议自动识别+结构化应答话术</div>
+      </div>
+    </div>
+
+    <div class="quote-box" style="background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.25);">
+      <p style="color:rgba(255,255,255,0.7);font-style:normal;font-size:12px;">所有数据自动归档飞书多维表格，还有可视化仪表盘</p>
+    </div>
+    <div class="page-num">3/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 4 张 · 记客户 + 做分析 ===== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">FEATURE · 1-2</div>
+    <div class="main-title">说句话就建档<br>自动诊断 + 产品推荐</div>
+    <div class="sub-title">不是填表，是聊天。不是拍脑袋推产品，是6个维度打分。</div>
+
+    <div class="info-card">
+      <div class="card-title">📝 录入，一句话的事</div>
+      <div class="card-body">"新建客户张三，35岁，想买重疾险，预算5万"<br><small>自动提取姓名、年龄、险种偏好、预算 → 存入维度表格</small></div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">🔍 更新，也一样简单</div>
+      <div class="card-body">"张三电话改成139xxxx"<br><small>识别字段名，自动更新对应列</small></div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">📊 诊断报告，秒出</div>
+      <div class="card-body">客户状态 → 意向度分数 → 流失风险 → 下一步动作<br><small>从203款产品中6维评分，排出Top 5，每款都有评分依据</small></div>
+    </div>
+
+    <div class="quote-box">
+      <p>不是"这个产品不错你试试"，是"这个产品在保障范围8.5分、性价比9.2分，适合这个客户的Kano需求类型"。</p>
+    </div>
+    <div class="page-num">4/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 5 张 · 5维评分引擎 ===== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">5-DIMENSION SCORING</div>
+    <div class="main-title">意向度不靠拍脑袋<br>5个信号自动打分</div>
+    <div class="sub-title">比人凭感觉打分准。下一步？它可以学你的成交规律。</div>
+
+    <table class="data-table">
+      <tr><th>信号维度</th><th>它看什么</th></tr>
+      <tr><td>跟进时效</td><td>距上次跟进多久？≤7天满分，>90天接近0分</td></tr>
+      <tr><td>反馈信号</td><td>客户说了什么？"我要买"和"再说吧"得分不一样</td></tr>
+      <tr><td>数据完整度</td><td>客户信息填得全不全？名字都不知道怎么跟？</td></tr>
+      <tr><td>互动密度</td><td>最近30天聊了几次？越活跃越有机会</td></tr>
+      <tr><td>时间衰减</td><td>老客户不维护也会自然降分</td></tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <div class="dark-card" style="background:#2C2C2C;">
+      <div class="dc-title">💡 它还能成长</div>
+      <div class="dc-body">未来可以学你的成交模式，告诉你"这类客户这个时点最容易成交"。工具不会成长，Agent会。</div>
+    </div>
+    <div class="page-num">5/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 6 张 · 盯跟进 + 出话术 ===== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">FEATURE · 3-4</div>
+    <div class="main-title">到点自动提醒<br>异议自动应答</div>
+    <div class="sub-title">不需要记得去查，它会来提醒你。不用每次临时想话术。</div>
+
+    <div class="info-card">
+      <div class="card-title">⏰ 自动预警机制</div>
+      <div class="card-body">超14天未跟进 → 标"预警"<br>超30天无动静 → 标"沉睡"<br>每天早9点日报推送：今天该跟谁、高意向客户是谁</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="info-card">
+      <div class="card-title">🗣️ 6类异议自动识别</div>
+      <div class="card-body">客户说太贵了、有社保就够了、要再想想、网上买更便宜……<br><small>系统识别异议类型 → 直接给结构化应对话术，不用硬聊</small></div>
+    </div>
+
+    <div class="card-row">
+      <div class="mini-card">
+        <div class="m-icon">⏳</div>
+        <div class="m-title">拖延异议</div>
+        <div class="m-desc">"跟老公商量下"</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-icon">💰</div>
+        <div class="m-title">价格异议</div>
+        <div class="m-desc">"太贵了买不起"</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-icon">🛡️</div>
+        <div class="m-title">替代异议</div>
+        <div class="m-desc">"有社保就够了"</div>
+      </div>
+    </div>
+    <div class="page-num">6/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 7 张 · Agent vs CRM 对比（深色） ===== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">CORE DIFFERENCE</div>
+    <div class="main-title">这不叫CRM<br>这叫Agent</div>
+    <div class="sub-title">CRM是一个数据库。Agent是一个懂你工作场景的助理。</div>
+
+    <div class="compare-row">
+      <div class="compare-col left-col">
+        <div class="col-label">CRM</div>
+        <div class="col-item">等着你操作<br>你往里面填数据<br>想看了打开看看<br>被动响应查询<br>是一个文件夹</div>
+      </div>
+      <div class="compare-col right-col">
+        <div class="col-label">AI Agent</div>
+        <div class="col-item">自己知道该干什么<br>聊完自动记跟进<br>两周没动静主动预警<br>结合画像+行为+产品库<br>给出有依据的策略报告</div>
+      </div>
+    </div>
+
+    <div class="quote-box" style="background:rgba(255,255,255,0.04);border-left:2px solid rgba(255,255,255,0.25);">
+      <p style="color:rgba(255,255,255,0.7);font-style:normal;">它更像一个实习助理，而不是一个文件夹。而且它会越来越懂你的业务。</p>
+    </div>
+
+    <div style="margin-top:12px; text-align:center; font-size:32px; font-weight:900; color:#FFF; letter-spacing:4px;">Agent ≠ 工具</div>
+    <div style="text-align:center; font-size:12px; color:rgba(255,255,255,0.35); margin-top:4px;">工具不会成长，Agent会</div>
+    <div class="page-num">7/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 8 张 · 仪表盘 ===== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">DASHBOARD</div>
+    <div class="main-title">可视化仪表盘<br>数据自动更新</div>
+    <div class="sub-title">数据随操作自动更新，不需要手动维护。</div>
+
+    <table class="data-table">
+      <tr><th>看什么</th><th>具体内容</th></tr>
+      <tr><td>统计数字卡片</td><td>客户总数、平均意向度、成交数、累计保费</td></tr>
+      <tr><td>跟进状态分布</td><td>多少正常、多少预警、多少沉睡</td></tr>
+      <tr><td>意向度分布</td><td>高/中/低意向客户各多少人</td></tr>
+      <tr><td>月度跟进趋势</td><td>这个月跟进了几次，趋势是升是降</td></tr>
+      <tr><td>成交产品分布</td><td>哪些产品卖得最好</td></tr>
+    </table>
+
+    <div class="divider"></div>
+
+    <div class="info-card">
+      <div class="card-title">📱 飞书卡片交互</div>
+      <div class="card-body">诊断报告、产品策略、记跟进——全部在飞书卡片里一键操作，不用跳出聊天窗口。</div>
+    </div>
+
+    <div class="quote-box">
+      <p>你的客户看板不是一张静止的截图，是活的。</p>
+    </div>
+    <div class="page-num">8/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 9 张 · 白嫖条件（深色） ===== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">HOW TO JOIN</div>
+    <div class="main-title">什么叫"白嫖"</div>
+    <div class="sub-title">不用花钱。准备4样东西，30分钟部署。</div>
+
+    <table class="data-table" style="margin-bottom:16px;">
+      <tr><th>你需要有</th><th>说明</th></tr>
+      <tr><td>飞书账号</td><td>能创建自建应用就行</td></tr>
+      <tr><td>一台电脑</td><td>Windows/Mac，能保持开机</td></tr>
+      <tr><td>DeepSeek API Key</td><td>免费注册，充10块够测几千次</td></tr>
+      <tr><td>30分钟</td><td>照着说明书部署一次</td></tr>
+    </table>
+
+    <div class="dark-card">
+      <div class="dc-title">✅ 你能获得什么</div>
+      <div class="dc-body">
+        24小时AI展业助手 · 可视化仪表盘 · 203款产品知识库<br>
+        6维评分引擎 · 早9点自动日报 · 优先体验新功能<br>
+        直接向开发者提需求和反馈
+      </div>
+    </div>
+
+    <div style="margin-top:12px; text-align:center;">
+      <span class="big-num">20</span>
+      <span style="font-size:13px;color:rgba(255,255,255,0.35);margin-left:6px;">人 · 第一批</span>
+    </div>
+    <div class="page-num">9/10</div>
+  </div>
+</div>
+
+<!-- ===== 第 10 张 · 行动召唤 ===== -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div style="font-size:13px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:12px;">JOIN US</div>
+    <div class="cover-title" style="font-size:40px;">第一批测试<br>只招 20 人</div>
+    <div class="cover-sub" style="font-size:14px;">多了服务不过来。<br>这个东西能不能真的帮到你，我说了不算。<br>你用，用了告诉我。</div>
+
+    <div style="margin:20px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:8px;">部署环境</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span style="font-size:11px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;">飞书生态</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;">DeepSeek驱动</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;">开源项目</span>
+      </div>
+    </div>
+
+    <div class="cta-row" style="flex-direction:column;gap:8px;">
+      <div class="cta-chip" style="background:#FFF;color:#1A1A1A;font-size:14px;padding:14px;">💬 评论区留个言</div>
+      <div class="cta-chip" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);font-size:14px;padding:14px;">📩 私信我要操作说明书</div>
+    </div>
+
+    <div style="margin-top:24px;font-size:10px;color:rgba(255,255,255,0.2);text-align:center;">
+      保险代理人AI助手 v2.0 · 2026.05
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">10/10</div>
+  </div>
+</div>
+
+<!-- CDN + 下载脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-AI保险展业助手-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-AI保险展业助手-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-AI保险展业助手-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配图下载 - 保费收了保单没出生效前出险能不能赔</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #E8ECF1; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 32px 16px 60px; }
+.header { max-width: 677px; margin: 0 auto 28px; text-align: center; }
+.header h1 { font-size: 20px; font-weight: 800; color: #102542; margin-bottom: 6px; }
+.header p { font-size: 14px; color: #86909C; }
+.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+.illu-download-btn { position: absolute; top: 10px; right: 10px; z-index: 10; background: rgba(255,255,255,0.9); border: 1px solid #CBD5E0; border-radius: 6px; padding: 5px 14px; font-size: 13px; cursor: pointer; color: #4A5568; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.4; font-weight: 600; }
+.illu-download-btn:hover { background: #FFFFFF; border-color: #F77F00; color: #F77F00; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>配图下载</h1>
+  <p>保费收了，保单没出，人确诊了癌症——保险公司说"合同没成立"，真的？ · 共 5 张 · 点击每张右上角按钮下载 PNG</p>
+</div>
+
+<!-- Illu-1: Timeline -->
+<div class="illu-card" id="illu-1" style="padding: 32px 28px; background: #F7F9FC;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-1', '配图1_冀惠保时间线')">⬇</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">冀惠保第五季：投保、出险、生效时间线</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0;">三个关键日期，看清"真空期"到底有多长</p>
+  <div style="display:flex; align-items:flex-start;">
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff;">1</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">投保缴费</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">2024.12.25<br>保费126元</div>
+    </div>
+    <div style="display:flex; align-items:center; padding-top:22px; width:36px; flex-shrink:0;">
+      <div style="flex:1; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#F77F00; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff;">!</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">住院确诊</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">2025.01.13<br>确诊乳腺癌</div>
+    </div>
+    <div style="display:flex; align-items:center; padding-top:22px; width:36px; flex-shrink:0;">
+      <div style="flex:1; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#86909C; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff;">3</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">保单生效</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">2025.02.01<br>保障开始</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:14px; color:#F77F00; font-weight:600;">投保到生效间隔 38 天 · 出险到生效相差 19 天</p>
+</div>
+
+<!-- Illu-2: 成立 vs 生效 -->
+<div class="illu-card" id="illu-2" style="padding: 32px 28px; background:linear-gradient(135deg, #102542 0%, #0A1931 100%); color:#FFFFFF;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-2', '配图2_成立vs生效')" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);">⬇</button>
+  <h2 style="font-size:20px; font-weight:800; color:#FFFFFF; margin:0 0 8px 0; border:none; padding:0;">合同成立 vs 合同生效：两个概念，别被混着说</h2>
+  <p style="font-size:13px; color:rgba(255,255,255,0.5); margin:0 0 20px 0;">保险公司常把两件事混为一谈，但法律上泾渭分明</p>
+  <div style="display:flex; gap:16px;">
+    <div style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:20px 16px;">
+      <div style="font-size:16px; font-weight:700; color:#86909C; margin-bottom:14px;">合同成立</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">解决"有没有"这个问题</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">要约 + 承诺 = 成立</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">诺成性合同，交不交保费都成立</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">事实判断，客观标准</div>
+    </div>
+    <div style="flex:1; background:rgba(247,127,0,0.1); border:1px solid rgba(247,127,0,0.25); border-radius:8px; padding:20px 16px;">
+      <div style="font-size:16px; font-weight:700; color:#F77F00; margin-bottom:14px;">合同生效</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">解决"能不能执行"这个问题</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">成立是前提，但不是成立了就生效</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">可附条件/附期限（如"次日零时"）</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">价值判断，法律评价</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#F77F00; font-weight:600;">成立是门槛，生效是开关——保险公司不能收了钱又把开关藏着</p>
+</div>
+
+<!-- Illu-3: 4条件网格 -->
+<div class="illu-card" id="illu-3" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #E5EAF2;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-3', '配图3_四个要件')">⬇</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">司法解释二第四条 · 四个要件</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 20px 0;">缺一不可，但举证责任在保险公司</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">01</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">双收</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">保费和投保单都已由保险人实际控制</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #102542;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">02</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">期限内</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">未超过合理核保时效（类案参照15-30天）</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #102542;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">03</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">符合条件</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">属标准体，保险人若否认需举证</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">04</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">事故已发生</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">在"预收后、核保中"真空期内出险</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#F77F00; font-weight:600;">满足全部四条件 → 保险人承担赔偿责任，不得以"合同未成立"拒赔</p>
+</div>
+
+<!-- Illu-4: 柱状图 -->
+<div class="illu-card" id="illu-4" style="padding: 32px 28px; background: #F7F9FC;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-4', '配图4_惠民保真空期')">⬇</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">各惠民保产品"真空期"对比</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0;">从投保开放日到保障生效日，中间可能长达2-3个月</p>
+  <div style="display:flex; align-items:flex-end; gap:12px; justify-content:center; height:200px; padding-bottom:8px;">
+    <div style="flex:1; max-width:100px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#F77F00; margin-bottom:4px;">19天</div>
+      <div style="height:27px; background:linear-gradient(180deg, #F77F00 0%, rgba(247,127,0,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">冀惠保·个例</div>
+      <div style="font-size:11px; color:#86909C;">出险到生效</div>
+    </div>
+    <div style="flex:1; max-width:100px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#E07B53; margin-bottom:4px;">42天</div>
+      <div style="height:52px; background:linear-gradient(180deg, #E07B53 0%, rgba(224,123,83,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">深圳惠民保</div>
+      <div style="font-size:11px; color:#86909C;">6.30截止 7.1生效</div>
+    </div>
+    <div style="flex:1; max-width:100px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#2E7D32; margin-bottom:4px;">52天</div>
+      <div style="height:65px; background:linear-gradient(180deg, #2E7D32 0%, rgba(46,125,50,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">冀惠保·新参保</div>
+      <div style="font-size:11px; color:#86909C;">11.20开投 1.11生效</div>
+    </div>
+    <div style="flex:1; max-width:100px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#1A6B7C; margin-bottom:4px;">72天</div>
+      <div style="height:92px; background:linear-gradient(180deg, #1A6B7C 0%, rgba(26,107,124,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">冀惠保·续保</div>
+      <div style="font-size:11px; color:#86909C;">最晚3.1生效</div>
+    </div>
+    <div style="flex:1; max-width:100px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#3949AB; margin-bottom:4px;">90天</div>
+      <div style="height:112px; background:linear-gradient(180deg, #3949AB 0%, rgba(57,73,171,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">极端情况</div>
+      <div style="font-size:11px; color:#86909C;">首日即投保</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:14px; color:#102542; font-weight:700;">真空期越长 → 未说明风险越大 → 保险公司举证越难</p>
+</div>
+
+<!-- Illu-5: 代理人4步 -->
+<div class="illu-card" id="illu-5" style="padding: 32px 28px; background: #F7F9FC;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-5', '配图5_代理人四步')">⬇</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">客户出险后，代理人第一时间四步走</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0;">每一步都在为后续追偿铺路——不能省，不能乱</p>
+  <div style="display:flex; align-items:flex-start;">
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff;">1</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">锁时间</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">记录缴费日·投保日<br>出险日·生效日</div>
+    </div>
+    <div style="display:flex; align-items:center; padding-top:18px; width:30px; flex-shrink:0;">
+      <div style="flex:1; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff;">2</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">判条件</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">标准体/非标体<br>告知范围核实</div>
+    </div>
+    <div style="display:flex; align-items:center; padding-top:18px; width:30px; flex-shrink:0;">
+      <div style="flex:1; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff;">3</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">控沟通</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">不急于定性<br>不代客户书面说明</div>
+    </div>
+    <div style="display:flex; align-items:center; padding-top:18px; width:30px; flex-shrink:0;">
+      <div style="flex:1; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div>
+    </div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#F77F00; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff;">4</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">找人</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">专业案件专业处理<br>每个案情不同</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:14px; color:#F77F00; font-weight:600;">越早介入，追回概率越大——晚了，证据、口供、时效全在流失</p>
+</div>
+
+<p style="text-align:center; max-width:677px; margin:32px auto 0; font-size:13px; color:#86909C;">
+  打开预览 HTML 确认位置，在本页下载 PNG → 上传到公众号图片库 → 回到预览页全选复制正文粘贴
+</p>
+
+<script>
+function downloadCard(elementId, filename) {
+  var el = document.getElementById(elementId);
+  if (!el) return;
+  var btn = el.querySelector('.illu-download-btn');
+  if (btn) btn.style.display = 'none';
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = (filename || '配图') + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      if (btn) btn.style.display = '';
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); if (btn) btn.style.display = ''; });
+}
+</script>
+
+</body>
+</html>

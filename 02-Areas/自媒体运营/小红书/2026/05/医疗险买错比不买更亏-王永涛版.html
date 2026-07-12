@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 医疗险买错比不买更亏（王永涛）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  /* --- Cover Slide --- */
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 44px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-data {
+    border-left: 2px solid rgba(255,255,255,0.2);
+    padding: 10px 14px;
+    margin-top: 4px;
+  }
+  .cover-slide .cover-data p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.55;
+  }
+  .cover-slide .cover-data strong {
+    color: rgba(255,255,255,0.75);
+  }
+  .cover-slide .ip-line {
+    margin-top: 18px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1px;
+  }
+
+  /* --- Content Slides (light) --- */
+  .content-light { background: #FFFFFF; }
+  .content-light .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+  .content-light .main-point {
+    font-size: 24px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .content-light .body-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+  }
+  .content-light .body-text strong {
+    color: #1A1A1A;
+  }
+  .content-light .insight-card {
+    background: #F5F6F8;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+  .content-light .insight-card p {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .content-light .insight-card strong {
+    color: #1A1A1A;
+  }
+
+  /* --- Dark Content Slide --- */
+  .content-dark { background: #1A1A1A; }
+  .content-dark .section-label { color: rgba(255,255,255,0.3); }
+  .content-dark .main-point { color: #FFF; }
+  .content-dark .body-text { color: rgba(255,255,255,0.65); }
+  .content-dark .body-text strong { color: #FFF; }
+  .content-dark .insight-card { background: rgba(255,255,255,0.04); }
+  .content-dark .insight-card p { color: rgba(255,255,255,0.55); }
+  .content-dark .insight-card strong { color: rgba(255,255,255,0.85); }
+  .content-dark .page-num { color: rgba(255,255,255,0.12); }
+
+  /* --- Trap Card --- */
+  .trap-card {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: stretch;
+  }
+  .trap-num {
+    width: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .trap-num .num {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .trap-num .label {
+    font-size: 8px;
+    color: #999;
+    letter-spacing: 1px;
+    margin-top: 1px;
+  }
+  .trap-body {
+    flex: 1;
+    background: #F5F6F8;
+    border-radius: 6px;
+    padding: 11px 14px;
+  }
+  .trap-body .t-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #1A1A1A;
+    margin-bottom: 3px;
+  }
+  .trap-body .t-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .content-dark .trap-body { background: rgba(255,255,255,0.04); }
+  .content-dark .trap-body .t-title { color: #FFF; }
+  .content-dark .trap-body .t-desc { color: rgba(255,255,255,0.55); }
+  .content-dark .trap-num .num { color: #FFF; }
+  .content-dark .trap-num .label { color: rgba(255,255,255,0.3); }
+
+  /* --- Summary --- */
+  .summary-box {
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    padding: 14px;
+    margin-top: 8px;
+  }
+  .summary-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+  .summary-box strong {
+    color: #FFF;
+  }
+
+  .cta-line {
+    margin-top: 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+  .cta-line strong {
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">医疗险买错了<br>比不买更亏</div>
+    <div class="cover-sub">三个最常见的坑，踩一个保费就白交</div>
+    <div class="cover-tags">
+      <span class="tag">医疗险</span>
+      <span class="tag">避坑</span>
+      <span class="tag">保险科普</span>
+    </div>
+    <div class="cover-data">
+      <p>2025年全国次均住院费用 <strong>8,509元</strong>。<br>买医疗险的人越来越多，但理赔被拒的，大多不是保险的锅。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/7</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 引言：为什么买对比买更重要 -->
+<div class="slide content-light">
+  <div class="content">
+    <div class="section-label">先想一个问题</div>
+    <div class="main-point" style="font-size:22px;">为什么有人买了医疗险<br>最后还是赔不到？</div>
+    <div class="body-text" style="margin-top:10px;">
+      行业数据显示，<strong>99%以上的理赔申请都获赔了</strong>。<br><br>
+      那"赔不到"的人是怎么回事？<br><br>
+      不是保险公司故意不赔，是买的时候就有问题——<strong>条款里写得清清楚楚，但买的人没看到，或者看懂了但没当回事。</strong><br><br>
+      我做了5年内勤，看过大量拒赔案，总结下来就是三个坑。
+    </div>
+    <div class="page-num">2/7</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 坑一：健康告知 -->
+<div class="slide content-dark">
+  <div class="content">
+    <div class="section-label">最常见的坑</div>
+    <div class="trap-card" style="margin-bottom:16px;">
+      <div class="trap-num">
+        <div class="num" style="color:#FFF;">1</div>
+        <div class="label" style="color:rgba(255,255,255,0.3);">坑</div>
+      </div>
+      <div class="trap-body">
+        <div class="t-title">健康告知漏了</div>
+        <div class="t-desc">体检有个结节、几年前住过院——觉得"应该没事"就没写</div>
+      </div>
+    </div>
+
+    <div class="body-text">
+      结果理赔时保险公司一查，跟既往症有关——拒赔。<br><br>
+      这不是保险公司不讲理。合同里写得清楚：<strong>投保时已知的异常要如实告知。</strong><br><br>
+      出险时发现跟没告知的既往症有关系，就是赔不了。
+    </div>
+
+    <div class="insight-card">
+      <p><strong>建议：</strong>买之前把近两年的体检报告拿出来，一条一条对。拿不准的问业务员或找专业的人帮你判断。别猜，猜错了代价很大。</p>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/7</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 坑二：医院范围 -->
+<div class="slide content-light">
+  <div class="content">
+    <div class="section-label">第二个坑</div>
+    <div class="trap-card" style="margin-bottom:16px;">
+      <div class="trap-num">
+        <div class="num">2</div>
+        <div class="label">坑</div>
+      </div>
+      <div class="trap-body">
+        <div class="t-title">没看清医院范围</div>
+        <div class="t-desc">去了私立医院或特需部——不在保障范围内</div>
+      </div>
+    </div>
+
+    <div class="body-text">
+      大部分百万医疗险只赔<strong>二级及以上公立医院普通部</strong>。<br><br>
+      有些人生病去了私立医院、或者公立医院的特需部国际部——一看条款，不在保障范围内。<br><br>
+      不是医院不好，是跟合同约定不匹配。
+    </div>
+
+    <div class="insight-card">
+      <p><strong>建议：</strong>买之前确认一下你常去的地方、你所在城市的医院，哪些在赔付范围内。拿不准就翻条款的"医院定义"那条。</p>
+    </div>
+
+    <div class="page-num">4/7</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 坑三：免责条款 -->
+<div class="slide content-dark">
+  <div class="content">
+    <div class="section-label">第三个坑</div>
+    <div class="trap-card" style="margin-bottom:16px;">
+      <div class="trap-num">
+        <div class="num" style="color:#FFF;">3</div>
+        <div class="label" style="color:rgba(255,255,255,0.3);">坑</div>
+      </div>
+      <div class="trap-body">
+        <div class="t-title">忽略免责条款</div>
+        <div class="t-desc">什么情况不赔——写在里面了，但没人看</div>
+      </div>
+    </div>
+
+    <div class="body-text">
+      不赔的情况都写在免责条款里。先天性疾病、特定治疗方式、指定的院外药——每个产品不一样。<br><br>
+      问题在于：<strong>大部分人要么不看，要么看了也看不懂。</strong>
+    </div>
+
+    <div class="insight-card">
+      <p><strong>我的方法：</strong>拿到合同先翻到免责条款那几页，逐条看。有不懂的术语，百度也好、问人也罢——搞清楚了再签字。</p>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">5/7</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 总结 -->
+<div class="slide content-light">
+  <div class="content">
+    <div class="section-label">总结一下</div>
+    <div class="main-point" style="font-size:22px;">买医疗险前先问自己三个问题</div>
+
+    <div style="margin-top:14px;">
+      <div style="background:#F5F6F8;border-radius:6px;padding:12px 14px;margin-bottom:8px;">
+        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">① 健康告知对了吗？</div>
+        <div style="font-size:11px;color:#666;">体检报告拿出来逐条对，拿不准的问人</div>
+      </div>
+      <div style="background:#F5F6F8;border-radius:6px;padding:12px 14px;margin-bottom:8px;">
+        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">② 医院范围看清了吗？</div>
+        <div style="font-size:11px;color:#666;">二级及以上公立医院普通部——确认自己常去的地方在不在</div>
+      </div>
+      <div style="background:#F5F6F8;border-radius:6px;padding:12px 14px;">
+        <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">③ 免责条款看懂了吗？</div>
+        <div style="font-size:11px;color:#666;">翻到那几页逐条看，不懂的术语查清楚再签</div>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <p>这三个问题任何一个没过，你交的保费大概率白交。而真正赔下来的人，99%以上都拿到了——因为他们的保单从一开始就没问题。</p>
+    </div>
+
+    <div class="page-num">6/7</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">买医疗险不是买<br>"治病的钱"</div>
+    <div class="cover-sub">是买"不用借钱的底气"<br>但前提是——买对</div>
+    <div style="margin-top:20px;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7;">
+        拿不准自己买的或者正要买的有没有问题，<br>可以私信我帮你看看。不收费，就当交个朋友。
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">7/7</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '医疗险买错比不买更亏-王永涛.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

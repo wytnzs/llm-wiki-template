@@ -1,0 +1,138 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]: 👇 下方是排版效果 · 点右侧 复制 直接粘到公众号
+    - button "📋 复制到公众号" [ref=e4] [cursor=pointer]
+  - generic [ref=e7]:
+    - generic [ref=e8]:
+      - paragraph [ref=e9]: QUOTE
+      - paragraph [ref=e10]:
+        - text: 客户资料的价值，不在于你记住了多少，而在于它能不能变成
+        - generic [ref=e11]: 下一步动作
+        - text: 。
+    - generic [ref=e12]:
+      - paragraph [ref=e13]:
+        - text: 很多人做客户管理，第一反应是建一个表。姓名、电话、城市、需求、备注，看起来很完整。但过一段时间你会发现，客户都在表里，你还是不知道
+        - generic [ref=e14]: 这周该跟谁聊
+        - text: ，也不知道该聊什么。
+      - paragraph [ref=e15]:
+        - text: 问题不在表格。问题在于你把客户当成一行数据，而不是一条会持续变化的关系线索。真正的客户管理库，应该把信息变成事件，把事件变成洞察，再把洞察变成
+        - generic [ref=e16]: 可执行的服务动作
+        - text: 。
+    - generic [ref=e17]:
+      - paragraph [ref=e18]: 本文看点
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: "01"
+          - paragraph [ref=e22]: 客户不是一行数据
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: "02"
+          - paragraph [ref=e25]: 最小单位是事件
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: "03"
+          - paragraph [ref=e28]: 先识别缺口再给方案
+    - paragraph [ref=e33]: — 客户信息进入系统后，应该经过身份匹配、洞察缺口、方案跟进和复盘沉淀。
+    - generic [ref=e35]:
+      - paragraph [ref=e36]: "01"
+      - generic [ref=e37]:
+        - paragraph [ref=e38]: PROBLEM
+        - heading "客户不是一行数据" [level=3] [ref=e39]
+    - paragraph [ref=e41]:
+      - text: 传统表格最容易犯的错，是把客户压缩成一行。张先生，杭州，已婚一孩，想了解重疾险，体检有甲状腺结节。这句话当然有用，但它真正的价值不在“备注”里，而在它背后暴露出的
+      - generic [ref=e42]: 经营信号
+      - text: 里。
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - paragraph [ref=e45]: "01"
+        - paragraph [ref=e46]: 家庭责任
+        - paragraph [ref=e47]: 已婚一孩意味着保障责任不是单点需求。
+      - generic [ref=e48]:
+        - paragraph [ref=e49]: "02"
+        - paragraph [ref=e50]: 健康风险
+        - paragraph [ref=e51]: 甲状腺结节意味着不能急着出方案。
+      - generic [ref=e52]:
+        - paragraph [ref=e53]: "03"
+        - paragraph [ref=e54]: 下一步动作
+        - paragraph [ref=e55]: 先补报告，再做核保前置判断。
+    - paragraph [ref=e57]: 「客户资料的价值，不在记录完整，而在能不能推动下一步。」
+    - generic [ref=e61]:
+      - paragraph [ref=e62]: "02"
+      - generic [ref=e63]:
+        - paragraph [ref=e64]: EVENT
+        - heading "最小单位不是客户，而是客户信息事件" [level=3] [ref=e65]
+    - paragraph [ref=e67]: 客户档案太容易被写成静态简历。客户是谁、住哪儿、做什么、买过什么，这些都重要，但不够。因为客户是动态变化的，一次聊天、一份体检报告、一个顾虑、一次团队反馈，都可能改变你对他的判断。
+    - paragraph [ref=e72]: — 从静态表格到经营资产，中间差的不是字段，而是事件流和洞察卡。
+    - generic [ref=e73]:
+      - generic [ref=e74]:
+        - generic [ref=e75]: "1"
+        - paragraph [ref=e77]:
+          - text: 事件回答：
+          - generic [ref=e78]: 发生了什么
+          - text: 。
+      - generic [ref=e79]:
+        - generic [ref=e80]: "2"
+        - paragraph [ref=e82]:
+          - text: 洞察回答：
+          - generic [ref=e83]: 这意味着什么
+          - text: 。
+      - generic [ref=e84]:
+        - generic [ref=e85]: "3"
+        - paragraph [ref=e87]:
+          - text: 跟进回答：
+          - generic [ref=e88]: 下一步做什么
+          - text: 。
+    - generic [ref=e92]:
+      - paragraph [ref=e93]: "03"
+      - generic [ref=e94]:
+        - paragraph [ref=e95]: GAP
+        - heading "先识别缺口，再生成方案" [level=3] [ref=e96]
+    - paragraph [ref=e98]:
+      - text: 很多销售动作让客户反感，不是因为你不专业，而是因为你太急。信息还没够，就开始推荐；顾虑还没识别，就开始讲优点；健康情况还没核清，就开始设计保障。这不是服务，是
+      - generic [ref=e99]: 提前给答案
+      - text: 。
+    - table [ref=e101]:
+      - rowgroup [ref=e102]:
+        - row [ref=e103]:
+          - columnheader "场景" [ref=e104]
+          - columnheader "先补什么" [ref=e105]
+      - rowgroup [ref=e106]:
+        - row [ref=e107]:
+          - cell "保障规划" [ref=e108]
+          - cell "已有保单、家庭责任、预算边界" [ref=e109]
+        - row [ref=e110]:
+          - cell "健康异常" [ref=e111]
+          - cell "体检报告、病历、复查结果" [ref=e112]
+        - row [ref=e113]:
+          - cell "理赔协助" [ref=e114]
+          - cell "出险时间、治疗记录、保险合同" [ref=e115]
+        - row [ref=e116]:
+          - cell "客户沟通" [ref=e117]
+          - cell "真实顾虑、决策人、时间节点" [ref=e118]
+    - paragraph [ref=e120]: 专业不是马上给答案。专业是知道什么时候不能急着给答案。
+    - generic [ref=e124]:
+      - paragraph [ref=e125]: "04"
+      - generic [ref=e126]:
+        - paragraph [ref=e127]: DASHBOARD
+        - heading "客户经营不是靠记忆，是靠看板" [level=3] [ref=e128]
+    - paragraph [ref=e133]: — 本周经营看板回答的不是“客户在哪里”，而是“下一步先处理谁”。
+    - paragraph [ref=e135]: 客户少的时候，可以靠脑子记。客户一多，脑子就会骗人。你以为你记得谁该跟进，其实你只记得最近和你聊过的人；你以为你知道谁最重要，其实你只是被最吵的人牵着走。
+    - generic [ref=e136]:
+      - generic [ref=e137]:
+        - paragraph [ref=e138]: "4"
+        - paragraph [ref=e139]: 本周看板分组
+      - generic [ref=e140]:
+        - paragraph [ref=e141]: "1"
+        - paragraph [ref=e142]: 下一步最小动作
+    - generic [ref=e146]:
+      - paragraph [ref=e147]: ∞
+      - generic [ref=e148]:
+        - paragraph [ref=e149]: THE END
+        - heading "最后，客户管理库沉淀的不是资料" [level=3] [ref=e150]
+    - paragraph [ref=e152]: 真正沉淀的是三样东西：你对客户的理解，你服务客户的判断路径，你长期经营客户的动作记录。资料只是原材料。洞察、缺口、方案、跟进、复盘，才是资产。
+    - paragraph [ref=e153]: 先接住信息，再判断价值；先识别缺口，再生成方案。
+    - generic [ref=e154]: END
+    - generic [ref=e161]:
+      - paragraph [ref=e162]: "我是 {{作者名}}，{{一句话简介}}。"
+      - paragraph [ref=e163]:
+        - text: 如果你觉得今天这篇有收获，欢迎
+        - strong [ref=e164]: 点赞、在看、转发
+        - text: 三连，我们下篇见。

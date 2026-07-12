@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>众民保 · 经典版 vs 臻选版 · 小红书</title>
+  <meta name="viewport" content="width=1080">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 70px 20px 40px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .sheet { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+    .poster {
+      position: relative; overflow: hidden; isolation: isolate;
+      width: 1080px; height: 1440px; border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.24);
+    }
+    .poster .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 100px 96px;
+      display: flex; flex-direction: column;
+    }
+
+    /* Theme */
+    .theme-warm { background: #fdf6ed; color: #2a1e13; }
+    .theme-warm .accent { color: #b85c2e; }
+    .theme-warm .tag { background: #f5e6d3; color: #8b5a3c; }
+    .theme-warm .card-box { background: #faf3ea; border-left: 4px solid #b85c2e; }
+    .theme-warm .card-box.dim { opacity: .55; background: #f7ede0; }
+    .theme-warm .divider { background: rgba(42,30,19,.15); }
+    .theme-warm .badge { background: #b85c2e; color: #fff; }
+    .theme-warm .badge-alt { background: #8b6f5a; color: #fff; }
+
+    .theme-dark { background: #2a1e13; color: #fdf6ed; }
+    .theme-dark .accent { color: #e8a96b; }
+    .theme-dark .tag { background: rgba(255,255,255,.08); color: #c9a87c; }
+    .theme-dark .card-box { background: rgba(255,255,255,.06); border-left: 4px solid #e8a96b; }
+    .theme-dark .divider { background: rgba(253,246,237,.15); }
+    .theme-dark .badge { background: #e8a96b; color: #2a1e13; }
+
+    .grain {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: .25; mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
+      background-size: 3px 3px;
+    }
+
+    /* Type */
+    h1 { font-weight: 900; font-size: 136px; line-height: 1.04; letter-spacing: -.01em; margin: 0; }
+    h2 { font-weight: 700; font-size: 76px; line-height: 1.14; letter-spacing: .01em; margin: 0; }
+    h3 { font-weight: 700; font-size: 42px; line-height: 1.22; margin: 0; }
+    .big-num { font-weight: 800; font-size: 140px; line-height: 1; letter-spacing: -.02em; }
+    .mid-num { font-weight: 700; font-size: 88px; line-height: 1; letter-spacing: -.01em; }
+    .body-lg { font-weight: 400; font-size: 34px; line-height: 1.55; margin: 0; }
+    .body-md { font-weight: 400; font-size: 28px; line-height: 1.6; margin: 0; }
+    .body-sm { font-weight: 400; font-size: 24px; line-height: 1.55; margin: 0; opacity: .72; }
+    .label { font-weight: 600; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+    .tag {
+      display: inline-block; padding: 10px 24px; border-radius: 6px;
+      font-weight: 600; font-size: 22px; letter-spacing: .04em;
+    }
+    .badge {
+      display: inline-block; padding: 6px 18px; border-radius: 4px;
+      font-weight: 700; font-size: 20px; letter-spacing: .06em;
+    }
+
+    /* Layout */
+    .stack { display: flex; flex-direction: column; }
+    .row   { display: flex; flex-direction: row; }
+    .grow  { flex: 1; }
+    .center { text-align: center; align-items: center; }
+    .divider { height: 1px; border: 0; margin: 0; }
+    .gap-xs  { gap: 12px; }
+    .gap-sm  { gap: 20px; }
+    .gap-md  { gap: 36px; }
+    .gap-lg  { gap: 56px; }
+
+    /* Card box */
+    .card-box { padding: 40px 48px; border-radius: 10px; }
+    .card-box .row { align-items: flex-start; gap: 24px; }
+    .card-box .dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 14px;
+    }
+    .theme-warm .card-box .dot { background: #b85c2e; }
+    .theme-dark .card-box .dot { background: #e8a96b; }
+
+    /* Point row */
+    .point-row {
+      display: flex; align-items: flex-start; gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(42,30,19,.10);
+    }
+    .theme-dark .point-row { border-bottom-color: rgba(253,246,237,.10); }
+    .point-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .point-row .point-num {
+      font-weight: 800; font-size: 56px; line-height: 1; flex-shrink: 0;
+      width: 72px; text-align: center;
+    }
+    .point-row .point-body { flex: 1; }
+    .point-row .point-body h3 { font-size: 38px; line-height: 1.3; }
+    .point-row .point-body p  { font-size: 26px; line-height: 1.5; margin: 8px 0 0; opacity: .72; }
+
+    /* VS divider */
+    .vs-divider {
+      display: flex; align-items: center; gap: 16px;
+      font-weight: 800; font-size: 36px; opacity: .45;
+    }
+    .vs-divider::before, .vs-divider::after {
+      content: ''; flex: 1; height: 1px;
+    }
+    .theme-warm .vs-divider::before, .theme-warm .vs-divider::after { background: rgba(42,30,19,.20); }
+    .theme-dark .vs-divider::before, .theme-dark .vs-divider::after { background: rgba(253,246,237,.20); }
+
+    /* Bottom strip */
+    .bottom-strip {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 20px; letter-spacing: .08em; opacity: .55;
+      padding-top: 24px; border-top: 1px solid;
+      margin-top: auto;
+    }
+    .theme-warm .bottom-strip { border-color: rgba(42,30,19,.12); }
+    .theme-dark .bottom-strip { border-color: rgba(253,246,237,.12); }
+
+    /* Toolbar */
+    .toolbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(26,26,26,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 10px 20px; display: flex; align-items: center;
+      justify-content: center; gap: 10px; height: 54px;
+    }
+    .toolbar .btn {
+      background: #fff; color: #1a1a1a; border: none;
+      padding: 8px 20px; border-radius: 6px; font-size: 13px;
+      font-weight: 600; cursor: pointer; font-family: -apple-system, sans-serif;
+    }
+    .toolbar .btn.accent { background: #b85c2e; color: #fff; }
+    .toolbar .btn:hover { opacity: .85; }
+    .toolbar .progress { color: rgba(255,255,255,.35); font-size: 12px; font-weight: 500; min-width: 120px; text-align: center; font-family: -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar" id="toolbar">
+    <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+    <button class="btn" onclick="downloadOne()">下载当前</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <main class="sheet">
+
+    <!-- ===== 01 · 封面 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-01">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <span class="tag">众民保 · 2026 版</span>
+        <div class="grow" style="display:flex;align-items:center;">
+          <div class="stack gap-sm">
+            <h1>经典版<br>vs 臻选版</h1>
+            <p class="body-lg" style="margin-top:8px;">怎么选不花冤枉钱？<br>四个维度帮你决策</p>
+          </div>
+        </div>
+        <div class="bottom-strip">
+          <span>Vol. 02 · 2026.06</span>
+          <span>众安保险</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 · 四项核心差异 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-02">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>四个维度<br>拉开差距</h2>
+        <p class="body-lg">看似差几百块保费，实际差了一整套保障。</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>赔付比例</h3><p class="body-sm" style="margin-top:6px;">80% 还是 100%，差的不止 20 个百分点</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>特药种类</h3><p class="body-sm" style="margin-top:6px;">经典版种类有限，臻选版覆盖 250 种癌症特药</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>质子重离子</h3><p class="body-sm" style="margin-top:6px;">经典版限制医院清单，臻选版不限</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>相伴权益</h3><p class="body-sm" style="margin-top:6px;">经典版不支持，臻选版满 3 年解锁专属福利</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 · 赔付比例（dark） ===== -->
+    <section class="poster xhs theme-dark" id="xhs-03">
+      <div class="content center stack" style="justify-content:center;gap:48px;">
+        <p class="label accent">核心差距</p>
+        <div class="stack gap-xs">
+          <div class="row center gap-md" style="align-items:baseline;">
+            <span class="mid-num" style="opacity:.40;">80%</span>
+            <span class="big-num accent" style="font-size:100px;">vs</span>
+            <span class="big-num accent">100%</span>
+          </div>
+        </div>
+        <p class="body-lg" style="opacity:.75;">同样一笔可赔费用<br>臻选版多拿 <strong class="accent">20%</strong> 赔付金</p>
+      </div>
+    </section>
+
+    <!-- ===== 04 · 逐项对比 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-04">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>逐项拆开看</h2>
+        <div class="grow stack" style="gap:0;">
+          <div class="point-row">
+            <span class="point-num accent">01</span>
+            <div class="point-body">
+              <h3>赔付比例</h3>
+              <p>经典版 80%，臻选版 100%。住院、特药、质重都按这个比例走，差距很大</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">02</span>
+            <div class="point-body">
+              <h3>癌症特药</h3>
+              <p>经典版种类有限；臻选版扩展至 250 种，覆盖更多癌种和靶向药</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">03</span>
+            <div class="point-body">
+              <h3>质子重离子治疗</h3>
+              <p>经典版限制指定医院清单；臻选版不限制，就医选择更自由</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">04</span>
+            <div class="point-body">
+              <h3>相伴权益</h3>
+              <p>臻选版独享：不间断续保满 3 年，第 4 年起可选严重既往症可赔或免赔额下调</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 05 · 经典版适合谁 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-05">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>经典版<br>适合谁？</h2>
+        <div class="grow stack gap-md" style="justify-content:center;">
+          <div class="card-box dim">
+            <span class="badge-alt">经典版 · 特点</span>
+            <p class="body-lg" style="margin-top:24px;">保费更低<br>一般医疗按 80% 赔付<br>特药种类有限<br>质重限指定医院</p>
+            <p class="body-md" style="margin-top:20px;opacity:.65;">不支持相伴权益</p>
+          </div>
+          <div class="card-box">
+            <span class="badge">适用人群</span>
+            <p class="body-lg" style="margin-top:24px;"><strong>预算实在有限</strong>的客群</p>
+            <p class="body-md" style="margin-top:16px;opacity:.75;">有基础保障总比没有好<br>但要做好赔付打八折的预期</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 · 臻选版为什么值 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-06">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>臻选版<br>为什么值？</h2>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>核心责任 100% 赔付</h3><p class="body-sm" style="margin-top:6px;">一般医疗、特药、质子重离子全按 100% 走</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>癌症特药 250 种</h3><p class="body-sm" style="margin-top:6px;">覆盖更广的癌种和靶向药，用药不愁</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>质重不受医院限制</h3><p class="body-sm" style="margin-top:6px;">哪里能治就去哪里，不被清单卡住</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>解锁相伴权益</h3><p class="body-sm" style="margin-top:6px;">满 3 年可选严重既往症可赔，或免赔额逐年下调</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 07 · 结论（dark） ===== -->
+    <section class="poster xhs theme-dark" id="xhs-07">
+      <div class="content center stack" style="justify-content:center;gap:48px;">
+        <span class="badge">结论</span>
+        <h2 style="color:#fdf6ed;">预算合适<br>就选臻选版</h2>
+        <div class="divider" style="width:120px;margin:0 auto;"></div>
+        <p class="body-lg" style="opacity:.75;">保费差几百块<br>保障差了不止一个档次<br>一步到位，不给自己留遗憾</p>
+      </div>
+    </section>
+
+    <!-- ===== 08 · 收尾 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-08">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>需要详细<br>对比？</h2>
+        <p class="body-lg">整理了两版对比资料——</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>经典版 / 臻选版逐项对照表</h3><p class="body-sm" style="margin-top:6px;">四项维度并排对比，一眼看出差距</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>保费对比明细</h3><p class="body-sm" style="margin-top:6px;">各年龄段经典版 vs 臻选版保费一览</p></div></div></div>
+          <div class="card-box"><div class="row"><span class="dot"></span><div><h3>相伴权益详细说明</h3><p class="body-sm" style="margin-top:6px;">两项权益怎么选，帮你算清楚</p></div></div></div>
+        </div>
+        <hr class="divider" style="margin:0;">
+        <p class="body-lg center" style="font-weight:600;">表格和图片已整理好<br>评论区回复「<strong class="accent">需要</strong>」，私信发你</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var W = 1080, H = 1440;
+      function renderPoster(el) {
+        var obr = el.style.borderRadius, obs = el.style.boxShadow;
+        el.style.borderRadius = '0'; el.style.boxShadow = 'none';
+        return html2canvas(el, { scale: 1, useCORS: true, backgroundColor: null, width: W, height: H, logging: false })
+          .then(function(c) { el.style.borderRadius = obr; el.style.boxShadow = obs; return c; });
+      }
+      function c2b(c) { return new Promise(function(r) { c.toBlob(r, 'image/png'); }); }
+      window.downloadAll = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var pg = document.getElementById('progress');
+        var zip = new JSZip(); var p = Promise.resolve();
+        ps.forEach(function(el, i) {
+          p = p.then(function() {
+            pg.textContent = '渲染 ' + (i+1) + '/' + ps.length + '...';
+            return renderPoster(el).then(function(c) { return c2b(c).then(function(b) { zip.file('小红书-' + String(i+1).padStart(2,'0') + '.png', b); }); });
+          });
+        });
+        p.then(function() { pg.textContent = '打包中...'; return zip.generateAsync({ type: 'blob' }); })
+         .then(function(b) { saveAs(b, '小红书-经典版vs臻选版.zip'); pg.textContent = ps.length + ' 张已完成'; });
+      };
+      window.downloadOne = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var vc = window.innerHeight / 2, idx = 0, min = Infinity;
+        ps.forEach(function(el, i) { var r = el.getBoundingClientRect(); var d = Math.abs(r.top + r.height/2 - vc); if (d < min) { min = d; idx = i; } });
+        renderPoster(ps[idx]).then(function(c) { return c2b(c); }).then(function(b) { saveAs(b, '小红书-' + String(idx+1).padStart(2,'0') + '.png'); });
+      };
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - AI时代代理人最重要的数字资产</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #F0F0F0;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,245,245,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #1A1A1A; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: opacity 0.15s;
+  }
+  .toolbar .btn:hover { opacity: 0.85; }
+  .toolbar .btn.accent { background: #444; }
+  .toolbar .progress { color: rgba(0,0,0,0.25); font-size: 13px; }
+
+  /* ====== CARD BASE ====== */
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 8px; margin-bottom: 28px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.07);
+  }
+  .bg-light { background: #F7F7F7; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 32px 32px 28px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 720px;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 14px; right: 22px;
+    font-size: 10px; font-weight: 500;
+    color: rgba(0,0,0,0.15);
+    z-index: 3; letter-spacing: 1px;
+  }
+
+  /* ====== SECTION TAG ====== */
+  .section-tag {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 3px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ====== TITLES ====== */
+  .main-title {
+    font-size: 27px;
+    font-weight: 900;
+    color: #111;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+
+  /* ====== DIVIDER ====== */
+  .divider {
+    width: 32px; height: 3px;
+    background: #111; border-radius: 2px;
+    margin: 8px 0 14px;
+  }
+
+  /* ====== INTRO TEXT ====== */
+  .intro {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .intro b { color: #111; }
+
+  /* ====== BIG NUMBER ====== */
+  .big-num {
+    font-size: 56px; font-weight: 900;
+    color: #111;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .big-num-label {
+    font-size: 13px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  /* ====== INFO CARD (light) ====== */
+  .info-card {
+    background: #FAFAFA;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    border-left: 3px solid #111;
+  }
+  .info-card .card-title {
+    font-size: 13px; font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  /* ====== LIST ITEMS ====== */
+  .bullet-list {
+    list-style: none; padding: 0;
+  }
+  .bullet-list li {
+    font-size: 12px; color: #444; line-height: 1.6;
+    padding: 5px 0 5px 16px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .bullet-list li:last-child { border-bottom: none; }
+  .bullet-list li::before {
+    content: '';
+    position: absolute; left: 0; top: 12px;
+    width: 5px; height: 5px;
+    background: #111; border-radius: 50%;
+  }
+
+  /* ====== 3-COLUMN MINI CARDS ====== */
+  .card-row {
+    display: flex; gap: 10px; margin-bottom: 10px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FAFAFA;
+    border-radius: 8px;
+    padding: 18px 12px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .mini-card .m-num {
+    font-size: 28px; font-weight: 900;
+    color: #DDD;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .mini-card .m-title {
+    font-size: 13px; font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+  }
+  .mini-card .m-desc {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.45;
+  }
+
+  /* ====== QUOTE BOX (dark inline) ====== */
+  .quote-box {
+    background: #1A1A1A;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 6px;
+    position: relative;
+  }
+  .quote-box::before {
+    content: '"';
+    position: absolute; top: 4px; left: 10px;
+    font-size: 36px; font-weight: 900;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.65;
+    padding-left: 6px;
+  }
+
+  /* ====== NAIL SENTENCE ====== */
+  .nail {
+    font-size: 15px; font-weight: 800;
+    color: #111;
+    line-height: 1.4;
+    padding: 10px 0 6px 14px;
+    border-left: 3px solid #111;
+    margin: 10px 0 6px;
+  }
+
+  /* ====== STEP NUMBER ====== */
+  .step-num {
+    font-size: 48px; font-weight: 900;
+    color: #E8E8E8;
+    line-height: 1;
+    min-width: 42px;
+    text-align: center;
+  }
+
+  /* ====== TABLE (A vs B) ====== */
+  .vs-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 11px;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .vs-table th {
+    background: #1A1A1A;
+    color: #FFF;
+    padding: 8px 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .vs-table th:first-child { background: #555; }
+  .vs-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: #333; line-height: 1.45;
+    text-align: center;
+  }
+  .vs-table tr:last-child td { border-bottom: none; }
+  .vs-table tr:nth-child(even) td { background: #FAFAFA; }
+
+  /* ====== DARK CARD ====== */
+  .dark-card {
+    background: #2A2A2A;
+    border-radius: 8px;
+    padding: 13px 16px;
+    margin-bottom: 8px;
+  }
+  .dark-card .dc-title {
+    font-size: 13px; font-weight: 700;
+    color: #AAA;
+    margin-bottom: 4px;
+  }
+  .dark-card .dc-body {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+
+  /* ====== CTA BUTTON ====== */
+  .cta-btn {
+    display: block;
+    background: #FFF;
+    color: #111;
+    text-align: center;
+    padding: 13px 20px;
+    border-radius: 8px;
+    font-size: 13px; font-weight: 700;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ====== COVER ====== */
+  .cover-slide { background: #121212; }
+  .cover-slide .content {
+    justify-content: center;
+    min-height: 720px;
+    padding: 40px 38px 32px;
+  }
+  .cover-slide .cover-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .cover-slide .cover-title {
+    font-size: 44px; font-weight: 900;
+    color: #FFF;
+    line-height: 1.12;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  .cover-slide .cover-line {
+    width: 48px; height: 2px;
+    background: rgba(255,255,255,0.15);
+    margin-bottom: 20px;
+  }
+  .cover-slide .cover-tags {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .cover-slide .tag {
+    font-size: 11px; font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 14px; border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid rgba(255,255,255,0.2);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.55;
+  }
+
+  /* ====== DARK SLIDE ====== */
+  .dark-slide { background: #121212; }
+  .dark-slide .section-tag { color: rgba(255,255,255,0.35); }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.5); }
+  .dark-slide .intro b { color: rgba(255,255,255,0.8); }
+  .dark-slide .divider { background: rgba(255,255,255,0.15); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.1); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.03);
+    border-left-color: rgba(255,255,255,0.25);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.6); }
+  .dark-slide .bullet-list li {
+    color: rgba(255,255,255,0.6);
+    border-bottom-color: rgba(255,255,255,0.04);
+  }
+  .dark-slide .bullet-list li::before { background: rgba(255,255,255,0.3); }
+  .dark-slide .mini-card { background: rgba(255,255,255,0.03); }
+  .dark-slide .mini-card .m-num { color: rgba(255,255,255,0.08); }
+  .dark-slide .mini-card .m-title { color: #CCC; }
+  .dark-slide .mini-card .m-desc { color: rgba(255,255,255,0.45); }
+  .dark-slide .nail { color: #FFF; border-left-color: rgba(255,255,255,0.3); }
+  .dark-slide .big-num { color: #FFF; }
+  .dark-slide .big-num-label { color: rgba(255,255,255,0.4); }
+  .dark-slide .vs-table th { background: #333; }
+  .dark-slide .vs-table th:first-child { background: #555; }
+  .dark-slide .vs-table td {
+    color: rgba(255,255,255,0.65);
+    border-bottom-color: rgba(255,255,255,0.04);
+  }
+  .dark-slide .vs-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .dark-slide .vs-table { border-color: rgba(255,255,255,0.06); }
+  .dark-slide .dark-card { background: rgba(255,255,255,0.04); }
+  .dark-slide .step-num { color: rgba(255,255,255,0.06); }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ====== 第1张 · 封面 ====== -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-badge">INSURANCE × AI</div>
+    <div class="cover-title">AI时代<br>代理人最重要<br>的数字资产</div>
+    <div class="cover-sub">99%的人每天都在生产它<br>却从来没把它当资产</div>
+    <div class="cover-line"></div>
+    <div class="cover-tags">
+      <span class="tag">AI + 保险</span>
+      <span class="tag">客户管理</span>
+      <span class="tag">效率提升</span>
+    </div>
+    <div class="cover-quote">
+      <p>你以为最重要的资产是客户名单。<br>但其实不是。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">1 / 5</div>
+  </div>
+</div>
+
+<!-- ====== 第2张 · 认知冲突 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">认知冲突</div>
+    <div class="main-title">聊天记录，比客户名单<br>值钱十倍</div>
+    <div class="divider"></div>
+
+    <div style="display:flex;align-items:flex-end;gap:8px;margin-bottom:12px;">
+      <div class="big-num">10万+</div>
+      <div class="big-num-label" style="padding-bottom:10px;">条消息<br>三年以上代理人</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">这 10 万条消息里装着什么</div>
+      <div class="card-body">
+        <ul class="bullet-list" style="margin-top:2px;">
+          <li>客户家庭结构、收入水平、核心担忧</li>
+          <li>什么时候说"再想想"——后来买了还是没买</li>
+          <li>哪些话术说了有效，哪些说了就冷场</li>
+          <li>同一个客户，三年里需求怎么变的</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="nail">这不叫聊天记录。这叫经验数据库。</div>
+
+    <div class="intro" style="margin-top:auto; padding-top:10px;">
+      以前只能存在脑子里。记不住就丢了。<br>新人重新踩坑，老人靠"感觉"判断。<br><b>现在不一样了。</b>
+    </div>
+    <div class="page-num">2 / 5</div>
+  </div>
+</div>
+
+<!-- ====== 第3张 · AI能做什么 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">AI 能做什么</div>
+    <div class="main-title">不是写文案<br>是帮你读数据</div>
+    <div class="divider"></div>
+
+    <div class="card-row" style="margin-top:6px;">
+      <div class="mini-card">
+        <div class="m-num">01</div>
+        <div class="m-title">结构化</div>
+        <div class="m-desc">散落的对话自动整理成客户档案</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-num">02</div>
+        <div class="m-title">发现信号</div>
+        <div class="m-desc">行为变化 AI 自动识别推给你</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-num">03</div>
+        <div class="m-title">下一步行动</div>
+        <div class="m-desc">不是"该跟进了"，是具体怎么跟</div>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <p>我试过。把自己的聊天记录导出来让 AI 分析。结果后背发凉——好几个客户有明确的购买信号，我当时根本没注意到。错过了。</p>
+    </div>
+
+    <div class="info-card" style="margin-top:8px;">
+      <div class="card-title">关键认知</div>
+      <div class="card-body">AI 大模型最擅长处理非结构化文本。你的聊天记录，对传统系统是垃圾，对 AI 是金矿。</div>
+    </div>
+    <div class="page-num">3 / 5</div>
+  </div>
+</div>
+
+<!-- ====== 第4张 · 三步开始 ====== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">怎么开始</div>
+    <div class="main-title">三步就够了<br>不需要技术背景</div>
+    <div class="divider"></div>
+
+    <div class="info-card" style="margin-top:8px;">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">01</span> 聊天记录结构化
+      </div>
+      <div class="card-body">微信聊天、电话笔记、保单照片全存下来。AI 自动把非结构化文本转成结构化信息。你只需把对话扔进去。</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">02</span> 选一个 AI 工具
+      </div>
+      <div class="card-body">我帮代理人做好了飞书工具。在聊天框里像跟同事说话一样打字就行。AI 自动提取、写入表格、更新状态。</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title" style="display:flex;align-items:center;gap:10px;">
+        <span class="step-num" style="font-size:32px;color:#CCC;">03</span> 建跟进表，AI 出决策
+      </div>
+      <div class="card-body">飞书多维表格就够了。AI 自动跑：超期预警、日报推送、意向度评分。每周花 15 分钟看一遍。</div>
+    </div>
+
+    <div class="nail" style="margin-top:12px;">剩下的事，AI 干了。</div>
+    <div class="page-num">4 / 5</div>
+  </div>
+</div>
+
+<!-- ====== 第5张 · 差距 + CTA ====== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">一年之后</div>
+    <div class="main-title">差距不在努力程度<br>在工作方式</div>
+    <div class="divider"></div>
+
+    <table class="vs-table" style="margin-top:8px;">
+      <tr><th>A 代理人</th><th>B 代理人</th></tr>
+      <tr><td>靠脑子记客户</td><td>AI 结构化客户信息</td></tr>
+      <tr><td>凭感觉判断跟谁</td><td>AI 每周分析跟进优先级</td></tr>
+      <tr><td>老客户半年没联系</td><td>最佳触达时机自动推送</td></tr>
+      <tr><td>凭感觉拍短视频</td><td>AI 先分析客群画像再选题</td></tr>
+    </table>
+
+    <div class="dark-card" style="margin-top:12px;">
+      <div class="dc-title">说句实话</div>
+      <div class="dc-body">代理人最值钱的东西，不是要花钱买的、要费力学的东西。是你本来就有、但从来没认真对待的——你跟客户说过的每一句话。</div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">我做了个工具</div>
+      <div class="dc-body">飞书里自动完成客户信息结构化，不用多干一份活。</div>
+    </div>
+
+    <div class="cta-btn">感兴趣直接回复，我发给你</div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.1); margin-top:auto; position:static; text-align:right; padding-top:14px;">5 / 5</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-AI时代数字资产.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>众民保中高端2026版对比 · 小红书</title>
+  <meta name="viewport" content="width=1080">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 70px 20px 40px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .sheet { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+    /* ---------- Card ---------- */
+    .poster {
+      position: relative; overflow: hidden; isolation: isolate;
+      width: 1080px; height: 1440px; border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.24);
+    }
+    .poster .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 100px 96px;
+      display: flex; flex-direction: column;
+    }
+
+    /* ---------- Theme variants ---------- */
+    .theme-warm { background: #fdf6ed; color: #2a1e13; }
+    .theme-warm .accent { color: #b85c2e; }
+    .theme-warm .tag { background: #f5e6d3; color: #8b5a3c; }
+    .theme-warm .card-box { background: #faf3ea; border-left: 4px solid #b85c2e; }
+    .theme-warm .card-box.dim { opacity: .60; background: #f7ede0; }
+    .theme-warm .card-box.warn { border-left-color: #d4a04a; background: #fef9ed; }
+    .theme-warm .divider { background: rgba(42,30,19,.15); }
+    .theme-warm .badge { background: #b85c2e; color: #fff; }
+    .theme-warm .badge.old { background: #8b6f5a; }
+
+    .theme-dark { background: #2a1e13; color: #fdf6ed; }
+    .theme-dark .accent { color: #e8a96b; }
+    .theme-dark .tag { background: rgba(255,255,255,.08); color: #c9a87c; }
+    .theme-dark .card-box { background: rgba(255,255,255,.06); border-left: 4px solid #e8a96b; }
+    .theme-dark .card-box.dim { opacity: .55; }
+    .theme-dark .divider { background: rgba(253,246,237,.15); }
+    .theme-dark .badge { background: #e8a96b; color: #2a1e13; }
+
+    /* grain on warm cards */
+    .grain {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: .25; mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
+      background-size: 3px 3px;
+    }
+
+    /* ---------- Typography ---------- */
+    h1 { font-weight: 900; font-size: 136px; line-height: 1.04; letter-spacing: -.01em; margin: 0; }
+    h2 { font-weight: 700; font-size: 76px; line-height: 1.14; letter-spacing: .01em; margin: 0; }
+    h3 { font-weight: 700; font-size: 48px; line-height: 1.22; margin: 0; }
+    .big-num { font-weight: 800; font-size: 140px; line-height: 1; letter-spacing: -.02em; }
+    .mid-num { font-weight: 700; font-size: 88px; line-height: 1; letter-spacing: -.01em; }
+    .body-lg { font-weight: 400; font-size: 34px; line-height: 1.55; margin: 0; }
+    .body-md { font-weight: 400; font-size: 28px; line-height: 1.6; margin: 0; }
+    .body-sm { font-weight: 400; font-size: 24px; line-height: 1.55; margin: 0; opacity: .72; }
+    .label { font-weight: 600; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+    .tag {
+      display: inline-block; padding: 10px 24px; border-radius: 6px;
+      font-weight: 600; font-size: 22px; letter-spacing: .04em;
+    }
+    .badge {
+      display: inline-block; padding: 6px 18px; border-radius: 4px;
+      font-weight: 700; font-size: 20px; letter-spacing: .06em;
+    }
+
+    /* ---------- Layout helpers ---------- */
+    .stack { display: flex; flex-direction: column; }
+    .row   { display: flex; flex-direction: row; }
+    .grow  { flex: 1; }
+    .center { text-align: center; align-items: center; }
+    .divider { height: 1px; border: 0; margin: 0; }
+    .gap-xs  { gap: 12px; }
+    .gap-sm  { gap: 20px; }
+    .gap-md  { gap: 36px; }
+    .gap-lg  { gap: 56px; }
+    .gap-xl  { gap: 80px; }
+
+    /* ---------- Card box (PPT text block) ---------- */
+    .card-box {
+      padding: 40px 48px; border-radius: 10px;
+    }
+    .card-box .row { align-items: flex-start; gap: 24px; }
+    .card-box .dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 12px;
+    }
+    .theme-warm .card-box .dot { background: #b85c2e; }
+    .theme-dark .card-box .dot { background: #e8a96b; }
+
+    /* point list */
+    .point-row {
+      display: flex; align-items: flex-start; gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(42,30,19,.10);
+    }
+    .theme-dark .point-row { border-bottom-color: rgba(253,246,237,.10); }
+    .point-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .point-row .point-num {
+      font-weight: 800; font-size: 56px; line-height: 1; flex-shrink: 0;
+      width: 72px; text-align: center;
+    }
+    .point-row .point-body { flex: 1; }
+    .point-row .point-body h3 { font-size: 38px; line-height: 1.3; }
+    .point-row .point-body p  { font-size: 26px; line-height: 1.5; margin: 8px 0 0; opacity: .72; }
+
+    /* two-column */
+    .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+
+    /* bottom strip */
+    .bottom-strip {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 20px; letter-spacing: .08em; opacity: .55;
+      padding-top: 24px; border-top: 1px solid;
+      margin-top: auto;
+    }
+    .theme-warm .bottom-strip { border-color: rgba(42,30,19,.12); }
+    .theme-dark .bottom-strip { border-color: rgba(253,246,237,.12); }
+
+    /* upgrade arrow */
+    .up-arrow { font-weight: 900; font-size: 36px; color: #b85c2e; flex-shrink: 0; }
+
+    /* toolbar */
+    .toolbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(26,26,26,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 10px 20px; display: flex; align-items: center;
+      justify-content: center; gap: 10px; height: 54px;
+    }
+    .toolbar .btn {
+      background: #fff; color: #1a1a1a; border: none;
+      padding: 8px 20px; border-radius: 6px; font-size: 13px;
+      font-weight: 600; cursor: pointer; font-family: -apple-system, sans-serif;
+    }
+    .toolbar .btn.accent { background: #b85c2e; color: #fff; }
+    .toolbar .btn:hover { opacity: .85; }
+    .toolbar .progress { color: rgba(255,255,255,.35); font-size: 12px; font-weight: 500; min-width: 120px; text-align: center; font-family: -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar" id="toolbar">
+    <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+    <button class="btn" onclick="downloadOne()">下载当前</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <main class="sheet">
+
+    <!-- ===== 01 · 封面 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-01">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <span class="tag">众民保 · 中高端医疗险</span>
+        <div class="grow" style="display:flex;align-items:center;">
+          <div class="stack gap-sm">
+            <h1>赔得多了<br>规则也严了</h1>
+            <p class="body-lg" style="margin-top:8px;">2026版 vs 2025版 全面对比<br>帮你判断<strong class="accent">该不该升级</strong></p>
+          </div>
+        </div>
+        <div class="bottom-strip">
+          <span>Vol. 01 · 2026.06</span>
+          <span>众安保险</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 · 三大核心升级 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-02">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>三大核心升级</h2>
+        <p class="body-lg">保障加码幅度很大，每一条都值钱。</p>
+        <div class="grow stack gap-md" style="justify-content:center;">
+          <div class="card-box">
+            <div class="row">
+              <span class="badge">升级 ①</span>
+            </div>
+            <p class="body-lg" style="margin-top:20px;">0-2万部分赔付比例<br><span class="mid-num accent" style="font-size:72px;">50% → 60%</span></p>
+            <p class="body-sm" style="margin-top:8px;">新保客户多赔 10%，获得感更强</p>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="badge">升级 ②</span>
+            </div>
+            <p class="body-lg" style="margin-top:20px;">住院康复责任保额<br><span class="mid-num accent" style="font-size:72px;">1万 → 100万</span></p>
+            <p class="body-sm" style="margin-top:8px;">翻了 100 倍，康复治疗更有底气</p>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="badge">升级 ③</span>
+            </div>
+            <p class="body-lg" style="margin-top:20px;">肿瘤特药范围<br><span class="mid-num accent" style="font-size:72px;">156 种 → 不限清单</span></p>
+            <p class="body-sm" style="margin-top:8px;">CAR-T 从 3 款扩到 7 款，用药更自由</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 · 关键数字冲击 ===== -->
+    <section class="poster xhs theme-dark" id="xhs-03">
+      <div class="content center stack gap-lg" style="justify-content:center;">
+        <p class="label accent">2026 版 · 核心数字</p>
+        <div class="stack gap-md">
+          <div class="stack gap-xs">
+            <span class="label" style="opacity:.6;">0-2万部分赔付比例</span>
+            <span class="big-num accent" style="font-size:180px;">60%</span>
+            <p class="body-md" style="opacity:.65;">老版 50%，每 2 万多赔 2,000 元</p>
+          </div>
+          <div class="divider" style="width:160px;margin:0 auto;"></div>
+          <div class="row gap-lg" style="justify-content:center;">
+            <div class="stack gap-xs center">
+              <span class="mid-num accent">100 万</span>
+              <span class="body-sm">康复保额</span>
+            </div>
+            <div class="stack gap-xs center">
+              <span class="mid-num accent">不限清单</span>
+              <span class="body-sm">肿瘤特药</span>
+            </div>
+            <div class="stack gap-xs center">
+              <span class="mid-num accent">183 家</span>
+              <span class="body-sm">私立医院</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 04 · 保障升级详解 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-04">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>保障升级<br>逐项拆开看</h2>
+        <div class="grow stack" style="gap:0;">
+          <div class="point-row">
+            <span class="point-num accent">01</span>
+            <div class="point-body">
+              <h3>一般医疗赔付比例提升</h3>
+              <p>0-2万部分：50% → 60%，2万以上维持 100%</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">02</span>
+            <div class="point-body">
+              <h3>住院康复责任大幅扩展</h3>
+              <p>保额从 1 万提升至 100 万，覆盖康复治疗全周期</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">03</span>
+            <div class="point-body">
+              <h3>慢病原研药直付 · 新增</h3>
+              <p>慢病用药升级，可报销原研进口药，老版无此责任</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">04</span>
+            <div class="point-body">
+              <h3>质子重离子医院扩展</h3>
+              <p>从指定 9 家 → 大陆境内不限清单，就医更灵活</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 05 · 更多升级 + 可选责任 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-05">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>还有这些<br>也升级了</h2>
+        <div class="grow stack" style="gap:0;">
+          <div class="point-row">
+            <span class="point-num accent">05</span>
+            <div class="point-body">
+              <h3>肿瘤特药范围扩大</h3>
+              <p>156 种 + 3 款 CAR-T → 不限清单 + 7 款 CAR-T</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">06</span>
+            <div class="point-body">
+              <h3>私立（民营）医院网络扩展</h3>
+              <p>从 102 家 → 183 家，私立就医选择更多</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">07</span>
+            <div class="point-body">
+              <h3>增值服务 16 项 → 18 项</h3>
+              <p>覆盖诊前至康复全流程，服务更丰富</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">08</span>
+            <div class="point-body">
+              <h3>可选特需医疗加油包 · 新增</h3>
+              <p>300 万保额，2 万免赔，一般疾病也能去特需部</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 · 规则变严了 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-06">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>但规则<br>也变严了</h2>
+        <p class="body-lg">升级的同时，几个门槛调整要心里有数。</p>
+        <div class="grow stack gap-md" style="justify-content:center;">
+          <div class="card-box warn">
+            <div class="row">
+              <span class="badge old">变化 ①</span>
+            </div>
+            <p class="body-lg" style="margin-top:20px;">一般既往症等待期<br><strong style="color:#b85c2e;">30 天 → 90 天</strong></p>
+            <p class="body-sm" style="margin-top:8px;">4月1日起新保保单执行，活动期间维持 30 天</p>
+          </div>
+          <div class="card-box warn">
+            <div class="row">
+              <span class="badge old">变化 ②</span>
+            </div>
+            <p class="body-lg" style="margin-top:20px;">一般既往症药品范围<br><strong style="color:#b85c2e;">无限制 → 有限制</strong></p>
+            <p class="body-sm" style="margin-top:8px;">限 2025 年底前获批上市的药品及适应症</p>
+          </div>
+          <div class="card-box warn">
+            <div class="row">
+              <span class="badge old">变化 ③</span>
+            </div>
+            <p class="body-lg" style="margin-top:20px;">严重既往症清单<br><strong style="color:#b85c2e;">新增三类疾病</strong></p>
+            <p class="body-sm" style="margin-top:8px;">高危结节、重症肌无力、罕见病列入除外</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 07 · 决策指南 ===== -->
+    <section class="poster xhs theme-dark" id="xhs-07">
+      <div class="content stack gap-lg" style="justify-content:center;">
+        <span class="badge" style="width:fit-content;">怎么选</span>
+        <div class="col-2">
+          <div class="card-box stack gap-sm" style="padding:48px 40px;">
+            <span class="label accent" style="font-size:28px;">老客户</span>
+            <p class="body-md" style="margin-top:8px;">没有新增严重既往症<br>（高危结节/重症肌无力/罕见病）</p>
+            <div class="divider" style="margin:8px 0;"></div>
+            <h3 class="accent" style="font-size:40px;">建议升级</h3>
+            <p class="body-sm" style="margin-top:8px;">享受更高赔付比例和扩展保障</p>
+          </div>
+          <div class="card-box stack gap-sm" style="padding:48px 40px;">
+            <span class="label accent" style="font-size:28px;">新客户</span>
+            <p class="body-md" style="margin-top:8px;">活动期间投保<br>（3月16日-31日）</p>
+            <div class="divider" style="margin:8px 0;"></div>
+            <h3 class="accent" style="font-size:40px;">抓紧窗口期</h3>
+            <p class="body-sm" style="margin-top:8px;">0-105岁可投，等待期仅30天</p>
+          </div>
+        </div>
+        <div class="divider" style="width:200px;margin:0 auto;"></div>
+        <p class="body-lg center" style="opacity:.75;">已确诊新增严重既往症？<br>重新投老版（2025版），保障不变</p>
+      </div>
+    </section>
+
+    <!-- ===== 08 · CTA 收尾 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-08">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>你的情况<br>该怎么选？</h2>
+        <p class="body-lg">整理了一份资料，方便你对照自己的情况判断——</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>2026 版完整保障责任表</h3><p class="body-sm" style="margin-top:6px;">每一项保什么、保多少，一目了然</p></div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>新旧版本逐项对比清单</h3><p class="body-sm" style="margin-top:6px;">哪里升级、哪里收紧，清清楚楚</p></div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>严重既往症完整清单</h3><p class="body-sm" style="margin-top:6px;">对照自查，判断自己属于老版还是新版范围</p></div>
+            </div>
+          </div>
+        </div>
+        <hr class="divider" style="margin:0;">
+        <p class="body-lg center" style="font-weight:600;">不确定自己的情况适不适合升级？<br>评论区回复「<strong class="accent">对比</strong>」，我帮你看看</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var W = 1080, H = 1440;
+      function renderPoster(el) {
+        var obr = el.style.borderRadius, obs = el.style.boxShadow;
+        el.style.borderRadius = '0'; el.style.boxShadow = 'none';
+        return html2canvas(el, { scale: 1, useCORS: true, backgroundColor: null, width: W, height: H, logging: false })
+          .then(function(c) { el.style.borderRadius = obr; el.style.boxShadow = obs; return c; });
+      }
+      function c2b(c) { return new Promise(function(r) { c.toBlob(r, 'image/png'); }); }
+      window.downloadAll = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var pg = document.getElementById('progress');
+        var zip = new JSZip(); var p = Promise.resolve();
+        ps.forEach(function(el, i) {
+          p = p.then(function() {
+            pg.textContent = '渲染 ' + (i+1) + '/' + ps.length + '...';
+            return renderPoster(el).then(function(c) { return c2b(c).then(function(b) { zip.file('小红书-' + String(i+1).padStart(2,'0') + '.png', b); }); });
+          });
+        });
+        p.then(function() { pg.textContent = '打包中...'; return zip.generateAsync({ type: 'blob' }); })
+         .then(function(b) { saveAs(b, '小红书-众民保中高端2026版对比.zip'); pg.textContent = ps.length + ' 张已完成'; });
+      };
+      window.downloadOne = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var vc = window.innerHeight / 2, idx = 0, min = Infinity;
+        ps.forEach(function(el, i) { var r = el.getBoundingClientRect(); var d = Math.abs(r.top + r.height/2 - vc); if (d < min) { min = d; idx = i; } });
+        renderPoster(ps[idx]).then(function(c) { return c2b(c); }).then(function(b) { saveAs(b, '小红书-' + String(idx+1).padStart(2,'0') + '.png'); });
+      };
+    })();
+  </script>
+</body>
+</html>

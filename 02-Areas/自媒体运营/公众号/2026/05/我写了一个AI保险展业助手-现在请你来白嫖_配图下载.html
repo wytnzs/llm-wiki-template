@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配图下载 - 我写了一个AI保险展业助手，现在请你来白嫖</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #E8ECF1; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 32px 16px 60px; }
+.header { max-width: 677px; margin: 0 auto 28px; text-align: center; }
+.header h1 { font-size: 20px; font-weight: 800; color: #102542; margin-bottom: 6px; }
+.header p { font-size: 14px; color: #86909C; }
+.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+.illu-download-btn { position: absolute; top: 10px; right: 10px; z-index: 10; background: rgba(255,255,255,0.9); border: 1px solid #CBD5E0; border-radius: 6px; padding: 5px 14px; font-size: 13px; cursor: pointer; color: #4A5568; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.4; font-weight: 600; }
+.illu-download-btn:hover { background: #FFFFFF; border-color: #F77F00; color: #F77F00; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📥 配图下载</h1>
+  <p>我写了一个AI保险展业助手，现在请你来白嫖 · 共 5 张 · 点击每张右上角按钮下载 PNG</p>
+</div>
+
+<!-- 配图1: Agent工作流程 -->
+<div class="illu-card" id="illu-1" style="padding: 32px 28px; background: #F7F9FC;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-1', 'AI保险展业助手-工作流程')">⬇ 下载PNG</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">这个 Agent 怎么工作</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0;">你在飞书里正常说话，剩下的它来</p>
+  <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">💬</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">飞书消息</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">你正常说话</div>
+    </div>
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:0; min-width:24px; height:48px;"><div style="width:100%; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div></div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">🧠</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">AI 理解意图</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">DeepSeek 解析</div>
+    </div>
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:0; min-width:24px; height:48px;"><div style="width:100%; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div></div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">📊</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">读写多维表格</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">自动归档数据</div>
+    </div>
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:0; min-width:24px; height:48px;"><div style="width:100%; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div></div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">📋</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">结构化回复</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">卡片+分析+建议</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:20px 0 0 0; font-size:14px; color:#0A1931; font-weight:600;">一句话：<span style="color:#F77F00;">飞书消息 → AI 理解 → 自动归档 → 智能回复</span></p>
+</div>
+
+<!-- 配图2: 四大核心能力 -->
+<div class="illu-card" id="illu-2" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #E5EAF2;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-2', 'AI保险展业助手-四大核心能力')">⬇ 下载PNG</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">四大核心能力</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 20px 0;">不是功能列表，是保险代理人每天都要做的事</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #102542;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">01</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">记客户</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">说句话自动建档，姓名/年龄/险种/预算一次提取。不用填表，不用切换系统。</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">02</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">做分析</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">客户诊断报告 + 203款产品6维评分Top5推荐 + Kano需求分层。</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">03</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">盯跟进</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">超14天自动预警，超30天标沉睡。每天早9点推日报，谁该跟、谁快凉，一目了然。</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #102542;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">04</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">出话术</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">6类异议自动识别——太贵了/有社保/再想想/网上便宜……即时给出结构化应对。</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#0A1931; font-weight:600;">四个能力，一个入口：在飞书里正常聊天就行。</p>
+</div>
+
+<!-- 配图3: CRM vs Agent 对比 -->
+<div class="illu-card" id="illu-3" style="padding: 32px 28px; background:linear-gradient(135deg, #102542 0%, #0A1931 100%); color:#FFFFFF;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-3', 'AI保险展业助手-CRMvsAgent')" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);">⬇ 下载PNG</button>
+  <h2 style="font-size:20px; font-weight:800; color:#FFFFFF; margin:0 0 8px 0; border:none; padding:0;">CRM vs Agent</h2>
+  <p style="font-size:13px; color:rgba(255,255,255,0.5); margin:0 0 20px 0;">不是升级，是换了一个物种</p>
+  <div style="display:flex; gap:16px;">
+    <div style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:20px 16px;">
+      <div style="font-size:16px; font-weight:700; color:#86909C; margin-bottom:14px;">🧱 传统 CRM</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">你主动打开，手动录入</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">客户状态靠你标记</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">意向度凭感觉打分</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">产品推荐靠翻手册</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">超期不提醒，忘了就忘了</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:0; line-height:1.6;">数据是死的，不会自己更新</div>
+    </div>
+    <div style="flex:1; background:rgba(247,127,0,0.1); border:1px solid rgba(247,127,0,0.25); border-radius:8px; padding:20px 16px;">
+      <div style="font-size:16px; font-weight:700; color:#F77F00; margin-bottom:14px;">🤖 AI Agent</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">聊完天自动归档，你不用管</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">系统实时追踪状态流转</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">5维行为信号自动计算</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">6维评分引擎秒出Top5</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">到点主动推送，怕你忘了</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:0; line-height:1.6;">凌晨自动全量同步+重算</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#F77F00; font-weight:600;">一个等你操作 &nbsp;→&nbsp; 一个帮你操作</p>
+</div>
+
+<!-- 配图4: 五维行为评分引擎 -->
+<div class="illu-card" id="illu-4" style="padding: 32px 28px; background: #F7F9FC;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-4', 'AI保险展业助手-五维评分引擎')">⬇ 下载PNG</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">五维行为评分引擎</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0;">意向度不由你拍脑袋，由客户行为决定</p>
+  <div style="display:flex; align-items:flex-end; gap:12px; justify-content:center; height:200px; padding-bottom:8px;">
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#F77F00; margin-bottom:4px;">30</div>
+      <div style="height:140px; background:linear-gradient(180deg, #F77F00 0%, rgba(247,127,0,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">跟进时效</div>
+      <div style="font-size:11px; color:#86909C;">满分 30</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#E07B53; margin-bottom:4px;">25</div>
+      <div style="height:117px; background:linear-gradient(180deg, #E07B53 0%, rgba(224,123,83,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">反馈信号</div>
+      <div style="font-size:11px; color:#86909C;">满分 25</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#2E7D32; margin-bottom:4px;">15</div>
+      <div style="height:70px; background:linear-gradient(180deg, #2E7D32 0%, rgba(46,125,50,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">数据完整</div>
+      <div style="font-size:11px; color:#86909C;">满分 15</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#1A6B7C; margin-bottom:4px;">15</div>
+      <div style="height:70px; background:linear-gradient(180deg, #1A6B7C 0%, rgba(26,107,124,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">互动密度</div>
+      <div style="font-size:11px; color:#86909C;">满分 15</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#3949AB; margin-bottom:4px;">15</div>
+      <div style="height:70px; background:linear-gradient(180deg, #3949AB 0%, rgba(57,73,171,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">时间衰减</div>
+      <div style="font-size:11px; color:#86909C;">满分 15</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:14px; color:#102542; font-weight:700;">意向度 = <span style="color:#F77F00;">30</span> + <span style="color:#E07B53;">25</span> + <span style="color:#2E7D32;">15</span> + <span style="color:#1A6B7C;">15</span> + <span style="color:#3949AB;">15</span> = 满分 <span style="color:#F77F00;">100</span></p>
+</div>
+
+<!-- 配图5: 白嫖指南 -->
+<div class="illu-card" id="illu-5" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #E5EAF2;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-5', 'AI保险展业助手-白嫖指南')">⬇ 下载PNG</button>
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">白嫖指南</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 20px 0;">第一批20人，零费用入场</p>
+  <div style="display:flex; gap:20px;">
+    <div style="flex:1;">
+      <div style="font-size:16px; font-weight:700; color:#86909C; padding-bottom:8px; border-bottom:2px solid #E5EAF2; margin-bottom:12px;">你需要准备</div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">1</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">飞书账号（能建自建应用）</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">2</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">一台电脑（Win/Mac，保持开机）</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">3</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">DeepSeek API Key（充¥10够测几千次）</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">4</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">30分钟照着说明书部署</span></div>
+    </div>
+    <div style="flex:1;">
+      <div style="font-size:16px; font-weight:700; color:#F77F00; padding-bottom:8px; border-bottom:2px solid #F77F00; margin-bottom:12px;">你能获得</div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">24小时运行AI展业助手</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">飞书可视化仪表盘</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">203款产品六维评分引擎</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">行为信号自动评分</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">每日9点自动推日报</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">新功能优先体验</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:0;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">直接向开发者提需求</span></div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:12px; color:#86909C;">投入30分钟 + ¥10 API余额 → 换一个不知疲倦的AI助理</p>
+</div>
+
+<script>
+function downloadCard(elementId, filename) {
+  var el = document.getElementById(elementId);
+  if (!el) return;
+  var btn = el.querySelector('.illu-download-btn');
+  if (btn) btn.style.display = 'none';
+  html2canvas(el, { scale: 2, backgroundColor: null, useCORS: true, logging: false })
+    .then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = (filename || '配图') + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      if (btn) btn.style.display = '';
+    })
+    .catch(function(err) { console.error('html2canvas error:', err); if (btn) btn.style.display = ''; });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=540">
+<title>小红书 - 毕业旅行意外险指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background: #EDEDE8;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .slide {
+    animation: fadeUp 0.5s ease-out both;
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 8px; margin-bottom: 24px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  .slide:nth-child(2) { animation-delay: 0.1s; }
+  .slide:nth-child(3) { animation-delay: 0.2s; }
+  .slide:nth-child(4) { animation-delay: 0.3s; }
+  .slide:nth-child(5) { animation-delay: 0.4s; }
+  .slide:nth-child(6) { animation-delay: 0.5s; }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    padding: 10px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 10px; height: 50px;
+  }
+  .toolbar .btn {
+    background: #1A1A1A; color: #FFF; border: none;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .toolbar .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .toolbar .btn.accent { background: #C79A5E; }
+  .toolbar .progress {
+    color: rgba(0,0,0,0.25); font-size: 12px;
+    font-weight: 500; min-width: 100px; text-align: center;
+  }
+
+  .bg-warm { background: #F5F5F0; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 36px 32px 30px;
+    z-index: 2;
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 14px; right: 24px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 1px; color: rgba(0,0,0,0.15);
+    z-index: 3;
+  }
+  .page-num.dark { color: rgba(255,255,255,0.12); }
+
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    color: #999; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .section-tag::before {
+    content: ''; display: inline-block;
+    width: 16px; height: 1.5px; background: #C79A5E; border-radius: 1px;
+  }
+
+  .main-title { font-size: 26px; font-weight: 800; color: #1A1A1A; line-height: 1.3; margin-bottom: 10px; }
+  .sub-title { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 16px; }
+  .body-text { font-size: 13px; color: #444; line-height: 1.75; margin-bottom: 12px; }
+
+  .serif-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 22px; color: #1A1A1A; line-height: 1.35; margin-bottom: 10px; }
+  .serif-sub { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 14px; color: #666; line-height: 1.6; }
+
+  .gold-num { color: #C79A5E; font-weight: 800; font-size: 32px; line-height: 1; margin-bottom: 4px; font-family: 'Noto Serif SC', serif; }
+  .gold-num-lg { color: #C79A5E; font-weight: 900; font-size: 52px; line-height: 1; font-family: 'Noto Serif SC', serif; }
+
+  .divider { width: 32px; height: 2px; background: #C79A5E; border-radius: 1px; margin: 12px 0; }
+  .divider.subtle { width: 100%; height: 1px; background: rgba(0,0,0,0.04); margin: 16px 0; }
+
+  /* 信息卡 */
+  .info-card {
+    background: #FFFFFF; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+  }
+  .info-card .card-title { font-size: 12px; font-weight: 700; color: #1A1A1A; margin-bottom: 4px; letter-spacing: 0.3px; }
+  .info-card .card-body { font-size: 12px; color: #444; line-height: 1.6; }
+  .info-card .card-body small { font-size: 10px; color: #999; display: block; margin-top: 4px; }
+
+  /* 步骤条 */
+  .step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .step .step-num {
+    flex-shrink: 0; width: 26px; height: 26px; background: #1A1A1A; color: #FFF;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; font-family: 'Noto Serif SC', serif;
+  }
+  .step .step-content { flex: 1; padding-top: 3px; }
+  .step .step-title { font-size: 13px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+  .step .step-desc { font-size: 11px; color: #666; line-height: 1.5; }
+
+  /* 对比框 */
+  .compare-box { display: flex; gap: 10px; margin-bottom: 10px; }
+  .compare-col { flex: 1; border-radius: 8px; padding: 14px 12px; }
+  .compare-col.left { background: #1A1A1A; }
+  .compare-col.right { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.05); }
+  .compare-col .c-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+  .compare-col.left .c-label { color: #C79A5E; }
+  .compare-col.right .c-label { color: #999; }
+  .compare-col .c-point { font-size: 11px; line-height: 1.5; margin-bottom: 4px; padding-left: 8px; position: relative; }
+  .compare-col.left .c-point { color: rgba(255,255,255,0.75); }
+  .compare-col.right .c-point { color: #444; }
+  .compare-col .c-point::before { content: '·'; position: absolute; left: 0; }
+
+  /* 高亮框 */
+  .highlight-box {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%);
+    border-radius: 8px; padding: 16px 18px; margin-bottom: 10px; position: relative; overflow: hidden;
+  }
+  .highlight-box::after {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(199,154,94,0.06) 0%, transparent 70%);
+  }
+  .highlight-box .hb-label { font-size: 9px; font-weight: 700; color: #C79A5E; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .highlight-box .hb-body { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.65; position: relative; z-index: 1; }
+  .highlight-box .hb-body strong { color: #C79A5E; font-weight: 700; }
+
+  /* 金句引用 */
+  .quote-box {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%);
+    border-radius: 8px; padding: 18px 20px; margin-top: 6px; position: relative; overflow: hidden;
+  }
+  .quote-box::before {
+    content: '"'; position: absolute; top: 2px; left: 12px;
+    font-size: 48px; color: rgba(199,154,94,0.15);
+    font-family: 'Noto Serif SC', serif; line-height: 1;
+  }
+  .quote-box p {
+    font-size: 14px; color: rgba(255,255,255,0.88); line-height: 1.7; padding-left: 8px;
+    position: relative; z-index: 1; font-family: 'Noto Serif SC', serif; font-weight: 600;
+  }
+  .quote-box .quote-author {
+    display: block; margin-top: 8px; font-size: 10px; color: rgba(199,154,94,0.5);
+    font-style: normal; letter-spacing: 0.5px; font-family: -apple-system, 'PingFang SC', sans-serif; font-weight: 400;
+  }
+
+  /* 数据表格 */
+  .data-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    font-size: 11px; background: #FFFFFF; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+  }
+  .data-table th { background: #1A1A1A; color: #FFF; padding: 8px 10px; text-align: left; font-weight: 700; font-size: 10px; letter-spacing: 0.5px; }
+  .data-table td { padding: 8px 10px; border-bottom: 1px solid rgba(0,0,0,0.04); color: #444; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #FAFAF7; }
+  .data-table .highlight { color: #C79A5E; font-weight: 700; }
+
+  /* 2列数据网格 */
+  .grid-2 { display: flex; gap: 10px; margin-bottom: 10px; }
+  .grid-item { flex: 1; background: #FFFFFF; border-radius: 8px; padding: 16px 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); text-align: center; }
+  .grid-item .gi-num { font-size: 28px; font-weight: 800; color: #C79A5E; margin-bottom: 4px; line-height: 1; font-family: 'Noto Serif SC', serif; }
+  .grid-item .gi-label { font-size: 11px; color: #666; font-weight: 600; margin-bottom: 2px; }
+  .grid-item .gi-desc { font-size: 10px; color: #999; line-height: 1.4; }
+
+  /* 3列图标卡 */
+  .grid-3 { display: flex; gap: 8px; margin-bottom: 10px; }
+  .mini-card { flex: 1; background: #FFFFFF; border-radius: 8px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); text-align: center; }
+  .mini-card .m-icon { font-size: 24px; margin-bottom: 6px; line-height: 1; }
+  .mini-card .m-title { font-size: 11px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+  .mini-card .m-desc { font-size: 10px; color: #888; line-height: 1.4; }
+
+  /* CTA 按钮栏 */
+  .cta-row { display: flex; gap: 10px; margin-top: auto; padding-top: 16px; }
+  .cta-chip { flex: 1; background: #1A1A1A; color: #FFF; text-align: center; padding: 12px 8px; border-radius: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+  .cta-chip.gold { background: #C79A5E; font-size: 15px; }
+
+  /* 深色页 */
+  .dark-slide { background: #1A1A1A; }
+  .dark-slide .section-tag { color: rgba(255,255,255,0.3); }
+  .dark-slide .section-tag::before { background: #C79A5E; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .serif-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.4); }
+  .dark-slide .body-text { color: rgba(255,255,255,0.65); }
+  .dark-slide .info-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.25); }
+  .dark-slide .grid-item { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+  .dark-slide .grid-item .gi-label { color: rgba(255,255,255,0.5); }
+  .dark-slide .grid-item .gi-desc { color: rgba(255,255,255,0.3); }
+  .dark-slide .mini-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+  .dark-slide .mini-card .m-title { color: #CCC; }
+  .dark-slide .mini-card .m-desc { color: rgba(255,255,255,0.4); }
+  .dark-slide .step .step-num { background: #C79A5E; }
+  .dark-slide .step .step-title { color: #FFF; }
+  .dark-slide .step .step-desc { color: rgba(255,255,255,0.45); }
+
+  /* 封面 */
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content { display: flex; flex-direction: column; justify-content: center; min-height: 720px; padding: 40px 36px 32px; }
+  .cover-slide .grid-texture { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; }
+  .cover-slide .geo-ring { position: absolute; border-radius: 50%; border: 1.5px solid; z-index: 0; }
+  .cover-slide .geo-ring.r1 { top: -80px; right: -80px; width: 260px; height: 260px; border-color: rgba(199,154,94,0.06); }
+  .cover-slide .geo-ring.r2 { top: -40px; right: -40px; width: 180px; height: 180px; border-color: rgba(199,154,94,0.04); }
+  .cover-slide .geo-ring.r3 { bottom: -60px; left: -60px; width: 200px; height: 200px; border-color: rgba(255,255,255,0.03); }
+  .cover-slide .geo-ring.r4 { bottom: -20px; left: -20px; width: 120px; height: 120px; border-color: rgba(255,255,255,0.02); }
+  .cover-slide .gold-corner { position: absolute; top: 32px; right: 32px; width: 24px; height: 24px; border-top: 2px solid rgba(199,154,94,0.3); border-right: 2px solid rgba(199,154,94,0.3); z-index: 1; }
+  .cover-slide .gold-ambient { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(0deg, rgba(199,154,94,0.04) 0%, transparent 100%); z-index: 1; }
+  .cover-slide .cover-title { font-size: 42px; font-weight: 900; color: #FFF; line-height: 1.15; margin-bottom: 14px; position: relative; z-index: 1; }
+  .cover-slide .cover-sub { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.5; margin-bottom: 16px; position: relative; z-index: 1; }
+  .cover-slide .cover-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; position: relative; z-index: 1; }
+  .cover-slide .tag { font-size: 10px; font-weight: 600; color: #C79A5E; background: rgba(199,154,94,0.08); border: 1px solid rgba(199,154,94,0.15); padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+  .cover-slide .cover-quote { background: rgba(255,255,255,0.03); border-left: 2px solid #C79A5E; border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 4px; position: relative; z-index: 1; }
+  .cover-slide .cover-quote p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.55; font-style: italic; }
+
+  /* CTA 页 */
+  .cta-slide { background: #1A1A1A; }
+  .cta-slide .content { justify-content: center; align-items: center; text-align: center; }
+  .cta-slide .cta-icon { font-size: 40px; margin-bottom: 16px; }
+  .cta-slide .cta-main { font-size: 26px; font-weight: 900; color: #C79A5E; margin-bottom: 10px; letter-spacing: 1px; font-family: 'Noto Serif SC', serif; }
+  .cta-slide .cta-desc { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-bottom: 24px; }
+  .cta-slide .cta-highlight { background: rgba(199,154,94,0.1); border: 1px solid rgba(199,154,94,0.2); border-radius: 8px; padding: 14px 24px; margin-bottom: 16px; }
+  .cta-slide .cta-highlight .ch-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 2px; margin-bottom: 4px; }
+  .cta-slide .cta-highlight .ch-value { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 900; color: #C79A5E; }
+  .cta-slide .cta-note { color: rgba(255,255,255,0.2); font-size: 11px; margin-top: 8px; }
+
+  /* 检查清单 */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    position: relative; padding-left: 22px; margin-bottom: 8px;
+    font-size: 13px; color: #1A1A1A; line-height: 1.5; font-weight: 600;
+  }
+  .checklist li::before {
+    content: ''; position: absolute; left: 0; top: 3px;
+    width: 14px; height: 14px; border: 1.5px solid #C79A5E; border-radius: 50%;
+  }
+  .checklist li.done::before {
+    content: '✓'; background: #C79A5E; color: #FFF; border: none;
+    font-size: 9px; display: flex; align-items: center; justify-content: center;
+  }
+  .checklist li .l-desc { font-weight: 400; color: #666; font-size: 11px; display: block; }
+
+  .warn-box {
+    background: rgba(199,154,94,0.06); border: 1px solid rgba(199,154,94,0.15);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 10px;
+  }
+  .warn-box .warn-title { font-size: 11px; font-weight: 700; color: #C79A5E; margin-bottom: 2px; }
+  .warn-box .warn-body { font-size: 11px; color: #666; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ========== 第 1 张 · 封面 ========== -->
+<div class="slide cover-slide">
+  <div class="grid-texture"></div>
+  <div class="geo-ring r1"></div>
+  <div class="geo-ring r2"></div>
+  <div class="geo-ring r3"></div>
+  <div class="geo-ring r4"></div>
+  <div class="gold-corner"></div>
+  <div class="gold-ambient"></div>
+  <div class="content">
+    <div class="cover-title">毕业旅行的第一步<br>买对旅行意外险</div>
+    <div class="cover-sub">高考结束 青春出发｜给即将启程的你</div>
+    <div class="cover-tags">
+      <span class="tag">毕业旅行</span>
+      <span class="tag">旅行意外险</span>
+      <span class="tag">避坑指南</span>
+    </div>
+    <div class="cover-quote">
+      <p>玩得尽兴的前提，是兜底的安全感</p>
+    </div>
+    <div class="page-num dark" style="position:absolute;bottom:14px;right:24px;">1/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 2 张 · 数据页 ========== -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">REALITY CHECK</div>
+    <div class="main-title">先看看这些真实案例</div>
+    <div class="sub-title">高考后出游事故比你想象的更常见</div>
+    <div class="divider"></div>
+    <div class="grid-2">
+      <div class="grid-item">
+        <div class="gi-num">35</div>
+        <div class="gi-label">被困山谷</div>
+        <div class="gi-desc">江西35名高三毕业生活动被困12小时</div>
+      </div>
+      <div class="grid-item">
+        <div class="gi-num">30%</div>
+        <div class="gi-label">事故上升</div>
+        <div class="gi-desc">暑期旅游意外事故率较平时上升30%</div>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="warn-title">⚠️ 真实案例</div>
+      <div class="warn-body">每年高考后都有学生出游遇险的报道。旅行意外险不是"买了浪费"，是"赔了不知道买"。</div>
+    </div>
+    <div class="highlight-box">
+      <div class="hb-label">BOTTOM LINE</div>
+      <div class="hb-body">一天不到 <strong>一杯奶茶钱</strong>，换全程安心的保障</div>
+    </div>
+    <div class="page-num">2/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 3 张 · 概念页 ========== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">CONCEPT</div>
+    <div class="serif-title">旅行意外险<br>到底是什么？</div>
+    <div class="body-text">专门保障旅行期间意外风险的保险，和普通综合意外险是两回事。</div>
+    <div class="divider"></div>
+    <div class="info-card">
+      <div class="card-title">🛡️ 核心保障</div>
+      <div class="card-body">意外身故/伤残 + 意外医疗费用报销</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">✈️ 旅行专属保障</div>
+      <div class="card-body">航班延误、行李丢失、紧急医疗运送、行程取消<small>普通综合意外险通常没有这些</small></div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">🏄 高风险活动</div>
+      <div class="card-body">潜水、滑雪、蹦极、漂流、攀岩等——选含高风险运动保障的产品<small>注意：普通意外险一般不赔这些</small></div>
+    </div>
+    <div class="page-num">3/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 4 张 · 场景页 ========== -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">SCENARIOS</div>
+    <div class="main-title">这些场景<br>你一定要买</div>
+    <div class="sub-title">不是所有旅行都需要，但这三种情况别犹豫</div>
+    <div class="divider"></div>
+    <div class="mini-card">
+      <div class="m-icon">🌏</div>
+      <div class="m-title">出境游</div>
+      <div class="m-desc">境外医疗费用高到惊人，一次急诊可能花掉整个旅行预算。紧急救援和医疗运送必须配齐。</div>
+    </div>
+    <div class="mini-card">
+      <div class="m-icon">🏂</div>
+      <div class="m-title">高风险活动</div>
+      <div class="m-desc">潜水/滑雪/蹦极/漂流——普通意外险明确免责，必须有专项保障。</div>
+    </div>
+    <div class="mini-card">
+      <div class="m-icon">🚗</div>
+      <div class="m-title">长途/自驾游</div>
+      <div class="m-desc">行程延误、财物丢失、车辆故障——一趟行程状况多，有保险兜底才踏实。</div>
+    </div>
+    <div class="page-num">4/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 5 张 · 三步准备 ========== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">PREPARATION</div>
+    <div class="serif-title">买之前先做<br>这三步功课</div>
+    <div class="divider"></div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">明确行程细节</div>
+        <div class="step-desc">目的地（境内/境外）、天数、游玩项目。有没有高风险活动？决定了选什么产品。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">核对已有保障</div>
+        <div class="step-desc">已有综合意外险？它不保航班延误、高风险运动、境外医疗——缺口比你想的大。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">确认保额需求</div>
+        <div class="step-desc">境内游：意外医疗1-5万够用。境外游：建议30万起步（申根签证要求≥23万）。</div>
+      </div>
+    </div>
+    <div class="page-num">5/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 6 张 · 对比页 ========== -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">COMPARISON</div>
+    <div class="serif-title">综合意外险 vs 旅行意外险</div>
+    <div class="divider"></div>
+    <div class="compare-box">
+      <div class="compare-col left">
+        <div class="c-label">综合意外险</div>
+        <div class="c-point">日常意外身故/伤残</div>
+        <div class="c-point">日常意外医疗</div>
+        <div class="c-point" style="opacity:0.4;">× 高风险运动</div>
+        <div class="c-point" style="opacity:0.4;">× 航班延误/行李丢失</div>
+        <div class="c-point" style="opacity:0.4;">× 全球紧急救援</div>
+        <div class="c-point" style="opacity:0.4;">× 急性病（食物中毒）</div>
+      </div>
+      <div class="compare-col right">
+        <div class="c-label">旅行意外险</div>
+        <div class="c-point">覆盖旅行全场景意外</div>
+        <div class="c-point">旅行意外医疗报销</div>
+        <div class="c-point" style="color:#C79A5A;font-weight:600;">✓ 可选高风险保障</div>
+        <div class="c-point" style="color:#C79A5A;font-weight:600;">✓ 航班延误/行李丢失</div>
+        <div class="c-point" style="color:#C79A5A;font-weight:600;">✓ 全球紧急救援</div>
+        <div class="c-point" style="color:#C79A5A;font-weight:600;">✓ 急性病医疗保障</div>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <div class="hb-label">KEY TAKEAWAY</div>
+      <div class="hb-body">旅行意外险不是综合意外险的替代品，是 <strong>补充品</strong>。两个都配，才叫全面保障。</div>
+    </div>
+    <div class="page-num">6/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 7 张 · 购买须知 ========== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">TIPS</div>
+    <div class="main-title">买保险时注意这4点</div>
+    <div class="sub-title">少踩一个坑，多一份安心</div>
+    <div class="divider"></div>
+    <div class="step" style="margin-bottom:8px;">
+      <div class="step-num" style="background:#C79A5E;">1</div>
+      <div class="step-content">
+        <div class="step-title">出发前买，别拖</div>
+        <div class="step-desc">大部分旅行险最早次日零时生效。出发当天才买？保障真空期了解一下。</div>
+      </div>
+    </div>
+    <div class="step" style="margin-bottom:8px;">
+      <div class="step-num" style="background:#C79A5E;">2</div>
+      <div class="step-content">
+        <div class="step-title">多买1-2天</div>
+        <div class="step-desc">保障期限前后各多覆盖1-2天，防止因延误导致保障中断。</div>
+      </div>
+    </div>
+    <div class="step" style="margin-bottom:8px;">
+      <div class="step-num" style="background:#C79A5E;">3</div>
+      <div class="step-content">
+        <div class="step-title">看清免责条款</div>
+        <div class="step-desc">哪些活动不保？酒后驾驶、无人看管财物丢失、未开发区"野爬"——不赔。</div>
+      </div>
+    </div>
+    <div class="step" style="margin-bottom:8px;">
+      <div class="step-num" style="background:#C79A5E;">4</div>
+      <div class="step-content">
+        <div class="step-title">保存救援电话</div>
+        <div class="step-desc">截图电子保单，把24小时全球救援热线存到手机通讯录里。</div>
+      </div>
+    </div>
+    <div class="page-num">7/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 8 张 · 推荐方案 ========== -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">RECOMMEND</div>
+    <div class="serif-title">按需选方案<br>不买贵只买对</div>
+    <div class="divider"></div>
+    <div class="grid-2">
+      <div class="grid-item" style="text-align:left;padding:14px;">
+        <div class="gi-label" style="font-size:14px;color:#1A1A1A;text-align:center;">🇨🇳 境内游</div>
+        <div style="text-align:center;margin:4px 0 8px;"><span class="gi-num">1</span><span style="font-size:14px;color:#666;">元起/天</span></div>
+        <div style="font-size:11px;color:#666;line-height:1.5;">
+          0免赔100%报销<br>
+          含急性病保障（高原反应等）<br>
+          覆盖50+种户外运动
+        </div>
+      </div>
+      <div class="grid-item" style="text-align:left;padding:14px;">
+        <div class="gi-label" style="font-size:14px;color:#1A1A1A;text-align:center;">🌏 境外游</div>
+        <div style="text-align:center;margin:4px 0 8px;"><span class="gi-num">25</span><span style="font-size:14px;color:#666;">元起/程</span></div>
+        <div style="font-size:11px;color:#666;line-height:1.5;">
+          医疗保额最高100万<br>
+          全球救援+医疗直付<br>
+          承保热门旅行目的地
+        </div>
+      </div>
+    </div>
+    <div class="warn-box" style="margin-top:4px;">
+      <div class="warn-title">💡 选购原则</div>
+      <div class="warn-body">按行程实际风险匹配，不是越贵越好。重点看：保额够不够？高风险运动保不保？救援服务强不强？</div>
+    </div>
+    <div class="page-num">8/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 9 张 · 金句页 ========== -->
+<div class="slide dark-slide">
+  <div class="content" style="justify-content:center;">
+    <div class="section-tag" style="color:rgba(255,255,255,0.3);">INSIGHT</div>
+    <div class="quote-box" style="margin-top:0;">
+      <p>旅行最好的行李<br>不是自拍杆和防晒霜<br>而是一份让你安心的保障</p>
+    </div>
+    <div style="margin-top:16px;padding:0 8px;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.25);letter-spacing:1px;line-height:1.7;text-align:center;">
+        不用把所有风险都扛在自己肩上<br>
+        花几块钱，把「万一」交给专业的人
+      </div>
+    </div>
+    <div class="page-num dark">9/10</div>
+  </div>
+</div>
+
+<!-- ========== 第 10 张 · CTA ========== -->
+<div class="slide cta-slide">
+  <div class="content">
+    <div class="cta-icon">🛡️</div>
+    <div class="cta-main">收藏这条笔记</div>
+    <div class="cta-desc">出发前翻出来看看<br>买对保险再出发，玩得放心</div>
+    <div class="cta-highlight">
+      <div class="ch-label">关注获取更多旅行干货</div>
+      <div class="ch-value">❤️ 收藏 ⭐ 保存</div>
+    </div>
+    <div style="margin-top:12px;">
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <div class="cta-chip gold" style="flex:0 1 auto;padding:10px 24px;">📌 保存指南</div>
+        <div class="cta-chip" style="flex:0 1 auto;padding:10px 24px;">关注我</div>
+      </div>
+    </div>
+    <div class="cta-note">毕业快乐，平安出发 ✨</div>
+    <div class="page-num dark">10/10</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2; const SLIDE_W = 540, SLIDE_H = 720;
+async function renderSlide(s) { s.style.animation = 'none'; return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: SLIDE_W, height: SLIDE_H, logging: false }); }
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide'); const progress = document.getElementById('progress'); const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) { progress.textContent = `渲染 ${i+1}/${slides.length}...`; const canvas = await renderSlide(slides[i]); zip.file(`小红书-毕业旅行意外险-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas)); }
+  progress.textContent = '打包中...'; saveAs(await zip.generateAsync({type:'blob'}), '毕业旅行意外险-全部.zip'); progress.textContent = `${slides.length} 张已完成`;
+}
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide'); const vc = window.innerHeight / 2; let idx = 0, min = Infinity;
+  slides.forEach((s,i) => { const d = Math.abs(s.getBoundingClientRect().top + 360 - vc); if (d < min) { min = d; idx = i; } });
+  const canvas = await renderSlide(slides[idx]); saveAs(await canvasToBlob(canvas), `毕业旅行意外险-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

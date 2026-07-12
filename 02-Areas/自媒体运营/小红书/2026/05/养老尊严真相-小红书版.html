@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书 - 养老尊严真相</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  /* === 工具栏 === */
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  /* === 卡片基础 === */
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  /* === 内容层 === */
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  /* === 页码 === */
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  /* === 标签 === */
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2C2C2C;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* === 通用文字 === */
+  .main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  /* === 信息卡 === */
+  .info-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C2C2C;
+    margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* === 卡片网格 3列 === */
+  .card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .mini-card .m-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .mini-card .m-desc {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.35;
+  }
+
+  /* === 引用块 === */
+  .quote-box {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* === 分隔线 === */
+  .divider {
+    width: 36px; height: 2px;
+    background: #2C2C2C; border-radius: 1px;
+    margin: 10px 0;
+  }
+
+  /* === CTA === */
+  .cta-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .cta-chip {
+    flex: 1;
+    background: #2C2C2C;
+    color: #FFF;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* === 深色卡 === */
+  .dark-card {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .dark-card .dc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #CCC;
+    margin-bottom: 3px;
+  }
+  .dark-card .dc-body {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  /* === 封面样式 === */
+  .cover-slide {
+    background: #1A1A1A;
+  }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  /* === 深色页（技巧页） === */
+  .dark-slide {
+    background: #1A1A1A;
+  }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+  /* === 自定义：大数字 === */
+  .big-number {
+    font-size: 48px;
+    font-weight: 900;
+    color: #2C2C2C;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .dark-slide .big-number { color: #FFF; }
+
+  /* === 编号列表 === */
+  .num-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .num-badge {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #2C2C2C;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .dark-slide .num-badge {
+    background: rgba(255,255,255,0.12);
+    color: #FFF;
+  }
+  .num-text {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+    padding-top: 2px;
+  }
+  .dark-slide .num-text { color: rgba(255,255,255,0.75); }
+  .num-text strong { color: #1A1A1A; }
+  .dark-slide .num-text strong { color: #FFF; }
+
+  /* === 场景描述块 === */
+  .scene-block {
+    background: rgba(0,0,0,0.02);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border-left: 3px solid #2C2C2C;
+  }
+  .scene-block p {
+    font-size: 12px;
+    color: #444;
+    line-height: 1.65;
+  }
+  .dark-slide .scene-block {
+    background: rgba(255,255,255,0.03);
+    border-left-color: rgba(255,255,255,0.25);
+  }
+  .dark-slide .scene-block p { color: rgba(255,255,255,0.6); }
+
+  /* === 金句大字号 === */
+  .big-quote {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1A1A;
+    line-height: 1.4;
+    text-align: center;
+    padding: 20px 0;
+  }
+  .dark-slide .big-quote { color: #FFF; }
+
+  /* === 行动号召 === */
+  .cta-title {
+    font-size: 28px;
+    font-weight: 900;
+    color: #FFF;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .cta-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .cta-wechat {
+    font-size: 32px;
+    font-weight: 900;
+    color: #FFF;
+    text-align: center;
+    letter-spacing: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 工具栏 -->
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ==================== 第 1 张 · 封面 ==================== -->
+<div class="slide cover-slide" id="slide-1">
+  <div class="content">
+    <div class="cover-title">晚年最大的尊严<br>是能自己上厕所</div>
+    <div class="cover-sub">一个养老院护工的观察，说透了晚年真相</div>
+    <div class="cover-tags">
+      <span class="tag">养老规划</span>
+      <span class="tag">深度好文</span>
+      <span class="tag">收藏备用</span>
+    </div>
+    <div class="cover-quote">
+      <p>能自己掌控身体的自由，比住大别墅都更像"活着"。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 2 张 · 故事引入 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">真实故事</div>
+    <div class="main-title">养老院里最扎心的排名</div>
+    <div class="scene-block">
+      <p>养老院护工分享：院里最受尊重的老人，不是退休金最高的，也不是子女常来的——而是能完全自理、不用别人帮忙擦身扶着上厕所的。</p>
+    </div>
+    <div class="scene-block" style="border-left-color:#888;">
+      <p>那些需要全程协助的长辈，哪怕子女再孝顺，也难免会在护工换班、忙不过来的时候，被迫憋着等半小时。</p>
+    </div>
+    <div class="scene-block" style="border-left-color:#aaa;">
+      <p>更别说要面对陌生人帮忙处理隐私时，那种藏不住的窘迫和自卑。</p>
+    </div>
+    <div class="divider"></div>
+    <div class="intro" style="font-size:12px;color:#888;margin-bottom:0;">
+      看到这里，很多人沉默了。
+    </div>
+    <div class="page-num">2/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 3 张 · 核心洞察 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">核心洞察</div>
+    <div class="main-title" style="font-size:22px;">你规划的养老，漏了最关键的一环</div>
+    <div class="divider" style="background:rgba(255,255,255,0.2);"></div>
+    <div class="intro">
+      很多人做养老规划只盯着存多少钱，却忽略了最根本的东西——
+    </div>
+    <div class="big-quote" style="font-size:24px;padding:16px 0;">
+      「尊严底线」
+    </div>
+    <div class="intro" style="color:rgba(255,255,255,0.5);">
+      不是有多少存款，而是失能之后，还能不能有尊严地活着。
+    </div>
+    <div class="dark-card" style="margin-top:12px;">
+      <div class="dc-title">📌 什么是尊严底线？</div>
+      <div class="dc-body">就是当你老了、病了，需要人照顾时——<br>不需要憋尿、不需要看脸色、不需要因为麻烦别人而自责。<br>这不是奢侈，是基本体面。</div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 4 张 · 建议 1 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">行动方案 ❶</div>
+    <div class="main-title">优先存够「失能护理金」</div>
+    <div class="sub-title">比养老金更刚需的一笔钱</div>
+
+    <div class="info-card">
+      <div class="card-title">为什么比养老金更紧迫？</div>
+      <div class="card-body">养老金是"活着"的钱，护理金是"有尊严地活着"的钱。一旦失能，每月护理费用是养老金的 2-3 倍。<small>一线城市专业护理机构月费约 8,000-15,000 元</small></div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">存多少？怎么存？</div>
+      <div class="card-body">目标：至少覆盖 3-5 年护理费用。<br>建议：单独开一个"护理专项账户"，专款专用，不动用。</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">有了这笔钱能换来什么？</div>
+      <div class="card-body">选到有一对一护工的高端养老机构，不用看人脸色、不用排队等帮忙。<small>这不是消费，是对晚年尊严的投资。</small></div>
+    </div>
+
+    <div class="page-num">4/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 5 张 · 建议 2 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">行动方案 ❷</div>
+    <div class="main-title" style="font-size:22px;">提前配置「长期护理险」</div>
+    <div class="sub-title">社保不够，商业险来补</div>
+
+    <div class="dark-card">
+      <div class="dc-title">社保护理险的缺口</div>
+      <div class="dc-body">社保里的长期护理险额度有限，覆盖范围窄，报销比例低。一旦需要专业护理，自费部分依然是沉重的压力。</div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">商业护理险能做什么？</div>
+      <div class="dc-body">覆盖专业护理费用、康复训练费用、上门护理服务费用。<br>年轻的时候买，保费低、保障长。</div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">关键配置时机</div>
+      <div class="dc-body">40 岁前是黄金窗口——保费便宜，容易通过核保。过了 50 岁，要么贵，要么买不了。</div>
+    </div>
+
+    <div class="divider" style="background:rgba(255,255,255,0.2);margin-top:14px;"></div>
+    <div class="big-quote" style="font-size:14px;padding:8px 0 0;font-weight:400;">
+      不是等老了才准备，是趁年轻的时候布局。
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">5/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 6 张 · 建议 3 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">行动方案 ❸</div>
+    <div class="main-title">现在开始练核心</div>
+    <div class="sub-title">最便宜、最有效的"养老投资"</div>
+
+    <div class="card-row">
+      <div class="mini-card">
+        <div class="m-title">🔄 平板支撑</div>
+        <div class="m-desc">每天 3 组<br>每组 30-60 秒<br>强化腰腹深层肌群</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-title">🧱 靠墙静蹲</div>
+        <div class="m-desc">每天 3 组<br>每组 30-60 秒<br>保护膝盖，练腿力</div>
+      </div>
+      <div class="mini-card">
+        <div class="m-title">🚶 快走</div>
+        <div class="m-desc">每天 30 分钟<br>保持心肺功能<br>维持身体协调性</div>
+      </div>
+    </div>
+
+    <div class="info-card" style="background:#F5F5F5;border:none;">
+      <div class="card-body" style="text-align:center;font-size:13px;color:#555;">
+        把腰腹腿的力量练起来，<br><strong style="color:#1A1A1A;">尽可能延长自理时间</strong><br>
+        <small>多维持一年的自理，就少花十几万的护理费</small>
+      </div>
+    </div>
+
+    <div class="page-num">6/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 7 张 · 数据对比 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">算一笔账</div>
+    <div class="main-title" style="font-size:22px;">现在准备 vs 临时抱佛脚</div>
+    <div class="sub-title">两个人生，选哪个？</div>
+
+    <div class="card-row" style="margin-bottom:10px;">
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);">
+        <div class="m-title" style="color:#FFF;">✅ 提前准备</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.55);">
+          每月存 1500<br>40 岁前配好护理险<br>保持运动习惯<br>老了住高端养老社区<br>有尊严、有选择
+        </div>
+      </div>
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);">
+        <div class="m-title" style="color:rgba(255,255,255,0.5);">❌ 临时应对</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.4);">
+          等病了才慌<br>护理险买不了<br>只能靠子女/社保<br>排队等护工<br>尊严一点点磨掉
+        </div>
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">差距在哪？</div>
+      <div class="dc-body">提前 20 年规划，每月只需存 1,500 元。<br>等失能了再想办法，每月花 10,000 元也不一定能买到好的照护。</div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 8 张 · 金句升华 ==================== -->
+<div class="slide bg-white">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;text-align:center;">
+    <div class="section-tag" style="text-align:center;display:block;">写给你的话</div>
+    <div class="divider" style="margin:10px auto;"></div>
+    <div class="big-quote" style="font-size:22px;padding:24px 0;">
+      别等失去了才懂——<br>
+      能自己掌控身体的自由，<br>
+      比住大别墅、吃山珍海味<br>
+      都更像"活着"。
+    </div>
+    <div class="divider" style="margin:10px auto;"></div>
+    <div class="intro" style="text-align:center;font-size:12px;color:#888;margin-top:10px;">
+      现在开始规划，就是给未来的自己最大的体面。
+    </div>
+    <div class="page-num">8/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 9 张 · CTA ==================== -->
+<div class="slide cover-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;text-align:center;">
+    <div class="cover-title" style="font-size:36px;">给未来的自己<br>一份体面</div>
+    <div class="cover-sub" style="margin-bottom:20px;">
+      养老规划，从今天开始<br>把尊严握在自己手里
+    </div>
+    <div class="cta-row" style="justify-content:center;">
+      <div class="cta-chip" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);flex:none;padding:12px 28px;">👍 收藏备用</div>
+      <div class="cta-chip" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);flex:none;padding:12px 28px;">↗️ 转发给需要的人</div>
+    </div>
+    <div class="cover-quote" style="margin-top:20px;">
+      <p>你打算从哪一步开始？评论区聊聊👇</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">9/9</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-养老尊严-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '小红书-养老尊严-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-养老尊严-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我写了一个AI保险展业助手，现在请你来白嫖</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; max-width: 677px; margin: 0 auto; padding: 20px 16px; font-size: 16px; line-height: 1.8; color: #1A1A1A; }
+h1 { font-size: 24px; font-weight: 800; color: #102542; margin: 24px 0 12px; text-align: center; }
+h2 { font-size: 19px; font-weight: 700; color: #102542; border-left: 4px solid #F77F00; padding-left: 12px; margin: 28px 0 14px; }
+h3 { font-size: 17px; font-weight: 700; color: #0A1931; margin: 20px 0 10px; }
+p { margin: 0 0 12px; color: #1A1A1A; }
+blockquote { border-left: 3px solid #F77F00; background: #F7F9FC; padding: 12px 16px; margin: 16px 0; color: #4A4A4A; border-radius: 0 4px 4px 0; font-size: 15px; }
+blockquote p { margin: 4px 0; color: #4A4A4A; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th { background: #102542; color: #FFFFFF; padding: 10px 12px; text-align: left; font-weight: 600; }
+td { padding: 10px 12px; border-bottom: 1px solid #E5EAF2; }
+tr:nth-child(even) td { background: #F7F9FC; }
+strong { color: #0A1931; }
+hr { border: none; border-top: 1px solid #E5EAF2; margin: 24px 0; }
+.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #E5EAF2; font-size: 13px; color: #86909C; text-align: center; }
+.dialogue { background: #F7F9FC; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.dialogue p { margin: 8px 0; font-size: 15px; }
+.dialogue .you { color: #102542; }
+.dialogue .bot { color: #0A1931; }
+.dialogue .bot-content { color: #4A4A4A; font-size: 14px; margin-left: 16px; }
+
+/* 配图卡片 */
+.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+</style>
+</head>
+<body>
+
+<h1>我写了一个AI保险展业助手，现在请你来白嫖</h1>
+
+<blockquote>不是卖课，不是割韭菜。是一个懂保险展业工作场景的 AI Agent，而且它会越来越聪明。第一批测试用户，免费。</blockquote>
+
+<!-- 配图1: Agent工作流程 -->
+<div class="illu-card" id="illu-1" style="padding: 32px 28px; background: #F7F9FC;">
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">这个 Agent 怎么工作</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0;">你在飞书里正常说话，剩下的它来</p>
+  <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">💬</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">飞书消息</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">你正常说话</div>
+    </div>
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:0; min-width:24px; height:48px;"><div style="width:100%; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div></div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">🧠</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">AI 理解意图</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">DeepSeek 解析</div>
+    </div>
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:0; min-width:24px; height:48px;"><div style="width:100%; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div></div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">📊</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">读写多维表格</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">自动归档数据</div>
+    </div>
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:0; min-width:24px; height:48px;"><div style="width:100%; height:2px; background:#E5EAF2; position:relative;"><div style="position:absolute; right:-2px; top:-4px; border:5px solid transparent; border-left:8px solid #F77F00;"></div></div></div>
+    <div style="text-align:center; flex:1; min-width:0;">
+      <div style="width:48px; height:48px; background:#102542; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; flex-shrink:0;">📋</div>
+      <div style="font-size:14px; font-weight:700; color:#0A1931; margin-bottom:4px; line-height:1.4;">结构化回复</div>
+      <div style="font-size:11px; color:#86909C; line-height:1.5;">卡片+分析+建议</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:20px 0 0 0; font-size:14px; color:#0A1931; font-weight:600;">一句话：<span style="color:#F77F00;">飞书消息 → AI 理解 → 自动归档 → 智能回复</span></p>
+</div>
+
+<hr>
+
+<h2>先说痛点</h2>
+
+<p>做保险这行，你是不是也有这些瞬间：</p>
+
+<p>客户多了记不住。Excel 翻来翻去，搜个名字等半天，找到才发现上次跟进的备注写得太潦草，自己都认不出来。</p>
+
+<p>跟进了谁、什么时候跟的、聊了什么，全靠脑子记。周末回家一想——糟了，好像有个客户两周没联系了。</p>
+
+<p>客户说"太贵了""有社保就够了""我再想想"。每次都要现场想话术，想不出来就硬聊，聊完自己都觉得没发挥好。</p>
+
+<p>公司上百款产品，哪个适合眼前这个客户？翻产品手册翻到怀疑人生，最后推荐的还是自己最熟的那三五款。</p>
+
+<p>晚上回家还要手动整理客户名单：谁该跟进了、谁快凉了、谁可能最近要成交。一搞就是半小时。</p>
+
+<p><strong>这些问题，本质上是同一个问题：你缺一个能帮你记、帮你算、帮你盯的助理。</strong></p>
+
+<hr>
+
+<h2>这个工具是什么</h2>
+
+<p>一句话：<strong>一个跑在飞书里的 AI 保险展业助手。</strong></p>
+
+<p>你在飞书里跟它说话，它帮你干四件事：</p>
+
+<!-- 配图2: 四大核心能力 -->
+<div class="illu-card" id="illu-2" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #E5EAF2;">
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">四大核心能力</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 20px 0;">不是功能列表，是保险代理人每天都要做的事</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #102542;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">01</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">记客户</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">说句话自动建档，姓名/年龄/险种/预算一次提取。不用填表，不用切换系统。</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">02</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">做分析</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">客户诊断报告 + 203款产品6维评分Top5推荐 + Kano需求分层。</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #F77F00;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">03</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">盯跟进</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">超14天自动预警，超30天标沉睡。每天早9点推日报，谁该跟、谁快凉，一目了然。</div>
+    </div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 16px; border-left:4px solid #102542;">
+      <div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:2px; line-height:1.2;">04</div>
+      <div style="font-size:15px; font-weight:700; color:#0A1931; margin-bottom:4px;">出话术</div>
+      <div style="font-size:12px; color:#86909C; line-height:1.6;">6类异议自动识别——太贵了/有社保/再想想/网上便宜……即时给出结构化应对。</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#0A1931; font-weight:600;">四个能力，一个入口：在飞书里正常聊天就行。</p>
+</div>
+
+<h3>1. 记客户——说句话就建档</h3>
+
+<p>你发一句：</p>
+
+<blockquote>"新建客户张三，35岁，想买重疾险，预算5万"</blockquote>
+
+<p>它自动提取姓名、年龄、险种偏好、预算，存进飞书多维表格。不用填表，不用切换系统。客户信息变更也一样：</p>
+
+<blockquote>"张三电话改成139xxxx"</blockquote>
+
+<p>它识别字段名，自动更新。</p>
+
+<h3>2. 做分析——自动诊断 + 产品推荐</h3>
+
+<p>说"分析张三"，它出一份完整的诊断报告：</p>
+
+<p>客户现在什么状态？正常 / 预警 / 沉睡？<br>
+意向度在升还是降？分数是多少？<br>
+有没有流失风险？<br>
+下一步具体该做什么？</p>
+
+<p>说"推荐产品给张三"，它从 <strong>203 款产品</strong>里用 6 个维度打分，排出 Top 5。不是拍脑袋推，是每个产品都有评分依据。</p>
+
+<h3>3. 盯跟进——到点自动提醒</h3>
+
+<p>超过 14 天没跟进的客户 → 自动标"预警"。<br>
+超过 30 天没动静 → 自动标"沉睡"。<br>
+每天早上 9 点推日报：今天该跟谁、高意向客户有哪些、最近有什么动态。</p>
+
+<p><strong>你不需要记得去查，它会来提醒你。</strong></p>
+
+<h3>4. 出话术——六类异议自动应答</h3>
+
+<p>客户说太贵了、有社保就够了、要再想想、网上买更便宜……</p>
+
+<p>系统自动识别异议类型，直接给你结构化应对话术。不用每次临时想，也不用硬聊。</p>
+
+<hr>
+
+<h2>这不叫 CRM，这叫 Agent</h2>
+
+<!-- 配图3: CRM vs Agent 对比 -->
+<div class="illu-card" id="illu-3" style="padding: 32px 28px; background:linear-gradient(135deg, #102542 0%, #0A1931 100%); color:#FFFFFF;">
+  <h2 style="font-size:20px; font-weight:800; color:#FFFFFF; margin:0 0 8px 0; border:none; padding:0;">CRM vs Agent</h2>
+  <p style="font-size:13px; color:rgba(255,255,255,0.5); margin:0 0 20px 0;">不是升级，是换了一个物种</p>
+  <div style="display:flex; gap:16px;">
+    <div style="flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:20px 16px;">
+      <div style="font-size:16px; font-weight:700; color:#86909C; margin-bottom:14px;">🧱 传统 CRM</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">你主动打开，手动录入</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">客户状态靠你标记</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">意向度凭感觉打分</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">产品推荐靠翻手册</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;">超期不提醒，忘了就忘了</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-bottom:0; line-height:1.6;">数据是死的，不会自己更新</div>
+    </div>
+    <div style="flex:1; background:rgba(247,127,0,0.1); border:1px solid rgba(247,127,0,0.25); border-radius:8px; padding:20px 16px;">
+      <div style="font-size:16px; font-weight:700; color:#F77F00; margin-bottom:14px;">🤖 AI Agent</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">聊完天自动归档，你不用管</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">系统实时追踪状态流转</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">5维行为信号自动计算</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">6维评分引擎秒出Top5</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:10px; line-height:1.6;">到点主动推送，怕你忘了</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:0; line-height:1.6;">凌晨自动全量同步+重算</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#F77F00; font-weight:600;">一个等你操作 &nbsp;→&nbsp; 一个帮你操作</p>
+</div>
+
+<p>CRM 是什么？是一个数据库。你往里面填东西，想看了打开看看。</p>
+
+<p>但这个工具不是。<strong>它是一个能理解你工作场景的 AI Agent。</strong></p>
+
+<p>区别在哪：</p>
+
+<p>CRM 等着你操作。Agent 自己知道你该干什么——你聊完一个客户，它自动记跟进；客户两周没动静，它主动标预警推给你；你问"这个客户该推什么产品"，它不是甩给你一个产品列表，而是结合客户画像、行为信号、产品库评分，给你一份有依据的策略报告。</p>
+
+<p><strong>它更像一个实习助理，而不是一个文件夹。</strong></p>
+
+<p>而且它会越来越懂你的业务。</p>
+
+<p>现在的行为评分引擎已经有五个信号维度，未来还可以接入更多——比如你的聊天记录分析、成交模式学习、甚至跨客户的规律发现。v2.0 不是终点，是这个 Agent 的起点：</p>
+
+<table>
+<tr><th>信号维度</th><th>它现在看什么</th></tr>
+<tr><td>跟进时效</td><td>距离上次跟进多久了？≤7天满分，>90天几乎0分</td></tr>
+<tr><td>反馈信号</td><td>客户说了什么？"我要买"和"再说吧"得分不一样</td></tr>
+<tr><td>数据完整度</td><td>客户信息填得全不全？名字都不知道怎么跟？</td></tr>
+<tr><td>互动密度</td><td>最近30天聊了几次？越活跃越有机会</td></tr>
+<tr><td>时间衰减</td><td>老客户不维护也会自然降分</td></tr>
+</table>
+
+<!-- 配图4: 五维行为评分引擎 -->
+<div class="illu-card" id="illu-4" style="padding: 32px 28px; background: #F7F9FC;">
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">五维行为评分引擎</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0;">意向度不由你拍脑袋，由客户行为决定</p>
+  <div style="display:flex; align-items:flex-end; gap:12px; justify-content:center; height:200px; padding-bottom:8px;">
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#F77F00; margin-bottom:4px;">30</div>
+      <div style="height:140px; background:linear-gradient(180deg, #F77F00 0%, rgba(247,127,0,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">跟进时效</div>
+      <div style="font-size:11px; color:#86909C;">满分 30</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#E07B53; margin-bottom:4px;">25</div>
+      <div style="height:117px; background:linear-gradient(180deg, #E07B53 0%, rgba(224,123,83,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">反馈信号</div>
+      <div style="font-size:11px; color:#86909C;">满分 25</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#2E7D32; margin-bottom:4px;">15</div>
+      <div style="height:70px; background:linear-gradient(180deg, #2E7D32 0%, rgba(46,125,50,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">数据完整</div>
+      <div style="font-size:11px; color:#86909C;">满分 15</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#1A6B7C; margin-bottom:4px;">15</div>
+      <div style="height:70px; background:linear-gradient(180deg, #1A6B7C 0%, rgba(26,107,124,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">互动密度</div>
+      <div style="font-size:11px; color:#86909C;">满分 15</div>
+    </div>
+    <div style="flex:1; max-width:90px; text-align:center;">
+      <div style="font-size:22px; font-weight:900; color:#3949AB; margin-bottom:4px;">15</div>
+      <div style="height:70px; background:linear-gradient(180deg, #3949AB 0%, rgba(57,73,171,0.2) 100%); border-radius:6px 6px 0 0; width:100%;"></div>
+      <div style="font-size:12px; font-weight:600; color:#0A1931; margin-top:8px;">时间衰减</div>
+      <div style="font-size:11px; color:#86909C;">满分 15</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:14px; color:#102542; font-weight:700;">意向度 = <span style="color:#F77F00;">30</span> + <span style="color:#E07B53;">25</span> + <span style="color:#2E7D32;">15</span> + <span style="color:#1A6B7C;">15</span> + <span style="color:#3949AB;">15</span> = 满分 <span style="color:#F77F00;">100</span></p>
+</div>
+
+<p><strong>这五个维度已经比人凭感觉打分准了。下一步呢？它可以学你的成交规律，告诉你"这类客户这个时点最容易成交"。</strong></p>
+
+<p>这就是 Agent 和工具的区别——工具不会成长，Agent 会。</p>
+
+<hr>
+
+<h2>实际用起来什么样</h2>
+
+<p>在飞书里，就跟普通聊天一样：</p>
+
+<div class="dialogue">
+<p class="you"><strong>你</strong>：新建客户李梅，28岁，刚生孩子想给宝宝买保险，预算3万</p>
+<p class="bot"><strong>机器人</strong>：✅ 已创建客户档案 [李梅]（点击卡片查看详情）</p>
+</div>
+
+<div class="dialogue">
+<p class="you"><strong>你</strong>：分析产品策略 李梅</p>
+<p class="bot"><strong>机器人</strong>：[结构化报告卡片]</p>
+<p class="bot-content"><strong>客户细分</strong>：保障优先型<br>
+<strong>Kano需求</strong>：基础型（少儿重疾/医疗）+ 期望型（教育金）+ 兴奋型（高端医疗）<br>
+<strong>Top 5 推荐产品</strong>：（每款附详细六维评分）<br>
+<strong>成交策略</strong>：抓住新生儿健康窗口期，建议15天内完成投保</p>
+</div>
+
+<div class="dialogue">
+<p class="you"><strong>你</strong>：李梅微信上看了方案，说要跟老公商量</p>
+<p class="bot"><strong>机器人</strong>：✅ 跟进已记录。⚠️ 检测到"拖延异议"，建议话术：强调新生儿年龄优势，提供"先锁定方案、后确认"选项。</p>
+</div>
+
+<p>所有的客户数据、跟进记录、成交信息，自动落入飞书多维表格。还有一张可视化仪表盘：</p>
+
+<table>
+<tr><th>仪表盘内容</th><th>你能看到什么</th></tr>
+<tr><td>统计数字卡片</td><td>客户总数、平均意向度、成交数、累计保费</td></tr>
+<tr><td>跟进状态分布</td><td>多少正常、多少预警、多少沉睡</td></tr>
+<tr><td>意向度分布</td><td>高/中/低意向客户各多少人</td></tr>
+<tr><td>月度跟进趋势</td><td>这个月跟进了几次，趋势是升是降</td></tr>
+<tr><td>成交产品分布</td><td>哪些产品卖得最好</td></tr>
+</table>
+
+<p><strong>数据随操作自动更新，不需要你手动维护。</strong></p>
+
+<hr>
+
+<h2>什么叫"白嫖"</h2>
+
+<p>现在是 v2.0，刚做完行为评分引擎和按需数据同步。产品能用，但需要真实用户来用、来找问题。</p>
+
+<p><strong>你不用花钱。</strong> 但需要准备几样东西：</p>
+
+<!-- 配图5: 白嫖指南 - 投入 vs 获得 -->
+<div class="illu-card" id="illu-5" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #E5EAF2;">
+  <h2 style="font-size:20px; font-weight:800; color:#102542; margin:0 0 8px 0; border:none; padding:0;">白嫖指南</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 20px 0;">第一批20人，零费用入场</p>
+  <div style="display:flex; gap:20px;">
+    <div style="flex:1;">
+      <div style="font-size:16px; font-weight:700; color:#86909C; padding-bottom:8px; border-bottom:2px solid #E5EAF2; margin-bottom:12px;">你需要准备</div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">1</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">飞书账号（能建自建应用）</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">2</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">一台电脑（Win/Mac，保持开机）</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">3</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">DeepSeek API Key（充¥10够测几千次）</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:#E5EAF2; color:#86909C; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">4</span><span style="font-size:13px; color:#4A4A4A; line-height:1.6;">30分钟照着说明书部署</span></div>
+    </div>
+    <div style="flex:1;">
+      <div style="font-size:16px; font-weight:700; color:#F77F00; padding-bottom:8px; border-bottom:2px solid #F77F00; margin-bottom:12px;">你能获得</div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">24小时运行AI展业助手</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">飞书可视化仪表盘</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">203款产品六维评分引擎</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">行为信号自动评分</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">每日9点自动推日报</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">新功能优先体验</span></div>
+      <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:0;"><span style="width:18px; height:18px; border-radius:50%; background:rgba(247,127,0,0.15); color:#F77F00; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px;">✓</span><span style="font-size:13px; color:#0A1931; line-height:1.6;">直接向开发者提需求</span></div>
+    </div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:12px; color:#86909C;">投入30分钟 + ¥10 API余额 → 换一个不知疲倦的AI助理</p>
+</div>
+
+<table>
+<tr><th>你需要有的</th><th>说明</th></tr>
+<tr><td>飞书账号</td><td>能创建自建应用就行（企业管理员可审批）</td></tr>
+<tr><td>一台电脑</td><td>Windows 或 Mac，能保持开机</td></tr>
+<tr><td>DeepSeek API Key</td><td>platform.deepseek.com 免费注册，充 10 块钱够测几千次</td></tr>
+<tr><td>30 分钟时间</td><td>照着操作说明书部署一次</td></tr>
+</table>
+
+<p><strong>你能获得什么：</strong></p>
+
+<p>一个 24 小时运行的 AI 展业助手<br>
+飞书多维表格可视化仪表盘<br>
+203 款产品知识库 + 六维评分引擎<br>
+行为信号自动评分系统<br>
+每天早上 9 点自动推日报<br>
+优先体验后续新功能<br>
+直接向开发者提需求和反馈</p>
+
+<hr>
+
+<h2>说在前面——这是什么，不是什么</h2>
+
+<p>这个东西<strong>不是</strong>：</p>
+
+<p>❌ 不是卖保险的平台 — 不接触你的客户，只跑在你自己的飞书里<br>
+❌ 不是割韭菜的课程 — 没课、没社群、不卖铲子<br>
+❌ 不是通用聊天机器人 — 它只懂保险展业，不会跟你闲聊八卦<br>
+❌ 不是一个完成品 — v2.0 是起点，它需要跟你一起成长</p>
+
+<p>这个东西<strong>是</strong>：</p>
+
+<p>✅ 一个懂你工作场景的 AI Agent — 记客户、做分析、盯跟进、出话术，自己知道该干什么<br>
+✅ 一个会进化的助手 — 现在的行为评分只是开始，未来可以学你的成交模式、预判客户走向<br>
+✅ 一个开源的个人项目 — 代码在你电脑上，数据完全归你。你说哪里不好用，我来改</p>
+
+<hr>
+
+<h2>最后几句实话</h2>
+
+<p>我写这个东西的原因很简单。</p>
+
+<p>保险代理人这行太苦了。几百个客户要维护，几十上百款产品要对比，跟进了谁没跟进谁全靠脑子记。而市面上能买到的东西，要么是死的数据柜，要么根本不理解你的工作场景。</p>
+
+<p><strong>我想做一个真正懂保险展业的 Agent——不是工具，是一个会成长的助理。</strong></p>
+
+<p>v2.0 刚把行为评分引擎和按需同步做完。接下来它还能长成什么样，说实话，取决于第一批用的人给我什么反馈。</p>
+
+<p>这个东西能不能真的帮到你，我说了不算。你用，用了告诉我。</p>
+
+<p><strong>第一批测试用户只招 20 个，多了服务不过来。</strong></p>
+
+<p>想试试的，评论区留个言，或者直接私信我要操作说明书。</p>
+
+<hr>
+
+<div class="footer">
+保险代理人 AI 助手 v2.0 | 2026 年 5 月<br>
+飞书生态 · DeepSeek 驱动 · 开源项目<br>
+<span style="color:#F77F00;">📥 配图下载：</span>打开同目录下的 <em>我写了一个AI保险展业助手-现在请你来白嫖_配图下载.html</em>
+</div>
+
+</body>
+</html>

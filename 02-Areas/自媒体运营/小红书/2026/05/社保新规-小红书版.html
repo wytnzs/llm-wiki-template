@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书 - 社保新规解读</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .toolbar .btn { background: #2C2C2C; color: #FFF; border: none; padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide { width: 540px; min-height: 720px; position: relative; overflow: hidden; border-radius: 6px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+  .content { position: relative; padding: 28px 26px 26px; z-index: 2; }
+  .page-num { position: absolute; bottom: 12px; right: 20px; font-size: 10px; color: rgba(0,0,0,0.2); z-index: 3; }
+  .section-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #2C2C2C; margin-bottom: 8px; }
+  .main-title { font-size: 26px; font-weight: 900; color: #1A1A1A; line-height: 1.25; margin-bottom: 10px; }
+  .sub-title { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 14px; }
+  .intro { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .divider { width: 36px; height: 2px; background: #2C2C2C; border-radius: 1px; margin: 10px 0; }
+
+  .info-card { background: #FFFFFF; border-radius: 6px; padding: 12px 14px; margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.06); }
+  .info-card .card-title { font-size: 12px; font-weight: 700; color: #2C2C2C; margin-bottom: 3px; }
+  .info-card .card-body { font-size: 12px; color: #333; line-height: 1.55; }
+  .info-card .card-body small { font-size: 10px; color: #888; display: block; margin-top: 3px; }
+
+  .card-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .mini-card { flex: 1; background: #FFFFFF; border-radius: 6px; padding: 12px 10px; border: 1px solid rgba(0,0,0,0.06); text-align: center; }
+  .mini-card .m-title { font-size: 12px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+  .mini-card .m-desc { font-size: 10px; color: #666; line-height: 1.35; }
+
+  .dark-card { background: #2C2C2C; border-radius: 6px; padding: 11px 14px; margin-bottom: 7px; }
+  .dark-card .dc-title { font-size: 12px; font-weight: 700; color: #CCC; margin-bottom: 3px; }
+  .dark-card .dc-body { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+  .quote-box { background: #2C2C2C; border-radius: 6px; padding: 11px 16px; margin-top: 10px; }
+  .quote-box p { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.6; font-style: italic; }
+
+  .big-quote { font-size: 20px; font-weight: 700; color: #1A1A1A; line-height: 1.4; text-align: center; padding: 20px 0; }
+
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content { display: flex; flex-direction: column; justify-content: center; min-height: 720px; padding: 36px 36px 28px; }
+  .cover-slide .cover-title { font-size: 48px; font-weight: 900; color: #FFFFFF; line-height: 1.15; margin-bottom: 14px; }
+  .cover-slide .cover-sub { font-size: 15px; color: rgba(255,255,255,0.4); line-height: 1.5; margin-bottom: 14px; }
+  .cover-slide .cover-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .cover-slide .tag { font-size: 11px; font-weight: 600; color: #FFF; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 4px 12px; border-radius: 20px; }
+  .cover-slide .cover-quote { background: rgba(255,255,255,0.04); border-left: 2px solid rgba(255,255,255,0.25); border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 8px; }
+  .cover-slide .cover-quote p { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.55; font-style: italic; }
+
+  .dark-slide { background: #1A1A1A; }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+  .dark-slide .big-quote { color: #FFF; }
+  .dark-slide .divider { background: rgba(255,255,255,0.2); }
+
+  .dialog-block { background: rgba(0,0,0,0.02); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px; }
+  .dialog-block .speaker { font-size: 11px; font-weight: 700; color: #2C2C2C; margin-bottom: 2px; }
+  .dialog-block .speech { font-size: 12px; color: #444; line-height: 1.55; }
+  .dark-slide .dialog-block { background: rgba(255,255,255,0.03); }
+  .dark-slide .dialog-block .speaker { color: #CCC; }
+  .dark-slide .dialog-block .speech { color: rgba(255,255,255,0.65); }
+
+  .big-number { font-size: 36px; font-weight: 900; line-height: 1; }
+  .big-number.money { color: #2C2C2C; }
+  .dark-slide .big-number.money { color: #FFF; }
+  .highlight-red { color: #D32F2F; }
+  .dark-slide .highlight-red { color: #EF9A9A; }
+
+  .num-list { list-style: none; padding: 0; }
+  .num-list li { display: flex; gap: 10px; margin-bottom: 10px; font-size: 12px; color: #333; line-height: 1.5; }
+  .num-list li .badge { width: 20px; height: 20px; border-radius: 50%; background: #2C2C2C; color: #FFF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .dark-slide .num-list li { color: rgba(255,255,255,0.75); }
+  .dark-slide .num-list li .badge { background: rgba(255,255,255,0.12); }
+
+  .scene-block { background: rgba(0,0,0,0.02); border-radius: 6px; padding: 14px 16px; margin-bottom: 10px; border-left: 3px solid #2C2C2C; }
+  .scene-block p { font-size: 12px; color: #444; line-height: 1.65; }
+  .dark-slide .scene-block { background: rgba(255,255,255,0.03); border-left-color: rgba(255,255,255,0.25); }
+  .dark-slide .scene-block p { color: rgba(255,255,255,0.6); }
+
+  .cta-row { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+  .cta-chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #FFF; text-align: center; padding: 12px 24px; border-radius: 6px; font-size: 13px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ==================== 第 1 张 · 封面 ==================== -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">社保新规来了<br>30+必看的3个变化</div>
+    <div class="cover-sub">陪客户办出院，8万只报了4万——才懂这些政策有多重要</div>
+    <div class="cover-tags">
+      <span class="tag">社保新规</span>
+      <span class="tag">医保变化</span>
+      <span class="tag">收藏备用</span>
+    </div>
+    <div class="cover-quote">
+      <p>社保是地基，但光有地基不够——看懂新规，把钱花在刀刃上。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 2 张 · 故事引入 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">真实案例</div>
+    <div class="main-title" style="font-size:22px;">8万治疗费，社保只报了4万</div>
+    <div class="scene-block" style="border-left-color:#D32F2F;">
+      <p>上周陪客户张姐给婆婆办出院，8万治疗费社保报了4万，剩下的4万得自己掏。</p>
+    </div>
+    <div class="dialog-block" style="border-left:3px solid #D32F2F;background:#FFF5F5;">
+      <div class="speaker" style="color:#C62828;">张姐 · 抱着2岁的孩子</div>
+      <div class="speech">"要是我或者孩子生病可怎么办……"</div>
+    </div>
+    <div class="divider"></div>
+    <div class="intro" style="font-size:12px;color:#888;">
+      前保司内勤+AI理赔规划师，见多了这种"报了但没全报"的落差。<br>
+      刚好赶上社保新规落地，给30+家庭划重点。
+    </div>
+    <div class="page-num">2/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 3 张 · 为什么报一半 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">先搞懂</div>
+    <div class="main-title" style="font-size:22px;">为什么8万只报了一半？</div>
+    <div class="sub-title">社保的"三不报"</div>
+
+    <div class="dark-card">
+      <div class="dc-title">❶ 进口药/自费药不报</div>
+      <div class="dc-body">手术用的进口耗材、效果更好的自费药，社保目录外的全自费。</div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">❷ ICU床位费不报</div>
+      <div class="dc-body">ICU一天几千到上万，社保报销比例极低，大部分要自费。</div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">❸ 起付线+封顶线限制</div>
+      <div class="dc-body">起付线以下不报，封顶线以上不报。大病花费越高，自费比例越大。</div>
+    </div>
+
+    <div class="divider" style="margin-top:14px;"></div>
+    <div class="big-quote" style="font-size:14px;font-weight:400;padding:8px 0 0;">
+      这就是为什么张姐家8万只报了4万——<br>社保报销有天花板，不是"全报"。
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">3/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 4 张 · 新规变化 1 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag" style="color:#2E7D32;">新规变化 ❶</div>
+    <div class="main-title" style="font-size:22px;">门诊报销范围扩大</div>
+    <div class="sub-title">爸妈的慢性病，终于能多报点了</div>
+
+    <div class="info-card" style="border-left:3px solid #4CAF50;">
+      <div class="card-title">以前</div>
+      <div class="card-body">高血压、糖尿病等慢性病门诊开药，大部分只能刷个人账户，花完就没了。</div>
+    </div>
+    <div class="info-card" style="border-left:3px solid #4CAF50;">
+      <div class="card-title">现在</div>
+      <div class="card-body">部分地区常见慢性病门诊也能走统筹报销，相当于给爸妈的日常看病省了一笔钱！</div>
+    </div>
+
+    <div class="info-card" style="background:#F5FBF5;border-color:rgba(76,175,80,0.2);">
+      <div class="card-body" style="text-align:center;font-size:12px;color:#555;">
+        <strong style="color:#2E7D32;">👴 对爸妈最有用的一条</strong><br>
+        高血压、糖尿病长期吃药的家庭，记得去医保局查一下当地是否已落地。
+      </div>
+    </div>
+    <div class="page-num">4/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 5 张 · 新规变化 2 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag" style="color:#81C784;">新规变化 ❷</div>
+    <div class="main-title" style="font-size:22px;">异地就医报销更顺畅</div>
+    <div class="sub-title">带老人去大城市看病，不用先垫钱了</div>
+
+    <div class="dark-card">
+      <div class="dc-title">以前有多麻烦？</div>
+      <div class="dc-body">先开转诊证明 → 自己垫全额 → 拿票回老家报销 → 跑断腿、等几个月。</div>
+    </div>
+    <div class="dark-card">
+      <div class="dc-title">现在</div>
+      <div class="dc-body">直接在异地医院刷社保卡就能结算，不用垫钱、不用跑腿报销。</div>
+    </div>
+
+    <div class="divider" style="background:rgba(255,255,255,0.2);"></div>
+    <div class="big-quote" style="font-size:14px;font-weight:400;padding:8px 0 0;">
+      📌 小提醒：去外地就医前，先在当地医保局备案（线上就能办）
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">5/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 6 张 · 新规变化 3 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag" style="color:#2E7D32;">新规变化 ❸</div>
+    <div class="main-title" style="font-size:22px;">个人账户全家共用</div>
+    <div class="sub-title">闲置的医保余额，终于能用了</div>
+
+    <div class="info-card" style="border-left:3px solid #4CAF50;">
+      <div class="card-title">以前</div>
+      <div class="card-body">自己卡里的钱只能自己用，年轻人的医保余额花不出去，爸妈的不够花。</div>
+    </div>
+    <div class="info-card" style="border-left:3px solid #4CAF50;">
+      <div class="card-title">现在</div>
+      <div class="card-body">医保卡余额能给配偶、孩子、爸妈交医保或刷门诊费。<br><small>等于把闲置的钱用在了刀刃上</small></div>
+    </div>
+
+    <div class="card-row" style="margin-top:4px;">
+      <div class="mini-card" style="background:#F5FBF5;border-color:rgba(76,175,80,0.15);">
+        <div class="m-title">👪 给配偶</div>
+        <div class="m-desc">代缴医保</div>
+      </div>
+      <div class="mini-card" style="background:#F5FBF5;border-color:rgba(76,175,80,0.15);">
+        <div class="m-title">👶 给孩子</div>
+        <div class="m-desc">交居民医保</div>
+      </div>
+      <div class="mini-card" style="background:#F5FBF5;border-color:rgba(76,175,80,0.15);">
+        <div class="m-title">👴 给爸妈</div>
+        <div class="m-desc">刷门诊费</div>
+      </div>
+    </div>
+    <div class="page-num">6/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 7 张 · 社保局限 + 解决方案 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">重要提醒</div>
+    <div class="main-title" style="font-size:22px;">社保只是基础，不是全部</div>
+    <div class="sub-title">为什么张姐家还是自费了4万？</div>
+
+    <div class="dark-card" style="background:rgba(211,47,47,0.08);border:1px solid rgba(211,47,47,0.15);">
+      <div class="dc-title" style="color:#EF9A9A;">社保报不了的部分</div>
+      <div class="dc-body">进口药、ICU床位费、自费检查项目……这些大病治疗中的"大头"，社保基本不报。</div>
+    </div>
+
+    <div class="dark-card" style="margin-top:10px;">
+      <div class="dc-title" style="color:#81C784;">缺口怎么补？</div>
+      <div class="dc-body">用商业医疗险覆盖社保报销不了的部分。花小钱转移大风险，真正实现"生病不拖垮全家"。</div>
+    </div>
+
+    <div class="divider" style="background:rgba(255,255,255,0.2);margin-top:14px;"></div>
+    <div class="big-quote" style="font-size:14px;font-weight:400;padding:8px 0 0;">
+      社保+商保，两条腿走路才稳。
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 8 张 · 金句 ==================== -->
+<div class="slide bg-white">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;text-align:center;">
+    <div class="section-tag" style="text-align:center;display:block;">前保司内勤想对你说</div>
+    <div class="divider" style="margin:10px auto;"></div>
+    <div class="big-quote" style="font-size:22px;padding:24px 0;">
+      买医疗险不是买"治病的钱"<br>
+      是买<strong>"不用借钱的底气"</strong>
+    </div>
+    <div class="divider" style="margin:10px auto;"></div>
+    <div class="intro" style="text-align:center;font-size:12px;color:#888;margin-top:10px;">
+      社保新规看懂政策，商保补上缺口<br>给自己和家人的保障，今天就开始搭
+    </div>
+    <div class="page-num">8/9</div>
+  </div>
+</div>
+
+<!-- ==================== 第 9 张 · CTA ==================== -->
+<div class="slide cover-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;text-align:center;">
+    <div class="cover-title" style="font-size:36px;">你家社保和商保<br>配齐了吗？</div>
+    <div class="cover-sub" style="margin-bottom:20px;">
+      看懂新规，查漏补缺<br>别让一场病拖垮一个家
+    </div>
+    <div class="cta-row">
+      <div class="cta-chip">👍 收藏备用</div>
+      <div class="cta-chip">↗️ 转给家人</div>
+      <div class="cta-chip">💬 评论区聊聊</div>
+    </div>
+    <div class="cover-quote" style="margin-top:20px;">
+      <p>你们的社保和商保都配到哪一步了？👇</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">9/9</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide'); const progress = document.getElementById('progress'); const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) { progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`; const canvas = await renderSlide(slides[i]); zip.file(`小红书-社保新规-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas)); }
+  progress.textContent = '打包中...'; saveAs(await zip.generateAsync({type:'blob'}), '小红书-社保新规-全部.zip'); progress.textContent = `${slides.length} 张已下载`;
+}
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide'); const vc = window.innerHeight / 2; let idx = 0, min = Infinity;
+  slides.forEach((s,i) => { const d = Math.abs(s.getBoundingClientRect().top + 360 - vc); if (d < min) { min = d; idx = i; } });
+  const canvas = await renderSlide(slides[idx]); saveAs(await canvasToBlob(canvas), `小红书-社保新规-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

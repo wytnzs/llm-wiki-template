@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大厂AI工具适合一线代理人吗-加上我自己做的</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; max-width: 677px; margin: 0 auto; padding: 20px 16px; font-size: 16px; line-height: 1.8; color: #1A1A1A; }
+h1 { font-size: 24px; font-weight: 800; color: #102542; margin: 24px 0 12px; }
+h2 { font-size: 19px; font-weight: 700; color: #102542; border-left: 4px solid #F77F00; padding-left: 12px; margin: 20px 0 10px; }
+h3 { font-size: 17px; font-weight: 700; color: #0A1931; margin: 16px 0 8px; }
+p { margin: 0 0 12px; }
+strong { color: #0A1931; }
+blockquote { border-left: 3px solid #F77F00; background: #F7F9FC; padding: 12px 16px; margin: 16px 0; color: #4A4A4A; border-radius: 0 4px 4px 0; font-size: 15px; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th { background: #102542; color: #FFFFFF; padding: 10px 12px; text-align: left; font-weight: 600; }
+td { padding: 10px 12px; border-bottom: 1px solid #E5EAF2; }
+tr:nth-child(even) td { background: #F7F9FC; }
+hr { border: none; border-top: 1px solid #E5EAF2; margin: 24px 0; }
+.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #E5EAF2; font-size: 14px; color: #86909C; }
+.footer a { color: #F77F00; text-decoration: none; }
+.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+</style>
+</head>
+<body>
+
+<p>"这么多 AI 工具，到底用哪个？"</p>
+<p>这个问题我被问了不下二十次。Quest、点金、豆包、DeepSeek、ChatGPT、Claude……再加上我自己也在做工具——拒赔分析、伤残鉴定、家庭财务分析——名字越堆越多，确实容易懵。</p>
+<p>我今天换个讲法。</p>
+<p><strong>不按工具讲。按你的工作流讲——从早到晚，每件事用哪个。</strong></p>
+
+<hr>
+
+<h2>先把工具分三层</h2>
+<p>市面上的 AI 工具，其实就三层：</p>
+<table>
+  <tr><th>层级</th><th>是什么</th><th>举例</th></tr>
+  <tr><td><strong>通用工具</strong></td><td>什么都能干，但什么都不精</td><td>豆包、DeepSeek、ChatGPT、Claude</td></tr>
+  <tr><td><strong>保险专用平台</strong></td><td>懂保险，但要公司买单</td><td>Quest by AXA、阿里云点金</td></tr>
+  <tr><td><strong>自己做的专用工具</strong></td><td>只解决一个问题，但解决到极致</td><td>拒赔分析、伤残鉴定、财务分析</td></tr>
+</table>
+<p><strong>三层不是互相替代。是配合。</strong></p>
+
+<!-- 配图 1：三层工具金字塔 -->
+<div class="illu-card" id="illu-1" style="padding: 32px 28px; background: #F7F9FC; font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;">
+  <h2 style="font-size:20px; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif; color:#102542; margin:0 0 8px 0; border:none; padding:0;">AI 工具三层地图</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0; letter-spacing:.10em;">三层配合，不是互相替代</p>
+  <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
+    <div style="background:#FFF; border:2px solid #E5EAF2; border-radius:10px; padding:18px 24px; width:100%; text-align:center;">
+      <div style="font-size:14px; font-weight:700; color:#86909C; margin-bottom:4px;">第一层 · 通用工具 · 打底</div>
+      <div style="font-size:15px; font-weight:500; color:#102542;">豆包 &nbsp;·&nbsp; DeepSeek &nbsp;·&nbsp; ChatGPT &nbsp;·&nbsp; Claude</div>
+      <div style="font-size:12px; color:#86909C; margin-top:4px;">什么都能干，什么都不精。日常够用，专业场景差口气</div>
+    </div>
+    <div style="font-size:18px; color:#86909C;">↓ 场景深了，通用工具不够用 ↓</div>
+    <div style="background:#FFF; border:2px solid #102542; border-radius:10px; padding:18px 24px; width:100%; text-align:center;">
+      <div style="font-size:14px; font-weight:700; color:#102542; margin-bottom:4px;">第二层 · 保险专用平台 · 公司买单</div>
+      <div style="font-size:15px; font-weight:500; color:#102542;">Quest by AXA &nbsp;·&nbsp; 阿里云点金</div>
+      <div style="font-size:12px; color:#86909C; margin-top:4px;">懂保险场景，不用写提示词。但只对机构开放</div>
+    </div>
+    <div style="font-size:18px; color:#86909C;">↓ 平台用不上，只能自己造 ↓</div>
+    <div style="background:linear-gradient(135deg, #FFF8F0, #FFF); border:2px solid #F77F00; border-radius:10px; padding:18px 24px; width:100%; text-align:center;">
+      <div style="font-size:14px; font-weight:700; color:#F77F00; margin-bottom:4px;">第三层 · 自己做专用工具 · 极致场景</div>
+      <div style="font-size:15px; font-weight:500; color:#102542;">拒赔维权分析 &nbsp;·&nbsp; 伤残鉴定预估 &nbsp;·&nbsp; 家庭财务分析</div>
+      <div style="font-size:12px; color:#86909C; margin-top:4px;">只解决一个问题，但解决到通用工具做不到的程度</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<h2>第一层：通用工具——打底用的</h2>
+
+<h3>豆包</h3>
+<p>写朋友圈、润色话术、查名词解释——打开就用。免费。手机端方便。</p>
+<p>缺点是啥都浅。你让它帮你分析一份拒赔通知书，它说的话听起来挺顺，但一查——条条不在点上。</p>
+<blockquote>豆包是笔。不是大脑。</blockquote>
+
+<h3>DeepSeek</h3>
+<p>推理能力比豆包强一档。能传文件——把保单 PDF 扔进去，它能帮你捋条款逻辑。</p>
+<p>我日常用它最多。分析条款、整理理赔材料、找法律依据——这些活，DeepSeek 的性价比目前没人能打。</p>
+<p>缺点是高峰期排队。而且你得会问——一句话丢进去和一段清晰的指令丢进去，出来的东西天差地别。</p>
+<blockquote>DeepSeek 是性价比最高的"分析师"。但前提是你得知道怎么问。</blockquote>
+
+<h3>ChatGPT / Claude</h3>
+<p>综合能力最强。Claude 处理长文档和结构化输出的能力尤其好。如果你干的活是"把一堆材料整理成一份报告"——Claude 目前是第一选择。</p>
+<p>但付费。要翻墙。对国内保险条款的语境理解有时候差一口气。</p>
+<blockquote>Claude 是你手下的"研究员"。不是你的"同事"——它不懂中国保险圈的语境。</blockquote>
+
+<hr>
+
+<h2>第二层：保险专用平台——公司买单的话直接用</h2>
+
+<h3>Quest by AXA（安盛 × 乐橙数健）</h3>
+<p>专门给代理人做的 AI 智能体。能做客户画像分析、个性化方案生成。不用写提示词——选任务就行。方案准备时间从 2 小时缩到 10 分钟。但只对安盛体系内的代理人开放。</p>
+
+<h3>阿里云点金</h3>
+<p>129 项金融 Skill。覆盖展业、核保核赔、风控合规。合规防线做得扎实。但面向机构客户。个人用不上。</p>
+<blockquote>这两个东西的价值不在"技术多强"——在于"懂保险"。但前提是你能用得上。</blockquote>
+
+<hr>
+
+<h2>第三层：我自己做的专用工具——通用工具做不精的事</h2>
+
+<p>上面两层用了一圈，我发现一个坑：</p>
+<p><strong>通用工具什么都懂一点，但遇到具体的保险场景——拒赔分析、伤残鉴定、财务缺口计算——它不够深。</strong></p>
+<p>保险专用平台又用不上。所以就自己做了。</p>
+
+<h3>拒赔维权分析工具</h3>
+<p>把拒赔通知书和保单丢进去，它帮你拆：保险公司拒赔的理由是什么、哪个条款被引用了、这个条款在法律上站不站得住、你可以从哪几个角度反驳。</p>
+<p>背后的逻辑不复杂——就是把保险法、司法解释、典型判例和条款数据库串起来，让 DeepSeek 按固定框架输出。</p>
+<p><strong>不是 AI 替你判断。是 AI 帮你把所有武器摆到桌上，你自己挑。</strong></p>
+
+<h3>交通事故伤残鉴定分析工具</h3>
+<p>输入伤情和事故描述，输出伤残等级预估和赔偿区间。</p>
+<p>这个事的难点不在 AI。在于你得把《人体损伤致残程度分级》和各地法院的判例数据喂给它，让它知道"肱骨骨折内固定"在不同省份大概评几级、赔多少。</p>
+<p>通用工具干不了这个。不是因为笨，是因为没喂过这些数据。</p>
+
+<h3>家庭财务分析工具</h3>
+<p>输入收入、支出、资产、负债——输出保障缺口分析。不是那种"建议你买 50 万重疾"的泛泛而谈。是具体到：你的医疗险覆盖了哪些、没覆盖哪些、万一出险你要自己掏多少。</p>
+<blockquote>三个工具的共同点：只解决一个问题。但解决到通用工具做不到的程度。</blockquote>
+
+<!-- 配图 2：工具箱速查 -->
+<div class="illu-card" id="illu-2" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #E5EAF2; font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;">
+  <h2 style="font-size:20px; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif; color:#102542; margin:0 0 8px 0; border:none; padding:0;">你的 AI 工具箱</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 18px 0; letter-spacing:.10em;">按工作场景对号入座</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+    <div style="background:#F7F9FC; border-radius:8px; padding:14px; border-left:4px solid #F77F00;"><div style="font-size:15px; font-weight:500; color:#102542; margin-bottom:4px;">✍️ 写文案</div><div style="font-size:12px; color:#86909C;">豆包 · 免费够用</div></div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:14px; border-left:4px solid #102542;"><div style="font-size:15px; font-weight:500; color:#102542; margin-bottom:4px;">🔍 读条款</div><div style="font-size:12px; color:#86909C;">DeepSeek · 能传文件</div></div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:14px; border-left:4px solid #0A1931;"><div style="font-size:15px; font-weight:500; color:#102542; margin-bottom:4px;">📝 深度研究</div><div style="font-size:12px; color:#86909C;">Claude · 长文最强</div></div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:14px; border-left:4px solid #86909C;"><div style="font-size:15px; font-weight:500; color:#102542; margin-bottom:4px;">🏢 公司有平台</div><div style="font-size:12px; color:#86909C;">Quest / 点金 · 直接用</div></div>
+    <div style="background:#FFF8F0; border-radius:8px; padding:14px; border-left:4px solid #F77F00;"><div style="font-size:15px; font-weight:500; color:#F77F00; margin-bottom:4px;">⚖️ 拒赔分析</div><div style="font-size:12px; color:#86909C;">专用工具 · 条款+判例库</div></div>
+    <div style="background:#FFF8F0; border-radius:8px; padding:14px; border-left:4px solid #F77F00;"><div style="font-size:15px; font-weight:500; color:#F77F00; margin-bottom:4px;">🦴 伤残鉴定</div><div style="font-size:12px; color:#86909C;">专用工具 · 鉴定标准+赔偿区间</div></div>
+    <div style="background:#FFF8F0; border-radius:8px; padding:14px; border-left:4px solid #F77F00;"><div style="font-size:15px; font-weight:500; color:#F77F00; margin-bottom:4px;">💰 财务分析</div><div style="font-size:12px; color:#86909C;">专用工具 · 保障缺口一目了然</div></div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:14px; border-left:4px solid #E5EAF2; display:flex; align-items:center; justify-content:center;"><div style="font-size:13px; color:#86909C; text-align:center;">更多工具<br>开发中...</div></div>
+  </div>
+  <p style="text-align:center; margin:14px 0 0 0; font-size:13px; color:#F77F00; font-weight:500;">三层配合：通用打底 + 平台省力 + 专用攻坚</p>
+</div>
+
+<hr>
+
+<h2>为什么我自己做工具</h2>
+<p>有人问我：你写代码的时间拿来多做几单理赔不好吗？</p>
+<p>我说：理赔单案帮一个人。一个工具帮一群人。</p>
+<p>通用 AI 工具越来越强，但"越来越强"和"够用"之间，差的就是那最后一公里——<strong>行业知识、场景框架、数据喂料。</strong></p>
+<p>这最后一公里，大厂不会替你走。因为他们要的是通用。你要的是"在这个具体场景下，一步到位"。</p>
+<blockquote>通用工具解决 80% 的问题。剩下 20%，才是你真正拉开差距的地方。</blockquote>
+
+<hr>
+
+<p>不管你用哪一层工具，三条红线不变：</p>
+<p><strong>数据先脱敏。决策你来下。AI 写的东西先审核。</strong></p>
+<p>工具是帮你省时间的。出了事，责任还是你的。</p>
+<blockquote>工具箱大不大不重要。重要的是：打开工具箱的那一刻，你知道拿哪个。</blockquote>
+
+<hr>
+<p style="color:#86909C; font-size:15px;">你平时用什么工具？有没有自己搭过什么好用的东西？私我聊聊。我最近在做几个新工具，想找人试用。</p>
+<div class="footer"><p>📥 配图下载：打开 <a href="大厂AI工具真的适合一线代理人吗-怎么选_配图下载.html">配图下载页</a> 下载 PNG</p></div>
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 自费药拒赔 山东高院再审</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  /* 工具栏 */
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  /* 卡片基础 */
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2C2C2C;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .info-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C2C2C;
+    margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .mini-card .m-icon { font-size: 22px; margin-bottom: 5px; }
+  .mini-card .m-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .mini-card .m-desc {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.35;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .data-table th {
+    background: #2C2C2C;
+    color: #FFFFFF;
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .data-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: #333;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #FAFAFA; }
+
+  .quote-box {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .divider {
+    width: 36px; height: 2px;
+    background: #2C2C2C; border-radius: 1px;
+    margin: 10px 0;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .cta-chip {
+    flex: 1;
+    background: #2C2C2C;
+    color: #FFF;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .dark-card {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .dark-card .dc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #CCC;
+    margin-bottom: 3px;
+  }
+  .dark-card .dc-body {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  /* 封面样式 */
+  .cover-slide {
+    background: #1A1A1A;
+  }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  /* 深色页 */
+  .dark-slide {
+    background: #1A1A1A;
+  }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+  .dark-slide .data-table { background: rgba(255,255,255,0.02); }
+  .dark-slide .data-table th { background: #555; }
+  .dark-slide .data-table td { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.04); }
+  .dark-slide .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+  /* 高亮数字 */
+  .highlight-num {
+    font-size: 36px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .highlight-num.dark { color: #FFF; }
+  .highlight-label {
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  /* 流程步骤 */
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .step-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #2C2C2C;
+    color: #FFF;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-content {
+    flex: 1;
+  }
+  .step-content .step-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 1px;
+  }
+  .step-content .step-desc {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.45;
+  }
+
+  /* CTA 大号微信 */
+  .cta-wechat {
+    font-size: 32px;
+    font-weight: 900;
+    color: #FFF;
+    text-align: center;
+    padding: 16px 0;
+    letter-spacing: 2px;
+  }
+  .cta-wechat small {
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    letter-spacing: 0;
+  }
+
+  .dark-slide .step-content .step-title { color: #FFF; }
+  .dark-slide .step-content .step-desc { color: rgba(255,255,255,0.6); }
+  .dark-slide .step-num { background: #555; }
+</style>
+</head>
+<body>
+
+<!-- 工具栏 -->
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ========= 第 1 张 · 封面 ========= -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">"自费药不赔"<br>被高院推翻了</div>
+    <div class="cover-sub">山东高院再审改判：保险公司不举证，就得全额赔</div>
+    <div class="cover-tags">
+      <span class="tag">保险理赔</span>
+      <span class="tag">真实案例</span>
+      <span class="tag">法律科普</span>
+      <span class="tag">代理人必知</span>
+    </div>
+    <div class="cover-quote">
+      <p>"你这药是自费药，我们不赔。"<br>这句话，以后站不住脚了。</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 2 张 · 先看结果 ========= -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">先看结果</div>
+    <div class="main-title">20万自费药，保险公司必须赔</div>
+    <div class="sub-title">山东高院再审裁定：仅以"自费药"为由拒赔，不予支持</div>
+
+    <div class="card-row" style="margin-top:14px;">
+      <div class="mini-card" style="text-align:left;flex:2;">
+        <div class="highlight-num">29.5万</div>
+        <div class="highlight-label">医疗费总额</div>
+        <div style="border-top:1px solid rgba(0,0,0,0.06);margin:6px 0;"></div>
+        <div class="m-title">其中自费药</div>
+        <div class="m-desc" style="font-size:13px;font-weight:700;">≈ 20万</div>
+      </div>
+      <div class="mini-card" style="text-align:left;">
+        <div class="highlight-num">三审</div>
+        <div class="highlight-label">三级法院审理</div>
+        <div style="border-top:1px solid rgba(0,0,0,0.06);margin:6px 0;"></div>
+        <div class="m-title">最终结果</div>
+        <div class="m-desc" style="font-size:13px;font-weight:700;color:#2C2C2C;">翻案</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">山东高院 · 核心裁定</div>
+      <div class="card-body">保险公司仅以"自费药"为由拒赔，无法律依据。应当就医疗费用是否超出基本医疗保险同类标准及超出数额承担举证责任。<small>——（2021）鲁民申3369号</small></div>
+    </div>
+
+    <div class="page-num">2/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 3 张 · 案件时间线 ========= -->
+<div class="slide bg-light">
+  <div class="content">
+    <div class="section-tag">案件还原</div>
+    <div class="main-title">一个案子，打了三场官司</div>
+    <div class="sub-title">从一审败诉到高院翻案，关键在哪？</div>
+
+    <div class="info-card">
+      <div class="card-title">📅 2019年11月8日 · 事发</div>
+      <div class="card-body">孙女士在青岛被一辆作业车撞伤，住院治疗。医疗费近30万元，自费药约占20万。</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">❌ 一审 · 即墨区法院（2020）</div>
+      <div class="card-body">判自费药由肇事方承担，保险公司不用赔。孙女士不服上诉。</div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">❌ 二审 · 青岛中院（2020）</div>
+      <div class="card-body">驳回上诉，维持原判。看起来"合情合理"——但问题在哪？</div>
+    </div>
+
+    <div class="info-card" style="border-left: 2px solid #2C2C2C;">
+      <div class="card-title">✅ 再审 · 山东高院（2021）</div>
+      <div class="card-body"><strong>推翻原判！</strong> 保险公司不能仅以"自费药"为由拒赔，必须举证。裁定青岛中院再审。</div>
+    </div>
+
+    <div class="page-num">3/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 4 张 · 法律依据 ========= -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">法律依据</div>
+    <div class="main-title">一字之差，天壤之别</div>
+    <div class="sub-title">《保险法解释三》第十九条拆解</div>
+
+    <div class="info-card">
+      <div class="card-title">📜 原文</div>
+      <div class="card-body">"保险合同约定按照基本医疗保险的标准核定医疗费用，保险人以被保险人的医疗支出超出基本医疗保险<strong>范围</strong>为由拒绝给付保险金的，人民法院<strong>不予支持</strong>……"</div>
+    </div>
+
+    <div style="margin:12px 0;text-align:center;">
+      <span style="font-size:24px;font-weight:900;color:#FFF;">"范围"≠"标准"</span>
+    </div>
+
+    <div class="card-row">
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-title" style="color:#CCC;">❌ 按"范围"拒赔</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.5);">说"不在医保目录内"，法院不支持</div>
+      </div>
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-title" style="color:#CCC;">✅ 按"标准"核减</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.5);">证明有更便宜的同类药且超过标准，法院才支持</div>
+      </div>
+    </div>
+
+    <div class="quote-box" style="background:#555;">
+      <p>法律用"标准"不用"范围"，就是为了防止保险公司拿医保目录当拒赔挡箭牌。</p>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">4/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 5 张 · 举证责任 ========= -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">谁主张谁举证</div>
+    <div class="main-title">保险公司想免责？<br>先拿出证据来</div>
+    <div class="sub-title">不是嘴上说"自费药"三个字就行</div>
+
+    <div class="info-card" style="border-left: 2px solid #2C2C2C;">
+      <div class="card-title">⚖️ 高院明确：保险公司必须举证两件事</div>
+    </div>
+
+    <div class="step-row" style="margin-top:12px;">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">证明存在医保同类替代药</div>
+        <div class="step-desc">被保险人用的这个药，在基本医疗保险目录里有替代方案。</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">证明超出同类费用的具体数额</div>
+        <div class="step-desc">不是笼统说"自费药不赔"，而是一分一厘算清"超了多少"。</div>
+      </div>
+    </div>
+
+    <div style="margin:14px 0;text-align:center;">
+      <span style="font-size:13px;font-weight:700;color:#2C2C2C;">缺一项，拒赔就不成立</span>
+    </div>
+
+    <div class="quote-box">
+      <p>谁主张免责，谁承担举证。这不是空话——高院白纸黑字写进了裁定书。</p>
+    </div>
+
+    <div class="page-num">5/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 6 张 · 全国判例趋势 ========= -->
+<div class="slide bg-light">
+  <div class="content">
+    <div class="section-tag">趋势一致</div>
+    <div class="main-title">2024-2025年，全国法院都在这么判</div>
+    <div class="sub-title">不是个案，是裁判规则</div>
+
+    <table class="data-table">
+      <tr><th>地区</th><th>时间</th><th>判决结果</th></tr>
+      <tr><td>广西平南</td><td>2025.09</td><td>全额赔偿30万。保险公司仅加黑条款，未完成实质说明义务</td></tr>
+      <tr><td>湖南临湘</td><td>2025.11</td><td>全额赔付18.9万。保险公司未提交有效证据</td></tr>
+      <tr><td>西安长安</td><td>2025.11</td><td>外购药19万全额赔。凭医生处方外购必需药品属于合理费用</td></tr>
+      <tr><td>上海虹口</td><td>2025.06</td><td>全额赔20万。保险公司未明确非医保部分具体金额</td></tr>
+      <tr><td>湖南株洲</td><td>2025</td><td>全额赔。保险公司说有非医保用药，但没举证有便宜替代药</td></tr>
+      <tr><td>湖北监利</td><td>2025</td><td>全额赔20.7万。买了附加医保外责任险，自费药必须赔</td></tr>
+    </table>
+
+    <div class="info-card" style="margin-top:10px;">
+      <div class="card-body" style="font-size:11px;text-align:center;">保险公司主张非医保用药不赔 → 举证不能 → 法院不支持拒赔<br>全国统一裁判逻辑</div>
+    </div>
+
+    <div class="page-num">6/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 7 张 · 背后的逻辑（干货） ========= -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">深层逻辑</div>
+    <div class="main-title">为什么法律要这么定？</div>
+    <div class="sub-title">三个理由，说清楚"自费药必须赔"背后的道理</div>
+
+    <div class="dark-card">
+      <div class="dc-title">① 医生用药，病人控制不了</div>
+      <div class="dc-body">危不危急、有没有替代药、过不过敏——是医生的专业判断。不能让患者为医疗方案买单。</div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">② 免责条款必须"明确说明"</div>
+      <div class="dc-body">医保标准条款属于免责条款。保险公司必须加粗、标红、单独签字确认。电子投保还要强制阅读、无法跳过——否则条款对投保人不产生效力。</div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">③ 保险不是保险公司的单方解释权</div>
+      <div class="dc-body">《保险法》第三十条：格式条款有争议时，应当作出有利于被保险人和受益人的解释。</div>
+    </div>
+
+    <div class="quote-box" style="background:#555;margin-top:8px;">
+      <p>法律在设计时就划了一条线——保险公司的权利边界，到"举证"为止。</p>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">7/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 8 张 · 行动指南 ========= -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">应对指南</div>
+    <div class="main-title">遇到"自费药不赔"<br>三步反击</div>
+    <div class="sub-title">给代理人和客户的话术+法律支点</div>
+
+    <div class="step-row" style="margin-top:10px;">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">问对方：请出示证据</div>
+        <div class="step-desc">"请你们拿出证据：同类替代药是什么？超过标准多少？"——没有，就不能拒赔。</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">引用法律依据</div>
+        <div class="step-desc">《保险法解释三》第19条 + 山东高院（2021）鲁民申3369号裁定书，明确"范围≠标准"，举证在保险公司。</div>
+      </div>
+    </div>
+
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">起诉或申诉</div>
+        <div class="step-desc">客户已签拒赔的，可依据新判例申请重新核定；诉讼中的，引用高院裁判规则打回去。</div>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:10px;">
+      <div class="card-body" style="font-size:11px;text-align:center;">真正的专业，不只是懂产品，更要懂规则。<br>这条裁判规则，就是你的法律武器。</div>
+    </div>
+
+    <div class="page-num">8/9</div>
+  </div>
+</div>
+
+<!-- ========= 第 9 张 · CTA ========= -->
+<div class="slide dark-slide">
+  <div class="content" style="display:flex;flex-direction:column;justify-content:center;min-height:720px;">
+    <div style="text-align:center;margin-bottom:20px;">
+      <div class="section-tag" style="font-size:12px;">关注我</div>
+      <div style="font-size:22px;font-weight:900;color:#FFF;margin:14px 0 8px;">保险理赔，你的法律武器库</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6;">
+        每一个拒赔理由背后<br>都有一条对应的法律规则
+      </div>
+    </div>
+
+    <div style="margin:20px 0;border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;text-align:center;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">保险理赔，你的法律武器库<br>每一个拒赔理由背后，都有一条对应的法律规则</div>
+    </div>
+
+    <div style="text-align:center;margin-top:10px;">
+      <span style="font-size:10px;color:rgba(255,255,255,0.2);">点赞 · 收藏 · 转发给需要的朋友</span>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">9/9</div>
+  </div>
+</div>
+
+<!-- CDN + 下载脚本 -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`自费药拒赔-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '自费药拒赔案例.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `自费药拒赔-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

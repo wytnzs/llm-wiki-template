@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保险报销≠侵权人少赔 - 封面</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #F0F2F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .cover-wrapper {
+    position: relative;
+    width: 1283px;
+    height: 383px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  .cover-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .cover-left {
+    width: 900px;
+    height: 383px;
+    background: linear-gradient(135deg, #0A1931 0%, #102542 40%, #162D5A 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cover-left::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(247,127,0,0.08) 0%, transparent 70%);
+  }
+  .cover-left::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 80%, rgba(247,127,0,0.04) 0%, transparent 60%);
+  }
+  .cover-left-dots {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 10px 10px;
+  }
+  .cover-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-tag {
+    background: rgba(247,127,0,0.18);
+    color: #F77F00;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(247,127,0,0.25);
+  }
+  .cover-main-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.25;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 2px;
+  }
+  .cover-main-title .highlight {
+    color: #F77F00;
+  }
+  .cover-subtitle {
+    font-size: 20px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 12px;
+    position: relative;
+    z-index: 1;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .cover-right {
+    width: 383px;
+    height: 383px;
+    background: linear-gradient(135deg, #0A1931 0%, #162D5A 60%, #1B3A4B 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+  .cover-right::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(247,127,0,0.1);
+  }
+  .cover-right::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(247,127,0,0.06) 0%, transparent 70%);
+  }
+  .cover-right-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .cover-right-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.3;
+  }
+  .cover-right-title .highlight {
+    color: #F77F00;
+  }
+  .cover-right-divider {
+    width: 40px;
+    height: 3px;
+    background: #F77F00;
+    margin: 14px auto;
+    border-radius: 2px;
+  }
+  .cover-right-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+  }
+  .btn-download {
+    margin-top: 20px;
+    padding: 12px 32px;
+    background: #F77F00;
+    color: #FFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+  .btn-download:hover { background: #DF7000; }
+</style>
+</head>
+<body>
+
+<div class="cover-wrapper" id="cover">
+  <div class="cover-inner">
+    <div class="cover-left">
+      <div class="cover-left-dots"></div>
+      <div class="cover-tags">
+        <span class="cover-tag">保险知识</span>
+        <span class="cover-tag">法律常识</span>
+        <span class="cover-tag">维权必知</span>
+      </div>
+      <div class="cover-main-title">
+        保险报销<br><span class="highlight">≠</span>侵权人少赔
+      </div>
+      <div class="cover-subtitle">保险报销了，侵权人一分不能少赔</div>
+    </div>
+    <div class="cover-right">
+      <div class="cover-right-content">
+        <div class="cover-right-title">
+          保险报销<br><span class="highlight">≠</span><br>侵权人少赔
+        </div>
+        <div class="cover-right-divider"></div>
+        <div class="cover-right-sub">刘立群 · 保险理赔</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn-download" onclick="downloadCover()">⬇ 下载封面 PNG</button>
+
+<script>
+function downloadCover() {
+  const el = document.getElementById('cover');
+  html2canvas(el, {
+    scale: 2,
+    backgroundColor: null,
+    useCORS: true,
+    logging: false
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = '保险报销≠侵权人少赔_封面.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }).catch(err => {
+    alert('导出失败，请截图保存。错误：' + err.message);
+  });
+}
+</script>
+</body>
+</html>

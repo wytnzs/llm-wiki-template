@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=540">
+<title>小红书 - 死因不明拒赔</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  body { background: #EDEDE8; display: flex; flex-direction: column; align-items: center; padding: 70px 20px 80px; font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif; }
+  .slide { animation: fadeUp 0.5s ease-out both; width: 540px; min-height: 720px; position: relative; overflow: hidden; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .slide:nth-child(2) { animation-delay: 0.1s; } .slide:nth-child(3) { animation-delay: 0.2s; } .slide:nth-child(4) { animation-delay: 0.3s; } .slide:nth-child(5) { animation-delay: 0.4s; } .slide:nth-child(6) { animation-delay: 0.5s; }
+
+  .toolbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.04); padding: 10px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; height: 50px; }
+  .toolbar .btn { background: #1A1A1A; color: #FFF; border: none; padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; }
+  .toolbar .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .toolbar .btn.accent { background: #C79A5E; }
+  .toolbar .progress { color: rgba(0,0,0,0.25); font-size: 12px; font-weight: 500; min-width: 100px; text-align: center; }
+
+  .bg-warm { background: #F5F5F0; } .bg-white { background: #FFFFFF; }
+  .content { position: relative; padding: 36px 32px 30px; z-index: 2; min-height: 720px; display: flex; flex-direction: column; }
+  .page-num { position: absolute; bottom: 14px; right: 24px; font-size: 11px; font-weight: 500; letter-spacing: 1px; color: rgba(0,0,0,0.15); z-index: 3; }
+  .page-num.dark { color: rgba(255,255,255,0.12); }
+
+  .section-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-bottom: 10px; }
+  .section-tag::before { content: ''; display: inline-block; width: 16px; height: 1.5px; background: #C79A5E; border-radius: 1px; }
+
+  .main-title { font-size: 26px; font-weight: 800; color: #1A1A1A; line-height: 1.3; margin-bottom: 10px; }
+  .sub-title { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 16px; }
+  .body-text { font-size: 13px; color: #444; line-height: 1.75; margin-bottom: 12px; }
+  .serif-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 22px; color: #1A1A1A; line-height: 1.35; margin-bottom: 10px; }
+  .divider { width: 32px; height: 2px; background: #C79A5E; border-radius: 1px; margin: 12px 0; }
+
+  .info-card { background: #FFFFFF; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); }
+  .info-card .card-title { font-size: 12px; font-weight: 700; color: #1A1A1A; margin-bottom: 4px; letter-spacing: 0.3px; }
+  .info-card .card-body { font-size: 12px; color: #444; line-height: 1.6; }
+
+  .highlight-box { background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%); border-radius: 8px; padding: 16px 18px; margin-bottom: 10px; position: relative; overflow: hidden; }
+  .highlight-box::after { content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 80px; background: radial-gradient(circle, rgba(199,154,94,0.06) 0%, transparent 70%); }
+  .highlight-box .hb-label { font-size: 9px; font-weight: 700; color: #C79A5E; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .highlight-box .hb-body { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.65; position: relative; z-index: 1; }
+  .highlight-box .hb-body strong { color: #C79A5E; font-weight: 700; }
+
+  .quote-box { background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%); border-radius: 8px; padding: 18px 20px; margin-top: 6px; position: relative; overflow: hidden; }
+  .quote-box::before { content: '"'; position: absolute; top: 2px; left: 12px; font-size: 48px; color: rgba(199,154,94,0.15); font-family: 'Noto Serif SC', serif; line-height: 1; }
+  .quote-box p { font-size: 14px; color: rgba(255,255,255,0.88); line-height: 1.7; padding-left: 8px; position: relative; z-index: 1; font-family: 'Noto Serif SC', serif; font-weight: 600; }
+  .quote-box .quote-author { display: block; margin-top: 8px; font-size: 10px; color: rgba(199,154,94,0.5); font-style: normal; letter-spacing: 0.5px; font-family: -apple-system, 'PingFang SC', sans-serif; font-weight: 400; }
+
+  .dark-slide { background: #1A1A1A; }
+  .dark-slide .section-tag { color: rgba(255,255,255,0.3); }
+  .dark-slide .section-tag::before { background: #C79A5E; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .serif-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.4); }
+  .dark-slide .body-text { color: rgba(255,255,255,0.65); }
+  .dark-slide .info-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content { display: flex; flex-direction: column; justify-content: center; min-height: 720px; padding: 40px 36px 32px; }
+  .cover-slide .grid-texture { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; }
+  .cover-slide .geo-ring { position: absolute; border-radius: 50%; border: 1.5px solid; z-index: 0; }
+  .cover-slide .geo-ring.r1 { top: -80px; right: -80px; width: 260px; height: 260px; border-color: rgba(199,154,94,0.06); }
+  .cover-slide .geo-ring.r2 { top: -40px; right: -40px; width: 180px; height: 180px; border-color: rgba(199,154,94,0.04); }
+  .cover-slide .geo-ring.r3 { bottom: -60px; left: -60px; width: 200px; height: 200px; border-color: rgba(255,255,255,0.03); }
+  .cover-slide .geo-ring.r4 { bottom: -20px; left: -20px; width: 120px; height: 120px; border-color: rgba(255,255,255,0.02); }
+  .cover-slide .gold-corner { position: absolute; top: 32px; right: 32px; width: 24px; height: 24px; border-top: 2px solid rgba(199,154,94,0.3); border-right: 2px solid rgba(199,154,94,0.3); z-index: 1; }
+  .cover-slide .gold-ambient { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(0deg, rgba(199,154,94,0.04) 0%, transparent 100%); z-index: 1; }
+  .cover-slide .cover-title { font-size: 42px; font-weight: 900; color: #FFF; line-height: 1.15; margin-bottom: 14px; position: relative; z-index: 1; }
+  .cover-slide .cover-sub { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.5; margin-bottom: 16px; position: relative; z-index: 1; }
+  .cover-slide .cover-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; position: relative; z-index: 1; }
+  .cover-slide .tag { font-size: 10px; font-weight: 600; color: #C79A5E; background: rgba(199,154,94,0.08); border: 1px solid rgba(199,154,94,0.15); padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+  .cover-slide .cover-quote { background: rgba(255,255,255,0.03); border-left: 2px solid #C79A5E; border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 4px; position: relative; z-index: 1; }
+  .cover-slide .cover-quote p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.55; font-style: italic; }
+
+  .cta-slide { background: #1A1A1A; }
+  .cta-slide .content { justify-content: center; align-items: center; text-align: center; }
+  .cta-slide .cta-icon { font-size: 40px; margin-bottom: 16px; }
+  .cta-slide .cta-main { font-size: 26px; font-weight: 900; color: #C79A5E; margin-bottom: 10px; letter-spacing: 1px; font-family: 'Noto Serif SC', serif; }
+  .cta-slide .cta-desc { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-bottom: 24px; }
+  .cta-slide .cta-highlight { background: rgba(199,154,94,0.1); border: 1px solid rgba(199,154,94,0.2); border-radius: 8px; padding: 14px 24px; margin-bottom: 16px; }
+  .cta-slide .cta-highlight .ch-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 2px; margin-bottom: 4px; }
+  .cta-slide .cta-highlight .ch-value { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 900; color: #C79A5E; }
+
+  .step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .step .step-num { flex-shrink: 0; width: 26px; height: 26px; background: #1A1A1A; color: #FFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; font-family: 'Noto Serif SC', serif; }
+  .step .step-content { flex: 1; padding-top: 3px; }
+  .step .step-title { font-size: 13px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+  .step .step-desc { font-size: 11px; color: #666; line-height: 1.5; }
+  .dark-slide .step .step-num { background: #C79A5E; }
+  .dark-slide .step .step-title { color: #FFF; }
+  .dark-slide .step .step-desc { color: rgba(255,255,255,0.45); }
+
+  .compare-box { display: flex; gap: 10px; margin-bottom: 10px; }
+  .compare-col { flex: 1; border-radius: 8px; padding: 14px 12px; }
+  .compare-col.left { background: #1A1A1A; }
+  .compare-col.right { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.05); }
+  .compare-col .c-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+  .compare-col.left .c-label { color: #C79A5E; }
+  .compare-col.right .c-label { color: #999; }
+  .compare-col .c-point { font-size: 11px; line-height: 1.5; margin-bottom: 4px; padding-left: 8px; position: relative; }
+  .compare-col.left .c-point { color: rgba(255,255,255,0.75); }
+  .compare-col.right .c-point { color: #444; }
+  .compare-col .c-point::before { content: '·'; position: absolute; left: 0; }
+
+  .gold-num-lg { color: #C79A5E; font-weight: 900; font-size: 52px; line-height: 1; font-family: 'Noto Serif SC', serif; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 1 · 封面 -->
+<div class="slide cover-slide">
+  <div class="grid-texture"></div>
+  <div class="geo-ring r1"></div>
+  <div class="geo-ring r2"></div>
+  <div class="geo-ring r3"></div>
+  <div class="geo-ring r4"></div>
+  <div class="gold-corner"></div>
+  <div class="gold-ambient"></div>
+  <div class="content">
+    <div class="cover-title">死因不明<br>保险公司就能拒赔？</div>
+    <div class="cover-sub">法律可不这么认为 · 一个真实理赔翻盘案例</div>
+    <div class="cover-tags">
+      <span class="tag">理赔必知</span>
+      <span class="tag">拒赔维权</span>
+      <span class="tag">保险法</span>
+    </div>
+    <div class="cover-quote">
+      <p>"死因不明"不是拒赔的理由——"不知道"在法律上站不住脚。</p>
+    </div>
+    <div class="page-num dark" style="position:absolute;bottom:14px;right:24px;">1/10</div>
+  </div>
+</div>
+
+<!-- 2 · 案例引入 -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">REAL CASE</div>
+    <div class="serif-title">上月经手的案子</div>
+    <div class="divider"></div>
+    <div class="info-card">
+      <div class="card-title">📋 案件经过</div>
+      <div class="card-body">客户在出租屋里没了。家属报案、公安出警、排除他杀。保险公司说：死因不明，猝死不赔。</div>
+    </div>
+    <div class="body-text" style="font-weight:700;font-style:italic;">"听起来很合理。但法律不是这么理解的。"</div>
+    <div class="info-card">
+      <div class="card-title">✅ 我的判断</div>
+      <div class="card-body" style="font-weight:700;color:#C79A5E;">有机会能赔付</div>
+    </div>
+    <div class="page-num">2/10</div>
+  </div>
+</div>
+
+<!-- 3 · 谁主张谁举证 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">LEGAL PRINCIPLE</div>
+    <div class="serif-title">谁主张，谁举证</div>
+    <div class="divider"></div>
+    <div class="body-text">保险公司说"死因不明，所以不赔"——这句话的逻辑是倒置的。</div>
+    <div class="highlight-box">
+      <div class="hb-label">CORRECT LOGIC</div>
+      <div class="hb-body">保险公司说"不赔"，必须有证据证明不属于保险责任。<br><br><strong>"不知道"不是拒赔的理由。</strong></div>
+    </div>
+    <div class="body-text" style="font-weight:700;">家属提供公安证明 = 完成举证<br>保险公司要拒赔 = 拿出尸检报告</div>
+    <div class="page-num">3/10</div>
+  </div>
+</div>
+
+<!-- 4 · 第25条 -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">KEY PROVISION</div>
+    <div class="serif-title">《保险法司法解释三》<br>第25条</div>
+    <div class="divider"></div>
+    <div class="quote-box" style="margin-top:0;">
+      <p>被保险人的损失系由承保事故或者非承保事故、免责事由造成难以确定，人民法院可以按照相应比例予以支持。</p>
+    </div>
+    <div class="body-text" style="margin-top:10px;font-weight:700;color:#1A1A1A;">翻译：死因确实查不清，法院可以判保险公司赔一部分</div>
+    <div class="info-card">
+      <div class="card-title">实践比例</div>
+      <div class="card-body">未及时尸检、死因无法查明的情况下，法院一般判 <strong style="color:#C79A5E;">40%~50%</strong>。保险公司未尽核定义务时承担更重责任。</div>
+    </div>
+    <div class="page-num">4/10</div>
+  </div>
+</div>
+
+<!-- 5 · 法院3问 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">COURT'S FOCUS</div>
+    <div class="serif-title">法院真正看什么</div>
+    <div class="divider"></div>
+    <div class="body-text">近两年判例中，核心就这三个问题：</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">家属有没有完成初步举证？</div>
+        <div class="step-desc">有公安证明、医院记录、目击证人——就算完成</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">保险公司有没有证据推翻？</div>
+        <div class="step-desc">仅凭猜测不行。必须拿出尸检报告、医学鉴定</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">双方都说不清怎么办？</div>
+        <div class="step-desc">不是"全有或全无"——法律允许按比例赔（第25条）</div>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top:6px;">
+      <div class="hb-label">BOTTOM LINE</div>
+      <div class="hb-body">哪怕是死因完全无法查明，法院也不会一刀切说"保险公司一分不用赔"。</div>
+    </div>
+    <div class="page-num">5/10</div>
+  </div>
+</div>
+
+<!-- 6 · 两条路 -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">TWO PATHS</div>
+    <div class="serif-title">有两条路可以走</div>
+    <div class="divider"></div>
+    <div class="compare-box">
+      <div class="compare-col left">
+        <div class="c-label">路径一：谁主张谁举证</div>
+        <div class="c-point">受益人提供"所能提供的"资料</div>
+        <div class="c-point">举证责任转到保险公司</div>
+        <div class="c-point">没有证据的主张不成立</div>
+      </div>
+      <div class="compare-col right">
+        <div class="c-label">路径二：第25条比例赔付</div>
+        <div class="c-point">双方都说不清时适用</div>
+        <div class="c-point">法院判 40%~50% 赔付</div>
+        <div class="c-point">风险共同体，不全是客户扛</div>
+      </div>
+    </div>
+    <div class="page-num">6/10</div>
+  </div>
+</div>
+
+<!-- 7 · 逻辑错误 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">LOGIC FALLACY</div>
+    <div class="serif-title">保险公司的逻辑错在哪</div>
+    <div class="divider"></div>
+    <div class="info-card">
+      <div class="card-title">❌ 保险公司的说法</div>
+      <div class="card-body">"死因不明 → 无法确定是意外 → 所以不赔"<br>逻辑是倒置的——"我不知道，所以不赔"</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">✅ 正确的法律逻辑</div>
+      <div class="card-body">"死因不明 → 保险公司有义务调查核实 → 无法举证不属于保险责任 → 应当赔付"</div>
+    </div>
+    <div class="highlight-box">
+      <div class="hb-label">BOTTOM LINE</div>
+      <div class="hb-body">保险公司不能把<strong>"不知道"</strong>当成<strong>"不赔"</strong>的挡箭牌。</div>
+    </div>
+    <div class="page-num">7/10</div>
+  </div>
+</div>
+
+<!-- 8 · 维权要点 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">ACTION GUIDE</div>
+    <div class="main-title">三个必须记住的<br>维权要点</div>
+    <div class="divider" style="background:#C79A5E;"></div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">出事第一时间报警</div>
+        <div class="step-desc">公安出警记录是最强有力的初步证据。有了它，家属就完成了举证义务。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">「不赔」不是最终结论</div>
+        <div class="step-desc">看清楚拒赔理由：有证据证明还是仅仅"推测"。后者完全站不住脚。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">出险后尽早介入</div>
+        <div class="step-desc">尸检窗口期很短，现场证据随时间消失。越早介入，维权空间越大。</div>
+      </div>
+    </div>
+    <div class="page-num dark">8/10</div>
+  </div>
+</div>
+
+<!-- 9 · 金句 -->
+<div class="slide dark-slide">
+  <div class="content" style="justify-content:center;">
+    <div class="section-tag" style="color:rgba(255,255,255,0.3);">PHILOSOPHY</div>
+    <div class="quote-box" style="margin-top:0;">
+      <p>保险合同的本质，不是一个让你找漏洞的文字游戏。<br><br>它是一个承诺。<span class="quote-author">出了事，说不清，法律给了兜底方案。</span></p>
+    </div>
+    <div class="page-num dark">9/10</div>
+  </div>
+</div>
+
+<!-- 10 · CTA -->
+<div class="slide cta-slide">
+  <div class="content">
+    <div class="cta-icon">📚</div>
+    <div class="cta-main">进理赔学习群</div>
+    <div class="cta-desc">免费领取理赔课程<br>学会自己跟保险公司打交道</div>
+    <div class="cta-highlight">
+      <div class="ch-label">公众号右下角</div>
+      <div class="ch-value">「联系方式」</div>
+    </div>
+    <div style="color:rgba(255,255,255,0.2);font-size:11px;margin-top:8px;">备注「理赔学习」优先通过</div>
+    <div class="page-num dark">10/10</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2; const SLIDE_W = 540, SLIDE_H = 720;
+async function renderSlide(s) { s.style.animation = 'none'; return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: SLIDE_W, height: SLIDE_H, logging: false }); }
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide'); const progress = document.getElementById('progress'); const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) { progress.textContent = `渲染 ${i+1}/${slides.length}...`; const canvas = await renderSlide(slides[i]); zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas)); }
+  progress.textContent = '打包中...'; saveAs(await zip.generateAsync({type:'blob'}), '小红书-全部.zip'); progress.textContent = `${slides.length} 张已完成`;
+}
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide'); const vc = window.innerHeight / 2; let idx = 0, min = Infinity;
+  slides.forEach((s,i) => { const d = Math.abs(s.getBoundingClientRect().top + 360 - vc); if (d < min) { min = d; idx = i; } });
+  const canvas = await renderSlide(slides[idx]); saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

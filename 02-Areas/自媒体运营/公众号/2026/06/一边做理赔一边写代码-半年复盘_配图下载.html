@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配图下载 - 半年复盘</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #e5ebef; font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 32px 16px 60px; }
+.header { max-width: 677px; margin: 0 auto 28px; text-align: center; }
+.header h1 { font-size: 20px; font-weight: 500; font-family:'Noto Serif SC','Songti SC',serif; color: #0a1f3d; margin-bottom: 6px; letter-spacing:.02em; }
+.header p { font-size: 14px; color: #5f6d78; }
+.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+.illu-download-btn { position: absolute; top: 10px; right: 10px; z-index: 10; background: rgba(255,255,255,0.9); border: 1px solid #CBD5E0; border-radius: 6px; padding: 5px 14px; font-size: 13px; cursor: pointer; color: #4A5568; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.4; font-weight: 600; }
+.illu-download-btn:hover { background: #FFFFFF; border-color: #F77F00; color: #F77F00; }
+</style>
+</head>
+<body>
+<div class="header"><h1>📥 配图下载</h1><p>一边做理赔一边写代码：半年复盘 · 共 2 张 · 点击右上角按钮下载 PNG</p></div>
+
+<div class="illu-card" id="illu-1" style="padding: 32px 28px; background: #F7F9FC; font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-1', '上半年时间分配')">⬇ 下载</button>
+  <h2 style="font-size:20px; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif; color:#102542; margin:0 0 8px 0; border:none; padding:0; letter-spacing:.02em;">2026 上半年时间分配</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 24px 0; letter-spacing:.10em; text-transform:uppercase;">1-6 月实际用时占比</p>
+  <div style="display:flex; align-items:flex-end; gap:16px; justify-content:center; height:180px; padding-bottom:8px;">
+    <div style="flex:1; max-width:120px; text-align:center;"><div style="font-size:24px; font-weight:900; color:#F77F00; margin-bottom:4px;">40%</div><div style="height:104px; background:linear-gradient(180deg, #F77F00 0%, rgba(247,127,0,0.15) 100%); border-radius:6px 6px 0 0; width:100%;"></div><div style="font-size:13px; font-weight:600; color:#102542; margin-top:8px;">理赔</div></div>
+    <div style="flex:1; max-width:120px; text-align:center;"><div style="font-size:24px; font-weight:900; color:#102542; margin-bottom:4px;">30%</div><div style="height:78px; background:linear-gradient(180deg, #102542 0%, rgba(16,37,66,0.15) 100%); border-radius:6px 6px 0 0; width:100%;"></div><div style="font-size:13px; font-weight:600; color:#102542; margin-top:8px;">写代码</div></div>
+    <div style="flex:1; max-width:120px; text-align:center;"><div style="font-size:24px; font-weight:900; color:#0A1931; margin-bottom:4px;">20%</div><div style="height:52px; background:linear-gradient(180deg, #0A1931 0%, rgba(10,25,49,0.15) 100%); border-radius:6px 6px 0 0; width:100%;"></div><div style="font-size:13px; font-weight:600; color:#102542; margin-top:8px;">写文章</div></div>
+    <div style="flex:1; max-width:120px; text-align:center;"><div style="font-size:24px; font-weight:900; color:#86909C; margin-bottom:4px;">10%</div><div style="height:26px; background:linear-gradient(180deg, #86909C 0%, rgba(134,144,156,0.15) 100%); border-radius:6px 6px 0 0; width:100%;"></div><div style="font-size:13px; font-weight:600; color:#102542; margin-top:8px;">杂事</div></div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#102542; font-weight:500;">70% 的时间在做"不知道有没有用但我觉得对"的事</p>
+</div>
+
+<div class="illu-card" id="illu-2" style="padding: 32px 28px; background: #FFFFFF; border: 1px solid #E5EAF2; font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-2', '半年想通的三件事')">⬇ 下载</button>
+  <h2 style="font-size:20px; font-weight:500; font-family:'Noto Serif SC','Songti SC',serif; color:#102542; margin:0 0 8px 0; border:none; padding:0; letter-spacing:.02em;">半年想通的三件事</h2>
+  <p style="font-size:13px; color:#86909C; margin:0 0 20px 0; letter-spacing:.10em;">不是计划出来的，是做出来的</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 14px; border-left:4px solid #F77F00;"><div style="font-size:28px; margin-bottom:6px;">🏗️</div><div style="font-size:15px; font-weight:500; color:#102542; margin-bottom:6px;">干着干着才清楚</div><div style="font-size:12px; color:#86909C; line-height:1.6;">年初想做平台<br>现在知道：说清楚才是目的</div></div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 14px; border-left:4px solid #102542;"><div style="font-size:28px; margin-bottom:6px;">🎯</div><div style="font-size:15px; font-weight:500; color:#102542; margin-bottom:6px;">内容是筛选</div><div style="font-size:12px; color:#86909C; line-height:1.6;">不是让更多人看到你<br>是让对的人认出你</div></div>
+    <div style="background:#F7F9FC; border-radius:8px; padding:18px 14px; border-left:4px solid #0A1931;"><div style="font-size:28px; margin-bottom:6px;">🔗</div><div style="font-size:15px; font-weight:500; color:#102542; margin-bottom:6px;">底层能力是通的</div><div style="font-size:12px; color:#86909C; line-height:1.6;">理赔·代码·文章<br>都是拆解复杂问题</div></div>
+  </div>
+  <p style="text-align:center; margin:16px 0 0 0; font-size:13px; color:#102542; font-weight:500;">找到那个接在一起的点，三件事就变成了一件事。</p>
+</div>
+
+<p style="text-align:center; max-width:677px; margin:32px auto 0; font-size:13px; color:#5f6d78;">打开预览 HTML 确认位置，在本页下载 PNG → 上传到公众号图片库 → 回到预览页全选复制正文粘贴</p>
+<script>
+function downloadCard(e,f){var el=document.getElementById(e);if(!el)return;var btn=el.querySelector('.illu-download-btn');if(btn)btn.style.display='none';html2canvas(el,{scale:2,backgroundColor:null,useCORS:true,logging:false}).then(function(c){var a=document.createElement('a');a.download=(f||'配图')+'.png';a.href=c.toDataURL('image/png');a.click();if(btn)btn.style.display='';}).catch(function(err){console.error(err);if(btn)btn.style.display='';});}
+</script>
+</body>
+</html>

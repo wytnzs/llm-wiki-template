@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>蓝医保少儿中高端长期医疗 · 小红书</title>
+  <meta name="viewport" content="width=1080">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 70px 20px 40px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .sheet { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+
+    .poster {
+      position: relative; overflow: hidden; isolation: isolate;
+      width: 1080px; height: 1440px; border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,.24);
+    }
+    .poster .content {
+      position: relative; z-index: 2;
+      width: 100%; height: 100%;
+      padding: 100px 96px;
+      display: flex; flex-direction: column;
+    }
+
+    .theme-warm { background: #fdf6ed; color: #2a1e13; }
+    .theme-warm .accent { color: #b85c2e; }
+    .theme-warm .tag { background: #f5e6d3; color: #8b5a3c; }
+    .theme-warm .card-box { background: #faf3ea; border-left: 4px solid #b85c2e; }
+    .theme-warm .card-box.dim { opacity: .60; background: #f7ede0; }
+    .theme-warm .card-box.warn { border-left-color: #d4a04a; background: #fef9ed; }
+    .theme-warm .card-box.good { border-left-color: #2e8b57; background: #f4faf6; }
+    .theme-warm .divider { background: rgba(42,30,19,.15); }
+    .theme-warm .badge { background: #b85c2e; color: #fff; }
+    .theme-warm .badge.old { background: #8b6f5a; }
+
+    .theme-dark { background: #2a1e13; color: #fdf6ed; }
+    .theme-dark .accent { color: #e8a96b; }
+    .theme-dark .tag { background: rgba(255,255,255,.08); color: #c9a87c; }
+    .theme-dark .card-box { background: rgba(255,255,255,.06); border-left: 4px solid #e8a96b; }
+    .theme-dark .card-box.dim { opacity: .55; }
+    .theme-dark .divider { background: rgba(253,246,237,.15); }
+    .theme-dark .badge { background: #e8a96b; color: #2a1e13; }
+
+    .grain {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: .25; mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
+      background-size: 3px 3px;
+    }
+
+    h1 { font-weight: 900; font-size: 136px; line-height: 1.04; letter-spacing: -.01em; margin: 0; }
+    h2 { font-weight: 700; font-size: 76px; line-height: 1.14; letter-spacing: .01em; margin: 0; }
+    h3 { font-weight: 700; font-size: 48px; line-height: 1.22; margin: 0; }
+    .big-num { font-weight: 800; font-size: 140px; line-height: 1; letter-spacing: -.02em; }
+    .mid-num { font-weight: 700; font-size: 88px; line-height: 1; letter-spacing: -.01em; }
+    .body-lg { font-weight: 400; font-size: 34px; line-height: 1.55; margin: 0; }
+    .body-md { font-weight: 400; font-size: 28px; line-height: 1.6; margin: 0; }
+    .body-sm { font-weight: 400; font-size: 24px; line-height: 1.55; margin: 0; opacity: .72; }
+    .label { font-weight: 600; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+    .tag {
+      display: inline-block; padding: 10px 24px; border-radius: 6px;
+      font-weight: 600; font-size: 22px; letter-spacing: .04em;
+    }
+    .badge {
+      display: inline-block; padding: 6px 18px; border-radius: 4px;
+      font-weight: 700; font-size: 20px; letter-spacing: .06em;
+    }
+
+    .stack { display: flex; flex-direction: column; }
+    .row   { display: flex; flex-direction: row; }
+    .grow  { flex: 1; }
+    .center { text-align: center; align-items: center; }
+    .divider { height: 1px; border: 0; margin: 0; }
+    .gap-xs  { gap: 12px; }
+    .gap-sm  { gap: 20px; }
+    .gap-md  { gap: 36px; }
+    .gap-lg  { gap: 56px; }
+
+    .card-box { padding: 40px 48px; border-radius: 10px; }
+    .card-box .row { align-items: flex-start; gap: 24px; }
+    .card-box .dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 12px;
+    }
+    .theme-warm .card-box .dot { background: #b85c2e; }
+    .theme-dark .card-box .dot { background: #e8a96b; }
+
+    .point-row {
+      display: flex; align-items: flex-start; gap: 28px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(42,30,19,.10);
+    }
+    .theme-dark .point-row { border-bottom-color: rgba(253,246,237,.10); }
+    .point-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .point-row .point-num {
+      font-weight: 800; font-size: 56px; line-height: 1; flex-shrink: 0;
+      width: 72px; text-align: center;
+    }
+    .point-row .point-body { flex: 1; }
+    .point-row .point-body h3 { font-size: 38px; line-height: 1.3; }
+    .point-row .point-body p  { font-size: 26px; line-height: 1.5; margin: 8px 0 0; opacity: .72; }
+
+    .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+
+    .bottom-strip {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 20px; letter-spacing: .08em; opacity: .55;
+      padding-top: 24px; border-top: 1px solid;
+      margin-top: auto;
+    }
+    .theme-warm .bottom-strip { border-color: rgba(42,30,19,.12); }
+    .theme-dark .bottom-strip { border-color: rgba(253,246,237,.12); }
+
+    .toolbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(26,26,26,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 10px 20px; display: flex; align-items: center;
+      justify-content: center; gap: 10px; height: 54px;
+    }
+    .toolbar .btn {
+      background: #fff; color: #1a1a1a; border: none;
+      padding: 8px 20px; border-radius: 6px; font-size: 13px;
+      font-weight: 600; cursor: pointer; font-family: -apple-system, sans-serif;
+    }
+    .toolbar .btn.accent { background: #b85c2e; color: #fff; }
+    .toolbar .btn:hover { opacity: .85; }
+    .toolbar .progress { color: rgba(255,255,255,.35); font-size: 12px; font-weight: 500; min-width: 120px; text-align: center; font-family: -apple-system, sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar" id="toolbar">
+    <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+    <button class="btn" onclick="downloadOne()">下载当前</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <main class="sheet">
+
+    <!-- ===== 01 · 封面 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-01">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <span class="tag">蓝医保 · 少儿中高端长期医疗</span>
+        <div class="grow" style="display:flex;align-items:center;">
+          <div class="stack gap-sm">
+            <h1>娃的医疗险<br>一步到位</h1>
+            <p class="body-lg" style="margin-top:8px;">0免赔 + 特需私立 + 保到23岁<br>从出生到大学毕业，<strong class="accent">一单到底</strong></p>
+          </div>
+        </div>
+        <div class="bottom-strip">
+          <span>Vol. 01 · 2026.06</span>
+          <span>太平洋健康 · 少儿专属</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 02 · 一句话点评 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-02">
+      <div class="grain"></div>
+      <div class="content" style="gap:40px;">
+        <h2>一句话点评</h2>
+        <div class="card-box" style="padding:48px;">
+          <p class="body-lg" style="font-size:40px;font-weight:600;line-height:1.4;">专为 0-17 岁设计的<br><strong class="accent">0免赔</strong> + <strong class="accent">门诊特需私立</strong><br>长期保证续保的少儿专属医疗险</p>
+        </div>
+        <div class="grow stack gap-md" style="justify-content:center;">
+          <div class="card-box good">
+            <div class="row">
+              <span class="badge" style="background:#2e8b57;">为什么值得看</span>
+            </div>
+            <p class="body-md" style="margin-top:16px;">保证续保到23/24岁，住院0免赔100%赔<br>120种重疾直接去特需/国际部<br>可选门诊私立100%报销，看病不排队</p>
+          </div>
+          <div class="card-box warn">
+            <div class="row">
+              <span class="badge old">注意</span>
+            </div>
+            <p class="body-md" style="margin-top:16px;">仅限0-17岁投保，成人不能买<br>门诊责任需额外加费<br>费率比普通百万医疗高</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 · 四大数字 ===== -->
+    <section class="poster xhs theme-dark" id="xhs-03">
+      <div class="content center stack gap-lg" style="justify-content:center;">
+        <p class="label accent">四大核心数字</p>
+        <div class="col-2" style="gap:48px 56px;">
+          <div class="stack gap-xs center">
+            <span class="mid-num accent">23 岁</span>
+            <span class="body-md">最长保证续保至<br>从出生保到大学毕业</span>
+          </div>
+          <div class="stack gap-xs center">
+            <span class="mid-num accent">0 免赔</span>
+            <span class="body-md">住院0免赔<br>100% 赔付</span>
+          </div>
+          <div class="stack gap-xs center">
+            <span class="mid-num accent">120 种</span>
+            <span class="body-md">重疾可直通<br>特需/国际部</span>
+          </div>
+          <div class="stack gap-xs center">
+            <span class="mid-num accent">不限清单</span>
+            <span class="body-md">外购药品及器械<br>全面放开</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 04 · 优势详解① ===== -->
+    <section class="poster xhs theme-warm" id="xhs-04">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>优势详解<br>续保 + 0免赔</h2>
+        <div class="grow stack" style="gap:0;">
+          <div class="point-row">
+            <span class="point-num accent">01</span>
+            <div class="point-body">
+              <h3>超长保证续保 · 少儿最佳</h3>
+              <p>最长保证续保至23岁/24岁，期间住院0免赔。从出生到大学毕业，20多年稳定保障，解决成长过程中医疗费用和续保的双重焦虑</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">02</span>
+            <div class="point-body">
+              <h3>0免赔 + 重疾特需直通</h3>
+              <p>住院0免赔、100%赔付，小病住院能报销。确诊120种重疾，可直接去特需、国际部就医——孩子遭遇重疾时第一时间获得最优医疗资源</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">03</span>
+            <div class="point-body">
+              <h3>解决带娃看病最大痛点</h3>
+              <p>小病不用扛——住院就赔。大病不用等——特需直通。这是少儿医疗险里少有的「两头都管」</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 05 · 优势详解② ===== -->
+    <section class="poster xhs theme-warm" id="xhs-05">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>优势详解<br>门诊 + 灵活核保</h2>
+        <div class="grow stack" style="gap:0;">
+          <div class="point-row">
+            <span class="point-num accent">04</span>
+            <div class="point-body">
+              <h3>可选特需/私立门诊 100% 报销</h3>
+              <p>解决带娃看病的另一个大痛点——排队久。直接带娃去私立或公立特需看门诊，不用在普通门诊挤半天，体验感瞬间提升</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">05</span>
+            <div class="point-body">
+              <h3>外购药械不限清单</h3>
+              <p>放开外购药品及医疗器械，不限清单。孩子需要的药，不受医院药房和医保目录限制</p>
+            </div>
+          </div>
+          <div class="point-row">
+            <span class="point-num accent">06</span>
+            <div class="point-body">
+              <h3>核保人性化</h3>
+              <p>常见疾病痊愈后仍可正常投保，不为孩子过去的病史关上未来的门</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 06 · 四个门槛 ===== -->
+    <section class="poster xhs theme-warm" id="xhs-06">
+      <div class="grain"></div>
+      <div class="content" style="gap:36px;">
+        <h2>四个门槛<br>下单前看清楚</h2>
+        <p class="body-lg">产品很好，但有几条要心里有数。</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box warn" style="padding:32px 40px;">
+            <div class="row">
+              <span class="badge old">门槛 ①</span>
+            </div>
+            <p class="body-md" style="margin-top:14px;"><strong style="color:#b85c2e;">仅限 0-17 岁投保</strong></p>
+            <p class="body-sm" style="margin-top:6px;">成人不能买。家里大人需要另外配置，不能一张保单全家搞定</p>
+          </div>
+          <div class="card-box warn" style="padding:32px 40px;">
+            <div class="row">
+              <span class="badge old">门槛 ②</span>
+            </div>
+            <p class="body-md" style="margin-top:14px;"><strong style="color:#b85c2e;">门诊是可选责任 · 需额外加费</strong></p>
+            <p class="body-sm" style="margin-top:6px;">不选门诊，就失去了「免排队看私立」的核心优势。加门诊保费会明显上升</p>
+          </div>
+          <div class="card-box warn" style="padding:32px 40px;">
+            <div class="row">
+              <span class="badge old">门槛 ③</span>
+            </div>
+            <p class="body-md" style="margin-top:14px;"><strong style="color:#b85c2e;">重疾后条款需看仔细</strong></p>
+            <p class="body-sm" style="margin-top:6px;">保证续保至23/24岁，但确诊重疾享受特需权益后，成年后的费率和责任是否调整，以条款为准</p>
+          </div>
+          <div class="card-box warn" style="padding:32px 40px;">
+            <div class="row">
+              <span class="badge old">门槛 ④</span>
+            </div>
+            <p class="body-md" style="margin-top:14px;"><strong style="color:#b85c2e;">品牌溢价 · 费率不低</strong></p>
+            <p class="body-sm" style="margin-top:6px;">中高端少儿产品，费率比普通百万医疗高出不少。要权衡「0免赔+门诊特需」是否值这个价</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 07 · 最佳画像 ===== -->
+    <section class="poster xhs theme-dark" id="xhs-07">
+      <div class="content stack gap-lg" style="justify-content:center;">
+        <span class="badge" style="width:fit-content;">对号入座</span>
+        <div class="col-2">
+          <div class="card-box stack gap-sm" style="padding:40px 36px;">
+            <span class="label accent" style="font-size:28px;">最适合</span>
+            <div class="stack gap-xs" style="margin-top:12px;">
+              <p class="body-md" style="font-size:24px;"><strong>刚有新生儿</strong>，想一步到位锁定长期保障</p>
+              <p class="body-md" style="font-size:24px;">希望<strong>孩子看病不排队</strong>，直接去私立</p>
+              <p class="body-md" style="font-size:24px;">对<strong>门诊体验</strong>有刚性需求的父母</p>
+              <p class="body-md" style="font-size:24px;"><strong>预算充足</strong>，愿为就医体验投入</p>
+            </div>
+          </div>
+          <div class="card-box dim stack gap-sm" style="padding:40px 36px;">
+            <span class="label" style="font-size:28px;opacity:.7;">不太适合</span>
+            <div class="stack gap-xs" style="margin-top:12px;">
+              <p class="body-md" style="font-size:24px;">预算有限，优先<strong>保额而非体验</strong></p>
+              <p class="body-md" style="font-size:24px;">能接受<strong>公立普通部排队</strong></p>
+              <p class="body-md" style="font-size:24px;">孩子已<strong>超过17岁</strong></p>
+              <p class="body-md" style="font-size:24px;">想一张保单<strong>覆盖全家</strong></p>
+            </div>
+          </div>
+        </div>
+        <div class="divider" style="width:200px;margin:0 auto;"></div>
+        <p class="body-md center" style="opacity:.75;">新生儿家庭的"定心丸"，娃的第一份保单选它不亏</p>
+      </div>
+    </section>
+
+    <!-- ===== 08 · CTA ===== -->
+    <section class="poster xhs theme-warm" id="xhs-08">
+      <div class="grain"></div>
+      <div class="content" style="gap:48px;">
+        <h2>想给娃<br>配置一份？</h2>
+        <p class="body-lg">整理了两份材料，帮爸妈们快速判断——</p>
+        <div class="grow stack gap-sm" style="justify-content:center;">
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>少儿中高端完整保障责任表</h3><p class="body-sm" style="margin-top:6px;">住院/门诊/特需/外购药，每一项保什么清清楚楚</p></div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>门诊加不加？保费差多少</h3><p class="body-sm" style="margin-top:6px;">基础住院 vs 住院+门诊，不同年龄保费对比一表看懂</p></div>
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="row">
+              <span class="dot"></span>
+              <div><h3>少儿医疗险横向对比</h3><p class="body-sm" style="margin-top:6px;">蓝医保少儿 vs 众民保 vs 普通百万医疗，哪款适合你家娃</p></div>
+            </div>
+          </div>
+        </div>
+        <hr class="divider" style="margin:0;">
+        <p class="body-lg center" style="font-weight:600;">评论区回复「<strong class="accent">少儿</strong>」<br>我把三份资料发你</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var W = 1080, H = 1440;
+      function renderPoster(el) {
+        var obr = el.style.borderRadius, obs = el.style.boxShadow;
+        el.style.borderRadius = '0'; el.style.boxShadow = 'none';
+        return html2canvas(el, { scale: 1, useCORS: true, backgroundColor: null, width: W, height: H, logging: false })
+          .then(function(c) { el.style.borderRadius = obr; el.style.boxShadow = obs; return c; });
+      }
+      function c2b(c) { return new Promise(function(r) { c.toBlob(r, 'image/png'); }); }
+      window.downloadAll = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var pg = document.getElementById('progress');
+        var zip = new JSZip(); var p = Promise.resolve();
+        ps.forEach(function(el, i) {
+          p = p.then(function() {
+            pg.textContent = '渲染 ' + (i+1) + '/' + ps.length + '...';
+            return renderPoster(el).then(function(c) { return c2b(c).then(function(b) { zip.file('小红书-' + String(i+1).padStart(2,'0') + '.png', b); }); });
+          });
+        });
+        p.then(function() { pg.textContent = '打包中...'; return zip.generateAsync({ type: 'blob' }); })
+         .then(function(b) { saveAs(b, '小红书-蓝医保少儿中高端.zip'); pg.textContent = ps.length + ' 张已完成'; });
+      };
+      window.downloadOne = function() {
+        var ps = document.querySelectorAll('.poster.xhs');
+        var vc = window.innerHeight / 2, idx = 0, min = Infinity;
+        ps.forEach(function(el, i) { var r = el.getBoundingClientRect(); var d = Math.abs(r.top + r.height/2 - vc); if (d < min) { min = d; idx = i; } });
+        renderPoster(ps[idx]).then(function(c) { return c2b(c); }).then(function(b) { saveAs(b, '小红书-' + String(idx+1).padStart(2,'0') + '.png'); });
+      };
+    })();
+  </script>
+</body>
+</html>

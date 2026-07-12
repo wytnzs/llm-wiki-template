@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=540">
+<title>小红书 - 高考题戳中了我</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  body {
+    background: #EDEDE8;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .slide {
+    animation: fadeUp 0.5s ease-out both;
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 8px; margin-bottom: 24px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  .slide:nth-child(2) { animation-delay: 0.1s; }
+  .slide:nth-child(3) { animation-delay: 0.2s; }
+  .slide:nth-child(4) { animation-delay: 0.3s; }
+  .slide:nth-child(5) { animation-delay: 0.4s; }
+  .slide:nth-child(6) { animation-delay: 0.5s; }
+  .slide:nth-child(7) { animation-delay: 0.6s; }
+  .slide:nth-child(8) { animation-delay: 0.7s; }
+  .slide:nth-child(9) { animation-delay: 0.8s; }
+  .slide:nth-child(10) { animation-delay: 0.9s; }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    padding: 10px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 10px; height: 50px;
+  }
+  .toolbar .btn {
+    background: #1A1A1A; color: #FFF; border: none;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .toolbar .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .toolbar .btn.accent { background: #C79A5E; }
+  .toolbar .progress {
+    color: rgba(0,0,0,0.25); font-size: 12px;
+    font-weight: 500; min-width: 100px; text-align: center;
+  }
+
+  .bg-warm { background: #F5F5F0; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 36px 32px 30px;
+    z-index: 2;
+    min-height: 720px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 14px; right: 24px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 1px; color: rgba(0,0,0,0.15);
+    z-index: 3;
+  }
+  .page-num.dark { color: rgba(255,255,255,0.12); }
+
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    color: #999; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .section-tag::before {
+    content: ''; display: inline-block;
+    width: 16px; height: 1.5px; background: #C79A5E; border-radius: 1px;
+  }
+
+  .main-title { font-size: 26px; font-weight: 800; color: #1A1A1A; line-height: 1.3; margin-bottom: 10px; }
+  .sub-title { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 16px; }
+
+  .serif-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 22px; color: #1A1A1A; line-height: 1.35; margin-bottom: 10px; }
+  .serif-sub { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 14px; color: #666; line-height: 1.6; }
+
+  .gold-num { color: #C79A5E; font-weight: 800; font-size: 32px; line-height: 1; margin-bottom: 4px; font-family: 'Noto Serif SC', serif; }
+  .gold-num-lg { color: #C79A5E; font-weight: 900; font-size: 52px; line-height: 1; font-family: 'Noto Serif SC', serif; }
+
+  .divider { width: 32px; height: 2px; background: #C79A5E; border-radius: 1px; margin: 12px 0; }
+  .divider.subtle { width: 100%; height: 1px; background: rgba(0,0,0,0.04); margin: 16px 0; }
+
+  .body-text { font-size: 13px; color: #444; line-height: 1.75; margin-bottom: 12px; }
+
+  .info-card {
+    background: #FFFFFF; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+  }
+  .info-card .card-title { font-size: 12px; font-weight: 700; color: #1A1A1A; margin-bottom: 4px; letter-spacing: 0.3px; }
+  .info-card .card-body { font-size: 12px; color: #444; line-height: 1.6; }
+  .info-card .card-body small { font-size: 10px; color: #999; display: block; margin-top: 4px; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%);
+    border-radius: 8px; padding: 16px 18px; margin-bottom: 10px; position: relative; overflow: hidden;
+  }
+  .highlight-box::after {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(199,154,94,0.06) 0%, transparent 70%);
+  }
+  .highlight-box .hb-label { font-size: 9px; font-weight: 700; color: #C79A5E; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .highlight-box .hb-body { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.65; position: relative; z-index: 1; }
+  .highlight-box .hb-body strong { color: #C79A5E; font-weight: 700; }
+
+  .quote-box {
+    background: linear-gradient(135deg, #1A1A1A 0%, #2C2C2C 100%);
+    border-radius: 8px; padding: 18px 20px; margin-top: 6px; position: relative; overflow: hidden;
+  }
+  .quote-box::before {
+    content: '"'; position: absolute; top: 2px; left: 12px;
+    font-size: 48px; color: rgba(199,154,94,0.15);
+    font-family: 'Noto Serif SC', serif; line-height: 1;
+  }
+  .quote-box p {
+    font-size: 14px; color: rgba(255,255,255,0.88); line-height: 1.7; padding-left: 8px;
+    position: relative; z-index: 1; font-family: 'Noto Serif SC', serif; font-weight: 600;
+  }
+  .quote-box .quote-author {
+    display: block; margin-top: 8px; font-size: 10px; color: rgba(199,154,94,0.5);
+    font-style: normal; letter-spacing: 0.5px; font-family: -apple-system, 'PingFang SC', sans-serif; font-weight: 400;
+  }
+
+  .grid-2 { display: flex; gap: 10px; margin-bottom: 10px; }
+  .grid-item { flex: 1; background: #FFFFFF; border-radius: 8px; padding: 16px 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); text-align: center; }
+  .grid-item .gi-num { font-size: 28px; font-weight: 800; color: #C79A5E; margin-bottom: 4px; line-height: 1; font-family: 'Noto Serif SC', serif; }
+  .grid-item .gi-label { font-size: 11px; color: #666; font-weight: 600; margin-bottom: 2px; }
+  .grid-item .gi-desc { font-size: 10px; color: #999; line-height: 1.4; }
+
+  .compare-box { display: flex; gap: 10px; margin-bottom: 10px; }
+  .compare-col { flex: 1; border-radius: 8px; padding: 14px 12px; }
+  .compare-col.left { background: #1A1A1A; }
+  .compare-col.right { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.05); }
+  .compare-col .c-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+  .compare-col.left .c-label { color: #C79A5E; }
+  .compare-col.right .c-label { color: #999; }
+  .compare-col .c-point { font-size: 11px; line-height: 1.5; margin-bottom: 4px; padding-left: 8px; position: relative; }
+  .compare-col.left .c-point { color: rgba(255,255,255,0.75); }
+  .compare-col.right .c-point { color: #444; }
+  .compare-col .c-point::before { content: '·'; position: absolute; left: 0; }
+
+  .step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .step .step-num {
+    flex-shrink: 0; width: 26px; height: 26px; background: #1A1A1A; color: #FFF;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; font-family: 'Noto Serif SC', serif;
+  }
+  .step .step-content { flex: 1; padding-top: 3px; }
+  .step .step-title { font-size: 13px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+  .step .step-desc { font-size: 11px; color: #666; line-height: 1.5; }
+
+  .mini-card { flex: 1; background: #FFFFFF; border-radius: 8px; padding: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); text-align: center; }
+  .mini-card .m-icon { font-size: 24px; margin-bottom: 6px; line-height: 1; }
+  .mini-card .m-title { font-size: 11px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+  .mini-card .m-desc { font-size: 10px; color: #888; line-height: 1.4; }
+
+  .grid-3 { display: flex; gap: 8px; margin-bottom: 10px; }
+
+  /* 封面 */
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content { display: flex; flex-direction: column; justify-content: center; min-height: 720px; padding: 40px 36px 32px; }
+  .cover-slide .grid-texture { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; }
+  .cover-slide .geo-ring { position: absolute; border-radius: 50%; border: 1.5px solid; z-index: 0; }
+  .cover-slide .geo-ring.r1 { top: -80px; right: -80px; width: 260px; height: 260px; border-color: rgba(199,154,94,0.06); }
+  .cover-slide .geo-ring.r2 { top: -40px; right: -40px; width: 180px; height: 180px; border-color: rgba(199,154,94,0.04); }
+  .cover-slide .geo-ring.r3 { bottom: -60px; left: -60px; width: 200px; height: 200px; border-color: rgba(255,255,255,0.03); }
+  .cover-slide .geo-ring.r4 { bottom: -20px; left: -20px; width: 120px; height: 120px; border-color: rgba(255,255,255,0.02); }
+  .cover-slide .gold-corner { position: absolute; top: 32px; right: 32px; width: 24px; height: 24px; border-top: 2px solid rgba(199,154,94,0.3); border-right: 2px solid rgba(199,154,94,0.3); z-index: 1; }
+  .cover-slide .gold-ambient { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(0deg, rgba(199,154,94,0.04) 0%, transparent 100%); z-index: 1; }
+  .cover-slide .cover-title { font-size: 42px; font-weight: 900; color: #FFF; line-height: 1.15; margin-bottom: 14px; position: relative; z-index: 1; }
+  .cover-slide .cover-sub { font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.5; margin-bottom: 16px; position: relative; z-index: 1; }
+  .cover-slide .cover-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; position: relative; z-index: 1; }
+  .cover-slide .tag { font-size: 10px; font-weight: 600; color: #C79A5E; background: rgba(199,154,94,0.08); border: 1px solid rgba(199,154,94,0.15); padding: 4px 12px; border-radius: 20px; letter-spacing: 0.5px; }
+  .cover-slide .cover-quote { background: rgba(255,255,255,0.03); border-left: 2px solid #C79A5E; border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 4px; position: relative; z-index: 1; }
+  .cover-slide .cover-quote p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.55; font-style: italic; }
+
+  /* CTA 页 */
+  .cta-slide { background: #1A1A1A; }
+  .cta-slide .content { justify-content: center; align-items: center; text-align: center; }
+  .cta-slide .cta-icon { font-size: 40px; margin-bottom: 16px; }
+  .cta-slide .cta-main { font-size: 26px; font-weight: 900; color: #C79A5E; margin-bottom: 10px; letter-spacing: 1px; font-family: 'Noto Serif SC', serif; }
+  .cta-slide .cta-desc { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-bottom: 24px; }
+  .cta-slide .cta-highlight { background: rgba(199,154,94,0.1); border: 1px solid rgba(199,154,94,0.2); border-radius: 8px; padding: 14px 24px; margin-bottom: 16px; }
+  .cta-slide .cta-highlight .ch-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 2px; margin-bottom: 4px; }
+  .cta-slide .cta-highlight .ch-value { font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 900; color: #C79A5E; }
+  .cta-slide .cta-note { color: rgba(255,255,255,0.2); font-size: 11px; margin-top: 8px; }
+
+  /* 深色页 */
+  .dark-slide { background: #1A1A1A; }
+  .dark-slide .section-tag { color: rgba(255,255,255,0.3); }
+  .dark-slide .section-tag::before { background: #C79A5E; }
+  .dark-slide .serif-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.4); }
+  .dark-slide .body-text { color: rgba(255,255,255,0.65); }
+  .dark-slide .info-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .grid-item { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); box-shadow: none; }
+  .dark-slide .grid-item .gi-label { color: rgba(255,255,255,0.5); }
+  .dark-slide .grid-item .gi-desc { color: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">⬇ 全部下载</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- ==================== 第 1 张 · 封面 ==================== -->
+<div class="slide cover-slide">
+  <div class="grid-texture"></div>
+  <div class="geo-ring r1"></div>
+  <div class="geo-ring r2"></div>
+  <div class="geo-ring r3"></div>
+  <div class="geo-ring r4"></div>
+  <div class="gold-corner"></div>
+  <div class="gold-ambient"></div>
+  <div class="content">
+    <div class="cover-title">高考题<br>戳中了我</div>
+    <div class="cover-sub">@保险其实不难</div>
+    <div class="cover-tags">
+      <span class="tag">保险代理人</span>
+      <span class="tag">AI + 保险</span>
+      <span class="tag">认知升级</span>
+    </div>
+    <div class="cover-quote">
+      <p>"科技改造世界时，也改造着我们的想象"<br>—— 2026 上海高考作文题</p>
+    </div>
+    <div class="page-num dark">1/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 2 张 · 结果页 ==================== -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">CORE INSIGHT</div>
+    <div class="serif-title">一个人，能做到<br>一整个团队的事</div>
+    <div class="divider"></div>
+    <div class="grid-2">
+      <div class="grid-item">
+        <div class="gi-num">2h</div>
+        <div class="gi-label">过去手动梳理</div>
+        <div class="gi-desc">理赔法律逻辑靠自己翻资料、查案例</div>
+      </div>
+      <div class="grid-item">
+        <div class="gi-num">1min</div>
+        <div class="gi-label">AI 一键输出</div>
+        <div class="gi-desc">结构清晰：依据·争议·切入点</div>
+      </div>
+    </div>
+    <div class="info-card" style="margin-top:6px;">
+      <div class="card-title">关键转变</div>
+      <div class="card-body">不是因为更勤奋了，是因为边界变了。<small>一个人能做以前一个团队才能做的事。</small></div>
+    </div>
+    <div class="page-num">2/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 3 张 · 触发 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">TRIGGER</div>
+    <div class="serif-title">一道高考题</div>
+    <div class="sub-title">"科技改造世界时，也改造着我们的想象"</div>
+    <div class="divider"></div>
+    <div class="body-text">
+      刷到这道题的时候，我盯着看了很久。
+    </div>
+    <div class="body-text">
+      因为我亲身经历过——那些曾经以为 "本来就是这样" 的行业规则，被一个工具彻底打碎了。
+    </div>
+    <div class="highlight-box" style="margin-top:8px;">
+      <div class="hb-label">我的体会</div>
+      <div class="hb-body">科技改造的不只是效率——它改造的是你 <strong>"以为自己做不到"</strong> 的那条线。</div>
+    </div>
+    <div class="page-num">3/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 4 张 · 旧认知 ==================== -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">BEFORE</div>
+    <div class="serif-title">2024 年之前，<br>我以为保险是</div>
+    <div class="divider"></div>
+    <div class="info-card">
+      <div class="card-title">刻板印象</div>
+      <div class="card-body">拜访客户 → 讲需求 → 做方案 → 签单 → 转介绍。每一环都靠人、靠时间、靠经验。</div>
+    </div>
+    <div class="info-card">
+      <div class="card-title">默认规则</div>
+      <div class="card-body">你能服务多少客户 = 你能出多少力气。做得好叫"勤奋"，做不好叫"不努力"。</div>
+    </div>
+    <div class="highlight-box">
+      <div class="hb-label">困局</div>
+      <div class="hb-body">靠体力换时间，靠时间换收入。<br><strong>停下来，收入就停了。</strong></div>
+    </div>
+    <div class="page-num">4/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 5 张 · 转折点 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">TURNING POINT</div>
+    <div class="serif-title">第一次用 AI 的那一分钟</div>
+    <div class="divider"></div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">输入诉求</div>
+        <div class="step-desc">把拒赔案例的关键信息告诉 AI</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">1 分多钟后</div>
+        <div class="step-desc">理赔依据、争议焦点、可切入点——三个层次清清楚楚列出来了</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">第一反应</div>
+        <div class="step-desc">不是"这工具真厉害"——是"我以前在干什么？"</div>
+      </div>
+    </div>
+    <div style="flex:1;"></div>
+    <div class="quote-box" style="margin-top:0;">
+      <p>原来一件事不需要花两个小时。是你不知道可以不用花两个小时。</p>
+    </div>
+    <div class="page-num">5/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 6 张 · 边界扩展 ==================== -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag" style="color:rgba(255,255,255,0.3);">EXPANSION</div>
+    <div class="serif-title" style="margin-bottom:4px;">每做一个工具<br>想象就扩大一圈</div>
+    <div class="sub-title">从一个人到一整个团队的能力</div>
+    <div class="divider" style="border-color:rgba(199,154,94,0.3);"></div>
+    <div class="grid-3" style="margin-top:10px;">
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-icon">💰</div>
+        <div class="m-title" style="color:#CCC;">家庭财务分析</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.4);">一键生成客户财务画像</div>
+      </div>
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-icon">🦴</div>
+        <div class="m-title" style="color:#CCC;">伤残鉴定分析</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.4);">交通事故理赔辅助</div>
+      </div>
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+        <div class="m-icon">📊</div>
+        <div class="m-title" style="color:#CCC;">自动报告生成</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.4);">从数据到方案一步到位</div>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top:8px;">
+      <div class="hb-label">我的新认知</div>
+      <div class="hb-body"><strong>一个人 = 一个团队。</strong>不是因为更勤快了，是因为"上限"被直接往上推了一截。</div>
+    </div>
+    <div class="page-num dark">6/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 7 张 · 对比 ==================== -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">COMPARISON</div>
+    <div class="serif-title">边界，到底被什么改写了？</div>
+    <div class="divider" style="margin-bottom:14px;"></div>
+    <div class="compare-box">
+      <div class="compare-col left">
+        <div class="c-label">我过去的想象</div>
+        <div class="c-point">靠体力换时间，靠时间换收入</div>
+        <div class="c-point">服务上限 = 自己出多少力</div>
+        <div class="c-point">做不好就是"不努力"</div>
+        <div class="c-point">停下来，收入就停了</div>
+      </div>
+      <div class="compare-col right">
+        <div class="c-label">AI 之后的现实</div>
+        <div class="c-point">能力边界被技术撑开了</div>
+        <div class="c-point">一个人覆盖全流程</div>
+        <div class="c-point">不是更努力，是方法变了</div>
+        <div class="c-point">工具在，能力就在</div>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <div class="hb-label">核心区别</div>
+      <div class="hb-body">过去问"你够不够努力" → 现在问 <strong>"你会不会用工具"</strong></div>
+    </div>
+    <div class="page-num">7/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 8 张 · 亮点洞察 ==================== -->
+<div class="slide bg-warm">
+  <div class="content">
+    <div class="section-tag">INSIGHT</div>
+    <div class="serif-title">AI 改造的不是效率</div>
+    <div class="sub-title">是你"以为自己做不到"的那条线</div>
+    <div class="divider"></div>
+    <div class="body-text">
+      很多保险代理人现在对 AI 的态度，就像我以前对保险这个行业的认知——觉得那是别人的事。
+    </div>
+    <div class="body-text">
+      但当时我也没想到，AI 会把我以为的"上限"直接往上推了一截。
+    </div>
+    <div class="info-card">
+      <div class="card-title">一个值得想的问题</div>
+      <div class="card-body">如果你对保险行业的想象还停留在"靠人靠力气靠时间"——<small>是行业本来就这样？还是你还不知道，它已经变了？</small></div>
+    </div>
+    <div class="page-num">8/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 9 张 · 金句追问 ==================== -->
+<div class="slide dark-slide">
+  <div class="content" style="justify-content:center;">
+    <div class="section-tag" style="color:rgba(255,255,255,0.3);">QUESTION</div>
+    <div class="quote-box" style="margin-top:0;">
+      <p>AI 改造的不只是效率<br>是你服务谁、服务多少人、以什么方式服务</p>
+    </div>
+    <div style="margin-top:24px;text-align:center;">
+      <div style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;font-family:'Noto Serif SC',serif;font-weight:600;">
+        你的想象<br>变了，还是没变？
+      </div>
+    </div>
+    <div class="page-num dark">9/10</div>
+  </div>
+</div>
+
+<!-- ==================== 第 10 张 · CTA ==================== -->
+<div class="slide cta-slide">
+  <div class="content">
+    <div class="cta-icon">🤖</div>
+    <div class="cta-main">AI + 保险</div>
+    <div class="cta-desc">
+      评论区聊聊<br>你用 AI 做过什么保险相关的事？
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;width:100%;max-width:320px;">
+      <div style="flex:1;background:rgba(199,154,94,0.12);border:1px solid rgba(199,154,94,0.2);border-radius:8px;padding:14px 10px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:4px;">📌</div>
+        <div style="font-size:12px;color:#C79A5E;font-weight:700;">收藏</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:14px 10px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:4px;">💬</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);font-weight:600;">评论</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:14px 10px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:4px;">👉</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);font-weight:600;">关注</div>
+      </div>
+    </div>
+    <div class="cta-note" style="margin-top:20px;">保险其实不难，从了解开始</div>
+    <div class="page-num dark">10/10</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2; const SLIDE_W = 540, SLIDE_H = 720;
+async function renderSlide(s) { s.style.animation = 'none'; return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: SLIDE_W, height: SLIDE_H, logging: false }); }
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide'); const progress = document.getElementById('progress'); const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) { progress.textContent = `渲染 ${i+1}/${slides.length}...`; const canvas = await renderSlide(slides[i]); zip.file(`保险其实不难-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas)); }
+  progress.textContent = '打包中...'; saveAs(await zip.generateAsync({type:'blob'}), '保险其实不难-全部.zip'); progress.textContent = `${slides.length} 张已完成`;
+}
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide'); const vc = window.innerHeight / 2; let idx = 0, min = Infinity;
+  slides.forEach((s,i) => { const d = Math.abs(s.getBoundingClientRect().top + 360 - vc); if (d < min) { min = d; idx = i; } });
+  const canvas = await renderSlide(slides[idx]); saveAs(await canvasToBlob(canvas), `保险其实不难-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>

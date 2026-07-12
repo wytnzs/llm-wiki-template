@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>小红书 - 45岁退休规划</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #FAFAFA;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 70px 20px 80px;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: #2C2C2C; color: #FFF; border: none;
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer;
+  }
+  .toolbar .btn.accent { background: #555; }
+  .toolbar .progress { color: rgba(0,0,0,0.3); font-size: 13px; }
+
+  .slide {
+    width: 540px; min-height: 720px;
+    position: relative; overflow: hidden;
+    border-radius: 6px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bg-light { background: #FAFAFA; }
+  .bg-white { background: #FFFFFF; }
+
+  .content {
+    position: relative;
+    padding: 28px 26px 26px;
+    z-index: 2;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 12px; right: 20px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    z-index: 3;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2C2C2C;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .intro {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .info-card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .info-card .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2C2C2C;
+    margin-bottom: 3px;
+  }
+  .info-card .card-body {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.55;
+  }
+  .info-card .card-body small {
+    font-size: 10px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .card-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 14px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .mini-card .m-icon { font-size: 22px; margin-bottom: 5px; }
+  .mini-card .m-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 2px;
+  }
+  .mini-card .m-desc {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.35;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .data-table th {
+    background: #2C2C2C;
+    color: #FFFFFF;
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .data-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: #333;
+    font-size: 11px;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #FAFAFA; }
+
+  .quote-box {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 10px;
+  }
+  .quote-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .divider {
+    width: 36px; height: 2px;
+    background: #2C2C2C; border-radius: 1px;
+    margin: 10px 0;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .cta-chip {
+    flex: 1;
+    background: #2C2C2C;
+    color: #FFF;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .dark-card {
+    background: #2C2C2C;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 7px;
+  }
+  .dark-card .dc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #CCC;
+    margin-bottom: 3px;
+  }
+  .dark-card .dc-body {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+
+  .cover-slide { background: #1A1A1A; }
+  .cover-slide .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 720px;
+    padding: 36px 36px 28px;
+  }
+  .cover-slide .cover-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .cover-slide .cover-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .cover-slide .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFF;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .cover-slide .cover-quote {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.25);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+  .cover-slide .cover-quote p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .dark-slide { background: #1A1A1A; }
+  .dark-slide .section-tag { color: #CCC; }
+  .dark-slide .main-title { color: #FFF; }
+  .dark-slide .sub-title { color: rgba(255,255,255,0.35); }
+  .dark-slide .intro { color: rgba(255,255,255,0.45); }
+  .dark-slide .info-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dark-slide .info-card .card-title { color: #CCC; }
+  .dark-slide .info-card .card-body { color: rgba(255,255,255,0.7); }
+  .dark-slide .info-card .card-body small { color: rgba(255,255,255,0.3); }
+  .dark-slide .page-num { color: rgba(255,255,255,0.12); }
+
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #1A1A1A;
+    color: #FFF;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  .step-content {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .big-number {
+    font-size: 36px;
+    font-weight: 900;
+    color: #1A1A1A;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .big-number-label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 6px;
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, #FFF8F0, #FFF);
+    border: 1px solid rgba(224,123,83,0.15);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .highlight-box .h-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #C85A35;
+    margin-bottom: 4px;
+  }
+  .highlight-box .h-body {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.55;
+  }
+
+  .promise-card {
+    background: #FFF8F0;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid rgba(224,123,83,0.15);
+    margin-bottom: 10px;
+  }
+  .promise-card .p-icon { font-size: 28px; margin-bottom: 6px; }
+  .promise-card .p-main {
+    font-size: 14px;
+    font-weight: 700;
+    color: #C85A35;
+    line-height: 1.4;
+  }
+  .promise-card .p-sub {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  .dark-slide .highlight-box { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); }
+  .dark-slide .highlight-box .h-title { color: #CCC; }
+  .dark-slide .highlight-box .h-body { color: rgba(255,255,255,0.6); }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadAll()">全部下载 (ZIP)</button>
+  <button class="btn" onclick="downloadOne()">下载当前</button>
+  <span class="progress" id="progress"></span>
+</div>
+
+<!-- 第 1 张 · 封面 -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">45岁退休<br>和女儿各赚够<br>20年生活费</div>
+    <div class="cover-sub">不想熬到65岁，普通人的「黄金退休线」</div>
+    <div class="cover-tags">
+      <span class="tag">提前退休</span>
+      <span class="tag">养老规划</span>
+      <span class="tag">建议收藏</span>
+    </div>
+    <div class="cover-quote">
+      <p>工作20年，养老40年——不是做梦，是算得清的账</p>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">1/8</div>
+  </div>
+</div>
+
+<!-- 第 2 张 · 核心观点 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">why 45</div>
+    <div class="main-title">为什么是45岁？</div>
+    <div class="sub-title">不想熬到65岁，算完这笔账我悟了</div>
+
+    <div class="card-row">
+      <div class="mini-card" style="background:#FFF8F0;border-color:rgba(224,123,83,0.15);text-align:left;">
+        <div style="font-size:14px;font-weight:700;color:#C85A35;margin-bottom:4px;">假设</div>
+        <div class="m-desc">25岁毕业工作<br>→ 45岁刚好20年</div>
+      </div>
+      <div class="mini-card" style="background:#FFF8F0;border-color:rgba(224,123,83,0.15);text-align:left;">
+        <div style="font-size:14px;font-weight:700;color:#C85A35;margin-bottom:4px;">目标</div>
+        <div class="m-desc">工作20年<br>→ 养老40年</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="h-title">核心思路</div>
+      <div class="h-body">不是不工作，而是把最赚钱的20年用来积累，之后的人生可以选——<strong>做喜欢的事，而不是为了钱被迫工作</strong>。</div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="intro" style="margin-bottom:0;">
+      只要提前做好3件事，45岁退休不是梦👇
+    </div>
+    <div class="page-num">2/8</div>
+  </div>
+</div>
+
+<!-- 第 3 张 · 三件事总览 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">3 things</div>
+    <div class="main-title">提前做好这3件事</div>
+    <div class="sub-title">普通人也能实现的退休计划</div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px;">
+      <div style="display:flex;gap:10px;background:#FAFAFA;border-radius:6px;padding:12px 14px;border:1px solid rgba(0,0,0,0.04);">
+        <div style="font-size:18px;font-weight:900;color:#C85A35;flex-shrink:0;width:28px;">01</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">社保交满15年</div>
+          <div style="font-size:11px;color:#666;line-height:1.5;">兜底的基础，像冬天的棉服——不一定时髦，但绝对保暖</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;background:#FAFAFA;border-radius:6px;padding:12px 14px;border:1px solid rgba(0,0,0,0.04);">
+        <div style="font-size:18px;font-weight:900;color:#C85A35;flex-shrink:0;width:28px;">02</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">存够3倍年支出的应急金</div>
+          <div style="font-size:11px;color:#666;line-height:1.5;">突发疾病或临时开销，不用为了钱再被迫工作</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;background:#FAFAFA;border-radius:6px;padding:12px 14px;border:1px solid rgba(0,0,0,0.04);">
+        <div style="font-size:18px;font-weight:900;color:#C85A35;flex-shrink:0;width:28px;">03</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:2px;">配置一份年金险</div>
+          <div style="font-size:11px;color:#666;line-height:1.5;">像雇了个专属发薪员，每月固定打钱，活多久领多久</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-num">3/8</div>
+  </div>
+</div>
+
+<!-- 第 4 张 · 社保打底 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">thing 1</div>
+    <div class="main-title">社保交满15年</div>
+    <div class="sub-title">兜底的基础，人人都能有的底气</div>
+
+    <div class="info-card" style="background:#FFF8F0;border-color:rgba(224,123,83,0.15);">
+      <div class="card-title" style="color:#C85A35;">🎯 目标：45岁前交满15年</div>
+      <div class="card-body">
+        社保就像冬天的棉服——不一定时髦，但绝对保暖。<br><br>
+        交满15年，退休后至少能拿到基础养老金。<br>
+        饿不着，冻不着。
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">怎么做</div>
+      <div class="card-body">
+        <span class="tag-highlight" style="background:#F0F0F0;padding:2px 6px;border-radius:3px;font-size:10px;">有工作</span> 职工社保，公司交大头，个人交小头<br>
+        <span class="tag-highlight" style="background:#F0F0F0;padding:2px 6px;border-radius:3px;font-size:10px;">没工作</span> 灵活就业交居民社保，一样算年限<br>
+        <span class="tag-highlight" style="background:#F0F0F0;padding:2px 6px;border-radius:3px;font-size:10px;">断过</span> 可以补缴，赶紧去问当地政策
+      </div>
+    </div>
+
+    <div class="intro" style="margin-top:4px;">
+      <strong>关键：</strong>45岁前交满，之后就不用操心了。这是退休计划的第一块砖。
+    </div>
+    <div class="page-num">4/8</div>
+  </div>
+</div>
+
+<!-- 第 5 张 · 应急金 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">thing 2</div>
+    <div class="main-title">存够3倍年支出的应急金</div>
+    <div class="sub-title">这笔钱是你的"说不"底气</div>
+
+    <div class="card-row">
+      <div class="mini-card" style="background:#FAFAFA;border-color:transparent;text-align:left;">
+        <div class="big-number" style="color:#C85A35;">3×</div>
+        <div class="big-number-label">年支出</div>
+        <div class="m-desc">按每年花10万算<br>存够30万就行</div>
+      </div>
+      <div class="mini-card" style="background:#FAFAFA;border-color:transparent;text-align:left;">
+        <div class="m-title" style="font-size:13px;">放在哪</div>
+        <div class="m-desc">
+          定期存款 · 货币基金<br>
+          分开存放 · 随用随取
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="card-title">为什么是3倍</div>
+      <div class="card-body">
+        突发疾病、家里急事、临时大额开销——<br>
+        这笔钱能让你不用为了钱<strong>再被迫回去工作</strong>。<br><br>
+        30万，买的是选择权。
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="intro" style="margin-bottom:0;">
+      社保保底 + 应急金托底 = 心里不慌
+    </div>
+    <div class="page-num">5/8</div>
+  </div>
+</div>
+
+<!-- 第 6 张 · 年金险 -->
+<div class="slide dark-slide">
+  <div class="content">
+    <div class="section-tag">thing 3</div>
+    <div class="main-title">配置一份年金险</div>
+    <div class="sub-title">给自己雇个"专属发薪员"</div>
+
+    <div class="promise-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
+      <div class="p-icon">💰</div>
+      <div class="p-main" style="color:#FFF;">从45岁开始，每月固定打钱</div>
+      <div class="p-sub" style="color:rgba(255,255,255,0.4);">活多久，领多久</div>
+    </div>
+
+    <div class="card-row">
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);text-align:left;">
+        <div class="m-title" style="color:#CCC;">比存银行强在哪</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.6);">
+          银行：越取越少，怕人活着钱没了<br>
+          年金：每月到账，活多久领多久
+        </div>
+      </div>
+      <div class="mini-card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);text-align:left;">
+        <div class="m-title" style="color:#CCC;">什么时候开始</div>
+        <div class="m-desc" style="color:rgba(255,255,255,0.6);">
+          越早越好，年轻人买<br>
+          同样的钱领得更多
+        </div>
+      </div>
+    </div>
+
+    <div class="dark-card">
+      <div class="dc-title">组合起来就是</div>
+      <div class="dc-body">社保兜底 → 应急金托底 → 年金按月发薪 → 45岁说退就退</div>
+    </div>
+
+    <div class="page-num" style="color:rgba(255,255,255,0.12);">6/8</div>
+  </div>
+</div>
+
+<!-- 第 7 张 · 和女儿的约定 -->
+<div class="slide bg-white">
+  <div class="content">
+    <div class="section-tag">our plan</div>
+    <div class="main-title">和女儿的约定</div>
+    <div class="sub-title">她也只工作20年，然后去做喜欢的事</div>
+
+    <div class="highlight-box" style="background:#FFF8F0;border-color:rgba(224,123,83,0.2);">
+      <div class="h-title">👩‍👧 母女约定</div>
+      <div class="h-body" style="font-size:13px;line-height:1.6;">
+        <strong>25岁到45岁</strong> → 拼事业，赚钱积累<br>
+        <strong>45岁以后</strong> → 去做自己喜欢的事
+      </div>
+    </div>
+
+    <div class="info-card" style="background:#FAFAFA;">
+      <div class="card-title">人生不是只有工作</div>
+      <div class="card-body" style="font-size:13px;line-height:1.7;">
+        能早点卸下担子，<br>
+        去看山看海，陪家人，<br><br>
+        <strong style="color:#C85A35;">这才是普通人最实在的幸福啊。</strong>
+      </div>
+    </div>
+
+    <div class="quote-box" style="margin-bottom:0;">
+      <p>不是不工作，是不用为了钱被迫工作——这是45岁退休真正的底气</p>
+    </div>
+    <div class="page-num">7/8</div>
+  </div>
+</div>
+
+<!-- 第 8 张 · CTA -->
+<div class="slide cover-slide">
+  <div class="content">
+    <div class="cover-title">工作20年<br>养老40年</div>
+    <div class="cover-sub">45岁退休，从今天开始规划</div>
+    <div style="margin-top:16px;margin-bottom:16px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:8px;">
+        ✅ 社保交满15年打底<br>
+        ✅ 存够3倍年支出应急金<br>
+        ✅ 配置年金险每月领钱
+      </div>
+    </div>
+    <div class="cover-quote">
+      <p>你愿意为了45岁退休，做哪一步？评论区聊聊👇</p>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="cta-row">
+        <div class="cta-chip" style="background:#555;">收藏 ⭐ 照着规划</div>
+        <div class="cta-chip" style="background:#555;">转发 ↗️ 和闺蜜一起</div>
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.2);">8/8</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<script>
+const SCALE = 2;
+async function renderSlide(s) {
+  return html2canvas(s, { scale: SCALE, useCORS: true, backgroundColor: null, width: 540, height: 720, logging: false });
+}
+function canvasToBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function downloadAll() {
+  const slides = document.querySelectorAll('.slide');
+  const progress = document.getElementById('progress');
+  const zip = new JSZip();
+  for (let i = 0; i < slides.length; i++) {
+    progress.textContent = `渲染第 ${i+1}/${slides.length} 张...`;
+    const canvas = await renderSlide(slides[i]);
+    zip.file(`小红书-${String(i+1).padStart(2,'0')}.png`, await canvasToBlob(canvas));
+  }
+  progress.textContent = '打包中...';
+  saveAs(await zip.generateAsync({type:'blob'}), '45岁退休规划-全部.zip');
+  progress.textContent = `${slides.length} 张已下载`;
+}
+
+async function downloadOne() {
+  const slides = document.querySelectorAll('.slide');
+  const vc = window.innerHeight / 2;
+  let idx = 0, min = Infinity;
+  slides.forEach((s,i) => {
+    const d = Math.abs(s.getBoundingClientRect().top + 360 - vc);
+    if (d < min) { min = d; idx = i; }
+  });
+  const canvas = await renderSlide(slides[idx]);
+  saveAs(await canvasToBlob(canvas), `小红书-${String(idx+1).padStart(2,'0')}.png`);
+}
+</script>
+</body>
+</html>
