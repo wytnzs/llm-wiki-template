@@ -6,93 +6,67 @@
 <title>配图下载 - 别再用表格管客户了</title>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #e5ebef; font-family: 'Noto Sans SC',-apple-system,'PingFang SC',sans-serif; padding: 32px 16px 60px; }
-  .header { max-width: 677px; margin: 0 auto 28px; text-align: center; }
-  .header h1 { font-size: 20px; font-weight: 500; color: #0a1f3d; margin-bottom: 6px; }
-  .header p { font-size: 14px; color: #5f6d78; }
-  .illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
-  .illu-download-btn { position: absolute; top: 10px; right: 10px; z-index: 10; background: rgba(255,255,255,0.9); border: 1px solid #CBD5E0; border-radius: 6px; padding: 5px 14px; font-size: 13px; cursor: pointer; color: #4A5568; line-height: 1.4; font-weight: 600; }
-  .illu-download-btn:hover { background: #FFFFFF; border-color: #F77F00; color: #F77F00; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#E5E7EB;font-family:'Noto Sans SC','PingFang SC',sans-serif;padding:32px 16px 60px}
+.header{max-width:677px;margin:0 auto 28px;text-align:center}
+.header h1{font-size:18px;font-weight:500;color:#1A1A2E;margin-bottom:4px;font-family:'Noto Serif SC',serif}
+.header p{font-size:13px;color:#6B5A5A}
+.illu-card{position:relative;width:100%;max-width:677px;margin:24px auto;border-radius:8px;overflow:hidden;box-sizing:border-box}
+.illu-download-btn{position:absolute;top:10px;right:10px;z-index:10;background:rgba(255,255,255,0.9);border:1px solid #E5E7EB;border-radius:4px;padding:4px 12px;font-size:12px;cursor:pointer;color:#666;font-family:inherit}
+.illu-download-btn:hover{border-color:#C53030;color:#C53030}
 </style>
 </head>
 <body>
-<div class="header"><h1>配图下载</h1><p>别再用表格管客户了 · 共3张 · 点击下载PNG</p></div>
+<div class="header"><h1>配图下载</h1><p>别再用表格管客户了 · 3张 · 点击下载PNG</p></div>
 
-<!-- 卡片1：四步流程 -->
-<div class="illu-card" id="illu-1" style="padding:32px 28px;background:#f2f4f5;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif;">
+<div class="illu-card" id="illu-1" style="padding:28px 24px;background:#F9F9F9;">
   <button class="illu-download-btn" onclick="downloadCard('illu-1','客户经营链路')">⬇</button>
-  <h2 style="font-size:20px;font-weight:500;font-family:'Noto Serif SC','Songti SC',serif;color:#0a1f3d;margin:0 0 8px;border:none;padding:0;">客户经营链路</h2>
-  <p style="font-size:13px;color:#5f6d78;margin:0 0 24px;font-family:'IBM Plex Mono',monospace;letter-spacing:.10em;">FROM DATA TO ACTION</p>
-  <div style="display:flex;align-items:flex-start;gap:0;">
-    <div style="text-align:center;flex:1;"><div style="width:48px;height:48px;background:#315d93;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-family:'IBM Plex Mono',monospace;">01</div><div style="font-size:14px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">信息</div><div style="font-size:11px;color:#5f6d78;">判断价值</div></div>
-    <div style="display:flex;align-items:center;flex-shrink:0;width:36px;padding-top:20px;"><div style="flex:1;height:1.5px;background:#e5ebef;position:relative;"><div style="position:absolute;right:-2px;top:-4px;border:5px solid transparent;border-left:8px solid #315d93;"></div></div></div>
-    <div style="text-align:center;flex:1;"><div style="width:48px;height:48px;background:#F77F00;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-family:'IBM Plex Mono',monospace;">02</div><div style="font-size:14px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">事件</div><div style="font-size:11px;color:#5f6d78;">记录变化</div></div>
-    <div style="display:flex;align-items:center;flex-shrink:0;width:36px;padding-top:20px;"><div style="flex:1;height:1.5px;background:#e5ebef;position:relative;"><div style="position:absolute;right:-2px;top:-4px;border:5px solid transparent;border-left:8px solid #315d93;"></div></div></div>
-    <div style="text-align:center;flex:1;"><div style="width:48px;height:48px;background:#315d93;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-family:'IBM Plex Mono',monospace;">03</div><div style="font-size:14px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">缺口</div><div style="font-size:11px;color:#5f6d78;">识别信息</div></div>
-    <div style="display:flex;align-items:center;flex-shrink:0;width:36px;padding-top:20px;"><div style="flex:1;height:1.5px;background:#e5ebef;position:relative;"><div style="position:absolute;right:-2px;top:-4px;border:5px solid transparent;border-left:8px solid #315d93;"></div></div></div>
-    <div style="text-align:center;flex:1;"><div style="width:48px;height:48px;background:#F77F00;border-radius:50%;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-family:'IBM Plex Mono',monospace;">04</div><div style="font-size:14px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">动作</div><div style="font-size:11px;color:#5f6d78;">安排跟进</div></div>
+  <p style="font-size:12px;color:#9CA3AF;letter-spacing:2px;margin:0 0 16px;font-family:'Noto Sans SC',sans-serif;">客户经营链路</p>
+  <div style="display:flex;align-items:center;gap:0;text-align:center;">
+    <div style="flex:1;"><div style="width:36px;height:36px;background:#C53030;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-family:'Noto Sans SC',sans-serif;">1</div><div style="font-size:12px;color:#1A1A2E;font-weight:600;">信息</div><div style="font-size:10px;color:#9CA3AF;">判断价值</div></div>
+    <div style="color:#ddd;font-size:16px;">→</div>
+    <div style="flex:1;"><div style="width:36px;height:36px;background:#C53030;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;">2</div><div style="font-size:12px;color:#1A1A2E;font-weight:600;">事件</div><div style="font-size:10px;color:#9CA3AF;">记录变化</div></div>
+    <div style="color:#ddd;font-size:16px;">→</div>
+    <div style="flex:1;"><div style="width:36px;height:36px;background:#C53030;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;">3</div><div style="font-size:12px;color:#1A1A2E;font-weight:600;">缺口</div><div style="font-size:10px;color:#9CA3AF;">识别信息</div></div>
+    <div style="color:#ddd;font-size:16px;">→</div>
+    <div style="flex:1;"><div style="width:36px;height:36px;background:#C53030;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;">4</div><div style="font-size:12px;color:#1A1A2E;font-weight:600;">动作</div><div style="font-size:10px;color:#9CA3AF;">安排跟进</div></div>
   </div>
-  <p style="text-align:center;margin:16px 0 0;font-size:13px;color:#0a1f3d;font-weight:500;">先接住信息 → 先匹配身份 → 先识别缺口 → 先人工复核</p>
 </div>
 
-<!-- 卡片2：信息缺口对比 -->
-<div class="illu-card" id="illu-2" style="padding:32px 28px;background:#0a1f3d;color:#FFFFFF;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif;">
-  <button class="illu-download-btn" onclick="downloadCard('illu-2','信息缺口对比')" style="border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);">⬇</button>
-  <h2 style="font-size:20px;font-weight:500;font-family:'Noto Serif SC','Songti SC',serif;color:#FFFFFF;margin:0 0 8px;border:none;padding:0;">常见信息缺口</h2>
-  <p style="font-size:13px;color:rgba(255,255,255,0.5);margin:0 0 20px;font-family:'IBM Plex Mono',monospace;letter-spacing:.10em;">WHAT YOU DON'T KNOW MATTERS</p>
-  <div style="display:flex;gap:16px;">
-    <div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:20px 16px;">
-      <div style="font-size:16px;font-weight:500;color:#5f6d78;margin-bottom:14px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;">你能看到的</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:10px;">客户姓名电话</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:10px;">产品意向</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:10px;">家庭状况</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.65);">备注记录</div>
+<div class="illu-card" id="illu-2" style="padding:28px 24px;background:#1A1A2E;">
+  <button class="illu-download-btn" onclick="downloadCard('illu-2','信息缺口对比')" style="border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);">⬇</button>
+  <p style="font-size:12px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin:0 0 16px;font-family:'Noto Sans SC',sans-serif;">信息缺口</p>
+  <div style="display:flex;gap:12px;">
+    <div style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:14px;">
+      <p style="font-size:11px;color:rgba(255,255,255,0.30);margin:0 0 10px;">你能看到的</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.50);margin:0 0 4px;">客户姓名电话</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.50);margin:0 0 4px;">产品意向</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.50);margin:0 0 4px;">家庭状况</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.50);margin:0;">备注记录</p>
     </div>
-    <div style="flex:1;background:rgba(247,127,0,0.12);border:1px solid rgba(247,127,0,0.25);border-radius:8px;padding:20px 16px;">
-      <div style="font-size:16px;font-weight:500;color:#F77F00;margin-bottom:14px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;">真正缺的</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.9);margin-bottom:10px;"><strong style="color:#F77F00;">已有保单</strong></div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.9);margin-bottom:10px;"><strong style="color:#F77F00;">预算边界</strong></div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.9);margin-bottom:10px;"><strong style="color:#F77F00;">真实顾虑</strong></div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.9);"><strong style="color:#F77F00;">下一步动作</strong></div>
+    <div style="flex:1;background:rgba(197,48,48,0.08);border:1px solid rgba(197,48,48,0.12);border-radius:6px;padding:14px;">
+      <p style="font-size:11px;color:#C53030;margin:0 0 10px;">真正缺的</p>
+      <p style="font-size:12px;color:#FFFFFF;margin:0 0 4px;font-weight:600;">已有保单</p>
+      <p style="font-size:12px;color:#FFFFFF;margin:0 0 4px;font-weight:600;">预算边界</p>
+      <p style="font-size:12px;color:#FFFFFF;margin:0 0 4px;font-weight:600;">真实顾虑</p>
+      <p style="font-size:12px;color:#FFFFFF;margin:0;font-weight:600;">下一步动作</p>
     </div>
   </div>
-  <p style="text-align:center;margin:16px 0 0;font-size:13px;color:#d7e1ec;font-weight:500;font-family:'Noto Serif SC',serif;">专业不是马上给答案，是知道什么时候不能急着给答案</p>
 </div>
 
-<!-- 卡片3：四句话金句卡 -->
-<div class="illu-card" id="illu-3" style="padding:32px 28px;background:#FFFFFF;border:1px solid #e5ebef;font-family:'Noto Sans SC',-apple-system,'PingFang SC',sans-serif;">
+<div class="illu-card" id="illu-3" style="padding:28px 24px;background:#F9F9F9;">
   <button class="illu-download-btn" onclick="downloadCard('illu-3','客户经营底线')">⬇</button>
-  <h2 style="font-size:20px;font-weight:500;font-family:'Noto Serif SC','Songti SC',serif;color:#0a1f3d;margin:0 0 8px;border:none;padding:0;">客户经营底线</h2>
-  <p style="font-size:13px;color:#5f6d78;margin:0 0 20px;font-family:'IBM Plex Mono',monospace;letter-spacing:.10em;">FOUR PRINCIPLES</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-    <div style="background:#f2f4f5;border-radius:8px;padding:18px 16px;border-left:4px solid #315d93;">
-      <div style="font-size:24px;font-weight:500;color:#315d93;margin-bottom:2px;font-family:'Noto Serif SC',serif;">01</div>
-      <div style="font-size:15px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">先接住信息</div>
-      <div style="font-size:12px;color:#5f6d78;">再判断价值</div>
-    </div>
-    <div style="background:#f2f4f5;border-radius:8px;padding:18px 16px;border-left:4px solid #F77F00;">
-      <div style="font-size:24px;font-weight:500;color:#F77F00;margin-bottom:2px;font-family:'Noto Serif SC',serif;">02</div>
-      <div style="font-size:15px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">先匹配身份</div>
-      <div style="font-size:12px;color:#5f6d78;">再沉淀档案</div>
-    </div>
-    <div style="background:#f2f4f5;border-radius:8px;padding:18px 16px;border-left:4px solid #315d93;">
-      <div style="font-size:24px;font-weight:500;color:#315d93;margin-bottom:2px;font-family:'Noto Serif SC',serif;">03</div>
-      <div style="font-size:15px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">先识别缺口</div>
-      <div style="font-size:12px;color:#5f6d78;">再生成方案</div>
-    </div>
-    <div style="background:#f2f4f5;border-radius:8px;padding:18px 16px;border-left:4px solid #F77F00;">
-      <div style="font-size:24px;font-weight:500;color:#F77F00;margin-bottom:2px;font-family:'Noto Serif SC',serif;">04</div>
-      <div style="font-size:15px;font-weight:500;color:#0a1f3d;margin-bottom:4px;font-family:'Noto Serif SC',serif;">先人工复核</div>
-      <div style="font-size:12px;color:#5f6d78;">再对外沟通</div>
-    </div>
-  </div>
-  <p style="text-align:center;margin:16px 0 0;font-size:14px;color:#0a1f3d;font-weight:600;font-family:'Noto Serif SC',serif;">不是记不记的问题。是记了以后下一步做什么的问题。</p>
+  <section style="width:32px;height:3px;background:#C53030;margin-bottom:14px;"><span leaf=""><br></span></section>
+  <p style="font-size:14px;margin:0 0 8px;color:#1A1A2E;"><strong style="color:#C53030;">先接住信息</strong>，再判断价值</p>
+  <p style="font-size:14px;margin:0 0 8px;color:#1A1A2E;"><strong style="color:#C53030;">先匹配身份</strong>，再沉淀档案</p>
+  <p style="font-size:14px;margin:0 0 8px;color:#1A1A2E;"><strong style="color:#C53030;">先识别缺口</strong>，再生成方案</p>
+  <p style="font-size:14px;margin:0 0 14px;color:#1A1A2E;"><strong style="color:#C53030;">先人工复核</strong>，再对外沟通</p>
+  <p style="font-size:14px;color:#1A1A2E;font-weight:600;padding-top:12px;border-top:1px solid #E5E7EB;">不是记不记的问题。是记了以后下一步做什么的问题。</p>
 </div>
 
 <script>
 function downloadCard(id,fn){var el=document.getElementById(id);if(!el)return;var btn=el.querySelector('.illu-download-btn');if(btn)btn.style.display='none';html2canvas(el,{scale:2,backgroundColor:null,useCORS:true,logging:false}).then(function(c){var a=document.createElement('a');a.download=(fn||'配图')+'.png';a.href=c.toDataURL('image/png');a.click();if(btn)btn.style.display='';}).catch(function(e){console.error(e);if(btn)btn.style.display='';});}
 </script>
-<p style="text-align:center;max-width:677px;margin:32px auto 0;font-size:13px;color:#5f6d78;">打开正文HTML确认位置 → 本页下载PNG → 上传公众号</p>
+<p style="text-align:center;max-width:677px;margin:32px auto 0;font-size:12px;color:#9CA3AF;">打开正文HTML确认位置 → 本页下载PNG → 上传公众号</p>
 </body>
 </html>
