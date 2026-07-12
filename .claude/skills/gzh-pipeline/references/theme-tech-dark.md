@@ -7,124 +7,135 @@ created: 2026-07-12
 updated: 2026-07-12
 ---
 
-# 科技暗色
+# 公众号排版组件库 —— 科技暗色
 
-> 现代、冲击、利落。适用于观点文、工具文、评测、方法论、认知输出类内容。
-> 暗色背景 + 亮色强调，营造科技感和冲击力。默认配 Cyan 青，可选紫/橙变体。
+> 现代、冲击、利落。适用于观点文、工具文、方法论、评测。
+> 暗色背景 + 亮色强调，默认青色，可选紫/橙变体。
 
 ---
 
 ## 一、设计变量速查
 
-| 用途 | 色值 | CSS 变量名 |
-|------|------|-----------|
-| 正文背景 | `#0D0D0D` (极黑) | `--bg` |
-| 正文颜色 | `#E0E0E0` (浅灰) | `--text` |
-| 标题主色（h1/h2） | `#FFFFFF` | `--heading` |
-| 标题深色（h3/strong） | `#E0E0E0` | `--heading-dark` |
-| 强调色（装饰/标签/下划线） | `#00D4FF` (青) | `--accent` |
-| 引用背景 | `#1A1A2E` | `--quote-bg` |
-| 引用左边框 | `#00D4FF` | `--quote-border` |
-| 引用文字 | `#A0B0C0` | `--quote-text` |
-| 表格表头背景 | `#00D4FF` | `--th-bg` |
-| 表格表头文字 | `#0D0D0D` | `--th-text` |
-| 表格行间隔色 | `#1A1A2E` | `--tr-alt` |
-| 表格边框 | `#2A2A3E` | `--table-border` |
-| 分割线 | `#2A2A3E` | `--hr` |
-| 脚注文字 | `#6A7A8A` | `--muted` |
-| 正文下划线 | `#00D4FF` (底部 2px) | `--underline` |
-| 浅强调色 | `rgba(0,212,255,0.12)` | `--accent-soft` |
+| 用途 | 青色（默认） | 紫色变体 | 橙色变体 |
+|------|------------|---------|---------|
+| 背景色 | `#0D0D0D` | 同左 | 同左 |
+| 正文色 | `#E0E0E0` | 同左 | 同左 |
+| 标题色 | `#FFFFFF` | 同左 | 同左 |
+| 强调色 | `#00D4FF` | `#C442F5` | `#FF6B35` |
+| 引用背景 | `#1A1A2E` | 同左 | 同左 |
+| 边框 | `#2A2A3E` | 同左 | 同左 |
+| 次要文字 | `#6A7A8A` | 同左 | 同左 |
 
-### 强调色变体
+字体：`"Noto Sans SC", -apple-system, sans-serif` / 数字/标签 `"Space Mono", monospace`
 
-用户可选以下变体替代默认青色：
+---
 
-| 变体 | 强调色 | 适用场景 |
-|------|-------|---------|
-| 青色（默认） | `#00D4FF` | 科技/AI/方法论 |
-| 紫色 | `#C442F5` | 认知输出/深度观点 |
-| 橙色 | `#FF6B35` | 反常识/批判性观点 |
+## 二、组件库
 
-## 二、字体
+### 组件 1：全局容器
 
-- **正文/标题**：`"Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif` — 无衬线更现代
-- **数据/序号/标签**：`"Space Mono", "IBM Plex Mono", ui-monospace, monospace`
-- **金句/强调**：`"Noto Sans SC", sans-serif`（加粗 900 字重）
-
-## 三、封面颜色方案
-
-| 元素 | 色值（青色变体） | 紫色变体 | 橙色变体 |
-|------|----------------|---------|---------|
-| 基底渐变 | `#0D0D0D → #1A1A2E → #16213E` | `#0D0D0D → #1A0A2E → #2A0A3E` | `#0D0D0D → #2E1A0A → #3E200A` |
-| 柔光色 | `rgba(0,212,255,0.10)` | `rgba(196,66,245,0.10)` | `rgba(255,107,53,0.10)` |
-| 柔光色（辅） | `rgba(22,33,62,0.12)` | `rgba(42,10,62,0.12)` | `rgba(62,32,10,0.12)` |
-| 环/点强调色 | `#00D4FF` | `#C442F5` | `#FF6B35` |
-| 标题文字 | `#FFFFFF` | `#FFFFFF` | `#FFFFFF` |
-| 副标题文字 | `rgba(255,255,255,0.55)` | `rgba(255,255,255,0.55)` | `rgba(255,255,255,0.55)` |
-
-## 四、正文排版 CSS（内联样式）
-
-### 基础容器
-
-```css
-body { background: #0D0D0D; font-family: "Noto Sans SC", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; max-width: 677px; margin: 0 auto; padding: 20px 16px; font-size: 16px; line-height: 1.8; color: #E0E0E0; }
+```html
+<section style="max-width:677px;margin:0 auto;background:#0D0D0D;font-family:'Noto Sans SC','PingFang SC',sans-serif;color:#E0E0E0;line-height:1.8;font-size:16px;">
+  <!-- 所有组件 -->
+</section>
 ```
 
-### 标题
+### 组件 2：封面
 
-```css
-h1 { font-size: 24px; font-weight: 800; color: #FFFFFF; margin: 24px 0 12px; letter-spacing: -0.02em; }
-h2 { font-size: 19px; font-weight: 700; color: #FFFFFF; border-left: 4px solid #00D4FF; padding-left: 12px; margin: 20px 0 10px; }
-h3 { font-size: 17px; font-weight: 700; color: #FFFFFF; margin: 16px 0 8px; }
+```html
+<section style="margin:0 0 28px;background:linear-gradient(155deg,#0D0D0D,#1A1A2E,#16213E);border-radius:16px;overflow:hidden;border:1px solid #2A2A3E;">
+  <section style="padding:36px 28px;">
+    <p style="font-size:12px;color:rgba(0,212,255,0.6);letter-spacing:2px;margin:0 0 12px;"><span leaf="">{{顶部标签}}</span></p>
+    <p style="font-size:24px;font-weight:800;color:#FFFFFF;margin:0 0 10px;line-height:1.15;letter-spacing:-0.02em;">
+      <span leaf="">{{主标题}}</span>
+      <span style="color:#00D4FF;"><span leaf="">{{强调词}}</span></span>
+    </p>
+    <section style="width:40px;height:2px;background:#00D4FF;margin-bottom:10px;"><span leaf=""><br></span></section>
+    <p style="font-size:14px;color:rgba(255,255,255,0.5);margin:0;"><span leaf="">{{副标题}}</span></p>
+  </section>
+</section>
 ```
 
-### 正文
+### 组件 3：章节标题
 
-```css
-p { margin: 0 0 12px; color: #E0E0E0; }
-strong { color: #FFFFFF; }
+```html
+<section style="margin:32px 0 20px;">
+  <section style="display:flex;align-items:center;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#00D4FF;line-height:1;flex-shrink:0;font-family:'Space Mono',monospace;"><span leaf="">{{01}}</span></span>
+    <p style="font-size:17px;font-weight:700;color:#FFFFFF;margin:0;"><span leaf="">{{标题}}</span></p>
+  </section>
+</section>
 ```
 
-### 引用
+### 组件 4：正文 + 行内样式
 
-```css
-blockquote { border-left: 3px solid #00D4FF; background: #1A1A2E; padding: 12px 16px; margin: 16px 0; color: #A0B0C0; border-radius: 0 4px 4px 0; font-size: 15px; }
+```html
+<p style="margin-bottom:14px;font-size:15px;line-height:1.9;"><span leaf="">{{正文}}</span></p>
 ```
 
-### 表格
-
-```css
-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
-th { background: #00D4FF; color: #0D0D0D; padding: 10px 12px; text-align: left; font-weight: 600; }
-td { padding: 10px 12px; border-bottom: 1px solid #2A2A3E; color: #E0E0E0; }
-tr:nth-child(even) td { background: #1A1A2E; }
+**强调色加粗**：
+```html
+<strong style="color:#0D0D0D;background:#00D4FF;padding:0 4px;"><span leaf="">文字</span></strong>
 ```
 
-### 强调与分割
-
-```css
-.em-accent { color: #00D4FF; font-weight: 700; }
-hr { border: none; border-top: 1px solid #2A2A3E; margin: 24px 0; }
-.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #2A2A3E; font-size: 14px; color: #6A7A8A; }
+**强调色下划线**：
+```html
+<span style="border-bottom:2px solid #00D4FF;font-weight:600;"><span leaf="">文字</span></span>
 ```
 
-### 配图卡片
-
-```css
-.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+**引用块**：
+```html
+<blockquote style="border-left:3px solid #00D4FF;background:#1A1A2E;padding:12px 16px;margin:16px 0;border-radius:0 4px 4px 0;"><p style="font-size:14px;color:#A0B0C0;margin:0;"><span leaf="">{{引用}}</span></p></blockquote>
 ```
 
-## 五、下划线/标记风格
+**金句段**：
+```html
+<p style="font-size:17px;font-weight:700;color:#FFFFFF;margin:16px 0;line-height:1.6;"><span leaf="">{{金句}}</span></p>
+```
 
-正文关键词下划线：`border-bottom: 2px solid #00D4FF; font-weight: 600;`
+### 组件 5：金句卡
 
-若使用强调色变体，下划线色值同步替换为对应变体的强调色。
+```html
+<section style="background:#1A1A2E;border:1px solid #2A2A3E;border-radius:12px;padding:20px 24px;margin-bottom:24px;">
+  <section style="width:32px;height:2px;background:#00D4FF;margin-bottom:12px;"><span leaf=""><br></span></section>
+  <p style="font-size:16px;font-weight:600;color:#FFFFFF;margin:0;line-height:1.6;"><span leaf="">{{金句}}</span></p>
+</section>
+```
 
-## 六、配图卡片强调色
+### 组件 6：提示框
 
-| 卡片元素 | 色值（青色变体） |
-|---------|----------------|
-| 强调左边框 | `#00D4FF` 或 `rgba(0,212,255,0.6)` |
-| 序号文字 | `#00D4FF` |
-| 暗底卡片背景 | `#1A1A2E` |
-| 下载按钮悬浮色 | `#00D4FF` |
+```html
+<section style="background:rgba(0,212,255,0.06);border:1px solid #2A2A3E;border-radius:8px;padding:12px 16px;margin-bottom:20px;">
+  <p style="font-size:13px;color:#A0B0C0;margin:0;"><span leaf="">{{提示}}</span></p>
+</section>
+```
+
+### 组件 7：作者签名区
+
+```html
+<section style="margin-top:32px;padding-top:16px;border-top:1px solid #2A2A3E;">
+  <p style="font-size:13px;color:#6A7A8A;margin:0;"><span leaf="">{{作者名}} · {{简介}}</span></p>
+</section>
+```
+
+---
+
+## 三、配方 + 骨架
+
+科技暗色适合观点文/工具文，推荐配方：
+
+```
+[封面] → [章节标题01+正文+金句卡] → [章节标题02+正文+提示框] → [金句卡] → [作者签名区]
+```
+
+完整骨架：
+
+```
+[全局容器]
+  [封面]
+  [章节标题 01] [正文×3] [金句卡]
+  [章节标题 02] [正文×2] [提示框] [正文]
+  [章节标题 03] [正文×2] [金句强调段]
+  [作者签名区]
+[/全局容器]
+```

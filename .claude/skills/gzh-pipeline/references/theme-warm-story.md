@@ -7,112 +7,174 @@ created: 2026-07-12
 updated: 2026-07-12
 ---
 
-# 暖橙故事
+# 公众号排版组件库 —— 暖橙故事
 
 > 温暖、亲和、耐读。适用于个人经历、客户故事、成长感悟、复盘类内容。
-> 以米白底色 + 茶色/琥珀色系营造阅读感，衬线字体增加人文气息。
+> 米白底色 + 茶色/琥珀色系 + 衬线字体，营造人文阅读感。
 
 ---
 
 ## 一、设计变量速查
 
-| 用途 | 色值 | CSS 变量名 |
-|------|------|-----------|
-| 正文背景 | `#FAFAF7` (米白) | `--bg` |
-| 正文颜色 | `#3D2E1E` (深茶) | `--text` |
-| 标题主色（h1/h2） | `#5C3D2E` (栗棕) | `--heading` |
-| 标题深色（h3/strong） | `#3D2E1E` | `--heading-dark` |
-| 强调色（装饰/标签/下划线） | `#C4814A` (琥珀) | `--accent` |
-| 引用背景 | `#F5F0EB` | `--quote-bg` |
-| 引用左边框 | `#C4814A` | `--quote-border` |
-| 引用文字 | `#6B5A4A` | `--quote-text` |
-| 表格表头背景 | `#5C3D2E` | `--th-bg` |
-| 表格表头文字 | `#FFFFFF` | `--th-text` |
-| 表格行间隔色 | `#F5F0EB` | `--tr-alt` |
-| 表格边框 | `#E5D8CC` | `--table-border` |
-| 分割线 | `#E5D8CC` | `--hr` |
-| 脚注文字 | `#9B8B7A` | `--muted` |
-| 正文下划线 | `#C4814A` (底部 2px) | `--underline` |
-| 浅强调色 | `rgba(196,129,74,0.10)` | `--accent-soft` |
-
-## 二、字体
-
-- **正文/标题**：`"Noto Serif SC", "Songti SC", serif` — 衬线体读感更温暖
-- **说明文字/标签**：`"Noto Sans SC", -apple-system, "PingFang SC", sans-serif`
-- **序号/元数据**：`"IBM Plex Mono", ui-monospace, monospace`
-
-## 三、封面颜色方案
-
-| 元素 | 色值 |
+| 用途 | 色值 |
 |------|------|
-| 基底渐变 | `#3D1F12 → #522E1A → #6B3A20` (奶油橙) |
-| 柔光色（暖橙） | `rgba(196,129,74,0.10)` |
-| 柔光色（浅茶） | `rgba(139,122,106,0.08)` |
-| 环/点强调色 | `#C4814A` |
-| 标题文字 | `#FFFFFF` |
-| 副标题文字 | `rgba(255,255,255,0.62)` |
+| 背景色 | `#FAFAF7`（米白） |
+| 主色/标题 | `#5C3D2E`（栗棕） |
+| 正文色 | `#3D2E1E`（深茶） |
+| 强调色 | `#C4814A`（琥珀） |
+| 引用背景 | `#F5F0EB` |
+| 分割线/边框 | `#E5D8CC` |
+| 次要文字 | `#9B8B7A` |
+| 浅强调色 | `rgba(196,129,74,0.08)` |
 
-## 四、正文排版 CSS（内联样式）
+字体：正文 `"Noto Serif SC", "Songti SC", serif`（衬线） / 说明 `"Noto Sans SC", sans-serif`
 
-### 基础容器
+---
 
-```css
-body { background: #FAFAF7; font-family: "Noto Serif SC", "Songti SC", serif; max-width: 677px; margin: 0 auto; padding: 20px 16px; font-size: 16px; line-height: 1.9; color: #3D2E1E; }
+## 二、组件库
+
+### 组件 1：全局容器
+
+```html
+<section style="max-width:677px;margin:0 auto;background:#FAFAF7;font-family:'Noto Serif SC','Songti SC',serif;color:#3D2E1E;line-height:1.9;font-size:16px;">
+  <!-- 所有组件放在这里 -->
+</section>
 ```
 
-### 标题
+---
 
-```css
-h1 { font-size: 24px; font-weight: 700; color: #5C3D2E; margin: 24px 0 12px; }
-h2 { font-size: 19px; font-weight: 600; color: #5C3D2E; border-left: 4px solid #C4814A; padding-left: 12px; margin: 20px 0 10px; }
-h3 { font-size: 17px; font-weight: 600; color: #3D2E1E; margin: 16px 0 8px; }
+### 组件 2：封面卡
+
+```html
+<section style="margin:0 0 28px;background:linear-gradient(155deg,#3D1F12,#522E1A,#6B3A20);border-radius:16px;overflow:hidden;">
+  <section style="padding:36px 28px;">
+    <p style="font-size:12px;color:rgba(196,129,74,0.7);letter-spacing:2px;margin:0 0 12px;"><span leaf="">{{顶部标签}}</span></p>
+    <p style="font-size:24px;font-weight:700;color:#FFFFFF;margin:0 0 10px;line-height:1.2;">
+      <span leaf="">{{主标题行1}}</span>
+      <span style="color:#C4814A;"><span leaf="">{{强调词}}</span></span>
+    </p>
+    <p style="font-size:16px;color:rgba(255,255,255,0.6);margin:0;"><span leaf="">{{副标题}}</span></p>
+  </section>
+  <section style="height:3px;background:linear-gradient(90deg,#C4814A,transparent);"><span leaf=""><br></span></section>
+</section>
 ```
 
-### 正文
+---
 
-```css
-p { margin: 0 0 14px; color: #3D2E1E; line-height: 1.9; }
-strong { color: #5C3D2E; font-weight: 700; }
+### 组件 3：TOC 目录
+
+```html
+<section style="margin:0 0 28px;background:#F5F0EB;border-radius:12px;padding:20px 24px;">
+  <p style="font-size:13px;color:#9B8B7A;letter-spacing:2px;margin:0 0 14px;"><span leaf="">📖 本篇文章看点</span></p>
+  <p style="font-size:15px;color:#5C3D2E;margin:0 0 10px;font-weight:600;"><span leaf="">01 {{章节1}}</span></p>
+  <p style="font-size:15px;color:#5C3D2E;margin:0 0 10px;font-weight:600;"><span leaf="">02 {{章节2}}</span></p>
+  <p style="font-size:15px;color:#5C3D2E;margin:0;font-weight:600;"><span leaf="">03 {{章节3}}</span></p>
+</section>
 ```
 
-### 引用
+---
 
-```css
-blockquote { border-left: 3px solid #C4814A; background: #F5F0EB; padding: 12px 16px; margin: 16px 0; color: #6B5A4A; border-radius: 0 4px 4px 0; font-size: 15px; line-height: 1.8; }
+### 组件 4：章节标题
+
+```html
+<section style="margin:32px 0 20px;">
+  <section style="display:flex;align-items:center;gap:14px;">
+    <span style="font-size:26px;font-weight:700;color:#C4814A;line-height:1;flex-shrink:0;"><span leaf="">{{01}}</span></span>
+    <span style="width:1px;height:28px;background:#E5D8CC;flex-shrink:0;"><span leaf=""><br></span></span>
+    <p style="font-size:18px;font-weight:600;color:#5C3D2E;margin:0;"><span leaf="">{{标题}}</span></p>
+  </section>
+</section>
 ```
 
-### 表格
+---
 
-```css
-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; font-family: "Noto Sans SC", -apple-system, "PingFang SC", sans-serif; }
-th { background: #5C3D2E; color: #FFFFFF; padding: 10px 12px; text-align: left; font-weight: 600; }
-td { padding: 10px 12px; border-bottom: 1px solid #E5D8CC; color: #3D2E1E; }
-tr:nth-child(even) td { background: #F5F0EB; }
+### 组件 5：正文段落
+
+```html
+<p style="margin-bottom:16px;font-size:16px;line-height:1.9;text-align:justify;"><span leaf="">{{正文}}</span></p>
 ```
 
-### 强调与分割
+---
 
-```css
-.em-accent { color: #C4814A; font-weight: 700; font-family: "Noto Sans SC", -apple-system, "PingFang SC", sans-serif; }
-hr { border: none; border-top: 1px solid #E5D8CC; margin: 28px 0; }
-.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #E5D8CC; font-size: 14px; color: #9B8B7A; font-family: "Noto Sans SC", -apple-system, "PingFang SC", sans-serif; }
+### 组件 6：行内样式
+
+**6a. 琥珀加粗**（核心概念）：
+```html
+<strong style="color:#C4814A;"><span leaf="">文字</span></strong>
 ```
 
-### 配图卡片
-
-```css
-.illu-card { position: relative; width: 100%; max-width: 677px; margin: 24px auto; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
+**6b. 琥珀下划线**（关键词标记）：
+```html
+<span style="border-bottom:2px solid #C4814A;font-weight:600;"><span leaf="">文字</span></span>
 ```
 
-## 五、下划线/标记风格
+**6c. 引用块**：
+```html
+<blockquote style="border-left:3px solid #C4814A;background:#F5F0EB;padding:12px 16px;margin:16px 0;border-radius:0 4px 4px 0;"><p style="font-size:15px;color:#6B5A4A;margin:0;line-height:1.8;"><span leaf="">{{引用}}</span></p></blockquote>
+```
 
-正文关键词下划线：`border-bottom: 2px solid #C4814A; font-weight: 600;`
+**6d. 金句段**（大号衬线）：
+```html
+<p style="font-size:18px;font-weight:600;color:#5C3D2E;margin:16px 0;line-height:1.7;font-family:'Noto Serif SC','Songti SC',serif;"><span leaf="">{{金句}}</span></p>
+```
 
-## 六、配图卡片强调色
+---
 
-| 卡片元素 | 色值 |
-|---------|------|
-| 强调左边框 | `#C4814A` 或 `rgba(196,129,74,0.6)` |
-| 序号文字 | `#C4814A` |
-| 暗底卡片背景 | `#3D2E1E` |
-| 下载按钮悬浮色 | `#C4814A` |
+### 组件 7：标签
+
+```html
+<section style="margin-bottom:20px;">
+  <section style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+    <span style="display:inline-block;background:#5C3D2E;color:#FAFAF7;font-size:10px;font-weight:700;padding:2px 10px;border-radius:12px;"><span leaf="">STEP 01</span></span>
+    <p style="font-size:16px;font-weight:600;color:#5C3D2E;margin:0;"><span leaf="">{{标题}}</span></p>
+  </section>
+  <p style="font-size:15px;color:#3D2E1E;margin:0;line-height:1.9;"><span leaf="">{{内容}}</span></p>
+</section>
+```
+
+---
+
+### 组件 8：金句卡
+
+```html
+<section style="background:#FFFFFF;border:1px solid #E5D8CC;border-radius:12px;padding:20px 24px;margin-bottom:24px;">
+  <section style="width:32px;height:3px;background:#C4814A;border-radius:2px;margin-bottom:12px;"><span leaf=""><br></span></section>
+  <p style="font-size:17px;font-weight:600;color:#3D2E1E;margin:0;line-height:1.6;font-family:'Noto Serif SC','Songti SC',serif;"><span leaf="">{{金句}}</span></p>
+  <p style="font-size:13px;color:#9B8B7A;margin:8px 0 0;"><span leaf="">{{出处}}</span></p>
+</section>
+```
+
+---
+
+### 组件 9：作者签名区
+
+```html
+<section style="margin-top:32px;padding-top:16px;border-top:1px solid #E5D8CC;">
+  <p style="font-size:14px;color:#9B8B7A;margin:0;"><span leaf="">{{作者名}} · {{简介}}</span></p>
+</section>
+```
+
+---
+
+## 三、文章类型配方
+
+暖橙故事主要适用于故事文/个人经历，推荐配方：
+
+```
+[封面] → [TOC] → [章节标题+正文×4] → [金句卡] → [作者签名]
+```
+
+全文用琥珀下划线标记关键词，金句段收束每节。
+
+## 四、完整骨架
+
+```
+[全局容器]
+  [封面]
+  [章节标题 01] [正文] [金句卡]
+  [章节标题 02] [正文] [STEP标签+正文]
+  ...
+  [末章标签 ∞] [正文] [金句卡]
+  [作者签名区]
+[/全局容器]
+```
