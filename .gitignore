@@ -1,0 +1,108 @@
+# ===========================
+# 数据层 —— 不上传
+# ===========================
+
+# 原始输入
+00-Inbox/
+
+# 知识卡片内容（保留模板）
+02-Areas/知识卡片/*
+!02-Areas/知识卡片/
+!02-Areas/知识卡片/_template.md
+
+# 判例数据（500+判例全部不上传）
+02-Areas/判例库/
+
+# 主题聚合内容（引用判例和卡片路径，不上传；保留模板）
+02-Areas/主题聚合/*
+!02-Areas/主题聚合/
+!02-Areas/主题聚合/_template.md
+
+# 外部资料
+03-Resources/
+
+# 归档
+04-Archive/
+
+# 选题库内容（选题卡含具体判例引用）
+06-选题库/*
+!06-选题库/
+!06-选题库/README.md
+!06-选题库/_templates/
+!06-选题库/_templates/**
+
+# ===========================
+# 项目内容 —— 不上传
+# ===========================
+
+# 自媒体产出成品
+01-Projects/自媒体运营/
+
+# 产品筹备材料：含直播话术、个人定位、内部进度，不直接上传
+01-Projects/知识库产品化/
+
+# 实战手册（完整书籍内容）
+01-Projects/寿险代理人理赔实战手册/
+
+# 业务系统
+01-Projects/从拒赔到维权成功工作系统/
+01-Projects/理赔工具/
+
+# 知识库项目日志
+01-Projects/知识库项目/
+
+# 当前库运行状态图，不作为公开模板上传
+知识库地图.md
+
+# ===========================
+# 工具脚本 —— 不上传数据文件
+# ===========================
+scripts/keywords_data.csv
+
+# ===========================
+# 本地配置
+# ===========================
+.claude/settings.local.json
+.obsidian/
+.claude/drafts/*
+!.claude/drafts/
+!.claude/drafts/README.md
+!.claude/drafts/content-brief.template.json
+!.claude/drafts/style-brief.template.json
+.codex/
+
+# 本地专用 Claude Code skills：含个人IP、平台生产、保险判例或外部课程引用
+.claude/skills/wangyongtao-ip/
+.claude/skills/gzh-pipeline/
+.claude/skills/xhs-pipeline/
+.claude/skills/short-video-script/
+.claude/skills/case-law-entry/
+.claude/skills/content-signal-pipeline/
+.claude/skills/references/
+.claude/skills/customer-solution-library/
+.claude/skills/customer-solution-library.backup-*/
+
+# 可公开的表达约束模板
+!02-Areas/知识卡片/个人IP/
+02-Areas/知识卡片/个人IP/*
+!02-Areas/知识卡片/个人IP/个人表达DNA模板.md
+
+# 历史设计稿和一次性规划文档
+docs/superpowers/
+
+# 历史迁移脚本：含本地绝对路径或真实判例路径，不直接上传
+scripts/classify*.sh
+scripts/classify_diseases.ps1
+scripts/convert_view.sh
+scripts/create_hardlinks.sh
+scripts/create_symlinks.sh
+scripts/temp_script.md
+
+# ===========================
+# 常规 gitignore
+# ===========================
+.DS_Store
+Thumbs.db
+*.pyc
+node_modules/
+.env

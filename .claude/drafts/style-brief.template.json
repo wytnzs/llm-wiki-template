@@ -1,0 +1,73 @@
+{
+  "mode": "private",
+  "source_content_brief": ".claude/drafts/content-brief.json",
+  "topic": "",
+  "platforms": [],
+  "mother_style": "克制知识编辑风 + 材质化解释图",
+  "route": {
+    "selected": "",
+    "reason": "",
+    "rejected": []
+  },
+  "voice_profile": {
+    "speaker_identity": "",
+    "reader_relationship": "",
+    "stance_strength": "",
+    "sentence_rhythm": "",
+    "opening_style": "",
+    "ending_style": "",
+    "preferred_moves": [],
+    "forbidden_moves": []
+  },
+  "visual_profile": {
+    "layout_density": "",
+    "color_system": {
+      "primary": "",
+      "accent": "",
+      "background": "",
+      "text": "",
+      "underline": ""
+    },
+    "typography_mood": "",
+    "component_language": [],
+    "image_language": ""
+  },
+  "image_plan": {
+    "needed": false,
+    "image_role": "",
+    "visual_structure": "",
+    "labels": [],
+    "chart_accuracy": {},
+    "prompt_direction": "",
+    "qa_notes": []
+  },
+  "platform_plan": {
+    "wechat": {
+      "article_theme": "",
+      "structure": [],
+      "layout_notes": []
+    },
+    "xiaohongshu": {
+      "carousel_structure": [],
+      "cover_hook": "",
+      "card_visuals": []
+    },
+    "short_video": {
+      "opening_tension": "",
+      "scene_vocabulary": [],
+      "visual_cues": []
+    }
+  },
+  "shareable_controls": {
+    "expose_as_template": false,
+    "replace_private_voice_with_selectors": true,
+    "blank_fields_for_user": []
+  },
+  "quality_gate": [
+    "风格是否稳定且不乱跳",
+    "是否符合平台阅读/传播场景",
+    "图片是否解释了一个明确关系",
+    "数据和法律边界是否安全",
+    "分享版是否避免复制私人写作人格"
+  ]
+}

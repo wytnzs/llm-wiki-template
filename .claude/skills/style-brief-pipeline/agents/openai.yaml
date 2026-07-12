@@ -1,0 +1,4 @@
+interface:
+  display_name: "Style Brief Pipeline"
+  short_description: "Generate style briefs for WeChat, Xiaohongshu, image strategy, and shareable design specs."
+  default_prompt: "Create a style brief for this topic and route it for WeChat, Xiaohongshu, and supporting images."

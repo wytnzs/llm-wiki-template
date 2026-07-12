@@ -1,0 +1,29 @@
+{
+  "topic": "",
+  "platform": "",
+  "target_person": "",
+  "reader_problem": "",
+  "core_conflict": "",
+  "core_viewpoint": "",
+  "why_i_want_to_say_this": "",
+  "selected_cards": [],
+  "selected_cases": [],
+  "related_theme": [],
+  "case_takeaways": [],
+  "claim_level": "",
+  "content_angle": "",
+  "forbidden": [
+    "不要承诺一定胜诉",
+    "不要把个案结论说成普遍规则",
+    "不要夸大个案适用范围"
+  ],
+  "output_plan": {
+    "公众号": "",
+    "小红书": "",
+    "短视频": ""
+  },
+  "shooting_confidence": 0,
+  "missing_materials": [],
+  "review_standard": [],
+  "feedback_path": ""
+}
