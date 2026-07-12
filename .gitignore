@@ -73,8 +73,10 @@ scripts/keywords_data.csv
 
 # 本地专用 Claude Code skills：含个人IP、平台生产、保险判例或外部课程引用
 .claude/skills/wangyongtao-ip/
-.claude/skills/gzh-pipeline/
-.claude/skills/xhs-pipeline/
+# gzh-pipeline/xhs-pipeline：仅忽略本地草稿和临时文件，结构文件（SKILL.md / references / scripts）可提交
+.claude/skills/gzh-pipeline/drafts/
+.claude/skills/xhs-pipeline/drafts/
+.claude/skills/xhs-pipeline/local/
 .claude/skills/short-video-script/
 .claude/skills/case-law-entry/
 .claude/skills/content-signal-pipeline/
