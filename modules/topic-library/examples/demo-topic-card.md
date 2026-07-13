@@ -1,6 +1,7 @@
 ﻿---
 title: 为什么你收藏越多越不会输出
 type: topic_card
+description: 从知识资产中人工确认并整理成选题卡的示例
 status: draft
 tags: [topic, knowledge_management]
 source_cards:

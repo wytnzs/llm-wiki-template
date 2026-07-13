@@ -1,61 +1,107 @@
-<#
+﻿<#
 .SYNOPSIS
-  初始化 LLM Wiki 知识资产生产系统
-.DESCRIPTION
-  在用户指定目录创建完整知识库结构、复制模板和 skill、生成 CLAUDE.md。
+  初始化最小知识库，并在安装可选模块前征求用户意见。
 #>
 
-param([string]$TargetDir = "")
+param(
+    [string]$TargetDir = "",
+    [ValidateSet("ask", "yes", "no")][string]$KnowledgeMap = "ask",
+    [ValidateSet("ask", "yes", "no")][string]$CaseLibrary = "ask",
+    [ValidateSet("ask", "yes", "no")][string]$TopicLibrary = "ask"
+)
 
-if (-not $TargetDir) { $TargetDir = Join-Path (Get-Location) "my-knowledge-base" }
+$ErrorActionPreference = "Stop"
+$repoRoot = Split-Path (Split-Path $MyInvocation.MyCommand.Path -Parent) -Parent
 
-Write-Host "=== LLM Wiki 知识资产初始化 ===" -ForegroundColor Cyan
+if (-not $TargetDir) {
+    $TargetDir = Join-Path (Get-Location) "my-knowledge-base"
+}
+
+function Resolve-Choice {
+    param([string]$Value, [string]$Prompt)
+    if ($Value -eq "yes") { return $true }
+    if ($Value -eq "no") { return $false }
+    return (Read-Host "$Prompt (y/n)") -eq "y"
+}
+
+Write-Host "=== LLM Wiki 最小知识库初始化 ===" -ForegroundColor Cyan
 Write-Host "目标目录: $TargetDir"
 
 if (Test-Path $TargetDir) {
-    $existing = Get-ChildItem -Path $TargetDir -Directory | Select-Object -First 1
-    if ($existing) {
-        Write-Host "目录已存在且非空" -ForegroundColor Yellow
-        $shouldInit = Read-Host "是否继续？(y/n)"
-        if ($shouldInit -ne "y") { exit 0 }
+    $existing = Get-ChildItem -LiteralPath $TargetDir -Force | Select-Object -First 1
+    if ($existing -and (Read-Host "目录非空。是否在保留现有内容的前提下继续？(y/n)") -ne "y") {
+        exit 0
     }
 } else {
     New-Item -ItemType Directory -Path $TargetDir -Force | Out-Null
 }
 
-$dirs = @("00-Inbox","01-Projects","02-Areas/知识卡片","02-Areas/案例库","02-Areas/主题聚合","03-Resources","04-Archive","05-Skills","06-选题库/cards",".claude/skills",".claude/drafts")
+$enableMap = Resolve-Choice $KnowledgeMap "是否需要知识库地图（统计和健康检查）"
+$enableCases = Resolve-Choice $CaseLibrary "是否需要案例库"
+$enableTopics = Resolve-Choice $TopicLibrary "是否需要选题库和内容选题 Skill"
 
-foreach ($d in $dirs) {
-    $path = Join-Path $TargetDir $d
-    if (-not (Test-Path $path)) {
-        New-Item -ItemType Directory -Path $path -Force | Out-Null
-        Write-Host "  + $d" -ForegroundColor Green
+$dirs = @(
+    "00-Inbox",
+    "01-Projects",
+    "02-Areas/知识卡片",
+    "02-Areas/主题聚合",
+    "03-Resources",
+    "04-Archive",
+    "05-Skills/_templates",
+    ".claude/skills",
+    ".claude/drafts"
+)
+
+if ($enableCases) { $dirs += "02-Areas/案例库" }
+if ($enableTopics) { $dirs += "06-选题库/cards" }
+
+foreach ($dir in $dirs) {
+    New-Item -ItemType Directory -Path (Join-Path $TargetDir $dir) -Force | Out-Null
+}
+
+$copyMap = @{
+    "templates/knowledge-card.template.md" = "02-Areas/知识卡片/_template.md"
+    "templates/theme-map.template.md" = "02-Areas/主题聚合/_template.md"
+    "templates/project-status.template.md" = "05-Skills/_templates/project-status.md"
+    "templates/review.template.md" = "05-Skills/_templates/review.md"
+    "templates/content-brief.template.json" = "05-Skills/_templates/content-brief.json"
+}
+
+foreach ($item in $copyMap.GetEnumerator()) {
+    $destination = Join-Path $TargetDir $item.Value
+    if (-not (Test-Path $destination)) {
+        Copy-Item (Join-Path $repoRoot $item.Key) $destination
     }
 }
 
-# Generate CLAUDE.md
-$claudePath = Join-Path $TargetDir "CLAUDE.md"
-if (-not (Test-Path $claudePath)) {
-    @"
-# 知识库协作规则
-
-本知识库是知识资产生产系统，不是普通资料库。
-
-## 目录职责
-- 00-Inbox：原始输入
-- 01-Projects：当前项目
-- 02-Areas：长期资产
-- 03-Resources：外部资料
-- 04-Archive：归档
-- 06-选题库：选题资产
-- .claude/skills：Claude Code 技能
-
-## 核心原则
-原子化 | 双向链接 | 输出反哺 | YAML 优先
-"@ | Set-Content -Path $claudePath -Encoding utf8
-    Write-Host "  + CLAUDE.md" -ForegroundColor Green
+$readmePath = Join-Path $TargetDir "README.md"
+if (-not (Test-Path $readmePath)) {
+    Copy-Item (Join-Path $repoRoot "templates/README.template.md") $readmePath
 }
 
-Write-Host "`n初始化完成" -ForegroundColor Cyan
-Write-Host "目录: $TargetDir"
-Write-Host "把这个路径发给 Claude Code，说「整理收件箱」开始使用。"
+$claudePath = Join-Path $TargetDir "CLAUDE.md"
+if (-not (Test-Path $claudePath)) {
+    Copy-Item (Join-Path $repoRoot "templates/CLAUDE.template.md") $claudePath
+}
+
+Copy-Item (Join-Path $repoRoot ".claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
+
+if ($enableMap) {
+    Copy-Item (Join-Path $repoRoot "modules/knowledge-map/.claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
+    $mapPath = Join-Path $TargetDir "知识库地图.md"
+    if (-not (Test-Path $mapPath)) {
+        Copy-Item (Join-Path $repoRoot "modules/knowledge-map/templates/knowledge-map.template.md") $mapPath
+    }
+}
+
+if ($enableCases) {
+    Copy-Item (Join-Path $repoRoot "modules/case-library/.claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
+}
+
+if ($enableTopics) {
+    Copy-Item (Join-Path $repoRoot "modules/topic-library/.claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
+    Copy-Item (Join-Path $repoRoot "modules/topic-library/templates/topic-card.template.md") (Join-Path $TargetDir "06-选题库/_template.md")
+}
+
+Write-Host "初始化完成: $TargetDir" -ForegroundColor Green
+Write-Host "请打开 README.md，补充你的目的和目录职责。"

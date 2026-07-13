@@ -1,6 +1,7 @@
 ﻿---
 title: 知识库不是仓库是工厂
 type: knowledge_card
+description: 用生产闭环而不是收藏数量判断知识库是否有效
 asset_type: concept
 status: growing
 source: personal

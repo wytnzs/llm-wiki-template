@@ -1,5 +1,7 @@
 ﻿---
+title: 三次知识库失败的聊天记录
 type: inbox_note
+description: 一条尚未加工的原始聊天灵感示例
 source: spontaneous
 captured: YYYY-MM-DD
 status: unprocessed

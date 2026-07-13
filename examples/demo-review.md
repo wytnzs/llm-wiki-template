@@ -1,5 +1,7 @@
 ﻿---
+title: 为什么你收藏越多越不会输出复盘
 type: review
+description: 一次内容生产完成后的复盘示例
 status: completed
 content_type: article
 topic: 为什么你收藏越多越不会输出

@@ -1,4 +1,14 @@
-﻿# 短视频脚本：为什么你收藏越多越不会输出
+---
+title: 为什么你收藏越多越不会输出
+type: content_piece
+description: 从知识资产生成短视频脚本的结果示例
+status: draft
+tags: [demo, short_video]
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+---
+
+# 短视频脚本：为什么你收藏越多越不会输出
 
 时长：60秒
 

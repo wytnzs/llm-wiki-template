@@ -1,52 +1,86 @@
-# AGENT_SETUP — Claude Code 初始化指南
+# Claude Code 初始化规则
 
-本文档给 Claude Code 在初始化知识库时使用。
+本文档供 Claude Code 执行。目标是建立一套足够简单、能持续使用的知识库，而不是机械复制目录。
 
-## 任务说明
+## 一、先了解用户
 
-为用户创建一套 AI 知识资产生产系统。这不是普通笔记库，而是一条从输入到输出的知识生产线。
+在创建或修改文件前，一次性询问：
 
-## 执行步骤
+1. 新建知识库，还是整理已有知识库；
+2. 主要输入是什么；
+3. 主要用来做什么；
+4. 希望得到什么输出；
+5. 是否采用推荐目录，还是保留现有目录；
+6. 是否需要知识库地图、案例库、选题库。
 
-### 1. 创建目录结构
+未得到明确回答时，不安装可选模块。选题库默认不安装。
 
+## 二、建立最小核心
+
+新建知识库时，可使用以下推荐结构：
+
+```text
+00-Inbox/       输入
+01-Projects/    当前工作
+02-Areas/       长期资产
+03-Resources/   外部资料
+04-Archive/     归档
+.claude/skills/ Claude Code 执行流程
 ```
-00-Inbox/        原始输入
-01-Projects/     当前项目
-02-Areas/        长期资产
-  知识卡片/      原子概念卡片
-  案例库/        专业案例
-  主题聚合/      长期记忆
-03-Resources/    外部资料
-04-Archive/      归档
-05-Skills/       人看的手册
-06-选题库/       选题资产
-.claude/skills/  AI 执行技能
+
+已有知识库不强制改名。应先识别现有目录分别承担什么职责，再把对应关系写入根目录 `README.md`。
+
+## 三、生成两个入口
+
+### README.md
+
+必须生成，内容保持简短：
+
+- 知识库目的；
+- 主要区域及职责；
+- 基本工作流；
+- 常用指令；
+- 已启用的可选模块。
+
+### CLAUDE.md
+
+从 `templates/CLAUDE.template.md` 生成，写入实际目录映射和已启用模块。不要把 Claude Code 改写成 Agent 或 Codex。
+
+## 四、安装 Skill
+
+始终安装：
+
+- `knowledge-base-collab`
+- `feedback-writeback`
+- `theme-map-maintenance`
+
+按需安装：
+
+- 知识库地图：`modules/knowledge-map/`
+- 案例库：`modules/case-library/`
+- 选题库：`modules/topic-library/`
+
+没有安装某模块时，其他 Skill 必须跳过对应路径和检查项，不能报错或擅自创建目录。
+
+## 五、最小文件规范
+
+知识文件至少包含：
+
+```yaml
+---
+title: 文件标题
+type: 文件类型
+---
 ```
 
-### 2. 复制模板
+推荐增加：`description`、`status`、`tags`、`created`、`updated`、`source`。
 
-从 `templates/` 复制到对应目录。
+`SKILL.md` 使用 Claude Code 自身的 `name` 和 `description` 字段，不套用知识文件模板。
 
-### 3. 复制 Skill
+## 六、保护已有数据
 
-从 `.claude/skills/` 复制到目标的 `.claude/skills/`。
-
-### 4. 创建 CLAUDE.md
-
-参考 `templates/CLAUDE.template.md` 生成。
-
-### 5. 选择人群方案
-
-根据用户回答选择方案（见 `docs/03-不同人群知识库方案.md`）。
-
-### 6. 生成使用说明
-
-输出一份给用户的简短使用指南。
-
-## 约束
-
-- 不要读取用户的隐私文件
-- 不要上传内容到网络
-- 不要引入数据库、RAG、MCP
-- 不要把 Claude Code 改写成 Agent 或 Codex
+- 不读取任务无关的私人文件；
+- 不上传用户资料；
+- 不因为不符合推荐目录就批量移动；
+- 删除、覆盖和大规模迁移前先报告影响；
+- 不引入数据库、RAG 或 MCP，除非用户另行要求。
