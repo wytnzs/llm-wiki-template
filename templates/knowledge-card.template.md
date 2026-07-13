@@ -1,6 +1,7 @@
 ---
 title: 
 type: knowledge_card
+description:
 asset_type: concept / principle / method / action / evidence / expression
 status: seed / growing / stable
 source: personal / book / course / case / web

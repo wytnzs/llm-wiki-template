@@ -1,6 +1,7 @@
 ---
 title: 
 type: theme_map
+description:
 status: active / paused / archived
 core_question: 
 tags: [theme_map]
@@ -63,14 +64,6 @@ updated: YYYY-MM-DD
 | 风险 | 说明 | 对应案例 |
 |------|------|---------|
 | 风险描述 | 什么情况下判断不成立 | 案例引用 |
-
----
-
-## 可转化选题
-
-| 选题 | 适合平台 | 优先级 |
-|------|---------|--------|
-| 选题示例 | 公众号/短视频/小红书 | P0/P1/P2 |
 
 ---
 

@@ -1,5 +1,7 @@
 ---
+title:
 type: project_status
+description:
 status: active / paused / completed / archived
 current_goal: 
 next_action: 

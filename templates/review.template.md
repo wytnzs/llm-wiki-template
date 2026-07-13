@@ -1,5 +1,7 @@
 ---
+title:
 type: review
+description:
 status: completed
 content_type: article / video / social
 topic: 
@@ -31,12 +33,12 @@ tags: [review]
 ## 可沉淀的知识
 
 - 是否发现新的可复用判断？
-- 是否发现新的选题方向？
+- 是否发现新的可复用方向？
 - 是否需要更新主题地图？
 
 ## 行动项
 
 - [ ] 更新知识卡片
 - [ ] 更新主题地图
-- [ ] 补充选题
+- [ ] 补充后续行动（如已启用选题库，可写入选题库）
 - [ ] 更新 skill 规则
