@@ -84,13 +84,28 @@ if (-not (Test-Path $claudePath)) {
     Copy-Item (Join-Path $repoRoot "templates/CLAUDE.template.md") $claudePath
 }
 
+$today = Get-Date -Format "yyyy-MM-dd"
+$governanceFiles = @{
+    "templates/ai-review-queue.template.md" = "00-Inbox/AI待确认.md"
+    "templates/knowledge-change-log.template.md" = "知识库变更日志.md"
+}
+
+foreach ($item in $governanceFiles.GetEnumerator()) {
+    $destination = Join-Path $TargetDir $item.Value
+    if (-not (Test-Path $destination)) {
+        $content = Get-Content (Join-Path $repoRoot $item.Key) -Encoding utf8 -Raw
+        $content.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $destination -Encoding utf8
+    }
+}
+
 Copy-Item (Join-Path $repoRoot ".claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
 
 if ($enableMap) {
     Copy-Item (Join-Path $repoRoot "modules/knowledge-map/.claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
     $mapPath = Join-Path $TargetDir "知识库地图.md"
     if (-not (Test-Path $mapPath)) {
-        Copy-Item (Join-Path $repoRoot "modules/knowledge-map/templates/knowledge-map.template.md") $mapPath
+        $mapContent = Get-Content (Join-Path $repoRoot "modules/knowledge-map/templates/knowledge-map.template.md") -Encoding utf8 -Raw
+        $mapContent.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $mapPath -Encoding utf8
     }
 }
 

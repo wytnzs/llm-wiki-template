@@ -1,14 +1,12 @@
 ---
-title: 
+title:
 type: theme_map
-description:
+description: 一句话说明这个主题页回答什么问题
 status: active / paused / archived
-core_question: 
+core_question: 围绕这个主题，需要持续回答的具体问题是什么？
 tags: [theme_map]
-related_cards: 
-  - 
-related_cases: 
-  - 
+related_cards: []
+related_cases: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
@@ -33,11 +31,13 @@ updated: YYYY-MM-DD
 
 ---
 
-## 支撑来源
+## 证据来源
 
-- 知识卡片：02-Areas/知识卡片/相关领域
-- 案例库：相关案例记录
-- 外部资料：书籍/课程/行业报告
+- 知识卡片：具体文件链接
+- 案例：具体案例或视图链接
+- 外部资料：具体文件、网页、页码或章节
+
+（目录级说明只能作为待补线索，不能替代正式证据）
 
 ---
 
