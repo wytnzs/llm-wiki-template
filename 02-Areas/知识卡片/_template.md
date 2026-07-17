@@ -1,19 +1,22 @@
 ---
-title:
+title: "_template"
 type: knowledge_card
+description: 一句话说明这张卡片帮助判断、决策或行动的什么问题
 asset_type: concept / cognition / principle / method / action / evidence / expression
 domain:
 status: seed / growing / stable
+# 指向具体文件、链接、判例、页码/章节、项目记录或注明日期的个人经验；不确定时先进入 AI 待确认
 source:
 tags: [知识卡片, domain_tag]
-related_topics: []
+# 仅在直接回答主题页核心问题时填写
+related_theme_maps: []
+# 仅在项目真实调用后填写
 related_projects: []
+# 以下关系均为可选，不为填满字段制造连接
 links:
   supports: []
   contrasts: []
   examples: []
-  applies_to: []
-  derived_methods: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
@@ -28,7 +31,7 @@ updated: YYYY-MM-DD
 
 ## 关键关系
 
-它和哪些概念互相支撑、冲突、包含或派生？
+只记录能够说清用途、沿过去有用并能回到依据的支持、反例或例子。没有明确关系时允许留空。
 
 ## 价值判断
 
@@ -57,4 +60,4 @@ updated: YYYY-MM-DD
 
 ## 来源
 
-原始材料、判例、书籍、经验或对话来源。
+写明原始材料的最终位置、链接、判例、页码/章节、项目记录，或注明时间和背景的个人经验。不要把 `00-Inbox/` 中尚未归类的临时路径当成长期来源。
