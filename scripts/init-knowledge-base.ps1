@@ -44,7 +44,7 @@ $dirs = @(
     "00-Inbox",
     "01-Projects",
     "02-Areas/知识卡片",
-    "02-Areas/主题聚合",
+    "02-Areas/主题中心/主题页",
     "03-Resources",
     "04-Archive",
     "05-Skills/_templates",
@@ -59,9 +59,11 @@ foreach ($dir in $dirs) {
     New-Item -ItemType Directory -Path (Join-Path $TargetDir $dir) -Force | Out-Null
 }
 
+$today = Get-Date -Format "yyyy-MM-dd"
 $copyMap = @{
     "templates/knowledge-card.template.md" = "02-Areas/知识卡片/_template.md"
-    "templates/theme-map.template.md" = "02-Areas/主题聚合/_template.md"
+    "templates/theme-center.template.md" = "02-Areas/主题中心/README.md"
+    "templates/theme-map.template.md" = "02-Areas/主题中心/主题页/_template.md"
     "templates/project-status.template.md" = "05-Skills/_templates/project-status.md"
     "templates/review.template.md" = "05-Skills/_templates/review.md"
     "templates/content-brief.template.json" = "05-Skills/_templates/content-brief.json"
@@ -70,7 +72,12 @@ $copyMap = @{
 foreach ($item in $copyMap.GetEnumerator()) {
     $destination = Join-Path $TargetDir $item.Value
     if (-not (Test-Path $destination)) {
-        Copy-Item (Join-Path $repoRoot $item.Key) $destination
+        if ($item.Key -eq "templates/theme-center.template.md") {
+            $content = Get-Content (Join-Path $repoRoot $item.Key) -Encoding utf8 -Raw
+            $content.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $destination -Encoding utf8
+        } else {
+            Copy-Item (Join-Path $repoRoot $item.Key) $destination
+        }
     }
 }
 
@@ -84,7 +91,6 @@ if (-not (Test-Path $claudePath)) {
     Copy-Item (Join-Path $repoRoot "templates/CLAUDE.template.md") $claudePath
 }
 
-$today = Get-Date -Format "yyyy-MM-dd"
 $governanceFiles = @{
     "templates/ai-review-queue.template.md" = "00-Inbox/AI待确认.md"
     "templates/knowledge-change-log.template.md" = "知识库变更日志.md"
