@@ -44,7 +44,7 @@ $dirs = @(
     "00-Inbox",
     "01-Projects",
     "02-Areas/知识卡片",
-    "02-Areas/主题聚合",
+    "02-Areas/主题中心/主题页",
     "03-Resources",
     "04-Archive",
     "05-Skills/_templates",
@@ -61,10 +61,14 @@ foreach ($dir in $dirs) {
 
 $copyMap = @{
     "templates/knowledge-card.template.md" = "02-Areas/知识卡片/_template.md"
-    "templates/theme-map.template.md" = "02-Areas/主题聚合/_template.md"
+    "templates/theme-center.README.md" = "02-Areas/主题中心/README.md"
+    "templates/theme-map.template.md" = "02-Areas/主题中心/主题页/_template.md"
     "templates/project-status.template.md" = "05-Skills/_templates/project-status.md"
     "templates/review.template.md" = "05-Skills/_templates/review.md"
     "templates/content-brief.template.json" = "05-Skills/_templates/content-brief.json"
+    "docs/知识库运作系统与协作边界.md" = "05-Skills/知识库运作系统与协作边界.md"
+    "docs/知识关系与索引规则.md" = "05-Skills/知识关系与索引规则.md"
+    "docs/定期维护与审计.md" = "05-Skills/定期维护与审计.md"
 }
 
 foreach ($item in $copyMap.GetEnumerator()) {
@@ -82,6 +86,11 @@ if (-not (Test-Path $readmePath)) {
 $claudePath = Join-Path $TargetDir "CLAUDE.md"
 if (-not (Test-Path $claudePath)) {
     Copy-Item (Join-Path $repoRoot "templates/CLAUDE.template.md") $claudePath
+}
+
+$agentsPath = Join-Path $TargetDir "AGENTS.md"
+if (-not (Test-Path $agentsPath)) {
+    Copy-Item (Join-Path $repoRoot "AGENTS.md") $agentsPath
 }
 
 Copy-Item (Join-Path $repoRoot ".claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
