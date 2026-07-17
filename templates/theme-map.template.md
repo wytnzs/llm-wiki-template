@@ -2,13 +2,11 @@
 title: 
 type: theme_map
 description:
-status: active / paused / archived
+status: active
 core_question: 
-tags: [theme_map]
-related_cards: 
-  - 
-related_cases: 
-  - 
+tags: [主题地图]
+related_cards: []
+related_cases: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
@@ -33,21 +31,21 @@ updated: YYYY-MM-DD
 
 ---
 
-## 支撑来源
+## 证据来源
 
-- 知识卡片：02-Areas/知识卡片/相关领域
-- 案例库：相关案例记录
-- 外部资料：书籍/课程/行业报告
+- 具体知识卡片：
+- 具体案例：
+- 原始资料、章节或项目记录：
 
 ---
 
 ## 已验证的方法
 
-### 方法名
+- 方法名：
 - 适用条件：
 - 操作步骤：
-- 验证案例：
-- 成功率估计：高/中/低
+- 已有验证：
+- 尚未验证：
 
 ---
 

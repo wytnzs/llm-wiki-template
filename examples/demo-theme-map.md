@@ -4,7 +4,9 @@ type: theme_map
 description: 汇总知识库失败原因及当前核心判断的主题地图示例
 status: active
 core_question: 为什么大多数人做知识库会失败
-tags: [theme_map]
+tags: [主题地图]
+related_cards: []
+related_cases: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
@@ -18,6 +20,14 @@ updated: YYYY-MM-DD
 - **仓库 vs 工厂**：仓库只存不加工，工厂持续产出
 - **工具迷恋**：花太多时间研究工具，太少时间产出内容
 - **最小闭环**：从输入到输出的完整链路比完美目录更重要
+
+## 证据来源
+
+- 本示例只演示结构，不提供真实证据；使用时应替换为具体卡片、项目记录或原始资料。
+
+## 适用边界
+
+- 这是通用演示判断，不代表所有用户或所有规模的知识库。
 
 ## 待补问题
 
