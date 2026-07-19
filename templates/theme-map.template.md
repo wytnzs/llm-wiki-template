@@ -2,9 +2,9 @@
 title:
 type: theme_map
 description: 一句话说明这个主题页回答什么问题
-status: active / paused / archived
+status: active
 core_question: 围绕这个主题，需要持续回答的具体问题是什么？
-tags: [theme_map]
+tags: [主题地图]
 related_cards: []
 related_cases: []
 created: YYYY-MM-DD
@@ -36,6 +36,7 @@ updated: YYYY-MM-DD
 - 知识卡片：具体文件链接
 - 案例：具体案例或视图链接
 - 外部资料：具体文件、网页、页码或章节
+- 个人输入或系统历史：具体文件或项目记录
 
 （目录级说明只能作为待补线索，不能替代正式证据）
 
@@ -43,11 +44,11 @@ updated: YYYY-MM-DD
 
 ## 已验证的方法
 
-### 方法名
+- 方法名：
 - 适用条件：
 - 操作步骤：
-- 验证案例：
-- 成功率估计：高/中/低
+- 已有验证：
+- 尚未验证：
 
 ---
 

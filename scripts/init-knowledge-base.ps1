@@ -46,7 +46,8 @@ $dirs = @(
     "02-Areas/知识卡片",
     "02-Areas/主题中心/主题页",
     "03-Resources",
-    "04-Archive",
+    "03-Resources/个人输入",
+    "03-Resources/系统资料",
     "05-Skills/_templates",
     ".claude/skills",
     ".claude/drafts"
@@ -64,15 +65,20 @@ $copyMap = @{
     "templates/knowledge-card.template.md" = "02-Areas/知识卡片/_template.md"
     "templates/theme-center.template.md" = "02-Areas/主题中心/README.md"
     "templates/theme-map.template.md" = "02-Areas/主题中心/主题页/_template.md"
+    "templates/resource-layer.template.md" = "03-Resources/README.md"
+    "templates/resource-workbench.template.md" = "03-Resources/资源工作台.md"
     "templates/project-status.template.md" = "05-Skills/_templates/project-status.md"
     "templates/review.template.md" = "05-Skills/_templates/review.md"
     "templates/content-brief.template.json" = "05-Skills/_templates/content-brief.json"
+    "docs/知识库运作系统与协作边界.md" = "05-Skills/知识库运作系统与协作边界.md"
+    "docs/知识关系与索引规则.md" = "05-Skills/知识关系与索引规则.md"
+    "docs/定期维护与审计.md" = "05-Skills/定期维护与审计.md"
 }
 
 foreach ($item in $copyMap.GetEnumerator()) {
     $destination = Join-Path $TargetDir $item.Value
     if (-not (Test-Path $destination)) {
-        if ($item.Key -eq "templates/theme-center.template.md") {
+        if ($item.Key -in @("templates/theme-center.template.md", "templates/resource-layer.template.md", "templates/resource-workbench.template.md")) {
             $content = Get-Content (Join-Path $repoRoot $item.Key) -Encoding utf8 -Raw
             $content.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $destination -Encoding utf8
         } else {
@@ -102,6 +108,11 @@ foreach ($item in $governanceFiles.GetEnumerator()) {
         $content = Get-Content (Join-Path $repoRoot $item.Key) -Encoding utf8 -Raw
         $content.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $destination -Encoding utf8
     }
+}
+
+$agentsPath = Join-Path $TargetDir "AGENTS.md"
+if (-not (Test-Path $agentsPath)) {
+    Copy-Item (Join-Path $repoRoot "AGENTS.md") $agentsPath
 }
 
 Copy-Item (Join-Path $repoRoot ".claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force

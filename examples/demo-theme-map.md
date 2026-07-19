@@ -4,7 +4,7 @@ type: theme_map
 description: 汇总知识库失败原因及当前核心判断的主题地图示例
 status: active
 core_question: 为什么大多数人做知识库会失败？
-tags: [theme_map]
+tags: [主题地图]
 related_cards:
   - "[[demo-knowledge-card]]"
 related_cases: []
@@ -27,6 +27,7 @@ updated: YYYY-MM-DD
 ## 证据来源
 
 - [[demo-knowledge-card]]：提供“仓库 vs 工厂”的概念和个人实践来源。
+- 本示例只演示结构；正式使用时应替换或补充为具体卡片、项目记录、原始资料或可核验研究。
 
 ## 适用边界
 

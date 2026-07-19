@@ -20,17 +20,21 @@ $markdownFiles | ForEach-Object {
 
         # Templates and documentation often contain example links inside fenced blocks.
         $contentToCheck = [regex]::Replace($content, '(?ms)^```.*?^```\s*', '')
+        $isTemplate = $file.Name -like '*.template.md'
 
-        foreach ($match in [regex]::Matches($contentToCheck, '\[[^\]]+\]\(([^)]+)\)')) {
-            $target = $match.Groups[1].Value.Split('#')[0]
-            if (-not $target -or $target -match '^(https?:|mailto:|#)') { continue }
-            $resolved = Join-Path $file.DirectoryName ([uri]::UnescapeDataString($target))
-            if (-not (Test-Path -LiteralPath $resolved)) {
-                $issues += "$($file.FullName): $target"
+        # A template may link to files that only exist after initialization.
+        if (-not $isTemplate) {
+            foreach ($match in [regex]::Matches($contentToCheck, '\[[^\]]+\]\(([^)]+)\)')) {
+                $target = $match.Groups[1].Value.Split('#')[0]
+                if (-not $target -or $target -match '^(https?:|mailto:|#)') { continue }
+                $resolved = Join-Path $file.DirectoryName ([uri]::UnescapeDataString($target))
+                if (-not (Test-Path -LiteralPath $resolved)) {
+                    $issues += "$($file.FullName): $target"
+                }
             }
         }
 
-        if ($file.Name -notlike '*.template.md') {
+        if (-not $isTemplate) {
             foreach ($match in [regex]::Matches($contentToCheck, '\[\[([^\]|#]+)')) {
                 $name = $match.Groups[1].Value
                 if (-not $wikiNames.ContainsKey($name)) { $issues += "$($file.FullName): [[$name]]" }
