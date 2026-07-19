@@ -46,7 +46,8 @@ $dirs = @(
     "02-Areas/知识卡片",
     "02-Areas/主题中心/主题页",
     "03-Resources",
-    "04-Archive",
+    "03-Resources/个人输入",
+    "03-Resources/系统资料",
     "05-Skills/_templates",
     ".claude/skills",
     ".claude/drafts"
@@ -59,10 +60,13 @@ foreach ($dir in $dirs) {
     New-Item -ItemType Directory -Path (Join-Path $TargetDir $dir) -Force | Out-Null
 }
 
+$today = Get-Date -Format "yyyy-MM-dd"
 $copyMap = @{
     "templates/knowledge-card.template.md" = "02-Areas/知识卡片/_template.md"
-    "templates/theme-center.README.md" = "02-Areas/主题中心/README.md"
+    "templates/theme-center.template.md" = "02-Areas/主题中心/README.md"
     "templates/theme-map.template.md" = "02-Areas/主题中心/主题页/_template.md"
+    "templates/resource-layer.template.md" = "03-Resources/README.md"
+    "templates/resource-workbench.template.md" = "03-Resources/资源工作台.md"
     "templates/project-status.template.md" = "05-Skills/_templates/project-status.md"
     "templates/review.template.md" = "05-Skills/_templates/review.md"
     "templates/content-brief.template.json" = "05-Skills/_templates/content-brief.json"
@@ -74,7 +78,12 @@ $copyMap = @{
 foreach ($item in $copyMap.GetEnumerator()) {
     $destination = Join-Path $TargetDir $item.Value
     if (-not (Test-Path $destination)) {
-        Copy-Item (Join-Path $repoRoot $item.Key) $destination
+        if ($item.Key -in @("templates/theme-center.template.md", "templates/resource-layer.template.md", "templates/resource-workbench.template.md")) {
+            $content = Get-Content (Join-Path $repoRoot $item.Key) -Encoding utf8 -Raw
+            $content.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $destination -Encoding utf8
+        } else {
+            Copy-Item (Join-Path $repoRoot $item.Key) $destination
+        }
     }
 }
 
@@ -88,6 +97,19 @@ if (-not (Test-Path $claudePath)) {
     Copy-Item (Join-Path $repoRoot "templates/CLAUDE.template.md") $claudePath
 }
 
+$governanceFiles = @{
+    "templates/ai-review-queue.template.md" = "00-Inbox/AI待确认.md"
+    "templates/knowledge-change-log.template.md" = "知识库变更日志.md"
+}
+
+foreach ($item in $governanceFiles.GetEnumerator()) {
+    $destination = Join-Path $TargetDir $item.Value
+    if (-not (Test-Path $destination)) {
+        $content = Get-Content (Join-Path $repoRoot $item.Key) -Encoding utf8 -Raw
+        $content.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $destination -Encoding utf8
+    }
+}
+
 $agentsPath = Join-Path $TargetDir "AGENTS.md"
 if (-not (Test-Path $agentsPath)) {
     Copy-Item (Join-Path $repoRoot "AGENTS.md") $agentsPath
@@ -99,7 +121,8 @@ if ($enableMap) {
     Copy-Item (Join-Path $repoRoot "modules/knowledge-map/.claude/skills/*") (Join-Path $TargetDir ".claude/skills") -Recurse -Force
     $mapPath = Join-Path $TargetDir "知识库地图.md"
     if (-not (Test-Path $mapPath)) {
-        Copy-Item (Join-Path $repoRoot "modules/knowledge-map/templates/knowledge-map.template.md") $mapPath
+        $mapContent = Get-Content (Join-Path $repoRoot "modules/knowledge-map/templates/knowledge-map.template.md") -Encoding utf8 -Raw
+        $mapContent.Replace("YYYY-MM-DD", $today) | Set-Content -LiteralPath $mapPath -Encoding utf8
     }
 }
 

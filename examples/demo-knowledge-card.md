@@ -6,6 +6,13 @@ asset_type: concept
 status: growing
 source: personal
 tags: [knowledge_card, knowledge_management]
+related_theme_maps:
+  - "[[demo-theme-map]]"
+related_projects: []
+links:
+  supports: []
+  contrasts: []
+  examples: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
@@ -26,4 +33,4 @@ updated: YYYY-MM-DD
 今天处理 3 条 Inbox，把原始信息转成卡片。
 
 ## 来源
-个人经验总结
+带日期的个人经验总结；实际使用时应记录对应项目或复盘文件。

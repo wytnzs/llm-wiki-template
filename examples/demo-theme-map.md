@@ -3,15 +3,18 @@ title: 知识管理失败原因分析
 type: theme_map
 description: 汇总知识库失败原因及当前核心判断的主题地图示例
 status: active
-core_question: 为什么大多数人做知识库会失败
+core_question: 为什么大多数人做知识库会失败？
 tags: [主题地图]
-related_cards: []
+related_cards:
+  - "[[demo-knowledge-card]]"
 related_cases: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
 
 # 知识管理失败原因分析 主题地图
+
+> 入口：[[demo-theme-center]]
 
 ## 当前核心判断
 大多数人做知识库失败的核心原因不是工具选择错误，而是把知识库定位成仓库而不是工厂。
@@ -23,11 +26,13 @@ updated: YYYY-MM-DD
 
 ## 证据来源
 
-- 本示例只演示结构，不提供真实证据；使用时应替换为具体卡片、项目记录或原始资料。
+- [[demo-knowledge-card]]：提供“仓库 vs 工厂”的概念和个人实践来源。
+- 本示例只演示结构；正式使用时应替换或补充为具体卡片、项目记录、原始资料或可核验研究。
 
 ## 适用边界
 
-- 这是通用演示判断，不代表所有用户或所有规模的知识库。
+- 这是演示性综合判断，不代表对所有知识库用户的统计结论；
+- 正式使用时需要补充具体项目复盘、用户样本或可核验研究。
 
 ## 待补问题
 

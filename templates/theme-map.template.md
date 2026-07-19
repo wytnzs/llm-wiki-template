@@ -1,9 +1,9 @@
 ---
-title: 
+title:
 type: theme_map
-description:
+description: 一句话说明这个主题页回答什么问题
 status: active
-core_question: 
+core_question: 围绕这个主题，需要持续回答的具体问题是什么？
 tags: [主题地图]
 related_cards: []
 related_cases: []
@@ -33,9 +33,12 @@ updated: YYYY-MM-DD
 
 ## 证据来源
 
-- 具体知识卡片：
-- 具体案例：
-- 原始资料、章节或项目记录：
+- 知识卡片：具体文件链接
+- 案例：具体案例或视图链接
+- 外部资料：具体文件、网页、页码或章节
+- 个人输入或系统历史：具体文件或项目记录
+
+（目录级说明只能作为待补线索，不能替代正式证据）
 
 ---
 
