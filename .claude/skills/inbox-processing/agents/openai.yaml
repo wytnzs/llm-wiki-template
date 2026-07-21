@@ -1,0 +1,4 @@
+interface:
+  display_name: "Inbox 输入加工"
+  short_description: "将 Inbox 输入安全路由为项目、来源层、知识卡片或待清理建议"
+  default_prompt: "Use $inbox-processing to process one Inbox item into a safe, traceable routing decision and draft asset."

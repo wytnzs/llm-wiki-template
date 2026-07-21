@@ -1,10 +1,14 @@
 ---
 title: 个人表达DNA模板
 type: knowledge_card
+description: "用于固定个人内容表达中的受众感受、语言边界、价值观和视觉偏好。"
 status: seed
+source: "本库私有内容引擎配置模板（用户待填写），创建于 2026-07-12"
 tags: [知识卡片, 个人IP, 表达约束, style-brief]
 created: 2026-07-12
-updated: 2026-07-12
+updated: 2026-07-17
+related_theme_maps:
+  - "[[内容生产主题地图]]"
 ---
 
 # 个人表达DNA模板

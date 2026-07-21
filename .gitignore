@@ -13,13 +13,20 @@
 # 判例数据（500+判例全部不上传）
 02-Areas/判例库/
 
-# 主题聚合内容（引用判例和卡片路径，不上传；保留模板）
-02-Areas/主题聚合/*
-!02-Areas/主题聚合/
-!02-Areas/主题聚合/_template.md
+# 主题中心：入口和模板可提交，真实主题页不上传
+02-Areas/主题中心/主题页/*
+!02-Areas/主题中心/
+!02-Areas/主题中心/README.md
+!02-Areas/主题中心/主题页/
+!02-Areas/主题中心/主题页/_template.md
 
-# 外部资料
-03-Resources/
+# 外部资料 —— 只推送 .md 架构和笔记，不上传PDF/音频等版权或大文件
+03-Resources/**/*.pdf
+03-Resources/**/*.mp3
+03-Resources/**/*.png
+03-Resources/**/*.jpg
+03-Resources/**/*.jpeg
+03-Resources/**/*.docx
 
 # 归档
 04-Archive/
@@ -70,6 +77,9 @@ scripts/keywords_data.csv
 !.claude/drafts/content-brief.template.json
 !.claude/drafts/style-brief.template.json
 .codex/
+.playwright-cli/
+tmp/
+docs/
 
 # 本地专用 Claude Code skills：含个人IP、平台生产、保险判例或外部课程引用
 .claude/skills/wangyongtao-ip/
@@ -88,17 +98,6 @@ scripts/keywords_data.csv
 !02-Areas/知识卡片/个人IP/
 02-Areas/知识卡片/个人IP/*
 !02-Areas/知识卡片/个人IP/个人表达DNA模板.md
-
-# 历史设计稿和一次性规划文档
-docs/superpowers/
-
-# 历史迁移脚本：含本地绝对路径或真实判例路径，不直接上传
-scripts/classify*.sh
-scripts/classify_diseases.ps1
-scripts/convert_view.sh
-scripts/create_hardlinks.sh
-scripts/create_symlinks.sh
-scripts/temp_script.md
 
 # ===========================
 # 常规 gitignore
